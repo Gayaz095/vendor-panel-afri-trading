@@ -1,0 +1,128 @@
+.vep-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  
+  .vendor-edit-product-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    width: 600px;
+    max-width: 900px;
+    overflow-y: auto;
+    max-height: 95vh;
+    position: relative;
+  }
+  
+  .vep-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #ff6f20;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  .vep-h2 {
+    color: #ff6f20;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .product-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .product-form label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="file"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .image-preview {
+    width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+  }
+  
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .checkbox-icon {
+    color: #ff6f20;
+    font-size: 20px;
+  }
+  
+  .checkbox-input {
+    transform: scale(1.2);
+    accent-color: #ff6f20;
+    cursor: pointer;
+  }
+  
+  button[type="submit"] {
+    grid-column: 1 / -1;
+    background-color: #ff6f20;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #e55a17;
+  }
+  

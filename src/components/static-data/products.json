@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "productname": "Brake Pads",
+    "image": "./src/assets/react.svg",
+    "createdat": "25-03-2022",
+    "updatedat": "28-04-2022",
+    "price": "$40",
+    "category": "jk",
+    "stock": 100
+  },
+  {
+    "id": 2,
+    "productname": "Oil Tape",
+    "image": "./src/assets/react.svg",
+    "createdat": "02-02-2023",
+    "updatedat": "28-04-2023",
+    "price": "$15",
+    "category": "k",
+    "stock": 250
+  },
+  {
+    "id": 3,
+    "productname": "Spark Plug",
+    "image": "./src/assets/react.svg",
+    "createdat": "01-02-2014",
+    "updatedat": "18-11-2014",
+    "price": "$10",
+    "category": "k",
+    "stock": 270
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Total Products",
+    "value": 128,
+    "color": "#3b82f6"
+  },
+  {
+    "title": "Total Items Sold",
+    "value": 520,
+    "color": "#0ea5e9"
+  },
+  {
+    "title": "Earnings",
+    "value": "$4,560",
+    "color": "#f59e0b"
+  },
+  {
+    "title": "Pending Commission",
+    "value": "$1,230",
+    "color": "#ef4444"
+  },
+  {
+    "title": "Order Pending",
+    "value": 14,
+    "color": "#f97316"
+  },
+  {
+    "title": "Order Processing",
+    "value": 8,
+    "color": "#6366f1"
+  },
+  {
+    "title": "Order Completed",
+    "value": 65,
+    "color": "#22c55e"
+  },
+  {
+    "title": "Current Balance",
+    "value": "$2,310",
+    "color": "#10b981"
+  }
+]

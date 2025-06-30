@@ -1,0 +1,294 @@
+/*Topbar.css */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #d1d9e0;
+  color: #2d3748;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
+  padding: 0.1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  color: #2a4365;
+  display: none;
+}
+
+.logo-image-wrapper {
+  width: 90px;
+  height: 85px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.phone-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.phone-circle {
+  width: 28px;
+  height: 28px;
+  background: #2a4365;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(44, 62, 80, 0.1);
+}
+
+.phone-icon {
+  color: #f5f7fa;
+  font-size: 1.1rem;
+}
+
+.phone-number {
+  color: #2a4365;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.phone-number:hover,
+.phone-number:focus {
+  color: #bb6458;
+  text-decoration: underline;
+}
+
+.topbar-message {
+  font-size: 1.1rem;
+  color: #2d3748;
+  margin-left: 1rem;
+  line-height: 1.2;
+  font-weight: 500;
+  font-style: italic;
+  text-shadow: 0 1px 2px rgba(44, 62, 80, 0.07);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.vendor-dropdown {
+  position: relative;
+}
+
+.vendor-btn {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #2a4365;
+  padding: 0.5rem 1rem;
+  border-radius: 24px;
+  cursor: pointer;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+.vendor-btn:hover,
+.vendor-btn:focus {
+  background: #fe9b65;
+  color: #ffffff;
+  border: 1px solid #f8f9fa;
+}
+
+.avatar {
+  font-size: 2rem;
+  margin-right: 0.7rem;
+  color: #2a4365;
+}
+
+.vendor-btn:hover .avatar,
+.vendor-btn:focus .avatar {
+  color: #ffffff;
+}
+
+.vendor-in-topbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2a4365;
+}
+
+.user-designation {
+  font-size: 0.9rem;
+  color: #2d3748;
+}
+.vendor-btn:hover .username,
+.vendor-btn:focus .username,
+.vendor-btn:hover .user-designation,
+.vendor-btn:focus .user-designation {
+  color: #ffffff;
+}
+
+/* Dropdown Menu */
+.dropdown-menu-wrapper {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.1);
+  min-width: 180px;
+  z-index: 10;
+  padding: 0.5rem 0;
+  border: 1px solid #cbd5e1;
+}
+
+.dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0px;
+}
+
+.dropdown-menu li {
+  margin: 0.1rem 0;
+}
+
+.dropdown-menu a,
+.dropdown-menu .logout-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  color: #2a4365;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.18s, color 0.18s;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dropdown-menu a::before,
+.dropdown-menu .logout-button::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 12%;
+  height: 76%;
+  width: 4px;
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.18s;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu .logout-button:hover {
+  background: #fe9b65;
+  color: #ffffff;
+}
+
+.dropdown-menu a:hover::before {
+  background: #2a4365;
+}
+
+.dropdown-menu .logout-button {
+  color: #2a4365;
+  font-weight: 600;
+}
+
+.dropdown-menu .logout-button:hover {
+  background: #2a4365;
+  color: #ffffff;
+}
+
+.dropdown-menu .logout-button:hover::before {
+  background: #4fd1c5;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    padding: 0.5rem 1rem;
+  }
+  .logo-image-wrapper {
+    width: 72px;
+    height: 72px;
+  }
+  .topbar-message {
+    font-size: 0.95rem;
+  }
+  .hamburger-btn {
+    display: block;
+  }
+  .vendor-dropdown {
+    margin-right: 10%;
+  }
+}
+
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 0.5rem;
+  }
+  .topbar-left {
+    width: 100%;
+    gap: 0.5rem;
+  }
+  .logo-image-wrapper {
+    width: 56px;
+    height: 56px;
+  }
+  .topbar-message {
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
+  .topbar-right {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+  .dropdown-menu-wrapper {
+    right: 0;
+    left: auto;
+    min-width: 140px;
+  }
+  .vendor-btn {
+    padding: 0.4rem 0.7rem;
+  }
+}

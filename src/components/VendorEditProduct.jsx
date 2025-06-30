@@ -1,0 +1,389 @@
+import React, { useState, useEffect } from "react";
+import { imageUpload } from "../utils/imageUpload";
+import { updateProduct } from "../utils/productsApi";
+import { getAllCars } from "../utils/getAllCars";
+import { getAllCarModels } from "../utils/getAllCarModels";
+import { mainGetCategories } from "../utils/mainGetCategories";
+import { getSubCategories } from "../utils/getSubCategories";
+import { getAllChildCategories } from "../utils/getAllChildCategories";
+import { useVendor } from "./VendorContext";
+import "./componentsStyles/VendorEditProduct.css";
+
+const VendorEditProduct = ({ product, onClose, onSave }) => {
+  const { vendorDetails } = useVendor();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    discription: "",
+    price: "",
+    stock: "",
+    referenceNumber: "",
+    carBrandId: "",
+    carBrandModelId: "",
+    categoryId: "",
+    subCategoryId: "",
+    childCategoryId: "",
+    feautureProduct: false,
+    heroProduct: "",
+  });
+
+  const [mainImageFile, setMainImageFile] = useState(null);
+  const [thumbnailImageFile, setThumbnailImageFile] = useState(null);
+  const [mainImagePreview, setMainImagePreview] = useState(null);
+  const [thumbnailImagePreview, setThumbnailImagePreview] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const [carBrands, setCarBrands] = useState([]);
+  const [carModels, setCarModels] = useState([]);
+  const [mainCategories, setMainCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [childCategories, setChildCategories] = useState([]);
+
+  const heroOptions = ["NEW ARRIVAL", "TRENDING", "BEST SELLING", "POPULAR"];
+
+  useEffect(() => {
+    loadDropdowns();
+    if (product) {
+      setFormData({
+        name: product.name || "",
+        discription: product.discription || "",
+        price: product.price || "",
+        stock: product.stock || "",
+        referenceNumber: product.referenceNumber || "",
+        carBrandId: product.carBrandId || "",
+        carBrandModelId: product.carBrandModelId || "",
+        categoryId: product.categoryId || "",
+        subCategoryId: product.subCategoryId || "",
+        childCategoryId: product.childCategoryId || "",
+        feautureProduct: product.feautureProduct || false,
+        heroProduct: product.heroProduct || "",
+      });
+      setMainImagePreview(product.image || null);
+      setThumbnailImagePreview(product.thumbnailImage || null);
+    }
+  }, [product]);
+
+  const loadDropdowns = async () => {
+    const carRes = await getAllCars();
+    setCarBrands(carRes?.data || []);
+    const modelRes = await getAllCarModels();
+    setCarModels(
+      Array.isArray(modelRes) ? modelRes : modelRes?.carModels || []
+    );
+    const mainCats = await mainGetCategories();
+    setMainCategories(
+      Array.isArray(mainCats) ? mainCats : mainCats?.categories || []
+    );
+    const subCats = await getSubCategories();
+    setSubCategories(
+      Array.isArray(subCats) ? subCats : subCats?.subCategories || []
+    );
+    const childCats = await getAllChildCategories();
+    setChildCategories(
+      Array.isArray(childCats) ? childCats : childCats?.childCategories || []
+    );
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const val = type === "checkbox" ? checked : value;
+    setFormData((prev) => ({ ...prev, [name]: val }));
+
+    if (name === "carBrandId")
+      setFormData((prev) => ({ ...prev, carBrandModelId: "" }));
+    if (name === "categoryId")
+      setFormData((prev) => ({
+        ...prev,
+        subCategoryId: "",
+        childCategoryId: "",
+      }));
+    if (name === "subCategoryId")
+      setFormData((prev) => ({ ...prev, childCategoryId: "" }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const previewURL = URL.createObjectURL(file);
+    if (e.target.name === "image") {
+      setMainImageFile(file);
+      setMainImagePreview(previewURL);
+    } else if (e.target.name === "thumbnailImage") {
+      setThumbnailImageFile(file);
+      setThumbnailImagePreview(previewURL);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (!vendorDetails?.vendorId) throw new Error("Vendor ID not found");
+
+      const updatedProduct = {
+        id: product._id,
+        vendorId: vendorDetails.vendorId,
+        ...formData,
+        image: product.image,
+        thumbnailImage: product.thumbnailImage,
+      };
+
+      if (mainImageFile) {
+        const res = await imageUpload({ image: mainImageFile });
+        updatedProduct.image = res.imageUrl || res.secure_url;
+      }
+
+      if (thumbnailImageFile) {
+        const res = await imageUpload({ image: thumbnailImageFile });
+        updatedProduct.thumbnailImage = res.imageUrl || res.secure_url;
+      }
+
+      const response = await updateProduct(
+        vendorDetails.vendorId,
+        updatedProduct
+      );
+
+      if (response?.message?.includes("Product updated")) {
+        onSave();
+        setFormData({
+          name: "",
+          discription: "",
+          price: "",
+          stock: "",
+          referenceNumber: "",
+          carBrandId: "",
+          carBrandModelId: "",
+          categoryId: "",
+          subCategoryId: "",
+          childCategoryId: "",
+          feautureProduct: false,
+          heroProduct: "",
+        });
+        setMainImageFile(null);
+        setThumbnailImageFile(null);
+        setMainImagePreview(null);
+        setThumbnailImagePreview(null);
+      } else {
+        alert(response?.message || "Product update failed");
+      }
+    } catch (err) {
+      console.error("Update failed:", err);
+      alert("Error updating product.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredModels = carModels.filter(
+    (m) => m.carId === formData.carBrandId
+  );
+  const filteredSubCats = subCategories.filter(
+    (s) => s.categoryId === formData.categoryId
+  );
+  const filteredChildCats = childCategories.filter(
+    (c) => c.subCategoryId === formData.subCategoryId
+  );
+
+  return (
+    <div className="vep-modal-overlay">
+      <div className="vep-modal">
+        <h2>Edit Product</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="vep-form-group">
+            <label>Name:</label>
+            <textarea
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="vep-form-group">
+            <label>Reference Number:</label>
+            <input
+              name="referenceNumber"
+              value={formData.referenceNumber}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="vep-outer-form-group">
+            <div className="vep-form-group">
+              <label>Car Brand:</label>
+              <select
+                name="carBrandId"
+                value={formData.carBrandId}
+                onChange={handleInputChange}
+                required>
+                <option value="">Select Car Brand</option>
+                {carBrands.map((brand) => (
+                  <option key={brand._id} value={brand._id}>
+                    {brand.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="vep-form-group">
+              <label>Car Model:</label>
+              <select
+                name="carBrandModelId"
+                value={formData.carBrandModelId}
+                onChange={handleInputChange}
+                required>
+                <option value="">Select Car Model</option>
+                {filteredModels.map((model) => (
+                  <option key={model._id} value={model._id}>
+                    {model.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="vep-form-group">
+              <label>Main Category:</label>
+              <select
+                name="categoryId"
+                value={formData.categoryId}
+                onChange={handleInputChange}
+                required>
+                <option value="">Select Main Category</option>
+                {mainCategories.map((cat) => (
+                  <option key={cat._id} value={cat._id}>
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="vep-form-group">
+              <label>Sub Category:</label>
+              <select
+                name="subCategoryId"
+                value={formData.subCategoryId}
+                onChange={handleInputChange}
+                required>
+                <option value="">Select Sub Category</option>
+                {filteredSubCats.map((sub) => (
+                  <option key={sub._id} value={sub._id}>
+                    {sub.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="vep-form-group">
+              <label>Child Category:</label>
+              <select
+                name="childCategoryId"
+                value={formData.childCategoryId}
+                onChange={handleInputChange}
+                required>
+                <option value="">Select Child Category</option>
+                {filteredChildCats.map((child) => (
+                  <option key={child._id} value={child._id}>
+                    {child.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="vep-form-group">
+              <label>Main Image:</label>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              {mainImagePreview && (
+                <img
+                  src={mainImagePreview}
+                  alt="Main Preview"
+                  className="vep-preview-image"
+                />
+              )}
+            </div>
+
+            <div className="vep-form-group">
+              <label>Thumbnail Image:</label>
+              <input
+                type="file"
+                name="thumbnailImage"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              {thumbnailImagePreview && (
+                <img
+                  src={thumbnailImagePreview}
+                  alt="Thumb Preview"
+                  className="vep-preview-image"
+                />
+              )}
+            </div>
+          </div>
+          <div className="vep-form-group">
+            <label>Description:</label>
+            <textarea
+              name="discription"
+              value={formData.discription}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="vep-form-group">
+            <label>Price:</label>
+            <input
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="vep-form-group">
+            <label>Stock:</label>
+            <input
+              type="number"
+              name="stock"
+              value={formData.stock}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="vep-form-group">
+            <label>Featured Product:</label>
+            <input
+              type="checkbox"
+              name="feautureProduct"
+              checked={formData.feautureProduct}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="vep-form-group">
+            <label>Hero Product:</label>
+            <select
+              name="heroProduct"
+              value={formData.heroProduct}
+              onChange={handleInputChange}>
+              <option value="">None</option>
+              {heroOptions.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="vep-actions">
+            <button type="submit" disabled={loading}>
+              {loading ? "Updating..." : "Update"}
+            </button>
+            <button type="vep-button" style={{  "height": "50px", "top": "50px"}} onClick={onClose} disabled={loading}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default VendorEditProduct;

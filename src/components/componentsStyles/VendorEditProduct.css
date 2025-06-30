@@ -1,0 +1,90 @@
+.vep-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.vep-modal {
+  background: #d1d9e0;
+  padding: 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+.vep-outer-form-group {
+  display: flex;
+  flex-direction: column;
+}
+.vep-form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.vep-form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.vep-form-group textarea {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.vep-form-group input,
+.vep-form-group select
+{
+  padding: 8px 10px;
+  width: 250px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.vep-preview-image {
+  width: 120px;
+  height: auto;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.vep-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.vep-actions .vep-button {
+  padding: 10px 16px;
+
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.vep-actions .vep-button[type="submit"] {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.vep-actions .vep-button[type="button"] {
+  background-color: #ccc;
+  color: #333;
+}
