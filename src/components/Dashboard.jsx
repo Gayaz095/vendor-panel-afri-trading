@@ -1,5 +1,4 @@
-//Dashboard.jsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useVendor } from "./VendorContext";
 import {
@@ -32,11 +31,14 @@ const iconComponents = {
 const Dashboard = () => {
   const { vendorDetails } = useVendor();
   const navigate = useNavigate();
+  const [animateValues, setAnimateValues] = useState(false);
 
   useEffect(() => {
     if (!vendorDetails) {
       navigate("/login");
     }
+    // Trigger animation after component mounts
+    setTimeout(() => setAnimateValues(true), 100);
   }, [vendorDetails, navigate]);
 
   const handleViewProduct = () => {
@@ -61,7 +63,7 @@ const Dashboard = () => {
       color: "#2196F3",
     },
     {
-      title: "Total Revenue",
+      title: "Total Earnings",
       value: "$5000",
       icon: "FiDollarSign",
       color: "#FF9800",
@@ -80,12 +82,6 @@ const Dashboard = () => {
       icon: "FiPieChart",
       color: "#0ea5e9",
     },
-    // {
-    //   title: "Current Balance",
-    //   value: "$2,310",
-    //   icon: "FiCreditCard",
-    //   color: "#10b981",
-    // },
   ];
 
   return (
@@ -107,53 +103,58 @@ const Dashboard = () => {
               </div>
               <div className="dashboard-info">
                 <h3>{stat.title}</h3>
-                <p>{stat.value}</p>
+                <div className="value-container">
+                  <p className={`stat-value ${animateValues ? "animate" : ""}`}>
+                    {stat.value}
+                  </p>
+                </div>
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className="dashboard-section">
-        <h3 className="section-title">Recent Orders</h3>
-        <div className="table-container">
-          <table className="dashboard-table">
-            <thead>
-              <tr>
-                <th>Order Number</th>
-                <th>Order Date</th>
-                <th>Customer</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ordersData.map((order) => (
-                <tr key={order.id}>
-                  <td>{order.orderno}</td>
-                  <td>{order.orderdate}</td>
-                  <td>{order.customer}</td>
-                  <td>{order.amount}</td>
-                  <td>
-                    <span
-                      className={`status-badge ${order.status.toLowerCase()}`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td>
-                    <button className="view-button" onClick={handleViewOrder}>
-                      <FiEye /> View
-                    </button>
-                  </td>
+
+        <div className="dashboard-section">
+          <h3 className="section-title">Recent Orders</h3>
+          <div className="table-container">
+            <table className="dashboard-table">
+              <thead>
+                <tr>
+                  <th>Order Number</th>
+                  <th>Order Date</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Details</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {ordersData.map((order) => (
+                  <tr key={order.id}>
+                    <td>{order.orderno}</td>
+                    <td>{order.orderdate}</td>
+                    <td>{order.customer}</td>
+                    <td>{order.amount}</td>
+                    <td>
+                      <span
+                        className={`status-badge ${order.status.toLowerCase()}`}>
+                        {order.status}
+                      </span>
+                    </td>
+                    <td>
+                      <button className="view-button" onClick={handleViewOrder}>
+                        <FiEye /> View
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-export default Dashboard;
+  export default Dashboard;
