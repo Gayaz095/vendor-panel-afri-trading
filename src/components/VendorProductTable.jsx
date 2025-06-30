@@ -423,58 +423,73 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
             </tr>
           </thead>
           <tbody>
-            {currentItems.map((product) => (
-              <tr key={product._id}>
-                <td data-label="Image">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="vendor-product-image"
-                  />
-                </td>
-                <td data-label="Name" title={product.referenceNumber}>
-                  {product.referenceNumber}
-                </td>
-                <td data-label="Name" title={product.name}>
-                  {product.name}
-                </td>
-                <td
-                  data-label="Description"
-                  title={product.description || product.discription}>
-                  {product.description || product.discription}
-                </td>
-                <td data-label="Price">{formatPrice(product.price)}</td>
-                <td data-label="Stock">{product.stock}</td>
-                <td
-                  data-label="Status"
-                  className={
-                    product.reflectStatus ? "status-active" : "status-inactive"
-                  }>
-                  {product.reflectStatus ? "Active" : "Inactive"}
-                </td>
-                <td data-label="Actions">
-                  <div className="action-buttons">
-                    <button
-                      className="edit-btn"
-                      onClick={() => handleEdit(product)}>
-                      Edit
-                    </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleDelete(product._id)}>
-                      Delete
-                    </button>
-                  </div>
-                </td>
-                <td data-label="View">
-                  <button
-                    className="view-btn"
-                    onClick={() => handleView(product)}>
-                    View
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {
+              currentItems.length === 0 ? (
+                <tr>
+                  <td colSpan="9" className="no-products-message">
+                    No products available.
+                  </td>
+                </tr>
+              ) :
+                (
+  
+            
+                  
+                    currentItems.map((product) => (
+                      <tr key={product._id}>
+                        <td data-label="Image">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="vendor-product-image"
+                          />
+                        </td>
+                        <td data-label="Name" title={product.referenceNumber}>
+                          {product.referenceNumber}
+                        </td>
+                        <td data-label="Name" title={product.name}>
+                          {product.name}
+                        </td>
+                        <td
+                          data-label="Description"
+                          title={product.description || product.discription}>
+                          {product.description || product.discription}
+                        </td>
+                        <td data-label="Price">{formatPrice(product.price)}</td>
+                        <td data-label="Stock">{product.stock}</td>
+                        <td
+                          data-label="Status"
+                          className={
+                            product.reflectStatus ? "status-active" : "status-inactive"
+                          }>
+                          {product.reflectStatus ? "Active" : "Inactive"}
+                        </td>
+                        <td data-label="Actions">
+                          <div className="action-buttons">
+                            <button
+                              className="edit-btn"
+                              onClick={() => handleEdit(product)}>
+                              Edit
+                            </button>
+                            <button
+                              className="delete-btn"
+                              onClick={() => handleDelete(product._id)}>
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                        <td data-label="View">
+                          <button
+                            className="view-btn"
+                            onClick={() => handleView(product)}>
+                            View
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  
+                )
+              }
           </tbody>
         </table>
       </div>
