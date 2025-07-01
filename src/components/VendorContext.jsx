@@ -26,7 +26,7 @@ export const VendorProvider = ({ children }) => {
       const now = Date.now();
       const savedTime = parseInt(storedTime, 10);
 
-      if (now - savedTime < 20000) {
+      if (now - savedTime < 1200000) {
         try {
           setVendorDetails(JSON.parse(storedVendor));
           setLoginTime(savedTime);

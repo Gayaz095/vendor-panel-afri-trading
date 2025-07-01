@@ -53,10 +53,10 @@ const VendorViewProduct = ({ product, onClose }) => {
         <div className="view-product-footer">
           <div className="view-price-info">
             <span className="view-label">Price:</span>
-            <span className="view-value">{product.price.toFixed(2)}</span>
+            <span className="view-value">₹ {product.price.toFixed(2)}</span>
           </div>
           <div className="view-stock-info">
-            <span className="view-label">Stock:</span>
+            <span className="view-label">Stock: </span>
             <span className="view-value">{product.stock}</span>
           </div>
         </div>

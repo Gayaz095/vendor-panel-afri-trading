@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
 
-/* Slide-in animation */
-@keyframes slideIn {
+/* Slide-in from left animation */
+@keyframes slideInLeftToRight {
   from {
     transform: translateX(-100%);
     opacity: 0;
@@ -44,16 +44,28 @@
   font-style: normal;
   font-weight: 400;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow: visible; /* Allow children to overflow */
 }
 .sidebar nav li:last-child {
   border-bottom: none;
 }
 
+.sidebar nav li a {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 25px;
+  background: none;
+  border: 1px solid transparent;
+  transition: transform 0.3s ease, background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
 /* Apply animation with a delay for each li */
 .sidebar nav li {
   opacity: 0;
-  animation: slideIn 1s forwards;
+  animation: slideInLeftToRight 0.5s forwards;
 }
 .sidebar nav li:nth-child(1) { animation-delay: 0.1s; }
 .sidebar nav li:nth-child(2) { animation-delay: 0.2s; }
@@ -72,17 +84,6 @@
   transition: transform 0.2s ease;
 }
 
-.sidebar nav li a {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  border-radius: 25px;
-  background: none;
-  border: 1px solid transparent;
-  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
 .sidebar nav a,
 .sidebar .dropdown-toggle {
   color: #1f0300;
@@ -94,7 +95,11 @@
   text-align: left;
 }
 
-.sidebar nav a:hover,
+.sidebar nav li a:hover {
+  transform: scale(1.05) translateX(10px);
+}
+
+.sidebar nav li a:hover,
 .sidebar nav a.active,
 .sidebar .dropdown-toggle.active,
 .sidebar .dropdown-toggle.open {
@@ -102,8 +107,8 @@
   color: #fff;
   border: 1px solid transparent;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
 }
-
 .has-dropdown .arrow {
   float: right;
   width: 0;

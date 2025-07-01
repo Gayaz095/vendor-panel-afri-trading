@@ -138,7 +138,7 @@ const LoginPage = () => {
                   <div className="connect-details">
                     <span className="connect-label">WhatsApp:</span>
                     <a className="connect-link" href="https://wa.me/0123456789">
-                      0123456789
+                      +91-8121927536
                     </a>
                   </div>
                 </div>
@@ -148,8 +148,8 @@ const LoginPage = () => {
                   </div>
                   <div className="connect-details">
                     <span className="connect-label">Phone:</span>
-                    <a className="connect-link" href="tel:+910123456789">
-                      +91-0123456789
+                    <a className="connect-link" href="tel:+91-8121927536">
+                      +91-8121927536
                     </a>
                   </div>
                 </div>
@@ -172,8 +172,8 @@ const LoginPage = () => {
                   </div>
                   <div className="connect-details">
                     <span className="connect-label">Support Hours:</span>
-                    <span className="connect-info">Mon-Fri: 9AM-6PM</span>
-                    <span className="connect-info">Sat: 10AM-4PM</span>
+                    <span className="connect-info">Mon-SAT: 9AM-6PM</span>
+                    {/* <span className="connect-info">Sat: 10AM-4PM</span> */}
                   </div>
                 </div>
               </div>

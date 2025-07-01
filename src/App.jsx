@@ -12,6 +12,7 @@ import LogoutPage from "./components/LogoutPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import VendorVisitStore from "./components/VendorVisitStore";
+import OrdersStatus from "./components/OrdersStatus";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { VendorProvider } from "./components/VendorContext";
@@ -35,6 +36,7 @@ export default function App() {
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products" element={<Products />} />
                 <Route path="visit-store" element={<VendorVisitStore />} />
+                <Route path="orders-status" element={<OrdersStatus />} />
               </Route>
             </Route>
 

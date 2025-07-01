@@ -1,15 +1,23 @@
-/*Topbar.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap');
+/* 
+* {
+  box-sizing: border-box;
+} */
+
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #d1d9e0;
+  /* background: linear-gradient(to right, #32588e, #3A5A6E); */
+  background: linear-gradient(to right, #5a5752, #655750);
+padding-top: 0 20px;
   color: #2d3748;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
-  padding: 0.1rem 2rem;
+  box-shadow: 0 12px 10px rgba(44, 62, 80, 0.07);
+  padding: 0.1rem 2rem 0.9rem 2rem;
   position: sticky;
   top: 0;
   z-index: 100;
+  font-family: "Roboto", sans-serif;
 }
 
 .topbar-left {
@@ -31,7 +39,7 @@
 .logo-image-wrapper {
   width: 90px;
   height: 85px;
-  background: #ffffff;
+  background: #F8FAFC;
   border-radius: 50%;
   border: 2px solid #cbd5e1;
   overflow: hidden;
@@ -86,7 +94,7 @@
 
 .topbar-message {
   font-size: 1.1rem;
-  color: #2d3748;
+  color: #e7f0ff;
   margin-left: 1rem;
   line-height: 1.2;
   font-weight: 500;
@@ -120,7 +128,7 @@
 
 .vendor-btn:hover,
 .vendor-btn:focus {
-  background: #fe9b65;
+  background: #f06a21;
   color: #ffffff;
   border: 1px solid #f8f9fa;
 }
@@ -169,14 +177,15 @@
   box-shadow: 0 4px 16px rgba(44, 62, 80, 0.1);
   min-width: 180px;
   z-index: 10;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   border: 1px solid #cbd5e1;
+  overflow: hidden;
 }
 
 .dropdown-menu {
   list-style: none;
   margin: 0;
-  padding: 0px;
+  padding: 0;
 }
 
 .dropdown-menu li {
@@ -187,8 +196,9 @@
 .dropdown-menu .logout-button {
   display: flex;
   align-items: center;
-  width: 100%;
-  padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+  width: calc(100% - 1rem);
+  margin: 0 0.5rem;
+  padding: 0.75rem 1rem;
   background: none;
   border: none;
   color: #2a4365;
@@ -196,10 +206,10 @@
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 6px;
   transition: background 0.18s, color 0.18s;
-  position: relative;
   box-sizing: border-box;
+  position: relative;
   overflow: hidden;
 }
 
@@ -241,6 +251,7 @@
   background: #4fd1c5;
 }
 
+/* Responsive Styles */
 @media (max-width: 900px) {
   .topbar {
     padding: 0.5rem 1rem;

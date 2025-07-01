@@ -63,7 +63,7 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
         className={`sidebar transition-sidebar ${
           isMobile ? "mobile-sidebar" : ""
         } ${isOpen ? "open" : "closed"}`}>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <NavLink
@@ -100,7 +100,27 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
               </NavLink>
             </li>
           </ul>
-        </nav>
+        </nav> */}
+        <div class="sidebar-pills-wrapper">
+          <nav>
+            <ul>
+              {[
+                { to: "/dashboard", label: "Dashboard" },
+                {  to: "/products", label: "Products" },
+                { to: "/visit-store", label: "Visit Store" },
+                { to: "/orders-status", label: "Orders Status" },
+              ].map((item) => (
+                <li key={item.id} style={{ "--i": item.id }}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) => (isActive ? "active" : "")}>
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </aside>
       {isMobile && isOpen && (
         <div className="sidebar-overlay" aria-label="Close sidebar" />

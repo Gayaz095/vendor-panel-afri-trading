@@ -68,6 +68,12 @@ const Dashboard = () => {
       icon: "FiDollarSign",
       color: "#FF9800",
     },
+    {
+      title: "Total Items Sold",
+      value: 520,
+      icon: "FiPieChart",
+      color: "#0ea5e9",
+    },
     { title: "Pending Orders", value: "2", icon: "FiClock", color: "#F44336" },
     { title: "Order Processing", value: 8, icon: "FiRepeat", color: "#6366f1" },
     {
@@ -75,12 +81,6 @@ const Dashboard = () => {
       value: 65,
       icon: "FiCheckCircle",
       color: "#22c55e",
-    },
-    {
-      title: "Total Items Sold",
-      value: 520,
-      icon: "FiPieChart",
-      color: "#0ea5e9",
     },
   ];
 
