@@ -1,4 +1,3 @@
-//Tobar.jsx
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import LogoutUI from "./LogoutUI";
@@ -89,7 +88,7 @@ const Topbar = ({ toggleSidebar }) => {
           Welcome to the Afr-Trading.com <br /> Vendor Portal
         </p>
       </div>
-      
+
       <div className="topbar-search">
         <form
           onSubmit={(e) => e.preventDefault()}
@@ -148,6 +147,6 @@ const Topbar = ({ toggleSidebar }) => {
       )}
     </header>
   );
-}
+};
 
 export default Topbar;

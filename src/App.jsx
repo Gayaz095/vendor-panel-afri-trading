@@ -17,6 +17,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { VendorProvider } from "./components/VendorContext";
 import DeliveryStatus from "./components/DeliveryStatus";
+import AddProduct from "./components/AddProduct";
+import BulkProducts from "./components/BulkProducts";
 
 export default function App() {
   return (
@@ -36,6 +38,8 @@ export default function App() {
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products" element={<Products />} />
+                <Route path="add-product" element={<AddProduct />} />
+                <Route path="bulk-products" element={<BulkProducts />} />
                 <Route path="visit-store" element={<VendorVisitStore />} />
                 <Route path="orders-status" element={<OrdersStatus />} />
                 <Route path="delivery-status" element={<DeliveryStatus />} />

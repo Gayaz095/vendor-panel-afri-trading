@@ -63,55 +63,19 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
         className={`sidebar transition-sidebar ${
           isMobile ? "mobile-sidebar" : ""
         } ${isOpen ? "open" : "closed"}`}>
-        {/* <nav>
-          <ul>
-            <li>
-              <NavLink
-                to="/"
-                end
-                onClick={isMobile ? onClose : undefined}
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active" : ""}`
-                }>
-                <FaTachometerAlt className="icon colorful-icon" />
-                <span>Dashboard</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/products"
-                onClick={isMobile ? onClose : undefined}
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active" : ""}`
-                }>
-                <FaBox className="icon colorful-icon" />
-                <span>Products</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/visit-store"
-                onClick={isMobile ? onClose : undefined}
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active" : ""}`
-                }>
-                <FaStore className="icon colorful-icon" />
-                <span>Visit Store</span>
-              </NavLink>
-            </li>
-          </ul>
-        </nav> */}
-        <div class="sidebar-pills-wrapper">
+        <div className="sidebar-pills-wrapper">
           <nav>
             <ul>
               {[
                 { to: "/dashboard", label: "Dashboard" },
                 { to: "/products", label: "Manage Products" },
+                { to: "/add-product", label: "Add Product" },
+                { to: "/bulk-products", label: "Upload Bulk Products" },
                 { to: "/visit-store", label: "Visit Store" },
                 { to: "/orders-status", label: "Orders Status" },
                 { to: "/delivery-status", label: "Delivery Status" },
-              ].map((item) => (
-                <li key={item.id} style={{ "--i": item.id }}>
+              ].map((item, index) => (
+                <li key={item.to} style={{ "--i": index }}>
                   <NavLink
                     to={item.to}
                     className={({ isActive }) => (isActive ? "active" : "")}>
