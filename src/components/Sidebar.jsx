@@ -106,9 +106,10 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
             <ul>
               {[
                 { to: "/dashboard", label: "Dashboard" },
-                {  to: "/products", label: "Products" },
+                { to: "/products", label: "Products" },
                 { to: "/visit-store", label: "Visit Store" },
                 { to: "/orders-status", label: "Orders Status" },
+                { to: "/delivery-status", label: "Delivery Status" },
               ].map((item) => (
                 <li key={item.id} style={{ "--i": item.id }}>
                   <NavLink

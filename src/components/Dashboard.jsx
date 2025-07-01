@@ -17,6 +17,9 @@ import "./componentsStyles/Dashboard.css";
 import ordersData from "./static-data/orders.json";
 import productsData from "./static-data/products.json";
 
+import Charts from "./Charts";
+
+
 const iconComponents = {
   FiShoppingCart,
   FiPackage,
@@ -114,47 +117,48 @@ const Dashboard = () => {
         })}
       </div>
 
+      <Charts stats={stats} />
 
-        <div className="dashboard-section">
-          <h3 className="section-title">Recent Orders</h3>
-          <div className="table-container">
-            <table className="dashboard-table">
-              <thead>
-                <tr>
-                  <th>Order Number</th>
-                  <th>Order Date</th>
-                  <th>Customer</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Details</th>
+      <div className="dashboard-section">
+        <h3 className="section-title">Recent Orders</h3>
+        <div className="table-container">
+          <table className="dashboard-table">
+            <thead>
+              <tr>
+                <th>Order Number</th>
+                <th>Order Date</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ordersData.map((order) => (
+                <tr key={order.id}>
+                  <td>{order.orderno}</td>
+                  <td>{order.orderdate}</td>
+                  <td>{order.customer}</td>
+                  <td>{order.amount}</td>
+                  <td>
+                    <span
+                      className={`status-badge ${order.status.toLowerCase()}`}>
+                      {order.status}
+                    </span>
+                  </td>
+                  <td>
+                    <button className="view-button" onClick={handleViewOrder}>
+                      <FiEye /> View
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {ordersData.map((order) => (
-                  <tr key={order.id}>
-                    <td>{order.orderno}</td>
-                    <td>{order.orderdate}</td>
-                    <td>{order.customer}</td>
-                    <td>{order.amount}</td>
-                    <td>
-                      <span
-                        className={`status-badge ${order.status.toLowerCase()}`}>
-                        {order.status}
-                      </span>
-                    </td>
-                    <td>
-                      <button className="view-button" onClick={handleViewOrder}>
-                        <FiEye /> View
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-    );
+    </div>
+  );
   };
 
   export default Dashboard;

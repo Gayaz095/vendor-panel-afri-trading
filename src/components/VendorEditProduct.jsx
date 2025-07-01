@@ -185,31 +185,33 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
   );
 
   return (
-    <div className="vep-modal-overlay">
-      <div className="vep-modal">
+    <div className="vendor-edit-product__modal-overlay">
+      <div className="vendor-edit-product__modal">
         <h2>Edit Product</h2>
         <form onSubmit={handleSubmit}>
-          <div className="vep-form-group">
-            <label>Name:</label>
-            <textarea
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="vep-form-group">
-            <label>Reference Number:</label>
-            <input
-              name="referenceNumber"
-              value={formData.referenceNumber}
-              onChange={handleInputChange}
-              required
-            />
+          <div className="vendor-edit-product__form-row">
+            <div className="vendor-edit-product__form-group">
+              <label>Name:</label>
+              <textarea
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="vendor-edit-product__form-group">
+              <label>Reference Number:</label>
+              <input
+                name="referenceNumber"
+                value={formData.referenceNumber}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </div>
 
-          <div className="vep-outer-form-group">
-            <div className="vep-form-group">
+          <div className="vendor-edit-product__form-row">
+            <div className="vendor-edit-product__form-group">
               <label>Car Brand:</label>
               <select
                 name="carBrandId"
@@ -224,7 +226,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
                 ))}
               </select>
             </div>
-            <div className="vep-form-group">
+            <div className="vendor-edit-product__form-group">
               <label>Car Model:</label>
               <select
                 name="carBrandModelId"
@@ -239,7 +241,10 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
                 ))}
               </select>
             </div>
-            <div className="vep-form-group">
+          </div>
+
+          <div className="vendor-edit-product__form-row">
+            <div className="vendor-edit-product__form-group">
               <label>Main Category:</label>
               <select
                 name="categoryId"
@@ -254,7 +259,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
                 ))}
               </select>
             </div>
-            <div className="vep-form-group">
+            <div className="vendor-edit-product__form-group">
               <label>Sub Category:</label>
               <select
                 name="subCategoryId"
@@ -269,7 +274,10 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
                 ))}
               </select>
             </div>
-            <div className="vep-form-group">
+          </div>
+
+          <div className="vendor-edit-product__form-row">
+            <div className="vendor-edit-product__form-group">
               <label>Child Category:</label>
               <select
                 name="childCategoryId"
@@ -284,99 +292,117 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
                 ))}
               </select>
             </div>
-            <div className="vep-form-group">
-              <label>Main Image:</label>
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                onChange={handleFileChange}
-              />
-              {mainImagePreview && (
-                <img
-                  src={mainImagePreview}
-                  alt="Main Preview"
-                  className="vep-preview-image"
-                />
-              )}
-            </div>
-
-            <div className="vep-form-group">
-              <label>Thumbnail Image:</label>
-              <input
-                type="file"
-                name="thumbnailImage"
-                accept="image/*"
-                onChange={handleFileChange}
-              />
-              {thumbnailImagePreview && (
-                <img
-                  src={thumbnailImagePreview}
-                  alt="Thumb Preview"
-                  className="vep-preview-image"
-                />
-              )}
-            </div>
-          </div>
-          <div className="vep-form-group">
-            <label>Description:</label>
-            <textarea
-              name="discription"
-              value={formData.discription}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="vep-form-group">
-            <label>Price:</label>
-            <input
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleInputChange}
-              required
-            />
           </div>
 
-          <div className="vep-form-group">
-            <label>Stock:</label>
-            <input
-              type="number"
-              name="stock"
-              value={formData.stock}
-              onChange={handleInputChange}
-              required
-            />
+          <div className="vendor-edit-product__form-row">
+            <div className="vendor-edit-product__form-group">
+              <label>Price:</label>
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="vendor-edit-product__form-group">
+              <label>Stock:</label>
+              <input
+                type="number"
+                name="stock"
+                value={formData.stock}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </div>
-          <div className="vep-form-group">
+          <div className="vendor-edit-product__form-group__checkbox-container">
             <label>Featured Product:</label>
-            <input
-              type="checkbox"
-              name="feautureProduct"
-              checked={formData.feautureProduct}
-              onChange={handleInputChange}
-            />
+            <div className="vendor-edit-product__checkbox-container">
+              <input
+                type="checkbox"
+                name="feautureProduct"
+                checked={formData.feautureProduct}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
-          <div className="vep-form-group">
-            <label>Hero Product:</label>
-            <select
-              name="heroProduct"
-              value={formData.heroProduct}
-              onChange={handleInputChange}>
-              <option value="">None</option>
-              {heroOptions.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
+          <div className="vendor-edit-product__form-row">
+            <div className="vendor-edit-product__form-group">
+              <label>Hero Product:</label>
+              <select
+                name="heroProduct"
+                value={formData.heroProduct}
+                onChange={handleInputChange}>
+                <option value="">None</option>
+                {heroOptions.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="vendor-edit-product__form-group"></div>
           </div>
 
-          <div className="vep-actions">
+          <div className="vendor-edit-product__form-row">
+            <div className="vendor-edit-product__image-container">
+              <div className="vendor-edit-product__image-upload">
+                <label>Main Image:</label>
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+                {mainImagePreview && (
+                  <img
+                    src={mainImagePreview}
+                    alt="Main Preview"
+                    className="vendor-edit-product__preview-image"
+                  />
+                )}
+              </div>
+              <div className="vendor-edit-product__image-upload">
+                <label>Thumbnail Image:</label>
+                <input
+                  type="file"
+                  name="thumbnailImage"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+                {thumbnailImagePreview && (
+                  <img
+                    src={thumbnailImagePreview}
+                    alt="Thumb Preview"
+                    className="vendor-edit-product__preview-image"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="vendor-edit-product__form-row">
+            <div className="vendor-edit-product__form-group">
+              <label>Description:</label>
+              <textarea
+                name="discription"
+                value={formData.discription}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="vendor-edit-product__actions">
             <button type="submit" disabled={loading}>
               {loading ? "Updating..." : "Update"}
             </button>
-            <button type="vep-button" style={{  "height": "50px", "top": "50px"}} onClick={onClose} disabled={loading}>
+            <button
+              type="button"
+              className="vendor-edit-product__cancel-button"
+              onClick={onClose}
+              disabled={loading}>
               Cancel
             </button>
           </div>

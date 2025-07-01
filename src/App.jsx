@@ -16,6 +16,7 @@ import OrdersStatus from "./components/OrdersStatus";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { VendorProvider } from "./components/VendorContext";
+import DeliveryStatus from "./components/DeliveryStatus";
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
                 <Route path="products" element={<Products />} />
                 <Route path="visit-store" element={<VendorVisitStore />} />
                 <Route path="orders-status" element={<OrdersStatus />} />
+                <Route path="delivery-status" element={<DeliveryStatus />} />
               </Route>
             </Route>
 
