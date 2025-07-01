@@ -9,10 +9,12 @@
   border-radius: 12px;
 }
 
-.recent-products-table h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+.recent-table-h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  text-align: start;
 }
 
 .recent-no-products-message {
@@ -25,6 +27,7 @@
   margin: 20px 0;
   position: relative;
 }
+
 .recent-no-products-message::before {
   content: "";
   display: block;
@@ -85,6 +88,56 @@
   font-weight: bold;
 }
 
+.recent-pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.recent-pagination button,
+.recent-pagination .recent-pagination-input {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.recent-pagination button:hover {
+  background-color: #007bff;
+  color: white;
+}
+.recent-pagination button:hover:not(:disabled) {
+  background-color: #007bff;
+  color: white;
+}
+.recent-pagination button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+.recent-pagination button.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.recent-pagination .recent-pagination-input {
+  width: 40px !important;
+  max-width: 40px !important;
+  min-width: 40px !important;
+  height: 30px;
+  padding: 0 5px;
+  font-size: 14px;
+  text-align: center;
+  margin-left: 5px;
+  border: 1px solid #ddd;
+  display: inline-block;
+}
+
 .recent-table td[data-label="Name"],
 .recent-table th:nth-child(3) {
   max-width: 140px;
@@ -103,23 +156,17 @@
   text-overflow: ellipsis;
 }
 
-.recent-table-h3 {
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: #2c3e50;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .recent-table td[data-label="Name"],
-  .recent-table td[data-label="Description"] {
-    max-width: 90px;
-    font-size: 12px;
-  }
-}
-
 @media (max-width: 600px) {
+  .recent-pagination button {
+    font-size: 14px;
+  }
+
+  .recent-pagination .recent-pagination-input {
+    width: 30px !important;
+    max-width: 30px !important;
+    min-width: 30px !important;
+  }
+
   .recent-table td[data-label="Name"],
   .recent-table td[data-label="Description"] {
     max-width: 90px;

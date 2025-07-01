@@ -210,10 +210,13 @@ button {
   -webkit-overflow-scrolling: touch;
 }
 .vendor-table-h3 {
-  font-size: 2.25rem;
+  font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 0.2rem;
     color: #2c3e50;
+    background: #dddddd;
+    border-radius: 5px;
+    padding: 0.9rem;
 }
 
 .vendor-table {

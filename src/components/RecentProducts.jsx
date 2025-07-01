@@ -3,11 +3,17 @@ import { getVendorProducts } from "../utils/productsApi";
 import "./componentsStyles/RecentProducts.css";
 import { useVendor } from "./VendorContext";
 
+const PRODUCTS_PER_PAGE = 5;
+const PAGE_WINDOW = 3;
+
 const RecentProducts = () => {
   const { vendorDetails } = useVendor();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [editPage, setEditPage] = useState(null);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const fetchRecentProducts = async () => {
@@ -20,7 +26,7 @@ const RecentProducts = () => {
               new Date(b.updatedAt || b.createdAt) -
               new Date(a.updatedAt || a.createdAt)
           );
-          setProducts(sorted.slice(0, 5));
+          setProducts(sorted);
         } else {
           throw new Error("Fetched data is not an array");
         }
@@ -32,6 +38,48 @@ const RecentProducts = () => {
     };
     fetchRecentProducts();
   }, [vendorDetails]);
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(products.length / PRODUCTS_PER_PAGE)
+  );
+  const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const endIndex = startIndex + PRODUCTS_PER_PAGE;
+  const currentItems = products.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    const clampedPage = Math.max(1, Math.min(page, totalPages));
+    setCurrentPage(clampedPage);
+    setEditPage(null);
+  };
+
+  let startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
+  let endPage = startPage + PAGE_WINDOW - 1;
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(1, endPage - PAGE_WINDOW + 1);
+  }
+  const pageNumbers = [];
+  for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
+
+  const handleDoubleClick = (page) => {
+    setEditPage(page);
+    setInputValue(page);
+  };
+
+  const handleInputChange = (e) =>
+    setInputValue(e.target.value.replace(/[^0-9]/g, ""));
+
+  const handleInputBlur = () => {
+    const page = Number(inputValue);
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
+    setEditPage(null);
+  };
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === "Enter") handleInputBlur();
+    else if (e.key === "Escape") setEditPage(null);
+  };
 
   const formatPrice = (price) => `₹${parseFloat(price).toFixed(2)}`;
 
@@ -61,14 +109,14 @@ const RecentProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {products.length === 0 ? (
+            {currentItems.length === 0 ? (
               <tr>
                 <td colSpan="7" className="recent-no-products-message">
                   No recent products available.
                 </td>
               </tr>
             ) : (
-              products.map((product) => (
+              currentItems.map((product) => (
                 <tr key={product._id}>
                   <td data-label="Image">
                     <img
@@ -103,6 +151,57 @@ const RecentProducts = () => {
           </tbody>
         </table>
       </div>
+
+      {totalPages > 1 && (
+        <div className="recent-pagination">
+          <button
+            onClick={() => handlePageChange(1)}
+            disabled={currentPage === 1}>
+            &laquo;
+          </button>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}>
+            &lsaquo;
+          </button>
+
+          {startPage > 1 && <span>...</span>}
+          {pageNumbers.map((num) =>
+            editPage === num ? (
+              <input
+                key={num}
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+                onKeyDown={handleInputKeyDown}
+                className="recent-pagination-input"
+                autoFocus
+              />
+            ) : (
+              <button
+                key={num}
+                className={currentPage === num ? "active" : ""}
+                onClick={() => handlePageChange(num)}
+                onDoubleClick={() => handleDoubleClick(num)}>
+                {num}
+              </button>
+            )
+          )}
+          {endPage < totalPages && <span>...</span>}
+
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}>
+            &rsaquo;
+          </button>
+          <button
+            onClick={() => handlePageChange(totalPages)}
+            disabled={currentPage === totalPages}>
+            &raquo;
+          </button>
+        </div>
+      )}
     </div>
   );
 };
