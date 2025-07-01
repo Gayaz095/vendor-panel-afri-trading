@@ -106,7 +106,7 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
             <ul>
               {[
                 { to: "/dashboard", label: "Dashboard" },
-                { to: "/products", label: "Products" },
+                { to: "/products", label: "Manage Products" },
                 { to: "/visit-store", label: "Visit Store" },
                 { to: "/orders-status", label: "Orders Status" },
                 { to: "/delivery-status", label: "Delivery Status" },

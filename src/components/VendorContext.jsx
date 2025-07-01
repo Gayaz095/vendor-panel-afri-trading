@@ -26,7 +26,7 @@ export const VendorProvider = ({ children }) => {
       const now = Date.now();
       const savedTime = parseInt(storedTime, 10);
 
-      if (now - savedTime < 1200000) {
+      if (now - savedTime < 600000) {
         try {
           setVendorDetails(JSON.parse(storedVendor));
           setLoginTime(savedTime);
@@ -54,13 +54,24 @@ export const VendorProvider = ({ children }) => {
       sessionStorage.setItem("vendorDetails", vendorString);
       localStorage.setItem("vendorDetails", vendorString);
       localStorage.setItem("vendorLoginTime", now.toString());
-    } else {
-      sessionStorage.removeItem("vendorDetails");
-      localStorage.removeItem("vendorDetails");
-      localStorage.removeItem("vendorLoginTime");
+    }
+    // else {
+    //   sessionStorage.removeItem("vendorDetails");
+    //   localStorage.removeItem("vendorDetails");
+    //   localStorage.removeItem("vendorLoginTime");
+    // }
+  }, [vendorDetails]);
+  useEffect(() => {
+    if (vendorDetails) {
+      const timer = setTimeout(() => {
+        logoutVendor();
+        toast.info("Session expired. Please login again.");
+      }, 600000); // 10 minutes
+
+      return () => clearTimeout(timer);
     }
   }, [vendorDetails]);
-
+  
   // Update loginTime on tab close (to extend session if reopened soon)
   useEffect(() => {
     const handleBeforeUnload = () => {

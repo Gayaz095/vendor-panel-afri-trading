@@ -18,6 +18,8 @@ import ordersData from "./static-data/orders.json";
 import productsData from "./static-data/products.json";
 
 import Charts from "./Charts";
+import VendorProductsTable from "./VendorProductTable";
+import RecentProducts from "./RecentProducts";
 
 
 const iconComponents = {
@@ -119,7 +121,7 @@ const Dashboard = () => {
 
       <Charts stats={stats} />
 
-      <div className="dashboard-section">
+      {/* <div className="dashboard-section">
         <h3 className="section-title">Recent Orders</h3>
         <div className="table-container">
           <table className="dashboard-table">
@@ -156,7 +158,9 @@ const Dashboard = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
+
+      <RecentProducts />
     </div>
   );
   };

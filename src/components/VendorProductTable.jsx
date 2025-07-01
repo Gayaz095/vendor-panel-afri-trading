@@ -384,6 +384,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       </div>
 
       <div className="table-responsive">
+        <h3 className="vendor-table-h3">Recent Products:</h3>
         <table className="vendor-table">
           <thead>
             <tr>
@@ -435,9 +436,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
                 </tr>
               ) :
                 (
-  
-            
-                  
                     currentItems.map((product) => (
                       <tr key={product._id}>
                         <td data-label="Image">
