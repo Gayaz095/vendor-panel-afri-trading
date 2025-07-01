@@ -1,8 +1,8 @@
 .login-container {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, #E2E8F0 0%, #F7FAFC 100%);
-  color: #2A4365;
+  background: linear-gradient(135deg, #e2e8f0 0%, #f7fafc 100%);
+  color: #2a4365;
   font-family: "Segoe UI", Roboto, sans-serif;
   overflow-y: auto;
 }
@@ -10,7 +10,7 @@
 .welcome-header {
   font-size: 1.6rem;
   font-weight: 600;
-  color: #2B6CB0;
+  color: #2b6cb0;
   margin-bottom: 1.5rem;
   text-align: center;
   letter-spacing: 0.05em;
@@ -29,11 +29,11 @@
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  background: #EDF2F7;
-  color: #2A4365;
+  background: #edf2f7;
+  color: #2a4365;
   position: relative;
   overflow: hidden;
-  border-right: 2px solid #CBD5E0;
+  border-right: 2px solid #cbd5e0;
 }
 
 .brand-section {
@@ -62,7 +62,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2B6CB0;
+  color: #2b6cb0;
   font-weight: 700;
   gap: 0.6rem;
   flex-wrap: wrap;
@@ -71,24 +71,24 @@
 .brand-icon {
   margin-right: 12px;
   /* color: #4299E1; */
-  color:#d7d3ac;
+  color: #d7d3ac;
   transition: transform 0.5s ease, color 0.3s ease;
 }
 
 .brand-icon:hover {
   transform: scale(1.5);
-  color: #2B6CB0;
+  color: #2b6cb0;
 }
 
 .typewriter {
   overflow: hidden;
   white-space: nowrap;
   display: inline-block;
-  border-right: 2px solid #2B6CB0;
+  border-right: 2px solid #2b6cb0;
   /* font-family: monospace; */
   font-size: 2.4rem;
   animation: typing 3s steps(20, end), blink-caret 0.75s step-end infinite;
-  color: #2B6CB0;
+  color: #2b6cb0;
   max-width: 100%;
 }
 
@@ -107,7 +107,7 @@
     border-color: transparent;
   }
   50% {
-    border-color: #2B6CB0;
+    border-color: #2b6cb0;
   }
 }
 
@@ -119,13 +119,12 @@
   }
 }
 
-
 /* Connect With Us Section */
 .connect-with-us {
   margin-top: auto;
   padding: 0 2.5rem 1.5rem 2.5rem;
   /* background: rgba(43, 108, 176, 0.05); */
-  background: #F7FAFC;
+  background: #f7fafc;
   backdrop-filter: blur(10px);
   border-radius: 16px;
   border: 1px solid rgba(43, 108, 176, 0.15);
@@ -136,7 +135,7 @@
 .connect-with-us h3 {
   margin-bottom: 1.5rem;
   font-size: 1.6rem;
-  color: #2A4365;
+  color: #2a4365;
 }
 
 .connect-with-us .connect-items {
@@ -154,7 +153,7 @@
 .connect-icon {
   flex-shrink: 0;
   font-size: 1.5rem;
-  color: #2B6CB0;
+  color: #2b6cb0;
   animation: slideInFromLeft 1s ease forwards;
 }
 
@@ -190,14 +189,14 @@
 }
 
 .connect-link {
-  color: #2B6CB0;
+  color: #2b6cb0;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .connect-link:hover {
   text-decoration: underline;
-  color: #1A365D;
+  color: #1a365d;
 }
 
 /* Right Section */
@@ -206,11 +205,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #F7FAFC;
+  background-color: #f7fafc;
 }
 
 .login-card {
-  background: #EDF2F7;
+  background: #edf2f7;
   border-radius: 12px;
   padding: 3.5rem;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
@@ -224,7 +223,7 @@
 } */
 
 .login-title {
-  color: #2A4365;
+  color: #2a4365;
   font-size: 2rem;
   margin-bottom: 2rem;
   text-align: center;
@@ -237,8 +236,8 @@
 }
 
 .error-message {
-  color: #C53030;
-  background: #FED7D7;
+  color: #c53030;
+  background: #fed7d7;
   padding: 1rem;
   border-radius: 6px;
   font-size: 1rem;
@@ -253,7 +252,7 @@
 .input-group label {
   display: block;
   margin-bottom: 10px;
-  color: #4A5568;
+  color: #4a5568;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -266,7 +265,7 @@
 
 .input-group input {
   padding: 14px 18px;
-  border: 1px solid #CBD5E0;
+  border: 1px solid #cbd5e0;
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.2s ease;
@@ -285,7 +284,7 @@
   padding-right: 45px;
   font-size: 1rem;
   padding: 14px 18px;
-  border: 1px solid #CBD5E0;
+  border: 1px solid #cbd5e0;
   border-radius: 8px;
   box-sizing: border-box;
   transition: all 0.2s ease;
@@ -303,7 +302,7 @@
 }
 
 .toggle-password-icon:hover {
-  color: #2B6CB0;
+  color: #2b6cb0;
 }
 
 .username-input,
@@ -313,14 +312,14 @@
 
 .input-group input:focus {
   outline: none;
-  border-color: #2B6CB0;
+  border-color: #2b6cb0;
   box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.2);
 }
 
 /* Login Button */
 .login-button {
-  background: linear-gradient(to right, #2B6CB0, #4299E1);
-  color: #FFFFFF;
+  background: linear-gradient(to right, #2b6cb0, #4299e1);
+  color: #ffffff;
   border: none;
   padding: 16px;
   border-radius: 8px;
@@ -336,7 +335,7 @@
 }
 
 .login-button:hover {
-  background: linear-gradient(to right, #2C5282, #2B6CB0);
+  background: linear-gradient(to right, #2c5282, #2b6cb0);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(43, 108, 176, 0.3);
 }
@@ -347,7 +346,7 @@
 
 .login-button.loading .loading-text {
   visibility: visible;
-  color:#e2e8f0;
+  color: #e2e8f0;
 }
 
 .login-button.loading .loading-spinner {
@@ -355,13 +354,17 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .login-button .loading-spinner {
   border: 4px solid #e2e8f0;
-  border-top: 4px solid #2B6CB0;
+  border-top: 4px solid #2b6cb0;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -370,11 +373,10 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-
   .login-container {
     flex-direction: row;
   }
-  .login-page-wrapper{
+  .login-page-wrapper {
     overflow: auto;
   }
   .login-right-content {
@@ -393,8 +395,7 @@
 }
 
 @media (max-width: 768px) {
-  
-  .login-page-wrapper{
+  .login-page-wrapper {
     overflow: auto;
   }
   .login-form {
@@ -407,8 +408,8 @@
   .input-group {
     width: 90%;
   }
-  .typewriter{
-    font-size: 1rem;
+  .typewriter {
+    font-size: 1.6rem;
   }
 }
 /* Scrollable Support for Smaller Screens */
