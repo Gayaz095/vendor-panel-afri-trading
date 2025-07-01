@@ -129,7 +129,7 @@ const LoginPage = () => {
               </div>
               <h1 className="brand-title">
                 <FaCarAlt className="brand-icon front-car" />
-                <span>Afri-Trading.com</span>
+                <span className="typewriter">Afri-Trading.com</span>
                 <span className="brand-highlight"></span>
                 <FaCarAlt className="brand-icon back-car" />
               </h1>

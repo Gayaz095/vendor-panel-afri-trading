@@ -70,7 +70,8 @@
 
 .brand-icon {
   margin-right: 12px;
-  color: #4299E1;
+  /* color: #4299E1; */
+  color:#d7d3ac;
   transition: transform 0.5s ease, color 0.3s ease;
 }
 
@@ -79,11 +80,52 @@
   color: #2B6CB0;
 }
 
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  border-right: 2px solid #2B6CB0;
+  /* font-family: monospace; */
+  font-size: 2.4rem;
+  animation: typing 3s steps(20, end), blink-caret 0.75s step-end infinite;
+  color: #2B6CB0;
+  max-width: 100%;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 18ch; /* Adjust to match character count */
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #2B6CB0;
+  }
+}
+
+/* Optional: Reset caret border when typing ends */
+@media (prefers-reduced-motion: reduce) {
+  .typewriter {
+    animation: none;
+    border: none;
+  }
+}
+
+
 /* Connect With Us Section */
 .connect-with-us {
   margin-top: auto;
   padding: 0 2.5rem 1.5rem 2.5rem;
-  background: rgba(43, 108, 176, 0.05);
+  /* background: rgba(43, 108, 176, 0.05); */
+  background: #F7FAFC;
   backdrop-filter: blur(10px);
   border-radius: 16px;
   border: 1px solid rgba(43, 108, 176, 0.15);
@@ -113,11 +155,34 @@
   flex-shrink: 0;
   font-size: 1.5rem;
   color: #2B6CB0;
+  animation: slideInFromLeft 1s ease forwards;
 }
 
 .connect-details {
   display: flex;
   flex-direction: column;
+  animation: slideInFromRight 1s ease forwards;
+}
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(90px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .connect-label {
@@ -145,18 +210,18 @@
 }
 
 .login-card {
-  background: white;
+  background: #EDF2F7;
   border-radius: 12px;
   padding: 3.5rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 450px;
   transition: all 0.3s ease;
 }
 
-.login-card:hover {
+/* .login-card:hover {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
+} */
 
 .login-title {
   color: #2A4365;

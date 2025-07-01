@@ -6,7 +6,7 @@ import "./componentsStyles/Topbar.css";
 import { useVendor } from "./VendorContext";
 import { FaUserCircle } from "react-icons/fa";
 import { FiPhone } from "react-icons/fi";
-
+import { FiSearch } from "react-icons/fi";
 import logoImage from "../assets/logo.png";
 
 const Topbar = ({ toggleSidebar }) => {
@@ -72,26 +72,40 @@ const Topbar = ({ toggleSidebar }) => {
         </button>
         <div className="logo-and-phone">
           <div className="logo-image-wrapper">
-            <img
-              src={logoImage}
-              alt="logo"
-              className="logo-image-img"
-              style={{ width: 96, height: 96 }}
-            />
+            <Link
+              to="/dashboard"
+              className="logo-image-wrapper"
+              onClick={() => setDropdownOpen(false)}>
+              <img
+                src={logoImage}
+                alt="logo"
+                className="logo-image-img"
+                style={{ width: 96, height: 96 }}
+              />
+            </Link>
           </div>
-          {/* 
-          <div className="phone-info">
-            <div className="phone-circle">
-              <FiPhone className="phone-icon" />
-            </div>
-            <a className="phone-number" href="tel:+919876543210">
-              +91-9876543210
-            </a>
-          </div> */}
         </div>
         <p className="topbar-message">
           Welcome to the Afr-Trading.com <br /> Vendor Portal
         </p>
+      </div>
+      
+      <div className="topbar-search">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="topbar-search-form">
+          <input
+            type="text"
+            placeholder="Search products, orders..."
+            className="topbar-search-input"
+          />
+          <button
+            type="submit"
+            className="topbar-search-btn"
+            aria-label="Search">
+            <FiSearch style={{ fontSize: "1.5rem" }} />
+          </button>
+        </form>
       </div>
 
       <div className="topbar-right">

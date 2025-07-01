@@ -39,11 +39,11 @@ const Charts = ({ stats }) => {
 
   return (
     <div className="charts-container">
-      <h3
+      {/* <h3
         className="section-title"
         style={{ textAlign: "center", color: "#2B6CB0" }}>
         Statistics Overview
-      </h3>
+      </h3> */}
       <div className="charts-wrapper">
         <div className="bar-chart">
           <ResponsiveContainer width="100%" height={300}>
