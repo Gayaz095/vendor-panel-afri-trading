@@ -286,7 +286,6 @@
 }
 
 .login-button.loading .loading-spinner {
-  /* margin-left: 35%; */
   animation: spin 1.5s infinite linear;
 }
 
@@ -306,6 +305,7 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+
   .login-container {
     flex-direction: column;
   }
