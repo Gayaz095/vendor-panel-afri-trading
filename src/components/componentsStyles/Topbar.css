@@ -1,23 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap');
-/* 
-* {
-  box-sizing: border-box;
-} */
 
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background: linear-gradient(to right, #32588e, #3A5A6E); */
-  background: linear-gradient(to right, #5a5752, #655750);
-padding-top: 0 20px;
+  background: #2B6CB0;
+  padding-top: 0 20px;
   color: #2d3748;
   box-shadow: 0 12px 10px rgba(44, 62, 80, 0.07);
   padding: 0.1rem 2rem 0.9rem 2rem;
   position: sticky;
   top: 0;
   z-index: 100;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;  
 }
 
 .topbar-left {
@@ -108,11 +103,11 @@ padding-top: 0 20px;
   gap: 1.5rem;
 }
 
-.vendor-dropdown {
+.topbar-vendor-dropdown {
   position: relative;
 }
 
-.vendor-btn {
+.topbar-vendor-btn {
   display: flex;
   align-items: center;
   background: #ffffff;
@@ -126,8 +121,8 @@ padding-top: 0 20px;
   transition: background 0.2s, color 0.2s, border 0.2s;
 }
 
-.vendor-btn:hover,
-.vendor-btn:focus {
+.topbar-endor-btn:hover,
+.topbar-vendor-btn:focus {
   background: #f06a21;
   color: #ffffff;
   border: 1px solid #f8f9fa;
@@ -139,36 +134,36 @@ padding-top: 0 20px;
   color: #2a4365;
 }
 
-.vendor-btn:hover .avatar,
-.vendor-btn:focus .avatar {
+.topbar-vendor-btn:hover .avatar,
+.topbar-vendor-btn:focus .avatar {
   color: #ffffff;
 }
 
-.vendor-in-topbar {
+.topbar-vendor-in-topbar {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.username {
+.topbar-username {
   font-weight: 600;
   font-size: 1rem;
   color: #2a4365;
 }
 
-.user-designation {
+.topbar-user-designation {
   font-size: 0.9rem;
   color: #2d3748;
 }
-.vendor-btn:hover .username,
-.vendor-btn:focus .username,
-.vendor-btn:hover .user-designation,
-.vendor-btn:focus .user-designation {
+.topbar-vendor-btn:hover .username,
+.topbar-vendor-btn:focus .username,
+.topbar-vendor-btn:hover .user-designation,
+.topbar-vendor-btn:focus .user-designation {
   color: #ffffff;
 }
 
 /* Dropdown Menu */
-.dropdown-menu-wrapper {
+.topbar-dropdown-menu-wrapper {
   position: absolute;
   right: 0;
   top: 110%;
@@ -182,18 +177,18 @@ padding-top: 0 20px;
   overflow: hidden;
 }
 
-.dropdown-menu {
+.topbar-dropdown-menu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.dropdown-menu li {
+.topbar-dropdown-menu li {
   margin: 0.1rem 0;
 }
 
-.dropdown-menu a,
-.dropdown-menu .logout-button {
+.topbar-dropdown-menu a,
+.topbar-dropdown-menu .logout-button {
   display: flex;
   align-items: center;
   width: calc(100% - 1rem);
@@ -213,8 +208,8 @@ padding-top: 0 20px;
   overflow: hidden;
 }
 
-.dropdown-menu a::before,
-.dropdown-menu .logout-button::before {
+.topbar-dropdown-menu a::before,
+.topbar-dropdown-menu .logout-button::before {
   content: "";
   display: block;
   position: absolute;
@@ -227,27 +222,27 @@ padding-top: 0 20px;
   transition: background 0.18s;
 }
 
-.dropdown-menu a:hover,
-.dropdown-menu .logout-button:hover {
+.topbar-dropdown-menu a:hover,
+.topbar-dropdown-menu .logout-button:hover {
   background: #fe9b65;
   color: #ffffff;
 }
 
-.dropdown-menu a:hover::before {
+.topbar-dropdown-menu a:hover::before {
   background: #2a4365;
 }
 
-.dropdown-menu .logout-button {
+.topbar-dropdown-menu .logout-button {
   color: #2a4365;
   font-weight: 600;
 }
 
-.dropdown-menu .logout-button:hover {
+.topbar-dropdown-menu .logout-button:hover {
   background: #2a4365;
   color: #ffffff;
 }
 
-.dropdown-menu .logout-button:hover::before {
+.topbar-dropdown-menu .logout-button:hover::before {
   background: #4fd1c5;
 }
 
@@ -266,7 +261,7 @@ padding-top: 0 20px;
   .hamburger-btn {
     display: block;
   }
-  .vendor-dropdown {
+  .topbar-vendor-dropdown {
     margin-right: 10%;
   }
 }
@@ -294,12 +289,12 @@ padding-top: 0 20px;
     justify-content: flex-end;
     margin-top: 0.5rem;
   }
-  .dropdown-menu-wrapper {
+  .topbar-dropdown-menu-wrapper {
     right: 0;
     left: auto;
     min-width: 140px;
   }
-  .vendor-btn {
+  .topbar-vendor-btn {
     padding: 0.4rem 0.7rem;
   }
 }

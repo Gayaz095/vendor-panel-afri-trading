@@ -34,7 +34,7 @@ const Topbar = ({ toggleSidebar }) => {
   };
 
   const renderDropdown = () => (
-    <ul className="dropdown-menu">
+    <ul className="topbar-dropdown-menu">
       <li>
         <Link to="/visit-store" onClick={() => setDropdownOpen(false)}>
           Visit Store
@@ -95,25 +95,28 @@ const Topbar = ({ toggleSidebar }) => {
       </div>
 
       <div className="topbar-right">
-        <div className="vendor-dropdown" ref={dropdownRef}>
+        <div className="topbar-vendor-dropdown" ref={dropdownRef}>
           <button
-            className="vendor-btn"
+            className="topbar-vendor-btn"
             onClick={() => setDropdownOpen(!dropdownOpen)}
             aria-expanded={dropdownOpen ? "true" : "false"}
-            aria-controls="vendor-dropdown-menu"
-            n>
+            aria-controls="topbar-vendor-dropdown-menu">
             <div>
               <FaUserCircle className="avatar" />
             </div>
-            <div className="vendor-in-topbar">
-              <span className="username">
+            <div className="topbar-vendor-in-topbar">
+              <span className="topbar-username">
                 {vendorDetails?.name || "Vendor"}
               </span>
-              <span className="user-designation">{vendorDetails?.email}▼</span>
+              <span className="topbar-user-designation">
+                {vendorDetails?.email}▼
+              </span>
             </div>
           </button>
           {dropdownOpen && (
-            <div id="vendor-dropdown-menu" className="dropdown-menu-wrapper">
+            <div
+              id="vendor-dropdown-menu"
+              className="topbar-dropdown-menu-wrapper">
               {renderDropdown()}
             </div>
           )}
