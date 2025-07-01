@@ -325,6 +325,10 @@
 }
 
 @media (max-width: 768px) {
+  
+  .login-page-wrapper{
+    overflow: auto;
+  }
   .login-form {
     align-items: flex-start;
     padding-left: 20px;
@@ -334,6 +338,25 @@
   }
   .input-group {
     width: 90%;
+  }
+}
+/* Scrollable Support for Smaller Screens */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .login-left,
+  .login-right {
+    flex-shrink: 0;
+    min-height: auto;
+  }
+
+  .login-card {
+    max-height: none;
+    overflow: visible;
   }
 }
 

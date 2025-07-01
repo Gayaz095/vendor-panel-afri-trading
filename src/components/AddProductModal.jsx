@@ -1,4 +1,4 @@
-//AddProductModal.jsx
+// AddProductModal.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { createProduct, updateProduct } from "../utils/productsApi";
 import { imageUpload } from "../utils/imageUpload";
@@ -183,16 +183,19 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
   );
 
   return (
-    <div className="modal-overlay">
+    <div className="add-product-modal-overlay">
       <div className="add-product-modal-content">
-        <span className="close" onClick={onClose}>
+        <span className="add-product-modal-close" onClick={onClose}>
           <AiOutlineClose />
         </span>
         <h2 className="add-product-modal-h2">
           {productToEdit ? "Update Product" : "Add New Product"}
         </h2>
 
-        <form onSubmit={handleSubmit} className="product-form" ref={formRef}>
+        <form
+          onSubmit={handleSubmit}
+          className="add-product-form"
+          ref={formRef}>
           <select
             name="carBrandId"
             value={productData.carBrandId}
@@ -287,7 +290,7 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
             required
           />
 
-          <div className="image-upload-group">
+          <div className="add-product-image-upload">
             <h5>
               <FiUpload /> Upload Product Image *
             </h5>
@@ -298,11 +301,15 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
               onChange={handleFileChange}
             />
             {imagePreview && (
-              <img src={imagePreview} alt="Preview" className="image-preview" />
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="add-product-image-preview"
+              />
             )}
           </div>
 
-          <div className="image-upload-group">
+          <div className="add-product-image-upload">
             <h5>
               <FiUpload /> Upload Thumbnail Image *
             </h5>
@@ -316,7 +323,7 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
               <img
                 src={thumbnailPreview}
                 alt="Thumbnail Preview"
-                className="image-preview"
+                className="add-product-image-preview"
               />
             )}
           </div>
@@ -351,7 +358,7 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
             required
           />
 
-          <label className="checkbox-label">
+          <label className="add-product-checkbox-label">
             <MdStars /> Feature Product:
             <input
               type="checkbox"
