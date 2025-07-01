@@ -407,6 +407,9 @@
   .input-group {
     width: 90%;
   }
+  .typewriter{
+    font-size: 1rem;
+  }
 }
 /* Scrollable Support for Smaller Screens */
 @media (max-width: 768px) {
