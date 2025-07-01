@@ -13,6 +13,10 @@ import {
   FaEnvelope,
   FaHeadset,
 } from "react-icons/fa";
+
+import {  FaEye, FaEyeSlash } from "react-icons/fa"; // already using FaLock
+
+
 import { vendorLogin } from "../utils/vendorLoginApi";
 import { toast } from "react-toastify";
 
@@ -20,6 +24,8 @@ const LoginPage = () => {
   const { vendorDetails, setVendorDetails, isCheckingSession } = useVendor();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const [errors, setErrors] = useState({ username: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -122,9 +128,10 @@ const LoginPage = () => {
                 />
               </div>
               <h1 className="brand-title">
-                <FaCarAlt className="brand-icon" />{" "}
+                <FaCarAlt className="brand-icon front-car" />
                 <span>Afri-Trading.com</span>
                 <span className="brand-highlight"></span>
+                <FaCarAlt className="brand-icon back-car" />
               </h1>
             </div>
 
@@ -167,14 +174,13 @@ const LoginPage = () => {
                   </div>
                 </div>
                 <div className="connect-item">
-                  <div className="connect-icon support">
+                  {/*   <div className="connect-icon support">
                     <FaHeadset />
                   </div>
                   <div className="connect-details">
                     <span className="connect-label">Support Hours:</span>
-                    <span className="connect-info">Mon-SAT: 9AM-6PM</span>
-                    {/* <span className="connect-info">Sat: 10AM-4PM</span> */}
-                  </div>
+                    <span className="connect-info">Mon-Sun: 24/7</span>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -203,18 +209,26 @@ const LoginPage = () => {
                   )}
                 </div>
 
-                <div className="input-group">
+                <div className="input-group password-group">
                   <label htmlFor="password">
                     <FaLock /> Password
                   </label>
-                  <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter password"
-                    className="login-password"
-                  />
+                  <div className="password-input-wrapper">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter password"
+                      className="login-password"
+                    />
+                    <span
+                      className="toggle-password-icon"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      aria-label="Toggle password visibility">
+                      {showPassword ? <FaEye /> : <FaEyeSlash />}
+                    </span>
+                  </div>
                   {errors.password && (
                     <div className="error-message">{errors.password}</div>
                   )}

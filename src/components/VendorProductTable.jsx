@@ -212,7 +212,10 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
   );
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
-  const currentItems = sortData(filteredProducts.slice(startIndex, endIndex));
+  // const currentItems = sortData(filteredProducts.slice(startIndex, endIndex));
+  const sortedFiltered = sortData(filteredProducts);
+  const currentItems = sortedFiltered.slice(startIndex, endIndex);
+  
 
   const handlePageChange = (page) => {
     const clampedPage = Math.max(1, Math.min(page, totalPages));

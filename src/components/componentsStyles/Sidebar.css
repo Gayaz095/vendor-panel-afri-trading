@@ -45,7 +45,7 @@
   margin: 0 16px;
   position: relative;
   opacity: 0;
-  animation: slideInFromLeft 0.5s forwards;
+  animation: slideInFromLeft 1s forwards;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
