@@ -307,7 +307,10 @@
 @media (max-width: 1024px) {
 
   .login-container {
-    flex-direction: column;
+    flex-direction: row;
+  }
+  .login-page-wrapper{
+    overflow: auto;
   }
   .login-right-content {
     padding-right: 5rem;
