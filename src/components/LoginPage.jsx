@@ -1,4 +1,4 @@
-//LoginPage.jsx
+// LoginPage.jsx
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useVendor } from "./VendorContext";
@@ -12,10 +12,9 @@ import {
   FaPhone,
   FaEnvelope,
   FaHeadset,
+  FaEye,
+  FaEyeSlash,
 } from "react-icons/fa";
-
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // already using FaLock
-
 import { vendorLogin } from "../utils/vendorLoginApi";
 import { toast } from "react-toastify";
 
@@ -106,79 +105,82 @@ const LoginPage = () => {
     }
   };
 
-  // Waiting for session/localStorage check to complete before rendering
   if (isCheckingSession) return null;
 
   return (
-    <div className="login-page-wrapper">
-      <div className="login-container">
+    <div className="loginpage-wrapper">
+      <div className="loginpage-container">
         {/* Left Side */}
-        <div className="login-left">
-          <div className="login-left-content">
-            <div className="brand-section">
-              <h2 className="welcome-header">
+        <div className="loginpage-left">
+          <div className="loginpage-left-content">
+            <div className="loginpage-brand-section">
+              <h2 className="loginpage-welcome-header">
                 Welcome to Afri-Trading.com Vendor Portal
               </h2>
-              <div className="logo-container">
+              <div className="loginpage-logo-container">
                 <img
                   src={loginImage}
                   alt="Afri-Trading.com"
-                  className="brand-logo"
+                  className="loginpage-brand-logo"
                 />
               </div>
-              <h1 className="brand-title">
-                <FaCarAlt className="brand-icon front-car" />
-                <span className="typewriter">Afri-Trading.com</span>
-                <span className="brand-highlight"></span>
-                <FaCarAlt className="brand-icon back-car" />
+              <h1 className="loginpage-brand-title">
+                <FaCarAlt className="loginpage-brand-icon loginpage-front-car" />
+                <span className="loginpage-typewriter">Afri-Trading.com</span>
+                <span className="loginpage-brand-highlight"></span>
+                <FaCarAlt className="loginpage-brand-icon loginpage-back-car" />
               </h1>
             </div>
 
-            <div className="connect-with-us">
-              <h3 className="connect-title">Connect With Us</h3>
-              <div className="connect-items">
-                <div className="connect-item">
-                  <div className="connect-icon whatsapp">
+            <div className="loginpage-connect-with-us">
+              <h3 className="loginpage-connect-title">Connect With Us</h3>
+              <div className="loginpage-connect-items">
+                <div className="loginpage-connect-item">
+                  <div className="loginpage-connect-icon loginpage-whatsapp">
                     <FaWhatsapp />
                   </div>
-                  <div className="connect-details">
-                    <span className="connect-label">WhatsApp:</span>
-                    <a className="connect-link" href="https://wa.me/8121927536">
+                  <div className="loginpage-connect-details">
+                    <span className="loginpage-connect-label">WhatsApp:</span>
+                    <a
+                      className="loginpage-connect-link"
+                      href="https://wa.me/8121927536">
                       +91-8121927536
                     </a>
                   </div>
                 </div>
-                <div className="connect-item">
-                  <div className="connect-icon phone">
+                <div className="loginpage-connect-item">
+                  <div className="loginpage-connect-icon loginpage-phone">
                     <FaPhone />
                   </div>
-                  <div className="connect-details">
-                    <span className="connect-label">Phone:</span>
-                    <a className="connect-link" href="tel:+91-8121927536">
+                  <div className="loginpage-connect-details">
+                    <span className="loginpage-connect-label">Phone:</span>
+                    <a
+                      className="loginpage-connect-link"
+                      href="tel:+91-8121927536">
                       +91-8121927536
                     </a>
                   </div>
                 </div>
-                <div className="connect-item">
-                  <div className="connect-icon email">
+                <div className="loginpage-connect-item">
+                  <div className="loginpage-connect-icon loginpage-email">
                     <FaEnvelope />
                   </div>
-                  <div className="connect-details">
-                    <span className="connect-label">Email Us:</span>
+                  <div className="loginpage-connect-details">
+                    <span className="loginpage-connect-label">Email Us:</span>
                     <a
-                      className="connect-link"
+                      className="loginpage-connect-link"
                       href="mailto:contact@afri-trading.com">
                       contact@afri-trading.com
                     </a>
                   </div>
                 </div>
-                <div className="connect-item">
-                  {/*   <div className="connect-icon support">
+                <div className="loginpage-connect-item">
+                  {/* <div className="loginpage-connect-icon loginpage-support">
                     <FaHeadset />
                   </div>
-                  <div className="connect-details">
-                    <span className="connect-label">Support Hours:</span>
-                    <span className="connect-info">Mon-Sun: 24/7</span>
+                  <div className="loginpage-connect-details">
+                    <span className="loginpage-connect-label">Support Hours:</span>
+                    <span className="loginpage-connect-info">Mon-Sun: 24/7</span>
                   </div> */}
                 </div>
               </div>
@@ -187,12 +189,12 @@ const LoginPage = () => {
         </div>
 
         {/* Right Side */}
-        <div className="login-right">
-          <div className="login-right-content">
-            <div className="login-card">
-              <h2 className="login-title">Vendor Sign In</h2>
-              <form onSubmit={handleLogin} className="login-form">
-                <div className="input-group">
+        <div className="loginpage-right">
+          <div className="loginpage-right-content">
+            <div className="loginpage-card">
+              <h2 className="loginpage-title">Vendor Sign In</h2>
+              <form onSubmit={handleLogin} className="loginpage-form">
+                <div className="loginpage-input-group">
                   <label htmlFor="username">
                     <FaUserShield /> Username (Email or Phone)
                   </label>
@@ -202,45 +204,54 @@ const LoginPage = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Enter email or phone"
+                    className="login-username"
                   />
                   {errors.username && (
-                    <div className="error-message">{errors.username}</div>
+                    <div className="loginpage-error-message">
+                      {errors.username}
+                    </div>
                   )}
                 </div>
 
-                <div className="input-group password-group">
+                <div className="loginpage-input-group loginpage-password-group">
                   <label htmlFor="password">
                     <FaLock /> Password
                   </label>
-                  <div className="password-input-wrapper">
+                  <div className="loginpage-password-input-wrapper">
                     <input
                       type={showPassword ? "text" : "password"}
                       id="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter password"
-                      className="login-password"
+                      className="loginpage-password"
                     />
                     <span
-                      className="toggle-password-icon"
+                      className="loginpage-toggle-password-icon"
                       onClick={() => setShowPassword((prev) => !prev)}
                       aria-label="Toggle password visibility">
                       {showPassword ? <FaEye /> : <FaEyeSlash />}
                     </span>
                   </div>
                   {errors.password && (
-                    <div className="error-message">{errors.password}</div>
+                    <div className="loginpage-error-message">
+                      {errors.password}
+                    </div>
                   )}
                 </div>
 
                 <button
                   type="submit"
-                  className={`login-button ${isLoading ? "loading" : ""}`}
+                  className={`loginpage-button${
+                    isLoading ? " loginpage-loading" : ""
+                  }`}
                   disabled={isLoading}>
                   {isLoading ? (
                     <>
-                      <span className="loading-spinner"></span>
-                      <span className="loading-text">Signing In...</span>
+                      <span className="loginpage-loading-spinner"></span>
+                      <span className="loginpage-loading-text">
+                        Signing In...
+                      </span>
                     </>
                   ) : (
                     "Sign In to Dashboard"

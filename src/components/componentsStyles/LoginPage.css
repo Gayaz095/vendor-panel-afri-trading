@@ -1,4 +1,8 @@
-.login-container {
+.loginpage-wrapper {
+  overflow: auto;
+}
+
+.loginpage-container {
   display: flex;
   min-height: 100vh;
   background: linear-gradient(135deg, #e2e8f0 0%, #f7fafc 100%);
@@ -7,7 +11,7 @@
   overflow-y: auto;
 }
 
-.welcome-header {
+.loginpage-welcome-header {
   font-size: 1.6rem;
   font-weight: 600;
   color: #2b6cb0;
@@ -16,8 +20,8 @@
   letter-spacing: 0.05em;
 }
 
-.login-left,
-.login-right {
+.loginpage-left,
+.loginpage-right {
   min-height: 0;
   overflow: hidden;
   display: flex;
@@ -25,7 +29,7 @@
 }
 
 /* Left Section */
-.login-left {
+.loginpage-left {
   flex: 1;
   flex-direction: column;
   justify-content: center;
@@ -36,28 +40,28 @@
   border-right: 2px solid #cbd5e0;
 }
 
-.brand-section {
+.loginpage-brand-section {
   text-align: center;
   margin-bottom: 0;
 }
 
-.logo-container {
+.loginpage-logo-container {
   transition: all 0.4s ease;
 }
 
-.brand-logo {
+.loginpage-brand-logo {
   width: 200px;
   height: auto;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
   transition: all 0.3s ease;
 }
 
-.logo-container:hover .brand-logo {
+.loginpage-logo-container:hover .loginpage-brand-logo {
   transform: scale(1.1);
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.3));
 }
 
-.brand-title {
+.loginpage-brand-title {
   font-size: 2.4rem;
   display: flex;
   align-items: center;
@@ -68,24 +72,22 @@
   flex-wrap: wrap;
 }
 
-.brand-icon {
+.loginpage-brand-icon {
   margin-right: 12px;
-  /* color: #4299E1; */
   color: #d7d3ac;
   transition: transform 0.5s ease, color 0.3s ease;
 }
 
-.brand-icon:hover {
+.loginpage-brand-icon:hover {
   transform: scale(1.5);
   color: #2b6cb0;
 }
 
-.typewriter {
+.loginpage-typewriter {
   overflow: hidden;
   white-space: nowrap;
   display: inline-block;
   border-right: 2px solid #2b6cb0;
-  /* font-family: monospace; */
   font-size: 2.4rem;
   animation: typing 3s steps(20, end), blink-caret 0.75s step-end infinite;
   color: #2b6cb0;
@@ -97,7 +99,7 @@
     width: 0;
   }
   to {
-    width: 18ch; /* Adjust to match character count */
+    width: 18ch;
   }
 }
 
@@ -111,19 +113,17 @@
   }
 }
 
-/* Optional: Reset caret border when typing ends */
 @media (prefers-reduced-motion: reduce) {
-  .typewriter {
+  .loginpage-typewriter {
     animation: none;
     border: none;
   }
 }
 
 /* Connect With Us Section */
-.connect-with-us {
+.loginpage-connect-with-us {
   margin-top: auto;
   padding: 0 2.5rem 1.5rem 2.5rem;
-  /* background: rgba(43, 108, 176, 0.05); */
   background: #f7fafc;
   backdrop-filter: blur(10px);
   border-radius: 16px;
@@ -132,36 +132,37 @@
   transition: all 0.3s ease;
 }
 
-.connect-with-us h3 {
+.loginpage-connect-title {
   margin-bottom: 1.5rem;
   font-size: 1.6rem;
   color: #2a4365;
 }
 
-.connect-with-us .connect-items {
+.loginpage-connect-items {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.connect-item {
+.loginpage-connect-item {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.connect-icon {
+.loginpage-connect-icon {
   flex-shrink: 0;
   font-size: 1.5rem;
   color: #2b6cb0;
   animation: slideInFromLeft 1s ease forwards;
 }
 
-.connect-details {
+.loginpage-connect-details {
   display: flex;
   flex-direction: column;
   animation: slideInFromRight 1s ease forwards;
 }
+
 @keyframes slideInFromLeft {
   from {
     opacity: 0;
@@ -184,23 +185,23 @@
   }
 }
 
-.connect-label {
+.loginpage-connect-label {
   font-weight: bold;
 }
 
-.connect-link {
+.loginpage-connect-link {
   color: #2b6cb0;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.connect-link:hover {
+.loginpage-connect-link:hover {
   text-decoration: underline;
   color: #1a365d;
 }
 
 /* Right Section */
-.login-right {
+.loginpage-right {
   flex: 1;
   display: flex;
   align-items: center;
@@ -208,7 +209,7 @@
   background-color: #f7fafc;
 }
 
-.login-card {
+.loginpage-card {
   background: #edf2f7;
   border-radius: 12px;
   padding: 3.5rem;
@@ -218,24 +219,20 @@
   transition: all 0.3s ease;
 }
 
-/* .login-card:hover {
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-} */
-
-.login-title {
+.loginpage-title {
   color: #2a4365;
   font-size: 2rem;
   margin-bottom: 2rem;
   text-align: center;
 }
 
-.login-form {
+.loginpage-form {
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
 }
 
-.error-message {
+.loginpage-error-message {
   color: #c53030;
   background: #fed7d7;
   padding: 1rem;
@@ -245,11 +242,11 @@
   text-align: center;
 }
 
-.input-group {
+.loginpage-input-group {
   width: 100%;
 }
 
-.input-group label {
+.loginpage-input-group label {
   display: block;
   margin-bottom: 10px;
   color: #4a5568;
@@ -258,12 +255,12 @@
   align-items: center;
 }
 
-.input-group label svg {
+.loginpage-input-group label svg {
   margin-right: 10px;
   color: #718096;
 }
 
-.input-group input {
+.loginpage-input-group input {
   padding: 14px 18px;
   border: 1px solid #cbd5e0;
   border-radius: 8px;
@@ -271,15 +268,15 @@
   transition: all 0.2s ease;
 }
 
-.password-group {
+.loginpage-password-group {
   position: relative;
 }
 
-.password-input-wrapper {
+.loginpage-password-input-wrapper {
   position: relative;
 }
 
-.login-password {
+.loginpage-password {
   width: 100%;
   padding-right: 45px;
   font-size: 1rem;
@@ -290,7 +287,7 @@
   transition: all 0.2s ease;
 }
 
-.toggle-password-icon {
+.loginpage-toggle-password-icon {
   position: absolute;
   right: 15px;
   top: 50%;
@@ -301,23 +298,18 @@
   transition: color 0.2s ease;
 }
 
-.toggle-password-icon:hover {
+.loginpage-toggle-password-icon:hover {
   color: #2b6cb0;
 }
 
-.username-input,
-.password-input {
-  width: 90%;
-}
-
-.input-group input:focus {
+.loginpage-input-group input:focus {
   outline: none;
   border-color: #2b6cb0;
   box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.2);
 }
 
-/* Login Button */
-.login-button {
+/* Login Button and Spinner */
+.loginpage-button {
   min-width: 120px;
   background: linear-gradient(to right, #2b6cb0, #4299e1);
   color: #ffffff;
@@ -332,28 +324,45 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
+  position: relative;
 }
 
-.login-button:hover {
-  background: linear-gradient(to right, #2c5282, #2b6cb0);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(43, 108, 176, 0.3);
+.loginpage-button .loginpage-loading-spinner {
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #2b6cb0;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  animation: spin 1s linear infinite;
+  display: none;
 }
 
-.login-button .loading-text {
-  /* visibility: hidden; */
-  opacity: 1;
+.loginpage-button .loginpage-loading-text {
+  font-size: 1.05rem;
+  margin-left: 0px;
+  display: none;
 }
 
-.login-button.loading .loading-text {
-  /* visibility: visible; */
-  opacity: 0;
-  color: #e2e8f0;
+.loginpage-button.loginpage-loading .loginpage-loading-spinner {
+  display: inline-block;
 }
 
-.login-button.loading .loading-spinner {
-  animation: spin 1.5s infinite linear;
+.loginpage-button.loginpage-loading .loginpage-loading-text {
+  display: inline-block;
+}
+
+.loginpage-button.loginpage-loading {
+  pointer-events: none;
+}
+
+.loginpage-button.loginpage-loading:not(:disabled):not(:hover)::after {
+  content: "";
+}
+
+/* Hide regular text when loading */
+.loginpage-button.loginpage-loading > :not(.loginpage-loading-spinner):not(.loginpage-loading-text) {
+  display: none !important;
 }
 
 @keyframes spin {
@@ -365,94 +374,93 @@
   }
 }
 
-.login-button .loading-spinner {
-  border: 4px solid #e2e8f0;
-  border-top: 4px solid #2b6cb0;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 2s linear infinite;
-}
-
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .login-container {
+  .loginpage-container {
     flex-direction: row;
   }
-  .login-page-wrapper {
+  .loginpage-wrapper {
     overflow: auto;
   }
-  .login-right-content {
+  .loginpage-right-content {
     padding-right: 5rem;
   }
-  .login-left,
-  .login-right {
+  .loginpage-left,
+  .loginpage-right {
     padding: 2.5rem;
   }
-  .brand-logo {
+  .loginpage-brand-logo {
     width: 160px;
   }
-  .login-card {
+  .loginpage-card {
     padding: 2.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .login-page-wrapper {
-    overflow: auto;
-  }
-  .login-form {
-    align-items: flex-start;
-    padding-left: 20px;
-  }
-  .login-right {
-    justify-content: center;
-  }
-  .input-group {
-    width: 90%;
-  }
-  .typewriter {
-    font-size: 1.6rem;
-  }
-}
-/* Scrollable Support for Smaller Screens */
-@media (max-width: 768px) {
-  .login-container {
+  .loginpage-container {
     flex-direction: column;
     min-height: 100vh;
     overflow-y: auto;
   }
-
-  .login-left,
-  .login-right {
+  .loginpage-form {
+    align-items: flex-start;
+    padding-left: 20px;
+  }
+  .loginpage-left,
+  .loginpage-right {
     flex-shrink: 0;
     min-height: auto;
   }
-
-  .login-card {
+  .loginpage-right {
+    justify-content: center;
+  }
+  .loginpage-card {
     max-height: none;
     overflow: visible;
+  }
+  .loginpage-input-group {
+    width: 90%;
+  }
+  .loginpage-input-group .login-username {
+    padding: 14px 18px;
+  }
+  .loginpage-typewriter {
+    font-size: 1.6rem;
   }
 }
 
 @media (max-width: 480px) {
-  .login-right-content {
+  .loginpage-right-content {
     margin: 0 0 0 2.5rem;
   }
-  .login-left {
+  .loginpage-left {
     padding: 1.5rem;
   }
-  .login-right {
+  .loginpage-right {
     padding: 1.5rem 1.5rem 1.5rem 0;
   }
-  .brand-title {
+  .loginpage-brand-title {
     font-size: 1.8rem;
   }
-  .login-card {
+  .loginpage-card {
     padding: 1.5rem;
   }
-  .login-title {
+  .loginpage-title {
     font-size: 1.5rem;
+  }
+  .loginpage-button {
+    font-size: 1rem;
+    padding: 12px;
+    gap: 8px;
+  }
+  .loginpage-button .loginpage-loading-spinner {
+    width: 18px;
+    height: 18px;
+  }
+  .loginpage-button .loginpage-loading-text {
+    font-size: 0.95rem;
+    margin-left: 7px;
   }
 }
 
@@ -478,9 +486,9 @@
   }
 }
 
-.login-left-content {
+.loginpage-left-content {
   animation: slideInLeftContent 0.7s cubic-bezier(0.4, 2, 0.6, 1) 0.1s both;
 }
-.login-right-content {
+.loginpage-right-content {
   animation: slideInRightContent 0.7s cubic-bezier(0.4, 2, 0.6, 1) 0.1s both;
 }
