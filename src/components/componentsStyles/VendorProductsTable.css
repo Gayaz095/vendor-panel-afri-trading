@@ -11,6 +11,8 @@
 
 .vendor-products-table h2 {
   text-align: center;
+  margin-top: 0px;
+  font-size: 1.3rem;
   margin-bottom: 20px;
   color: #333;
 }

@@ -34,7 +34,7 @@
   width: 60px;
   height: 60px;
   margin: 0 auto 15px;
-  background-image: url('https://placehold.co/120x120?text=📦');
+  /* background-image: url('https://placehold.co/120x120?text=📦'); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
