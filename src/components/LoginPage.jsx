@@ -83,7 +83,7 @@ const LoginPage = () => {
       if (response?.token) {
         setVendorDetails(response);
 
-        toast.success("Login successful! Redirecting...", {
+        toast.success("Login successful!", {
           position: "top-right",
           autoClose: 1500,
           hideProgressBar: true,

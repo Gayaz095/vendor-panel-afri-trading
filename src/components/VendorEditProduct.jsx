@@ -8,6 +8,7 @@ import { getSubCategories } from "../utils/getSubCategories";
 import { getAllChildCategories } from "../utils/getAllChildCategories";
 import { useVendor } from "./VendorContext";
 import "./componentsStyles/VendorEditProduct.css";
+import { toast } from "react-toastify";
 
 const VendorEditProduct = ({ product, onClose, onSave }) => {
   const { vendorDetails } = useVendor();
@@ -164,11 +165,11 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
         setMainImagePreview(null);
         setThumbnailImagePreview(null);
       } else {
-        alert(response?.message || "Product update failed");
+        toast.error(response?.message || "Product update failed");
       }
     } catch (err) {
-      console.error("Update failed:", err);
-      alert("Error updating product.");
+      //console.error("Update failed:", err);
+      toast.error(err.message || "Error updating product.");
     } finally {
       setLoading(false);
     }
@@ -395,7 +396,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
           </div>
 
           <div className="vendor-edit-product__actions">
-            <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading} className="vendor-edit-product__cancel-button">
               {loading ? "Updating..." : "Update"}
             </button>
             <button

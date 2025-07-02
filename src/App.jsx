@@ -6,11 +6,11 @@ import {
 } from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard";
-import Products from "./components/Products";
 import LoginPage from "./components/LoginPage";
 import LogoutPage from "./components/LogoutPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
+import NotFound from "./components/NotFound";
 import VendorVisitStore from "./components/VendorVisitStore";
 import OrdersStatus from "./components/OrdersStatus";
 import { ToastContainer, toast } from "react-toastify";
@@ -37,7 +37,6 @@ export default function App() {
               <Route path="/" element={<Layout />}>
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="products" element={<Products />} />
                 <Route path="add-product" element={<AddProduct />} />
                 <Route path="bulk-products" element={<BulkProducts />} />
                 <Route path="visit-store" element={<VendorVisitStore />} />
@@ -50,7 +49,10 @@ export default function App() {
             <Route path="/logout" element={<LogoutPage />} />
 
             {/* Fallback route */}
-            <Route path="*" element={<Navigate to="/login" replace />} />
+            {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+
+            {/* 404 Not Found Route */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </VendorProvider>

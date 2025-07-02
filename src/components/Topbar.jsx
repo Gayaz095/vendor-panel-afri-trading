@@ -89,7 +89,7 @@ const Topbar = ({ toggleSidebar }) => {
         </p>
       </div>
 
-      <div className="topbar-search">
+      {/* <div className="topbar-search">
         <form
           onSubmit={(e) => e.preventDefault()}
           className="topbar-search-form">
@@ -105,7 +105,7 @@ const Topbar = ({ toggleSidebar }) => {
             <FiSearch style={{ fontSize: "1.5rem" }} />
           </button>
         </form>
-      </div>
+      </div> */}
 
       <div className="topbar-right">
         <div className="topbar-vendor-dropdown" ref={dropdownRef}>

@@ -1,7 +1,16 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { useVendor } from "./VendorContext";
-import { FaTachometerAlt, FaBox, FaStore } from "react-icons/fa";
+import {
+  FaTachometerAlt,
+  FaBoxOpen,
+  FaPlus,
+  FaCloudUploadAlt,
+  FaStore,
+  FaClipboardList,
+  FaShippingFast,
+  FaChevronDown,
+} from "react-icons/fa";
 import "./componentsStyles/Sidebar.css";
 
 export default function Sidebar({ isMobile, isOpen, onClose }) {
@@ -11,7 +20,6 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
   const sidebarRef = useRef(null);
   const navigate = useNavigate();
 
-  // Close dropdown and sidebar on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -29,7 +37,6 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
     };
   }, [isMobile, isOpen, onClose]);
 
-  // Close dropdown on route change
   useEffect(() => {
     setOpenDropdown(null);
   }, [location.pathname]);
@@ -45,7 +52,6 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
     navigate("/logout");
   };
 
-  // Remove focus when mobile sidebar closes
   useEffect(() => {
     if (isMobile && !isOpen && document.activeElement?.blur) {
       if (sidebarRef.current?.contains(document.activeElement)) {
@@ -66,23 +72,73 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
         <div className="sidebar-pills-wrapper">
           <nav>
             <ul>
-              {[
-                { to: "/dashboard", label: "Dashboard" },
-                { to: "/products", label: "Manage Products" },
-                { to: "/add-product", label: "Add Product" },
-                { to: "/bulk-products", label: "Upload Bulk Products" },
-                { to: "/visit-store", label: "Visit Store" },
-                { to: "/orders-status", label: "Orders Status" },
-                { to: "/delivery-status", label: "Delivery Status" },
-              ].map((item, index) => (
-                <li key={item.to} style={{ "--i": index }}>
-                  <NavLink
-                    to={item.to}
-                    className={({ isActive }) => (isActive ? "active" : "")}>
-                    {item.label}
-                  </NavLink>
-                </li>
-              ))}
+              <li key="/dashboard" style={{ "--i": 0 }}>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) => (isActive ? "active" : "")}>
+                  <FaTachometerAlt className="icon" />
+                  Dashboard
+                </NavLink>
+              </li>
+
+              {/* Dropdown for Manage Products */}
+              <li
+                className={`has-dropdown ${
+                  openDropdown === "products" ? "open" : ""
+                }`}
+                style={{ "--i": 1 }}>
+                <button
+                  type="button"
+                  className="dropdown-toggle"
+                  onClick={() => handleDropdown("products")}>
+                  <FaBoxOpen className="icon" />
+                  Manage Products
+                  <FaChevronDown className="arrow" />
+                </button>
+                <ul className="dropdown-menu">
+                  <li key="/add-product">
+                    <NavLink
+                      to="/add-product"
+                      className={({ isActive }) => (isActive ? "active" : "")}>
+                      <FaPlus className="icon" />
+                      Add & Edit Product
+                    </NavLink>
+                  </li>
+                  {/* <li key="/bulk-products">
+                    <NavLink
+                      to="/bulk-products"
+                      className={({ isActive }) => (isActive ? "active" : "")}>
+                      <FaCloudUploadAlt className="icon" />
+                      Upload Bulk Products
+                    </NavLink>
+                  </li> */}
+                </ul>
+              </li>
+
+              <li key="/visit-store" style={{ "--i": 2 }}>
+                <NavLink
+                  to="/visit-store"
+                  className={({ isActive }) => (isActive ? "active" : "")}>
+                  <FaStore className="icon" />
+                  Visit Store
+                </NavLink>
+              </li>
+              <li key="/orders-status" style={{ "--i": 3 }}>
+                <NavLink
+                  to="/orders-status"
+                  className={({ isActive }) => (isActive ? "active" : "")}>
+                  <FaClipboardList className="icon" />
+                  Orders Status
+                </NavLink>
+              </li>
+              <li key="/delivery-status" style={{ "--i": 4 }}>
+                <NavLink
+                  to="/delivery-status"
+                  className={({ isActive }) => (isActive ? "active" : "")}>
+                  <FaShippingFast className="icon" />
+                  Delivery Status
+                </NavLink>
+              </li>
             </ul>
           </nav>
         </div>

@@ -14,7 +14,7 @@ import VendorEditProduct from "./VendorEditProduct";
 import VendorViewProduct from "./VendorViewProduct";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import "./componentsStyles/VendorProductsTable.css";
-
+import { toast } from "react-toastify";
 const PRODUCTS_PER_PAGE = 5;
 const PAGE_WINDOW = 3;
 
@@ -144,7 +144,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
   const handleSave = async () => {
     await fetchProducts();
     setEditingProduct(null);
-    alert("Product updated successfully!");
+    toast.success("Product updated successfully!");
   };
 
   const handleFilterChange = (e) => {
@@ -395,7 +395,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       <div className="table-responsive">
         <div className="vendor-table-header">
           <h3 className="vendor-table-h3">
-            Recent Products:
+            Edit Products:
             <button
               className={`refresh-button ${isSpinning ? "spin-once" : ""}`}
               onClick={handleRefreshClick}
