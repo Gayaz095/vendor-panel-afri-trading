@@ -194,7 +194,7 @@ const LoginPage = () => {
             <div className="loginpage-card">
               <h2 className="loginpage-title">Vendor Sign In</h2>
               <form onSubmit={handleLogin} className="loginpage-form">
-                <div className="loginpage-input-group">
+                <div className="loginpage-input-group ">
                   <label htmlFor="username">
                     <FaUserShield /> Username (Email or Phone)
                   </label>
@@ -204,7 +204,7 @@ const LoginPage = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Enter email or phone"
-                    className="login-username"
+                    className="loginpage-username"
                   />
                   {errors.username && (
                     <div className="loginpage-error-message">
