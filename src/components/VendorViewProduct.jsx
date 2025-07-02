@@ -34,7 +34,13 @@ const VendorViewProduct = ({
   const childCategory = childCategories.find(
     (child) => child._id === product.childCategoryId
   );
-
+  if (
+    !mainCategories.length ||
+    !subCategories.length ||
+    !childCategories.length
+  ) {
+    return <div className="view-modal-content">Loading categories...</div>;
+  }
   return (
     <div className="view-modal-overlay">
       <div className="view-modal-content">
