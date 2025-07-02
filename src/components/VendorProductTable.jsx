@@ -576,6 +576,9 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
         <VendorViewProduct
           product={viewingProduct}
           onClose={() => setViewingProduct(null)}
+          mainCategories={mainCategories}
+          subCategories={subCategories}
+          childCategories={childCategories}
         />
       )}
       <DeleteConfirmationModal

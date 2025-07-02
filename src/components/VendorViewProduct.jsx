@@ -17,7 +17,24 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString("en-US", options);
 };
 
-const VendorViewProduct = ({ product, onClose }) => {
+const VendorViewProduct = ({
+  product,
+  onClose,
+  mainCategories,
+  subCategories,
+  childCategories,
+}) => {
+
+  const mainCategory = mainCategories.find(
+    (cat) => cat._id === product.categoryId
+  );
+  const subCategory = subCategories.find(
+    (sub) => sub._id === product.subCategoryId
+  );
+  const childCategory = childCategories.find(
+    (child) => child._id === product.childCategoryId
+  );
+
   return (
     <div className="view-modal-overlay">
       <div className="view-modal-content">
@@ -42,6 +59,14 @@ const VendorViewProduct = ({ product, onClose }) => {
                 product.reflectStatus ? "active" : "inactive"
               }`}>
               {product.reflectStatus ? "Active" : "Inactive"}
+            </div>
+            <div className="product-categories-section">
+              <h4>Main Category:</h4>
+              <span> {mainCategory ? mainCategory.name : "N/A"}</span>
+              <h4>Sub Category:</h4>{" "}
+              <span>{subCategory ? subCategory.name : "N/A"}</span>
+              <h4>Child Category: </h4>
+              <span>{childCategory ? childCategory.name : "N/A"}</span>
             </div>
           </div>
         </div>

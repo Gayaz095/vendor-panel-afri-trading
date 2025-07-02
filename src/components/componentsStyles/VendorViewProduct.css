@@ -117,6 +117,38 @@
   background-color: #f44336;
 }
 
+.product-categories-section {
+  /* margin-top: 20px; */
+  padding: 15px;
+  background-color: #f4f6f8;
+  /* border: 1px solid #dcdcdc; */
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.product-categories-section h4 {
+  margin: 8px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.product-categories-section h4::before {
+  content: "•";
+  color: #007bff;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.product-categories-section span {
+  font-size: 1.1rem;
+  color: #555;
+  word-wrap: break-word;
+}
+
 .view-product-description {
   background-color: #f9f9f9;
   padding: 20px;
