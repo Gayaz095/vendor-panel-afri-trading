@@ -42,6 +42,8 @@ export default function App() {
                 <Route path="visit-store" element={<VendorVisitStore />} />
                 <Route path="orders-status" element={<OrdersStatus />} />
                 <Route path="delivery-status" element={<DeliveryStatus />} />
+                {/* NotFound route at /path-not-found */}
+                <Route path="/path-not-found" element={<NotFound />} />
               </Route>
             </Route>
 
@@ -51,8 +53,11 @@ export default function App() {
             {/* Fallback route */}
             {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
 
-            {/* 404 Not Found Route */}
-            <Route path="*" element={<NotFound />} />
+            {/* Catch-all: redirect to /path-not-found for any unknown route */}
+            <Route
+              path="*"
+              element={<Navigate to="/path-not-found" replace />}
+            />
           </Routes>
         </Router>
       </VendorProvider>

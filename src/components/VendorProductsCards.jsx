@@ -88,6 +88,7 @@ const VendorProductsCards = ({ products, vendorId }) => {
               <p className="product-description">
                 Description: {item.discription}
               </p>
+                <p style={{"fontWeight":"150", "fontSize":"1rem"}}>Reference Number: {item.referenceNumber}</p>
               <div className="price-section">
                 <div>
                   <p className="price">Price: {formatPrice(item.price)}</p>

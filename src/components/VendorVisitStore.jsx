@@ -8,6 +8,14 @@ import LoadingSpinner from "./LoadingSpinner.jsx";
 
 import "./componentsStyles/VendorVisitStore.css";
 
+// Helper to get the latest date (updatedAt or createdAt)
+const getLatestDate = (product) => {
+  const updated = product.updatedAt ? new Date(product.updatedAt) : null;
+  const created = product.createdAt ? new Date(product.createdAt) : null;
+  if (updated && created) return updated > created ? updated : created;
+  return updated || created || new Date(0);
+};
+
 const VendorVisitStore = () => {
   const { vendorDetails } = useVendor();
   const [products, setProducts] = useState([]);
@@ -26,7 +34,7 @@ const VendorVisitStore = () => {
     // eslint-disable-next-line
   }, [vendorDetails]);
 
-  // Sort products whenever sortOption or products change
+  // Sort products whenever sortOption changes
   useEffect(() => {
     if (products.length > 0) {
       sortProducts(sortOption);
@@ -39,8 +47,9 @@ const VendorVisitStore = () => {
     setProductsError(null);
     try {
       const data = await getVendorProducts(vendorId);
+      // Sort by most recent updatedAt or createdAt
       const sortedData = [...data].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        (a, b) => getLatestDate(b) - getLatestDate(a)
       );
       setProducts(sortedData);
     } catch (err) {
@@ -60,10 +69,11 @@ const VendorVisitStore = () => {
         sorted.sort((a, b) => b.price - a.price);
         break;
       case "newest":
-        sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        // Use latest of updatedAt or createdAt
+        sorted.sort((a, b) => getLatestDate(b) - getLatestDate(a));
         break;
       case "oldest":
-        sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        sorted.sort((a, b) => getLatestDate(a) - getLatestDate(b));
         break;
       case "updated":
         sorted.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
@@ -111,11 +121,13 @@ const VendorVisitStore = () => {
                   aria-label="Sort products"
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value)}>
-                  <option value="newest">Sort by: Newest First</option>
+                  <option value="newest">
+                    Sort by: Recently Added/Updated
+                  </option>
                   <option value="oldest">Sort by: Oldest First</option>
                   <option value="price-low">Sort by: Price Low to High</option>
                   <option value="price-high">Sort by: Price High to Low</option>
-                  <option value="updated">Sort by: Recently Updated</option>
+                  {/* <option value="updated">Sort by: Recently Updated</option> */}
                 </select>
                 <FaChevronDown className="filter-arrow" />
               </div>
