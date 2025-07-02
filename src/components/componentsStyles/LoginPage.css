@@ -405,6 +405,9 @@
   .login-right {
     justify-content: center;
   }
+  .login-button {
+    padding: 16px;
+  }
   .input-group {
     width: 90%;
   }
