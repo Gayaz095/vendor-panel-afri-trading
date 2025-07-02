@@ -341,11 +341,13 @@
 }
 
 .login-button .loading-text {
-  visibility: hidden;
+  /* visibility: hidden; */
+  opacity: 1;
 }
 
 .login-button.loading .loading-text {
-  visibility: visible;
+  /* visibility: visible; */
+  opacity: 0;
   color: #e2e8f0;
 }
 
@@ -404,9 +406,6 @@
   }
   .login-right {
     justify-content: center;
-  }
-  .login-button {
-    padding: 16px;
   }
   .input-group {
     width: 90%;
