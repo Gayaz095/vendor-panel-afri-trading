@@ -31,7 +31,6 @@ const VendorVisitStore = () => {
       setProductsError("Vendor information is missing.");
       setLoadingProducts(false);
     }
-    // eslint-disable-next-line
   }, [vendorDetails]);
 
   // Sort products whenever sortOption changes
@@ -39,7 +38,6 @@ const VendorVisitStore = () => {
     if (products.length > 0) {
       sortProducts(sortOption);
     }
-    // eslint-disable-next-line
   }, [sortOption]);
 
   const fetchProducts = async (vendorId) => {
