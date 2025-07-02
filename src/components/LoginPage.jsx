@@ -58,7 +58,7 @@ const LoginPage = () => {
       newErrors.password = "Password is required";
       isValid = false;
     } else if (password.length < 5) {
-      newErrors.password = "Password must be at least 5 characters";
+      newErrors.password = "Password is incorrect";
       isValid = false;
     }
 
@@ -144,7 +144,7 @@ const LoginPage = () => {
                   </div>
                   <div className="connect-details">
                     <span className="connect-label">WhatsApp:</span>
-                    <a className="connect-link" href="https://wa.me/0123456789">
+                    <a className="connect-link" href="https://wa.me/8121927536">
                       +91-8121927536
                     </a>
                   </div>
