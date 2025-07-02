@@ -14,8 +14,7 @@ import {
   FaHeadset,
 } from "react-icons/fa";
 
-import {  FaEye, FaEyeSlash } from "react-icons/fa"; // already using FaLock
-
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // already using FaLock
 
 import { vendorLogin } from "../utils/vendorLoginApi";
 import { toast } from "react-toastify";
@@ -58,7 +57,7 @@ const LoginPage = () => {
       newErrors.password = "Password is required";
       isValid = false;
     } else if (password.length < 5) {
-      newErrors.password = "Password is incorrect";
+      newErrors.password = "Please enter a valid password";
       isValid = false;
     }
 
