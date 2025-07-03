@@ -102,7 +102,7 @@ const EditProfile = ({ initialValues = initialState, onSave }) => {
             name="phone"
             value={form.phone}
             onChange={handleChange}
-            placeholder="Enter 10 digit phone number"
+            placeholder="Enter phone number"
             maxLength={10}
             pattern="[0-9]{10}"
           />
