@@ -10,6 +10,7 @@ import {
   FaClipboardList,
   FaShippingFast,
   FaChevronDown,
+  FaUserEdit,
 } from "react-icons/fa";
 import "./componentsStyles/Sidebar.css";
 
@@ -137,6 +138,14 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
                   className={({ isActive }) => (isActive ? "active" : "")}>
                   <FaShippingFast className="icon" />
                   Delivery Status
+                </NavLink>
+              </li>
+              <li key="/edit-profile" style={{ "--i": 5 }}>
+                <NavLink
+                  to="/edit-profile"
+                  className={({ isActive }) => (isActive ? "active" : "")}>
+                  <FaUserEdit  className="icon" />
+                  Edit Profile
                 </NavLink>
               </li>
             </ul>
