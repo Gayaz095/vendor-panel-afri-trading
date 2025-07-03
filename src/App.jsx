@@ -18,14 +18,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { VendorProvider } from "./components/VendorContext";
 import DeliveryStatus from "./components/DeliveryStatus";
 import AddProduct from "./components/AddProduct";
-import BulkProducts from "./components/BulkProducts";
+import UploadBulkProducts from "./components/UploadBulkProducts";
 
 export default function App() {
   return (
     <div className="app">
       <VendorProvider>
         <Router>
-          <ToastContainer />
+          <ToastContainer style={{ zIndex: 11000 }} />
           <Routes>
             {/* Public routes */}
             <Route element={<PublicRoute />}>
@@ -38,7 +38,7 @@ export default function App() {
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="add-product" element={<AddProduct />} />
-                <Route path="bulk-products" element={<BulkProducts />} />
+                <Route path="upload-bulk-products" element={<UploadBulkProducts />} />
                 <Route path="visit-store" element={<VendorVisitStore />} />
                 <Route path="orders-status" element={<OrdersStatus />} />
                 <Route path="delivery-status" element={<DeliveryStatus />} />

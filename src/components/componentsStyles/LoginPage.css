@@ -287,7 +287,7 @@
   transition: all 0.2s ease;
 }
 
-.loginpage-username{
+.loginpage-username {
   width: 100%;
   padding-right: 45px;
   font-size: 1rem;
@@ -296,7 +296,6 @@
   border-radius: 8px;
   box-sizing: border-box;
   transition: all 0.2s ease;
-
 }
 
 .loginpage-toggle-password-icon {
@@ -373,7 +372,8 @@
 }
 
 /* Hide regular text when loading */
-.loginpage-button.loginpage-loading > :not(.loginpage-loading-spinner):not(.loginpage-loading-text) {
+.loginpage-button.loginpage-loading
+  > :not(.loginpage-loading-spinner):not(.loginpage-loading-text) {
   display: none !important;
 }
 
@@ -434,7 +434,7 @@
   .loginpage-input-group {
     width: 90%;
   }
-  .loginpage-input-group .login-username {
+  .loginpage-input-group .loginpage-username {
     padding: 14px 18px;
   }
   .loginpage-typewriter {

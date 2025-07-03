@@ -104,9 +104,9 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
                       Add & Edit Product
                     </NavLink>
                   </li>
-                  {/* <li key="/bulk-products">
+                  {/* <li key="/upload-bulk-products">
                     <NavLink
-                      to="/bulk-products"
+                      to="/upload-bulk-products"
                       className={({ isActive }) => (isActive ? "active" : "")}>
                       <FaCloudUploadAlt className="icon" />
                       Upload Bulk Products
