@@ -58,6 +58,7 @@
   transition: border 0.2s, box-shadow 0.2s;
   resize: none;
 }
+
 .edit-profile-input:focus,
 .edit-profile-textarea:focus {
   border-color: #2b6cb0 !important;
