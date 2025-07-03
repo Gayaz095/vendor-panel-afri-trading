@@ -25,7 +25,7 @@ const EditProfile = ({ initialValues = initialState, onSave }) => {
       newErrors.email = "Invalid email";
     if (!form.phone.trim()) newErrors.phone = "Phone is required";
     else if (!/^[0-9]{10}$/.test(form.phone))
-      newErrors.phone = "Enter 10 digit phone";
+      newErrors.phone = "Enter phone number";
     if (!form.address.trim()) newErrors.address = "Address is required";
     return newErrors;
   };
@@ -61,7 +61,7 @@ const EditProfile = ({ initialValues = initialState, onSave }) => {
             value={form.name}
             onChange={handleChange}
             placeholder="Enter your name"
-            maxLength={40}
+            maxLength={70}
           />
           {errors.name && (
             <span className="edit-profile-error">{errors.name}</span>
@@ -80,7 +80,7 @@ const EditProfile = ({ initialValues = initialState, onSave }) => {
             value={form.email}
             onChange={handleChange}
             placeholder="Enter your email"
-            maxLength={40}
+            maxLength={60}
           />
           {errors.email && (
             <span className="edit-profile-error">{errors.email}</span>
@@ -98,8 +98,8 @@ const EditProfile = ({ initialValues = initialState, onSave }) => {
             name="phone"
             value={form.phone}
             onChange={handleChange}
-            placeholder="Enter 10 digit phone"
-            maxLength={10}
+            placeholder="Enter phone number"
+            maxLength={20}
             pattern="[0-9]{10}"
           />
           {errors.phone && (
@@ -118,7 +118,7 @@ const EditProfile = ({ initialValues = initialState, onSave }) => {
             value={form.address}
             onChange={handleChange}
             placeholder="Enter your address"
-            rows={3}
+            rows={6}
             maxLength={120}
           />
           {errors.address && (
