@@ -71,7 +71,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       setIsSpinning(false);
     }, 600);
   };
-  
+
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
   }, [filteredProducts]);
@@ -412,7 +412,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
               <th>Name</th>
               <th>Description</th>
               <th>
-                Price(Rs.)
+                Price
                 <button onClick={() => handleSort("price")}>
                   {sortConfig.key === "price"
                     ? sortConfig.direction === "asc"
