@@ -125,10 +125,10 @@ const LoginPage = () => {
                 />
               </div>
               <h1 className="loginpage-brand-title">
-                <FaCarAlt className="loginpage-brand-icon loginpage-front-car" />
+                {/* <FaCarAlt className="loginpage-brand-icon loginpage-front-car" /> */}
                 <span className="loginpage-typewriter">Afri-Trading.com</span>
                 <span className="loginpage-brand-highlight"></span>
-                <FaCarAlt className="loginpage-brand-icon loginpage-back-car" />
+                {/* <FaCarAlt className="loginpage-brand-icon loginpage-back-car" /> */}
               </h1>
             </div>
 
