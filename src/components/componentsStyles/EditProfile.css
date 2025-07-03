@@ -10,13 +10,13 @@
 .edit-profile-form {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
   padding: 36px 38px 30px 38px;
-  max-width: 400px;
+  max-width: 600px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 28px;
 }
 
 .edit-profile-title {
@@ -26,6 +26,12 @@
   text-align: center;
   margin-bottom: 8px;
   letter-spacing: 0.01em;
+}
+
+.edit-profile-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 28px;
 }
 
 .edit-profile-field {
@@ -54,8 +60,9 @@
 }
 .edit-profile-input:focus,
 .edit-profile-textarea:focus {
-  border-color: #2b6cb0;
-  box-shadow: 0 0 0 2px #bee3f8;
+  border-color: #2b6cb0 !important;
+  box-shadow: 0 0 0 2px #bee3f8 !important;
+  outline: none !important;
 }
 
 .edit-profile-error {
@@ -65,8 +72,8 @@
 }
 
 .edit-profile-save-btn {
-  margin-top: 10px;
-  padding: 12px 0;
+  margin-top: 14px;
+  padding: 13px 0;
   background: #2b6cb0;
   color: #fff;
   font-size: 1.13rem;
@@ -76,20 +83,33 @@
   cursor: pointer;
   transition: background 0.18s;
   letter-spacing: 0.02em;
+  width: 100%;
 }
 .edit-profile-save-btn:hover {
   background: #1a365d;
 }
 
+/* Make Business Address field span two columns */
+.edit-profile-field.business-address {
+  grid-column: 1 / 3;
+}
+
 /* Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .edit-profile-form {
     padding: 18px 5vw 16px 5vw;
     max-width: 98vw;
-    gap: 16px;
+    gap: 18px;
   }
   .edit-profile-title {
     font-size: 1.15rem;
+  }
+  .edit-profile-fields-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .edit-profile-field.business-address {
+    grid-column: auto;
   }
   .edit-profile-input,
   .edit-profile-textarea {
