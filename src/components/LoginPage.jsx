@@ -114,7 +114,7 @@ const LoginPage = () => {
         <div className="loginpage-left">
           <div className="loginpage-left-content">
             <div className="loginpage-brand-section">
-              <h2 className="loginpage-welcome-header">
+              <h2 className="loginpage-welcome-header animated-fadein">
                 Welcome to Afri-Trading.com Vendor Portal
               </h2>
               <div className="loginpage-logo-container">
@@ -192,7 +192,9 @@ const LoginPage = () => {
         <div className="loginpage-right">
           <div className="loginpage-right-content">
             <div className="loginpage-card">
-              <h2 className="loginpage-title">Vendor Sign In</h2>
+              <h2 className="loginpage-title animated-fadein">
+                Vendor Sign In
+              </h2>
               <form onSubmit={handleLogin} className="loginpage-form">
                 <div className="loginpage-input-group ">
                   <label htmlFor="username">
