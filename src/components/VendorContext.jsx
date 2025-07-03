@@ -168,9 +168,9 @@ export const VendorProvider = ({ children }) => {
   // Restore vendor session from localStorage
   useEffect(() => {
     const storedVendor = localStorage.getItem("vendorDetails");
-    const storedTime = localStorage.getItem("vendorLoginTime");
+    const storedTime = localStorage.getItem("vendorLoginTime");  //remove this, if want every time logging in
 
-    if (storedVendor && storedTime) {
+    if (storedVendor && storedTime) { //remove only storedTime, if want every time logging in
       try {
         setVendorDetails(JSON.parse(storedVendor));
         setLoginTime(parseInt(storedTime, 10));
@@ -192,8 +192,8 @@ export const VendorProvider = ({ children }) => {
 
       const vendorString = JSON.stringify(vendorDetails);
       sessionStorage.setItem("vendorDetails", vendorString);
-      localStorage.setItem("vendorDetails", vendorString);
-      localStorage.setItem("vendorLoginTime", now.toString());
+      localStorage.setItem("vendorDetails", vendorString); //remove this, if want every time logging in
+      localStorage.setItem("vendorLoginTime", now.toString()); //remove this, if want every time logging in
     }
   }, [vendorDetails]);
 

@@ -5,7 +5,8 @@ const initialState = {
   name: "",
   email: "",
   phone: "",
-  address: "",
+  businessName: "",
+  businessAddress: "",
 };
 
 const EditProfile = ({ initialValues = initialState, onSave }) => {
@@ -25,8 +26,11 @@ const EditProfile = ({ initialValues = initialState, onSave }) => {
       newErrors.email = "Invalid email";
     if (!form.phone.trim()) newErrors.phone = "Phone is required";
     else if (!/^[0-9]{10}$/.test(form.phone))
-      newErrors.phone = "Enter phone number";
-    if (!form.address.trim()) newErrors.address = "Address is required";
+      newErrors.phone = "Enter 10 digit phone number";
+    if (!form.businessName.trim())
+      newErrors.businessName = "Business Name is required";
+    if (!form.businessAddress.trim())
+      newErrors.businessAddress = "Business Address is required";
     return newErrors;
   };
 
@@ -98,8 +102,8 @@ const EditProfile = ({ initialValues = initialState, onSave }) => {
             name="phone"
             value={form.phone}
             onChange={handleChange}
-            placeholder="Enter phone number"
-            maxLength={20}
+            placeholder="Enter 10 digit phone number"
+            maxLength={10}
             pattern="[0-9]{10}"
           />
           {errors.phone && (
@@ -108,21 +112,40 @@ const EditProfile = ({ initialValues = initialState, onSave }) => {
         </div>
 
         <div className="edit-profile-field">
-          <label className="edit-profile-label" htmlFor="address">
-            Address
+          <label className="edit-profile-label" htmlFor="businessName">
+            Business Name
+          </label>
+          <input
+            className="edit-profile-input"
+            type="text"
+            id="businessName"
+            name="businessName"
+            value={form.businessName}
+            onChange={handleChange}
+            placeholder="Enter your business name"
+            maxLength={70}
+          />
+          {errors.businessName && (
+            <span className="edit-profile-error">{errors.businessName}</span>
+          )}
+        </div>
+
+        <div className="edit-profile-field">
+          <label className="edit-profile-label" htmlFor="businessAddress">
+            Business Address
           </label>
           <textarea
             className="edit-profile-input edit-profile-textarea"
-            id="address"
-            name="address"
-            value={form.address}
+            id="businessAddress"
+            name="businessAddress"
+            value={form.businessAddress}
             onChange={handleChange}
-            placeholder="Enter your address"
-            rows={6}
+            placeholder="Enter your business address"
+            rows={4}
             maxLength={120}
           />
-          {errors.address && (
-            <span className="edit-profile-error">{errors.address}</span>
+          {errors.businessAddress && (
+            <span className="edit-profile-error">{errors.businessAddress}</span>
           )}
         </div>
 
