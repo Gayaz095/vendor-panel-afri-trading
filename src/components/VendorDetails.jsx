@@ -19,8 +19,6 @@ const VendorDetails = ({ vendorDetails }) => {
               </div>
             </div>
 
-            <div className="document-divider"></div>
-
             <div className="document-item">
               <h4 className="document-title">GST Certificate</h4>
               <div className="document-image-container">
@@ -31,8 +29,6 @@ const VendorDetails = ({ vendorDetails }) => {
                 />
               </div>
             </div>
-
-            <div className="document-divider"></div>
 
             <div className="document-item">
               <h4 className="document-title">PAN Card</h4>
