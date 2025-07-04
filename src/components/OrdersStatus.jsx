@@ -194,7 +194,7 @@ const OrderStatus = () => {
   const loaderStyle = {
     fontSize: "3rem",
     color: "#2563eb",
-    animation: "spin 1.5s linear infinite",
+    animation: "spin 7s linear infinite",
   };
 
   const spinnerKeyframes = `

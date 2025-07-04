@@ -27,7 +27,7 @@
 }
 
 .view-modal-title {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   color: #333;
   margin-bottom: 20px;
   font-weight: 600;
@@ -116,7 +116,7 @@
   background-color: #f44336;
 }
 
-.products-brands-models-section {
+.product-brands-models-section {
   margin: 10px 0;
   display: flex;
   flex-direction: column;
