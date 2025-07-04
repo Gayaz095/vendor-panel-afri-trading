@@ -4,6 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard";
 import LoginPage from "./components/LoginPage";
@@ -26,6 +27,7 @@ export default function App() {
     <div className="app">
       <VendorProvider>
         <Router>
+          <ScrollToTop />
           <ToastContainer style={{ zIndex: 11000 }} />
           <Routes>
             {/* Public routes */}

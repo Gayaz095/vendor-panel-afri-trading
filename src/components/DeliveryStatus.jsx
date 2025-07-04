@@ -88,8 +88,8 @@ const DeliveryStatus = () => {
               <th>Total Cost</th>
               <th>Payment Method</th>
               <th>Rider</th>
-              <th>Status</th>
-              <th>Actions</th>
+              {/* <th>Status</th> */}
+              {/* <th>Actions</th> */}
             </tr>
           </thead>
           <tbody>
@@ -105,9 +105,9 @@ const DeliveryStatus = () => {
                 <td className="delivery-status-component__cell">
                   {order.payment}
                 </td>
-                <td className="delivery-status-component__cell">
+                {/* <td className="delivery-status-component__cell">
                   {order.rider}
-                </td>
+                </td> */}
                 <td className="delivery-status-component__cell">
                   <span
                     className={`delivery-status-component__status-badge ${getStatusColor(
@@ -116,7 +116,7 @@ const DeliveryStatus = () => {
                     {order.status}
                   </span>
                 </td>
-                <td className="delivery-status-component__cell">
+                {/* <td className="delivery-status-component__cell">
                   {order.rider === "Unassigned" ? (
                     <div className="delivery-status-component__dropdown-container">
                       <button
@@ -142,7 +142,7 @@ const DeliveryStatus = () => {
                       Assigned
                     </span>
                   )}
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>
