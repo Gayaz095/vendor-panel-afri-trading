@@ -103,7 +103,7 @@ const RecentProducts = () => {
               <th>Reference No.</th>
               <th>Name</th>
               <th>Description</th>
-              <th>Price (Rs.)</th>
+              <th>Price</th>
               <th>Stock</th>
               <th>Status</th>
             </tr>

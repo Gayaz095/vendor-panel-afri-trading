@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+/* Dashboard.css */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 
-/* Root font settings for modern look */
 .dashboard {
-  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   background-color: #f4f6f8;
@@ -10,12 +10,10 @@
   letter-spacing: 0.01em;
 }
 
-/* Dashboard main container */
 .dashboard {
   padding: 1rem;
 }
 
-/* Heading */
 .dashboard-heading {
   font-size: 2.2rem;
   font-weight: 500;
@@ -25,7 +23,6 @@
   font-family: inherit;
 }
 
-/* Dashboard cards */
 .dashboard-cards {
   display: flex;
   flex-wrap: wrap;
@@ -40,13 +37,12 @@
   box-sizing: border-box;
 }
 
-/* Card */
 .dashboard-card {
   background-color: #fff;
   padding: 1.6rem;
   height: 140px;
   border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,10 +53,9 @@
 
 .dashboard-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.13);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.13);
 }
 
-/* Icon */
 .dashboard-icon {
   width: 52px;
   height: 52px;
@@ -73,16 +68,30 @@
   flex-shrink: 0;
   transition: transform 0.3s, background-color 0.3s;
 }
+
 .dashboard-card:hover .dashboard-icon {
   animation: rotateThreeTimes 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
+
 @keyframes rotateThreeTimes {
-  0% { transform: rotate(0deg);}
-  20% { transform: rotate(30deg);}
-  40% { transform: rotate(-30deg);}
-  60% { transform: rotate(20deg);}
-  80% { transform: rotate(-10deg);}
-  100% { transform: rotate(0deg);}
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(30deg);
+  }
+  40% {
+    transform: rotate(-30deg);
+  }
+  60% {
+    transform: rotate(20deg);
+  }
+  80% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 /* Stat value animation */
@@ -110,16 +119,31 @@
 }
 
 /* Stagger animations for each card */
-.dashboard-cards > *:nth-child(1) .stat-value { --index: 0; }
-.dashboard-cards > *:nth-child(2) .stat-value { --index: 1; }
-.dashboard-cards > *:nth-child(3) .stat-value { --index: 2; }
-.dashboard-cards > *:nth-child(4) .stat-value { --index: 3; }
-.dashboard-cards > *:nth-child(5) .stat-value { --index: 4; }
-.dashboard-cards > *:nth-child(6) .stat-value { --index: 5; }
-.dashboard-cards > *:nth-child(7) .stat-value { --index: 6; }
-.dashboard-cards > *:nth-child(8) .stat-value { --index: 7; }
+.dashboard-cards > *:nth-child(1) .stat-value {
+  --index: 0;
+}
+.dashboard-cards > *:nth-child(2) .stat-value {
+  --index: 1;
+}
+.dashboard-cards > *:nth-child(3) .stat-value {
+  --index: 2;
+}
+.dashboard-cards > *:nth-child(4) .stat-value {
+  --index: 3;
+}
+.dashboard-cards > *:nth-child(5) .stat-value {
+  --index: 4;
+}
+.dashboard-cards > *:nth-child(6) .stat-value {
+  --index: 5;
+}
+.dashboard-cards > *:nth-child(7) .stat-value {
+  --index: 6;
+}
+.dashboard-cards > *:nth-child(8) .stat-value {
+  --index: 7;
+}
 
-/* Card Info */
 .dashboard-info h3 {
   margin: 0;
   font-size: 1.08rem;
@@ -138,13 +162,12 @@
   letter-spacing: 0.01em;
 }
 
-/* Charts */
 .charts-container {
   margin-top: 40px;
   background: #fff;
   padding: 20px;
   border-radius: 13px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .charts-wrapper {
@@ -160,13 +183,12 @@
   min-width: 300px;
 }
 
-/* Section */
 .dashboard-section {
   margin-top: 2rem;
   background: #fff;
   border-radius: 0.5rem;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.09);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.09);
 }
 
 .section-title {
@@ -177,7 +199,6 @@
   font-family: inherit;
 }
 
-/* Table */
 .table-container {
   overflow-x: auto;
 }
@@ -210,7 +231,6 @@
   font-size: 0.98rem;
 }
 
-/* View Button */
 .view-button {
   display: flex;
   align-items: center;
@@ -233,7 +253,6 @@
   transform: scale(1.05);
 }
 
-/* Status badge */
 .status-badge {
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;

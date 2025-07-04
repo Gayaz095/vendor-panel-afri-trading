@@ -1,21 +1,20 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap');
-
+/* EditProfile.css */
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap");
 
 .edit-profile__input:focus,
 .edit-profile__textarea:focus {
-  border-color: #2563eb !important; /* Modern blue */
+  border-color: #2563eb !important;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
   outline: none !important;
 }
 
 .edit-profile {
-  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 90vh;
-  background: #f8fafc; /* Softer background */
+  background: #f8fafc;
   padding: 32px 8px;
 }
 
@@ -31,7 +30,7 @@
 .edit-profile__title {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #1e293b; /* Slate gray */
+  color: #1e293b;
   margin-bottom: 28px;
   text-align: center;
   letter-spacing: 0.4px;
@@ -52,7 +51,7 @@
 
 .edit-profile__label {
   font-size: 1.05rem;
-  color: #475569; /* Subtle text */
+  color: #475569;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -62,7 +61,7 @@
 
 .edit-profile__icon {
   font-size: 1.1em;
-  color: #2563eb; /* Primary accent color */
+  color: #2563eb;
 }
 
 .edit-profile__input {
@@ -123,7 +122,7 @@
   pointer-events: none;
 }
 
-/* Responsive adjustments */
+/* Responsive Design */
 @media (max-width: 600px) {
   .edit-profile__card {
     padding: 24px 16px 18px 16px;

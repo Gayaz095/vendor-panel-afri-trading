@@ -432,7 +432,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
                 </button>
               </th>
               <th>
-                Status{" "}
+                Status
                 <button onClick={() => handleSort("status")}>
                   {sortConfig.key === "status"
                     ? sortConfig.direction === "asc"

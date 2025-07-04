@@ -47,7 +47,6 @@ button {
   transition: background-color 0.3s ease;
 }
 
-/* Confirm Delete Button */
 .confirm-delete {
   background-color: #dc3545;
   color: white;
@@ -57,7 +56,6 @@ button {
   background-color: #c82333;
 }
 
-/* Cancel Delete Button */
 .cancel-delete {
   background-color: #6c757d;
   color: white;
