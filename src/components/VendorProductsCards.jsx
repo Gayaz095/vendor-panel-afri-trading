@@ -5,17 +5,18 @@ import "./componentsStyles/VendorProductsCards.css";
 const CARDS_PER_PAGE = 6;
 const PAGE_WINDOW = 5;
 
-const VendorProductsCards = ({ products, vendorId }) => {
+const VendorProductsCards = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [editPage, setEditPage] = useState(null);
   const [inputValue, setInputValue] = useState("");
 
   const totalPages = Math.ceil(products.length / CARDS_PER_PAGE);
 
-  // Get products for the current page
   const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
-  const endIndex = startIndex + CARDS_PER_PAGE;
-  const currentProducts = products.slice(startIndex, endIndex);
+  const currentProducts = products.slice(
+    startIndex,
+    startIndex + CARDS_PER_PAGE
+  );
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -24,25 +25,17 @@ const VendorProductsCards = ({ products, vendorId }) => {
     }
   };
 
-  let startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
-  let endPage = startPage + PAGE_WINDOW - 1;
-  if (endPage > totalPages) {
-    endPage = totalPages;
-    startPage = Math.max(1, endPage - PAGE_WINDOW + 1);
-  }
-  const pageNumbers = [];
-  for (let i = startPage; i <= endPage; i++) {
-    pageNumbers.push(i);
-  }
+  const startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
+  const endPage = Math.min(totalPages, startPage + PAGE_WINDOW - 1);
 
-  // Double click to edit page number
   const handleDoubleClick = (page) => {
     setEditPage(page);
     setInputValue(page);
   };
 
   const handleInputChange = (e) => {
-    setInputValue(e.target.value.replace(/[^0-9]/g, ""));
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    setInputValue(value);
   };
 
   const handleInputBlur = () => {
@@ -54,19 +47,16 @@ const VendorProductsCards = ({ products, vendorId }) => {
   };
 
   const handleInputKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleInputBlur();
-    } else if (e.key === "Escape") {
-      setEditPage(null);
-    }
+    if (e.key === "Enter") handleInputBlur();
+    else if (e.key === "Escape") setEditPage(null);
   };
-  // Function to format price
-  const formatPrice = (price) => {
-    return `₹${Number(price).toLocaleString("en-IN", {
+
+  const formatPrice = (price) =>
+    `₹${Number(price).toLocaleString("en-IN", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })}`;
-  };
+
   return (
     <div>
       <div className="product-card-container">
@@ -78,33 +68,28 @@ const VendorProductsCards = ({ products, vendorId }) => {
                 href={item.onlineLink || "#"}
                 className="go-online-btn"
                 target="_blank"
-                rel="noopener noreferrer"
-                tabIndex={-1}>
+                rel="noopener noreferrer">
                 Go Online
               </a>
             </div>
             <div className="product-details">
               <h3 className="product-name">Name: {item.name}</h3>
               <p className="product-description">
-                <span>Description: </span>
-                {item.discription}
+                <span>Description:</span> {item.discription}
               </p>
-              <p style={{ fontWeight: "150", fontSize: "1rem" }}>
+              <p className="product-reference">
                 Reference Number: {item.referenceNumber}
               </p>
               <div className="price-section">
-                <div>
-                  <p className="price">Price: {formatPrice(item.price)}</p>
-                </div>
-                <div>
-                  <p className="stock">Stock: {item.stock}</p>
-                </div>
+                <p className="price">Price: {formatPrice(item.price)}</p>
+                <p className="stock">Stock: {item.stock}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
-      {/* Pagination Controls */}
+
+      {/* Pagination */}
       <div className="pagination">
         <button
           onClick={() => handlePageChange(1)}
@@ -117,7 +102,10 @@ const VendorProductsCards = ({ products, vendorId }) => {
           &lsaquo;
         </button>
         {startPage > 1 && <span>...</span>}
-        {pageNumbers.map((num) =>
+        {Array.from(
+          { length: endPage - startPage + 1 },
+          (_, i) => startPage + i
+        ).map((num) =>
           editPage === num ? (
             <input
               key={num}
@@ -128,7 +116,6 @@ const VendorProductsCards = ({ products, vendorId }) => {
               onKeyDown={handleInputKeyDown}
               className="pagination-input"
               autoFocus
-              style={{ width: "40px" }}
             />
           ) : (
             <button
