@@ -1,17 +1,18 @@
+/* Updated Font Family */
+
 .vendor-details-root {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding: 32px 16px;
   background: #f6f8fa;
-  /* min-height: 100vh; */
   box-sizing: border-box;
 }
 
 .vendor-details-profile-card {
   background: #fff;
   border-radius: 18px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1); /* Slightly darker shadow for depth */
   max-width: 900px;
   width: 100%;
   padding: 32px 28px;
@@ -27,10 +28,9 @@
   min-width: 320px;
 }
 
-
 .vendor-details-section-title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.5rem; /* Increased size for better readability */
+  font-weight: 600; /* Slightly lighter weight for a modern look */
   margin-bottom: 18px;
   color: #2d3748;
   letter-spacing: 0.02em;
@@ -50,12 +50,12 @@
   border-radius: 10px;
   padding: 12px;
   text-align: center;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1); /* Slightly darker shadow */
 }
 
 .vendor-details-document-title {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.1rem; /* Increased size for better readability */
+  font-weight: 500; /* Lighter weight for a modern look */
   margin-bottom: 8px;
   color: #4a5568;
   white-space: nowrap;
@@ -81,6 +81,7 @@
   border-radius: 6px;
   transition: box-shadow 0.2s;
 }
+
 .vendor-details-document-image:hover {
   box-shadow: 0 0 0 2px #2b6cb0;
 }
@@ -111,8 +112,8 @@
 }
 
 .vendor-details-name {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.75rem; /* Increased size for better prominence */
+  font-weight: 700; /* Bold for emphasis */
   color: #1a202c;
   margin-bottom: 8px;
   word-break: break-word;
@@ -157,11 +158,10 @@
 .vendor-details-info-section-title {
   margin-top: 0px;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700; /* Bold for emphasis */
   color: #1a202c;
   margin-bottom: 8px;
   word-break: break-word;
-  
 }
 
 .vendor-details-contact-grid {
@@ -211,7 +211,7 @@
   position: relative;
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   padding: 24px 24px 16px 24px;
   max-width: 90vw;
   max-height: 90vh;
@@ -222,8 +222,8 @@
 }
 
 @keyframes vendor-details-zoomIn {
-  from { transform: scale(0.85);}
-  to   { transform: scale(1);}
+  from { transform: scale(0.85); }
+  to   { transform: scale(1); }
 }
 
 .vendor-details-modal-image {
@@ -253,6 +253,7 @@
   z-index: 10;
   transition: background 0.2s;
 }
+
 .vendor-details-modal-close-btn:hover {
   background: #1a365d;
 }
@@ -291,10 +292,10 @@
     width: 100%;
   }
   .vendor-details-name {
-    font-size: 1.15rem;
+    font-size: 1.25rem; /* Adjusted for smaller screens */
   }
   .vendor-details-section-title {
-    font-size: 1.05rem;
+    font-size: 1.2rem; /* Adjusted for smaller screens */
   }
   .vendor-details-info-label,
   .vendor-details-contact-label {

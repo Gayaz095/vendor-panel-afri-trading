@@ -108,21 +108,30 @@
 .price-section {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  margin-top: 10px;
+}
+
+.price-section div {
+  font-size: 1.1rem;
+}
+
+.price-section span {
+  font-weight: 500;
+  margin-right: 5px;
+  color: #555;
 }
 
 .price {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #2c3e50;
+  color: #2a52be;
+  font-weight: 600;
 }
 
-.price .stock{
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #2c3e50;
+.stock {
+  color: #228b22;
+  font-weight: 600;
 }
 
+/* Pagination Controls */
 .pagination {
   display: flex;
   justify-content: center;

@@ -1,52 +1,61 @@
-/*VendorProductsTable.css*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Main container */
 .vendor-products-table {
   margin: 30px auto;
   padding: 20px;
   max-width: 1200px;
-  font-family: "Segoe UI", sans-serif;
-  background: #eaeaea;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  background: #f9fafb;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+  border-radius: 14px;
 }
 
+/* Headings */
 .vendor-products-table h2 {
   text-align: center;
   margin-top: 0px;
+  font-size: 1.5rem;
+  margin-bottom: 22px;
+  color: #23272f;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.vendor-table-h3 {
   font-size: 1.3rem;
-  margin-bottom: 20px;
-  color: #333;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  color: #2c3e50;
+  background: #eeeeee;
+  border-radius: 6px;
+  padding: 1rem;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.01em;
 }
 
 /* No products message styling */
 .no-products-message {
   text-align: center;
-  padding: 30px;
+  padding: 32px;
   color: #6c757d;
-  font-size: 18px;
+  font-size: 1.1rem;
   background-color: #f8f9fa;
-  border-radius: 8px;
-  margin: 20px 0;
+  border-radius: 10px;
+  margin: 22px 0;
   position: relative;
 }
 
-/* .no-products-message::before {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 15px;
-  background-image: url('https://placehold.co/120x120?text=📦');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.6;
-} */
-
+/* Filters and actions */
 .filters-actions {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 18px;
+  margin-bottom: 22px;
 }
 
 .filter-header {
@@ -54,26 +63,30 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .filter-header input {
   flex: 1;
-  padding: 12px;
+  padding: 13px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 250px;
+  border-radius: 7px;
+  width: 260px;
+  font-size: 1rem;
+  font-family: inherit;
 }
 
 .reset-button {
-  padding: 8px 14px;
+  padding: 9px 16px;
   background-color: #dc3545;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 7px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: background-color 0.2s;
 }
 
 .reset-button:hover {
@@ -82,25 +95,27 @@
 
 .filter-row {
   display: flex;
-  gap: 12px;
+  gap: 13px;
   flex-wrap: wrap;
 }
 
 .filter-row input,
 .filter-row select,
 .reference-no input {
-  max-width: 250px;
+  max-width: 260px;
   width: 100%;
-  padding: 10px;
+  padding: 11px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 7px;
+  font-size: 1rem;
+  font-family: inherit;
 }
 
 .vendor-product-table-horizontal-line {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 16px 0;
+  margin: 18px 0;
   position: relative;
 }
 
@@ -112,49 +127,51 @@
 }
 
 .vendor-product-table-horizontal-line span {
-  padding: 0 10px;
-  font-size: 14px;
+  padding: 0 12px;
+  font-size: 15px;
   color: #555;
   font-weight: 600;
+  font-family: inherit;
 }
 
 .reference-no {
   display: flex;
   justify-content: flex-start;
-  margin-top: 10px;
+  margin-top: 11px;
+}
+
+/* Table styling */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 15px;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 
 th,
 td {
   border: 1px solid #e0e0e0;
-  padding: 12px 10px;
+  padding: 13px 11px;
   text-align: center;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 400;
 }
 
 th {
-  background-color: #f7f9fc;
-  color: #555;
+  background-color: #f3f6fa;
+  color: #23272f;
   font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 td {
-  background-color: #ffffff;
-}
-
-.vendor-table-h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.2rem;
-  color: #2c3e50;
-  background: #dddddd;
-  border-radius: 5px;
-  padding: 0.9rem;
+  background-color: #fff;
 }
 
 .vendor-table {
@@ -183,38 +200,48 @@ td {
   width: 70px;
   height: 70px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 9px;
   border: 1px solid #ddd;
 }
 
+/* Status styles */
 .status-active {
-  color: green;
-  font-weight: bold;
+  color: #27ae60;
+  font-weight: 600;
+  font-family: inherit;
 }
 
 .status-inactive {
-  color: red;
-  font-weight: bold;
+  color: #e74c3c;
+  font-weight: 600;
+  font-family: inherit;
 }
 
+/* Action buttons */
 .action-buttons {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
 }
 
-button {
-  padding: 6px 10px;
+button,
+.reset-button,
+.edit-btn,
+.delete-btn,
+.view-btn {
+  padding: 7px 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.2s ease-in-out;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  transition: all 0.2s;
 }
 
 .edit-btn {
   background-color: #ffc107;
-  color: #333;
+  color: #23272f;
 }
 
 .edit-btn:hover {
@@ -267,24 +294,22 @@ button {
   animation: spinOnce 0.6s ease-in-out;
 }
 
-.table-responsive {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
+/* Pagination */
 .pagination-input {
-  width: 40px;
-  height: 30px;
-  padding: 0 5px;
-  font-size: 14px;
+  width: 42px;
+  height: 32px;
+  padding: 0 6px;
+  font-size: 15px;
   text-align: center;
-  margin-left: 5px;
+  margin-left: 6px;
   border: 1px solid #ddd;
+  font-family: inherit;
 }
 
 .pagination button,
 .pagination .pagination-input {
   display: inline-block;
+  font-family: inherit;
 }
 
 .pagination button:hover {
@@ -295,7 +320,7 @@ button {
 .pagination button.active {
   background-color: #007bff;
   color: white;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 /* Responsive */
@@ -308,7 +333,7 @@ button {
   .right-button {
     order: 1;
     align-self: flex-end;
-    margin-bottom: 10px;
+    margin-bottom: 11px;
   }
 
   .left-input {
@@ -318,30 +343,31 @@ button {
 
   .left-input input {
     width: 100%;
-    max-width: 250px;
+    max-width: 260px;
   }
 
   .filter-row {
     flex-direction: column;
-    gap: 10px;
+    gap: 11px;
   }
 
   .filter-row select,
   .filter-row input,
   .reference-no input {
     width: 100%;
-    max-width: 250px;
+    max-width: 260px;
   }
 }
+
 @media (max-width: 600px) {
   .vendor-table td[data-label="Name"],
   .vendor-table td[data-label="Description"] {
     max-width: 90px;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .pagination button {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .pagination-input {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useVendor } from "./VendorContext";
 import { updateVendorProfile } from "../utils/updateVendorProfile";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { FiUser, FiMail, FiPhone, FiMapPin, FiBriefcase } from "react-icons/fi";
 import "./componentsStyles/EditProfile.css";
 
