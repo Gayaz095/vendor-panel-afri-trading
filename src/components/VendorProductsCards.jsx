@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaStar, FaShoppingCart } from "react-icons/fa";
 import "./componentsStyles/VendorProductsCards.css";
 
 const CARDS_PER_PAGE = 6;
@@ -11,7 +10,6 @@ const VendorProductsCards = ({ products }) => {
   const [inputValue, setInputValue] = useState("");
 
   const totalPages = Math.ceil(products.length / CARDS_PER_PAGE);
-
   const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
   const currentProducts = products.slice(
     startIndex,
@@ -73,8 +71,16 @@ const VendorProductsCards = ({ products }) => {
               </a>
             </div>
             <div className="product-details">
-              <h3 className="product-name">Name: {item.name}</h3>
-              <p className="product-description">
+              <h3
+                className="product-name"
+                title={item.name} // Hover full name
+              >
+                Name: {item.name}
+              </h3>
+              <p
+                className="product-description"
+                title={item.discription} // Hover full description
+              >
                 <span>Description:</span> {item.discription}
               </p>
               <p className="product-reference">
