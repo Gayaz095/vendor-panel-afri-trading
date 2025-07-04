@@ -1,132 +1,135 @@
-/*EditProfile.css */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap');
+
+
 .edit-profile__input:focus,
 .edit-profile__textarea:focus {
-  border-color: #2b6cb0 !important;
-  box-shadow: 0 0 0 2px #bee3f8 !important;
+  border-color: #2563eb !important; /* Modern blue */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2) !important;
   outline: none !important;
 }
 
 .edit-profile {
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 90vh;
-  background: #f5f7fa;
+  background: #f8fafc; /* Softer background */
   padding: 32px 8px;
 }
 
 .edit-profile__card {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08),
-    0 1.5px 4px rgba(44, 62, 80, 0.03);
-  padding: 38px 32px 28px 32px;
-  max-width: 420px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  padding: 40px 32px 30px 32px;
+  max-width: 480px;
   width: 100%;
 }
 
 .edit-profile__title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #22304a;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1e293b; /* Slate gray */
   margin-bottom: 28px;
   text-align: center;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  line-height: 1.2;
 }
 
 .edit-profile__form {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 .edit-profile__form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .edit-profile__label {
-  font-size: 1rem;
-  color: #334e68;
+  font-size: 1.05rem;
+  color: #475569; /* Subtle text */
   font-weight: 500;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .edit-profile__icon {
-  font-size: 1.12em;
-  color: #3b82f6;
+  font-size: 1.1em;
+  color: #2563eb; /* Primary accent color */
 }
 
 .edit-profile__input {
-  padding: 10px 14px;
-  border: 1.5px solid #d1d5db;
-  border-radius: 8px;
+  padding: 12px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
   font-size: 1rem;
   background: #f9fafb;
-  color: #22304a;
+  color: #1f2937;
   transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
-  box-shadow: none;
 }
 
 .edit-profile__input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .edit-profile__input--error {
-  border-color: #ef4444 !important;
+  border-color: #dc2626 !important;
   background: #fef2f2;
 }
 
 .edit-profile__error {
-  color: #ef4444;
-  font-size: 0.92rem;
-  margin-top: 2px;
+  color: #dc2626;
+  font-size: 0.93rem;
+  margin-top: 3px;
   padding-left: 2px;
   font-weight: 500;
   letter-spacing: 0.1px;
 }
 
 .edit-profile__button {
-  margin-top: 10px;
-  padding: 12px 0;
-  background: #2b6cb0;
-  color: #fff;
-  font-size: 1.08rem;
+  margin-top: 12px;
+  padding: 14px 0;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 1.1rem;
   font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.18s, opacity 0.15s;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.05);
+  transition: background 0.2s, opacity 0.15s;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.15);
 }
 
 .edit-profile__button:hover:not(:disabled),
 .edit-profile__button:focus-visible:not(:disabled) {
-  background: #1f509f;
-  opacity: 0.92;
+  background: #1e40af; /* Darker blue on hover */
+  opacity: 0.95;
 }
 
 .edit-profile__button--disabled,
 .edit-profile__button:disabled {
-  background: #a5b4fc;
+  background: #c7d2fe;
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.75;
   pointer-events: none;
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .edit-profile__card {
-    padding: 22px 8px 16px 8px;
-    max-width: 98vw;
+    padding: 24px 16px 18px 16px;
+    max-width: 95vw;
   }
   .edit-profile__title {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 }
