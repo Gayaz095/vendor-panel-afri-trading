@@ -17,29 +17,30 @@
   color: #333;
 }
 
-   /* No products message styling */
-   .no-products-message {
-    text-align: center;
-    padding: 30px;
-    color: #6c757d;
-    font-size: 18px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    margin: 20px 0;
-    position: relative;
-  }
-  .no-products-message::before {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 15px;
-    background-image: url('https://placehold.co/120x120?text=📦');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.6;
-  }
+/* No products message styling */
+.no-products-message {
+  text-align: center;
+  padding: 30px;
+  color: #6c757d;
+  font-size: 18px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
+  position: relative;
+}
+
+/* .no-products-message::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 15px;
+  background-image: url('https://placehold.co/120x120?text=📦');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+} */
 
 .filters-actions {
   display: flex;
@@ -123,7 +124,6 @@
   margin-top: 10px;
 }
 
-/* Table */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -145,6 +145,38 @@ th {
 
 td {
   background-color: #ffffff;
+}
+
+.vendor-table-h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  color: #2c3e50;
+  background: #dddddd;
+  border-radius: 5px;
+  padding: 0.9rem;
+}
+
+.vendor-table {
+  min-width: 600px;
+}
+
+.vendor-table td[data-label="Name"],
+.vendor-table th:nth-child(2) {
+  max-width: 140px;
+  min-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vendor-table td[data-label="Description"],
+.vendor-table th:nth-child(3) {
+  max-width: 220px;
+  min-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .vendor-product-image {
@@ -206,10 +238,12 @@ button {
 .view-btn:hover {
   background-color: #0056b3;
 }
+
 .vendor-table-header {
   align-items: center;
   padding: 10px 0;
 }
+
 .refresh-button {
   background: transparent;
   border: none;
@@ -233,41 +267,9 @@ button {
   animation: spinOnce 0.6s ease-in-out;
 }
 
-
 .table-responsive {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-}
-.vendor-table-h3 {
-  font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.2rem;
-    color: #2c3e50;
-    background: #dddddd;
-    border-radius: 5px;
-    padding: 0.9rem;
-}
-
-.vendor-table {
-  min-width: 600px;
-}
-
-.vendor-table td[data-label="Name"],
-.vendor-table th:nth-child(2) {
-  max-width: 140px;
-  min-width: 80px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.vendor-table td[data-label="Description"],
-.vendor-table th:nth-child(3) {
-  max-width: 220px;
-  min-width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .pagination-input {
@@ -295,8 +297,6 @@ button {
   color: white;
   font-weight: bold;
 }
-
-
 
 /* Responsive */
 @media (max-width: 768px) {

@@ -1,5 +1,5 @@
 .vendor-store-container {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   max-width: 1200px;
   margin: 0 auto;
   /* padding: 20px; */
@@ -31,16 +31,11 @@
   margin-bottom: 2rem;
 }
 
-@media (min-width: 768px) {
-  .vendor-profile-section {
-    padding: 0;
-  }
-}
 .light-line {
   border: none;
-  border-top: 1px solid #ccc; /* Light gray line */
-  margin: 20px 0; /* Optional spacing */
-  background-color: rgba(0, 0, 0, 0.1); /* very soft line */
+  border-top: 1px solid #ccc;
+  margin: 20px 0; 
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .products-section {
@@ -81,7 +76,7 @@
 
 .filter-select:focus {
   outline: none;
-  border-color: #D97706;
+  border-color: #d97706;
   box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2);
 }
 
@@ -147,7 +142,7 @@
 .toggle-vendor-details {
   background: none;
   border: none;
-  color: #B45309; /* Amber accent */
+  color: #b45309;
   font-size: 1rem;
   cursor: pointer;
   display: flex;
@@ -168,6 +163,7 @@
   .vendor-profile-section {
     flex-direction: row;
     align-items: flex-start;
+    padding: 0;
   }
 
   .products-filters {
@@ -179,34 +175,3 @@
     min-width: 180px;
   }
 }
-
-
-/* .loading-spinner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-}
-
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #d4af37;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-.loading-text {
-  font-size: 16px;
-  color: #666;
-  font-weight: 500;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-} */

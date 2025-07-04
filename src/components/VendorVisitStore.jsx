@@ -96,7 +96,6 @@ const VendorVisitStore = () => {
   return (
     <div className="vendor-store-container">
       <div className="vendor-header">{/* Optional: Add header UI */}</div>
-
       <div className="vendor-content">
         <div className="vendor-profile-section">
           {vendorDetails ? (
@@ -125,7 +124,6 @@ const VendorVisitStore = () => {
                   <option value="oldest">Sort by: Oldest First</option>
                   <option value="price-low">Sort by: Price Low to High</option>
                   <option value="price-high">Sort by: Price High to Low</option>
-                  {/* <option value="updated">Sort by: Recently Updated</option> */}
                 </select>
                 <FaChevronDown className="filter-arrow" />
               </div>
