@@ -1,6 +1,6 @@
 [
   {
-    "id": "#OD101",
+    "id": "34568",
     "customer": "Michael Johnson",
     "total": "$245.99",
     "payment": "Credit Card",
@@ -8,7 +8,7 @@
     "status": "Pending"
   },
   {
-    "id": "#OD102",
+    "id": "34568",
     "customer": "Sarah Williams",
     "total": "$189.50",
     "payment": "PayPal",
@@ -16,7 +16,7 @@
     "status": "In Transit"
   },
   {
-    "id": "#OD103",
+    "id": "38886",
     "customer": "Robert Chen",
     "total": "$320.75",
     "payment": "Cash on Delivery",
@@ -24,7 +24,7 @@
     "status": "Delivered"
   },
   {
-    "id": "#OD104",
+    "id": "02586",
     "customer": "Emily Davis",
     "total": "$150.20",
     "payment": "Credit Card",

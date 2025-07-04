@@ -26,13 +26,12 @@
   word-wrap: break-word;
 }
 
-/* Modal Title */
 .view-modal-title {
   font-size: 1.8rem;
   color: #333;
   margin-bottom: 20px;
   font-weight: 600;
-  text-align: center;
+  text-align: start;
   word-wrap: break-word;
 }
 
@@ -110,18 +109,23 @@
 }
 
 .view-product-status.active {
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 
 .view-product-status.inactive {
   background-color: #f44336;
 }
 
+.products-brands-models-section {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .product-categories-section {
-  /* margin-top: 20px; */
-  padding: 15px;
+  padding: 5px 15px 15px 15px;
   background-color: #f4f6f8;
-  /* border: 1px solid #dcdcdc; */
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -181,7 +185,6 @@
   font-size: 1.1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
-  /* text-align: center; */
 }
 
 .view-price-info {

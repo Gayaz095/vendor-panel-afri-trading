@@ -9,7 +9,6 @@ const VendorContext = createContext();
 
 export const VendorProvider = ({ children }) => {
   const [vendorDetails, setVendorDetails] = useState(null);
-  const [loginTime, setLoginTime] = useState(null);
   const [allCars, setAllCars] = useState([]);
   const [allCarModels, setAllCarModels] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
@@ -17,84 +16,70 @@ export const VendorProvider = ({ children }) => {
   const [allChildCategories, setAllChildCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Restore vendor session from localStorage
+  // Restore vendor session
   useEffect(() => {
-    const storedVendor = localStorage.getItem("vendorDetails");
-    const storedTime = localStorage.getItem("vendorLoginTime"); //remove this, if want every time logging in
-
-    if (storedVendor && storedTime) {
-      //remove only storedTime, if want every time logging in
+    const storedVendor = sessionStorage.getItem("vendorDetails");
+    if (storedVendor) {
       try {
         setVendorDetails(JSON.parse(storedVendor));
-        setLoginTime(parseInt(storedTime, 10));
       } catch (err) {
         console.error("Failed to parse stored vendor details:", err);
-        localStorage.removeItem("vendorDetails");
-        localStorage.removeItem("vendorLoginTime");
+        sessionStorage.removeItem("vendorDetails");
       }
     }
-
     setLoading(false);
   }, []);
 
-  // Sync vendor details to storage
+  // Sync vendor details to sessionStorage
   useEffect(() => {
     if (vendorDetails) {
-      const now = Date.now();
-      setLoginTime(now);
-
-      const vendorString = JSON.stringify(vendorDetails);
-      sessionStorage.setItem("vendorDetails", vendorString);
-      localStorage.setItem("vendorDetails", vendorString); //remove this, if want every time logging in
-      localStorage.setItem("vendorLoginTime", now.toString()); //remove this, if want every time logging in
+      sessionStorage.setItem("vendorDetails", JSON.stringify(vendorDetails));
     }
   }, [vendorDetails]);
 
-  // Fetch dropdown data on login
+  // Fetch dropdown data (only once per session)
   useEffect(() => {
+    let isMounted = true;
     const fetchData = async () => {
       try {
-        const cars = await getAllCars();
-        const models = await getAllCarModels();
-        const categories = await mainGetCategories();
-        const subCats = await getSubCategories();
-        const childCats = await getAllChildCategories();
+        const [cars, models, categories, subCats, childCats] =
+          await Promise.all([
+            getAllCars(),
+            getAllCarModels(),
+            mainGetCategories(),
+            getSubCategories(),
+            getAllChildCategories(),
+          ]);
 
-        setAllCars(cars?.data || []);
-        setAllCarModels(models?.carModels || models || []);
-        setAllCategories(
-          Array.isArray(categories) ? categories : categories?.categories || []
-        );
-        setAllSubCategories(
-          Array.isArray(subCats) ? subCats : subCats?.subCategories || []
-        );
-        setAllChildCategories(
-          Array.isArray(childCats)
-            ? childCats
-            : childCats?.childCategories || []
-        );
+        if (isMounted) {
+          setAllCars(cars?.data || []);
+          setAllCarModels(models?.carModels || models || []);
+          setAllCategories(categories?.categories || []);
+          setAllSubCategories(subCats?.subCategories || []);
+          setAllChildCategories(childCats?.childCategories || []);
+        }
       } catch (err) {
         console.error("Error loading dropdown data:", err);
       }
     };
 
-    if (vendorDetails) {
+    if (vendorDetails && allCars.length === 0) {
       fetchData();
     }
-  }, [vendorDetails]);
 
-  // Logout function
+    return () => {
+      isMounted = false;
+    };
+  }, [vendorDetails]); // 👈 only fetch on first login
+
   const logoutVendor = () => {
     setVendorDetails(null);
-    setLoginTime(null);
+    sessionStorage.removeItem("vendorDetails");
     setAllCars([]);
     setAllCarModels([]);
     setAllCategories([]);
     setAllSubCategories([]);
     setAllChildCategories([]);
-    sessionStorage.removeItem("vendorDetails");
-    localStorage.removeItem("vendorDetails");
-    localStorage.removeItem("vendorLoginTime");
   };
 
   return (
@@ -102,7 +87,6 @@ export const VendorProvider = ({ children }) => {
       value={{
         vendorDetails,
         setVendorDetails,
-        loginTime,
         logoutVendor,
         allCars,
         allCarModels,

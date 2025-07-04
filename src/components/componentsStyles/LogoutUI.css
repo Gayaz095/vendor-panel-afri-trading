@@ -1,66 +1,67 @@
+/* Logout.css */
 .logout-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .logout-modal {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 350px;
-    max-width: 90%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .logout-modal h3 {
-    margin-top: 0;
-    color: #333;
-  }
-  
-  .logout-modal p {
-    margin-bottom: 20px;
-    color: #666;
-  }
-  
-  .logout-modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-  
-  .logout-modal-cancel,
-  .logout-modal-confirm {
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-  }
-  
-  .logout-modal-cancel {
-    background: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
-  }
-  
-  .logout-modal-cancel:hover {
-    background: #e0e0e0;
-  }
-  
-  .logout-modal-confirm {
-    background: #ff4d4f;
-    color: white;
-    border: 1px solid #ff4d4f;
-  }
-  
-  .logout-modal-confirm:hover {
-    background: #ff7875;
-  }
-  
+  font-family: "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logout-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 350px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logout-modal h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.logout-modal p {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.logout-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.logout-modal-cancel,
+.logout-modal-confirm {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.logout-modal-cancel {
+  background: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.logout-modal-cancel:hover {
+  background: #e0e0e0;
+}
+
+.logout-modal-confirm {
+  background: #ff4d4f;
+  color: white;
+  border: 1px solid #ff4d4f;
+}
+
+.logout-modal-confirm:hover {
+  background: #ff7875;
+}

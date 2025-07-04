@@ -4,7 +4,8 @@ import {
   deleteProduct,
   updateProduct,
 } from "../utils/productsApi";
-import { FaSyncAlt } from "react-icons/fa";
+// import { FaSyncAlt } from "react-icons/fa";
+import { FiRefreshCw } from "react-icons/fi";
 import { getAllCars } from "../utils/getAllCars";
 import { getAllCarModels } from "../utils/getAllCarModels";
 import { mainGetCategories } from "../utils/mainGetCategories";
@@ -308,7 +309,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
           </div>
           <div className="right-button">
             <button className="reset-button" onClick={resetFilters}>
-              Reset Filters
+              Reset All Filters
             </button>
           </div>
         </div>
@@ -400,7 +401,8 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
               className={`refresh-button ${isSpinning ? "spin-once" : ""}`}
               onClick={handleRefreshClick}
               title="Reset sorting">
-              <FaSyncAlt />
+              {/* <FaSyncAlt /> */}
+              <FiRefreshCw />
             </button>
           </h3>
         </div>
@@ -576,6 +578,8 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
         <VendorViewProduct
           product={viewingProduct}
           onClose={() => setViewingProduct(null)}
+          carBrands={carBrands}
+          carModels={carModels}
           mainCategories={mainCategories}
           subCategories={subCategories}
           childCategories={childCategories}

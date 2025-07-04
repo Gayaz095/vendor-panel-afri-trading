@@ -20,11 +20,14 @@ const formatDate = (dateString) => {
 const VendorViewProduct = ({
   product,
   onClose,
+  carBrands,
+  carModels,
   mainCategories,
   subCategories,
   childCategories,
 }) => {
-
+  const carBrand = carBrands.find((b) => b._id === product.carBrandId);
+  const carModel = carModels.find((m) => m._id === product.carBrandModelId);
   const mainCategory = mainCategories.find(
     (cat) => cat._id === product.categoryId
   );
@@ -34,9 +37,16 @@ const VendorViewProduct = ({
   const childCategory = childCategories.find(
     (child) => child._id === product.childCategoryId
   );
-if (!mainCategories.length || !subCategories.length || !childCategories.length) {
-  return <div className="view-modal-content">Loading categories...</div>;
-}
+
+  if (
+    !mainCategories.length ||
+    !subCategories.length ||
+    !childCategories.length ||
+    !carBrands.length ||
+    !carModels.length
+  ) {
+    return <div className="view-modal-content">Loading categories...</div>;
+  }
   return (
     <div className="view-modal-overlay">
       <div className="view-modal-content">
@@ -62,10 +72,20 @@ if (!mainCategories.length || !subCategories.length || !childCategories.length) 
               }`}>
               {product.reflectStatus ? "Active" : "Inactive"}
             </div>
+            <div className="product-brands-models-section">
+              <div>
+                <strong>Car Brand:</strong>
+                <span>{carBrand ? carBrand.name : "N/A"}</span>
+              </div>
+              <div>
+                <strong>Car Model:</strong>
+                <span>{carModel ? carModel.name : "N/A"}</span>
+              </div>
+            </div>
             <div className="product-categories-section">
               <h4>Main Category:</h4>
               <span> {mainCategory ? mainCategory.name : "N/A"}</span>
-              <h4>Sub Category:</h4>{" "}
+              <h4>Sub Category:</h4>
               <span>{subCategory ? subCategory.name : "N/A"}</span>
               <h4>Child Category: </h4>
               <span>{childCategory ? childCategory.name : "N/A"}</span>
@@ -101,3 +121,11 @@ if (!mainCategories.length || !subCategories.length || !childCategories.length) 
 };
 
 export default VendorViewProduct;
+
+
+{/* <div className="product-brands-models-section">
+  <h4>Car Brands:</h4>
+  <span></span>
+  <h4>Car Models:</h4>
+  <span></span>
+</div>; */}
