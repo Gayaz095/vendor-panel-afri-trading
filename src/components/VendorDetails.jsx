@@ -75,7 +75,7 @@ const VendorDetails = ({ vendorDetails }) => {
           <h3 className="vendor-details-section-title">Vendor Information</h3>
           <div className="vendor-details-info-basic-contact">
             <div className="vendor-details-basic-info">
-              <h2 className="vendor-details-name">{vendorDetails.name}</h2>
+              <h2 className="vendor-details-name">{vendorDetails.vendorDetails.name}</h2>
               <div className="vendor-details-business-info">
                 <div className="vendor-details-info-row">
                   <span className="vendor-details-info-label">
