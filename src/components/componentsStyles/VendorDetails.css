@@ -27,6 +27,7 @@
   min-width: 320px;
 }
 
+
 .vendor-details-section-title {
   font-size: 1.25rem;
   font-weight: 700;
@@ -154,10 +155,13 @@
 }
 
 .vendor-details-info-section-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #2b6cb0;
-  margin-bottom: 10px;
+  margin-top: 0px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a202c;
+  margin-bottom: 8px;
+  word-break: break-word;
+  
 }
 
 .vendor-details-contact-grid {
