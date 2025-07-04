@@ -94,7 +94,7 @@ const EditProfile = () => {
 
       const response = await updateVendorProfile(payload);
 
-      // ✅ Update root-level and vendorDetails fields
+      //Update root-level and vendorDetails fields
       setVendorDetails((prev) => ({
         ...prev,
         name: formData.name,

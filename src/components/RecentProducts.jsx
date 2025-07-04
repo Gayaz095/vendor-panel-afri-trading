@@ -111,7 +111,7 @@ const RecentProducts = () => {
           <tbody>
             {currentItems.length === 0 ? (
               <tr>
-                <td colSpan="7" className="recent-no-products-message">
+                <td className="recent-no-products-message">
                   No recent products available.
                 </td>
               </tr>

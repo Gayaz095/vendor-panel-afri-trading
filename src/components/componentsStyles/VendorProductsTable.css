@@ -268,7 +268,7 @@ button,
 
 .vendor-table-header {
   align-items: center;
-  padding: 10px 0;
+  padding-top: 10px;
 }
 
 .refresh-button {
