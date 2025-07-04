@@ -1,6 +1,4 @@
 /* BulkProducts.css */
-
-/* Modal Overlay */
 .bulk-upload-modal-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -31,7 +29,6 @@
   to   { opacity: 1; transform: scale(1);}
 }
 
-/* Headings */
 .bulk-upload-modal-content h2 {
   margin-top: 0;
   font-size: 2rem;
@@ -75,7 +72,6 @@
   outline: none;
 }
 
-/* Buttons */
 .bulk-upload-btn,
 .bulk-upload-close {
   margin-top: 1.5rem;
@@ -110,7 +106,6 @@
   background: #e7eaf1;
 }
 
-/* Preview Table */
 .bulk-preview {
   margin-top: 2rem;
   overflow-x: auto;
