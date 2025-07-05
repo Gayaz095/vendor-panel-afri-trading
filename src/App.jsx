@@ -19,7 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { VendorProvider } from "./components/VendorContext";
 import DeliveryStatus from "./components/DeliveryStatus";
 import AddProduct from "./components/AddProduct";
-import UploadBulkProducts from "./components/UploadBulkProducts";
 import EditProfile from "./components/EditProfile";
 
 export default function App() {
@@ -41,10 +40,6 @@ export default function App() {
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="add-product" element={<AddProduct />} />
-                <Route
-                  path="upload-bulk-products"
-                  element={<UploadBulkProducts />}
-                />
                 <Route path="visit-store" element={<VendorVisitStore />} />
                 <Route path="orders-status" element={<OrdersStatus />} />
                 <Route path="delivery-status" element={<DeliveryStatus />} />
