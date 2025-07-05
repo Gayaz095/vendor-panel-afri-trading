@@ -5,8 +5,14 @@ export default function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Scroll the window to the top on every route change
-    window.scrollTo(0, 0);
+    // Delay to let DOM update first
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth", // Or "auto"
+      });
+    }, 50);
   }, [pathname]);
 
   return null;
