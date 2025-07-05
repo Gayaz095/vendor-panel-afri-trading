@@ -4,8 +4,8 @@ import LogoutUI from "./LogoutUI";
 import "./componentsStyles/Topbar.css";
 import { useVendor } from "./VendorContext";
 import { FaUserCircle } from "react-icons/fa";
-import { FiPhone } from "react-icons/fi";
-import { FiSearch } from "react-icons/fi";
+// import { FiPhone } from "react-icons/fi";
+// import { FiSearch } from "react-icons/fi";
 import logoImage from "../assets/logo.png";
 
 const Topbar = ({ toggleSidebar }) => {
@@ -88,24 +88,6 @@ const Topbar = ({ toggleSidebar }) => {
           Welcome to the Afr-Trading.com <br /> Vendor Portal
         </p>
       </div>
-
-      {/* <div className="topbar-search">
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="topbar-search-form">
-          <input
-            type="text"
-            placeholder="Search products, orders..."
-            className="topbar-search-input"
-          />
-          <button
-            type="submit"
-            className="topbar-search-btn"
-            aria-label="Search">
-            <FiSearch style={{ fontSize: "1.5rem" }} />
-          </button>
-        </form>
-      </div> */}
 
       <div className="topbar-right">
         <div className="topbar-vendor-dropdown" ref={dropdownRef}>

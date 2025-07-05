@@ -110,7 +110,7 @@
 
 .edit-profile__button:hover:not(:disabled),
 .edit-profile__button:focus-visible:not(:disabled) {
-  background: #1e40af; /* Darker blue on hover */
+  background: #1e40af;
   opacity: 0.95;
 }
 

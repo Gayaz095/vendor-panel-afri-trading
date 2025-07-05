@@ -67,7 +67,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     setIsSpinning(true);
     setSortConfig({ key: null, direction: "asc" });
 
-    // Reset the animation class after it completes (duration: 0.6s)
+    // Reset the animation class after it completes
     setTimeout(() => {
       setIsSpinning(false);
     }, 600);

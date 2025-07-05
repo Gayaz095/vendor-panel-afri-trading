@@ -73,7 +73,7 @@ const VendorProductsCards = ({ products }) => {
             <div className="product-details">
               <h3
                 className="product-name"
-                title={item.name} // Hover full name
+                title={item.name}
               >
                 Name: {item.name}
               </h3>

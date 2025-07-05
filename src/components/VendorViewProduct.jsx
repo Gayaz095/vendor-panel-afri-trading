@@ -121,11 +121,3 @@ const VendorViewProduct = ({
 };
 
 export default VendorViewProduct;
-
-
-{/* <div className="product-brands-models-section">
-  <h4>Car Brands:</h4>
-  <span></span>
-  <h4>Car Models:</h4>
-  <span></span>
-</div>; */}
