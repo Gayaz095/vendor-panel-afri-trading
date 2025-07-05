@@ -40,7 +40,7 @@ const Topbar = ({ toggleSidebar }) => {
         </Link>
       </li>
       <li>
-        <Link to="/orders" onClick={() => setDropdownOpen(false)}>
+        <Link to="/orders-status" onClick={() => setDropdownOpen(false)}>
           Orders
         </Link>
       </li>
