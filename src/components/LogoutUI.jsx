@@ -1,4 +1,3 @@
-//LogoutUI.jsx
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useVendor } from "./VendorContext";

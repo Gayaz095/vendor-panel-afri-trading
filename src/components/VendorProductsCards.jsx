@@ -79,7 +79,7 @@ const VendorProductsCards = ({ products }) => {
               </h3>
               <p
                 className="product-description"
-                title={item.discription} // Hover full description
+                title={item.discription}
               >
                 <span>Description:</span> {item.discription}
               </p>

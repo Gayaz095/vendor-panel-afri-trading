@@ -1,4 +1,3 @@
-// LoginPage.jsx
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useVendor } from "./VendorContext";

@@ -70,7 +70,7 @@ export const VendorProvider = ({ children }) => {
     return () => {
       isMounted = false;
     };
-  }, [vendorDetails]); // 👈 only fetch on first login
+  }, [vendorDetails]); //only fetch on first login
 
   const logoutVendor = () => {
     setVendorDetails(null);
