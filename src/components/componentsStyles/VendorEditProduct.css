@@ -1,4 +1,4 @@
-/* Overlay */
+/* VendorEditProduct.css */
 .vendor-edit-product__modal-overlay {
   position: fixed;
   top: 0;
@@ -45,7 +45,6 @@
   border-radius: 4px;
 }
 
-/* Modal heading */
 .vendor-edit-product__modal h2 {
   font-size: 1.9rem;
   font-weight: 700;
@@ -54,7 +53,6 @@
   text-align: center;
 }
 
-/* Form rows - flex container with gap */
 .vendor-edit-product__form-row {
   display: flex;
   gap: 24px;
@@ -150,7 +148,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Actions container */
 .vendor-edit-product__actions {
   display: flex;
   justify-content: flex-end;
@@ -180,7 +177,6 @@
   box-shadow: 0 6px 14px rgba(30, 64, 175, 0.5);
 }
 
-/* Disabled state */
 .vendor-edit-product__actions button:disabled {
   background-color: #9ca3af;
   cursor: not-allowed;

@@ -1,3 +1,4 @@
+/* VendorVisitStore.css */
 .vendor-store-container {
   font-family: "Roboto", sans-serif;
   max-width: 1200px;
@@ -34,7 +35,7 @@
 .light-line {
   border: none;
   border-top: 1px solid #ccc;
-  margin: 20px 0; 
+  margin: 20px 0;
   background-color: rgba(0, 0, 0, 0.1);
 }
 

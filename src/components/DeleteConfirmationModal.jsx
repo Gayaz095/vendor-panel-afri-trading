@@ -1,4 +1,3 @@
-//DeleteConfirmationModal.js
 import React from "react";
 import "./componentsStyles/DeleteConfirmationModal.css";
 
