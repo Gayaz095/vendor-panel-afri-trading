@@ -28,7 +28,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const hasRedirected = useRef(false);
-
+  // console.log(`${window.location.origin+"/login"}`);
   useEffect(() => {
     if (!isCheckingSession && vendorDetails && !hasRedirected.current) {
       hasRedirected.current = true;

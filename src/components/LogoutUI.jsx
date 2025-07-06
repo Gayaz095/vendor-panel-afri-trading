@@ -23,7 +23,8 @@ function LogoutUI({ onCancel, currentPath }) {
     logoutVendor(); //Clear context + sessionStorage
     onCancel(); // Close modal
     // navigate("/login", { replace: true, state: { from: currentPath } });
-    window.location.replace("/login");
+    window.location.replace(window.location.origin + "/login");
+  
   };
 
   return (
