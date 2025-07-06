@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  getVendorProducts,
-  deleteProduct,
-  updateProduct,
-} from "../utils/productsApi";
-// import { FaSyncAlt } from "react-icons/fa";
+import { getVendorProducts, deleteProduct } from "../utils/productsApi";
 import { FiRefreshCw } from "react-icons/fi";
 import { getAllCars } from "../utils/getAllCars";
 import { getAllCarModels } from "../utils/getAllCarModels";
@@ -16,6 +11,7 @@ import VendorViewProduct from "./VendorViewProduct";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import "./componentsStyles/VendorProductsTable.css";
 import { toast } from "react-toastify";
+
 const PRODUCTS_PER_PAGE = 5;
 const PAGE_WINDOW = 3;
 
@@ -50,24 +46,35 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     direction: "asc",
   });
 
+  // Accordion state
+  const [carAccordionOpen, setCarAccordionOpen] = useState(false);
+  const [categoryAccordionOpen, setCategoryAccordionOpen] = useState(false);
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE)
+  );
+
   useEffect(() => {
     fetchProducts();
+    // eslint-disable-next-line
   }, [vendorId, refreshTrigger]);
 
   useEffect(() => {
     loadDropdowns();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     applyFilters();
+    // eslint-disable-next-line
   }, [products, filters]);
+
   const [isSpinning, setIsSpinning] = useState(false);
 
   const handleRefreshClick = () => {
     setIsSpinning(true);
     setSortConfig({ key: null, direction: "asc" });
-
-    // Reset the animation class after it completes
     setTimeout(() => {
       setIsSpinning(false);
     }, 600);
@@ -75,7 +82,8 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
 
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
-  }, [filteredProducts]);
+    // eslint-disable-next-line
+  }, [filteredProducts, currentPage, totalPages]);
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -99,21 +107,23 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
   };
 
   const loadDropdowns = async () => {
-    const carRes = await getAllCars();
+    const [carRes, modelRes, mainCats, subCats, childCats] = await Promise.all([
+      getAllCars(),
+      getAllCarModels(),
+      mainGetCategories(),
+      getSubCategories(),
+      getAllChildCategories(),
+    ]);
     setCarBrands(carRes?.data || []);
-    const modelRes = await getAllCarModels();
     setCarModels(
       Array.isArray(modelRes) ? modelRes : modelRes?.carModels || []
     );
-    const mainCats = await mainGetCategories();
     setMainCategories(
       Array.isArray(mainCats) ? mainCats : mainCats?.categories || []
     );
-    const subCats = await getSubCategories();
     setSubCategories(
       Array.isArray(subCats) ? subCats : subCats?.subCategories || []
     );
-    const childCats = await getAllChildCategories();
     setChildCategories(
       Array.isArray(childCats) ? childCats : childCats?.childCategories || []
     );
@@ -131,8 +141,10 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
         setProducts(
           products.filter((product) => product._id !== confirmDeleteId)
         );
+        toast.success("Product deleted successfully!");
       } catch (err) {
         setError(err.message);
+        toast.error("Failed to delete product: " + err.message);
       } finally {
         setShowModal(false);
         setConfirmDeleteId(null);
@@ -188,7 +200,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       filtered = filtered.filter(
         (p) => p.childCategoryId === filters.childCategoryId
       );
-
     setFilteredProducts(filtered);
     setCurrentPage(1);
   };
@@ -218,10 +229,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     });
   };
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE)
-  );
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
   const sortedFiltered = sortData(filteredProducts);
@@ -282,131 +289,176 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       childCategoryId: "",
     });
   };
+
   const formatPrice = (price) => {
     return `₹${parseFloat(price).toFixed(2)}`;
   };
+
   if (loading)
     return (
-      <div className="loading-spinner-container">
-        <div className="spinner"></div>
-        <div className="loading-text">Loading...</div>
+      <div className="vpt-loading-spinner-container">
+        <div className="vpt-spinner"></div>
+        <div className="vpt-loading-text">Loading...</div>
       </div>
     );
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="vendor-products-table">
-      <div className="filters-actions">
-        <div className="filter-header">
-          <div className="left-input">
+    <div className="vpt-table">
+      <div className="vpt-filters-actions">
+        <div className="vpt-filter-header">
+          <div className="vpt-left-input">
             <input
               type="text"
               name="name"
               placeholder="Search by name"
               value={filters.name}
               onChange={handleFilterChange}
+              className="vpt-left-input-input"
             />
           </div>
-          <div className="right-button">
-            <button className="reset-button" onClick={resetFilters}>
+          <div className="vpt-right-button">
+            <button className="vpt-reset-button" onClick={resetFilters}>
               Reset All Filters
             </button>
           </div>
         </div>
 
-        <div className="filter-row">
-          <select
-            name="carBrandId"
-            value={filters.carBrandId}
-            onChange={handleFilterChange}>
-            <option value="">Search Car Brands</option>
-            {carBrands.map((brand) => (
-              <option key={brand._id} value={brand._id}>
-                {brand.name}
-              </option>
-            ))}
-          </select>
+        <div className="vpt-accordion-row">
+          {/* Accordion: Car Brands & Models */}
+          <div
+            className={`vpt-accordion-section${
+              carAccordionOpen ? " open" : ""
+            }`}>
+            <button
+              className="vpt-accordion-toggle"
+              onClick={() => setCarAccordionOpen((prev) => !prev)}
+              aria-expanded={carAccordionOpen}>
+              <span>Select Car Brands & Models</span>
+              <span className="vpt-accordion-arrow" aria-hidden="true">
+                {carAccordionOpen ? "▲" : "▼"}
+              </span>
+            </button>
+            {carAccordionOpen && (
+              <div className="vpt-accordion-content">
+                <div className="vpt-filter-row">
+                  <select
+                    name="carBrandId"
+                    value={filters.carBrandId}
+                    onChange={handleFilterChange}>
+                    <option value="">Search Car Brands</option>
+                    {carBrands.map((brand) => (
+                      <option key={brand._id} value={brand._id}>
+                        {brand.name}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    name="carModelId"
+                    value={filters.carModelId}
+                    onChange={handleFilterChange}
+                    disabled={!filters.carBrandId}>
+                    <option value="">Search Car Models</option>
+                    {filteredModels.map((model) => (
+                      <option key={model._id} value={model._id}>
+                        {model.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            )}
+          </div>
 
-          <select
-            name="carModelId"
-            value={filters.carModelId}
-            onChange={handleFilterChange}>
-            <option value="">Search Car Models</option>
-            {filteredModels.map((model) => (
-              <option key={model._id} value={model._id}>
-                {model.name}
-              </option>
-            ))}
-          </select>
+          {/* Accordion: Categories */}
+          <div
+            className={`vpt-accordion-section${
+              categoryAccordionOpen ? " open" : ""
+            }`}>
+            <button
+              className="vpt-accordion-toggle"
+              onClick={() => setCategoryAccordionOpen((prev) => !prev)}
+              aria-expanded={categoryAccordionOpen}>
+              <span>Select Categories</span>
+              <span className="vpt-accordion-arrow" aria-hidden="true">
+                {categoryAccordionOpen ? "▲" : "▼"}
+              </span>
+            </button>
+            {categoryAccordionOpen && (
+              <div className="vpt-accordion-content">
+                <div className="vpt-filter-row">
+                  <select
+                    name="categoryId"
+                    value={filters.categoryId}
+                    onChange={handleFilterChange}>
+                    <option value="">Search Main Categories</option>
+                    {mainCategories.map((cat) => (
+                      <option key={cat._id} value={cat._id}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    name="subCategoryId"
+                    value={filters.subCategoryId}
+                    onChange={handleFilterChange}
+                    disabled={!filters.categoryId}>
+                    <option value="">Search Sub Categories</option>
+                    {filteredSubCategories.map((sub) => (
+                      <option key={sub._id} value={sub._id}>
+                        {sub.name}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    name="childCategoryId"
+                    value={filters.childCategoryId}
+                    onChange={handleFilterChange}
+                    disabled={!filters.subCategoryId}>
+                    <option value="">Search Child Categories</option>
+                    {filteredChildCategories.map((child) => (
+                      <option key={child._id} value={child._id}>
+                        {child.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className="filter-row">
-          <select
-            name="categoryId"
-            value={filters.categoryId}
-            onChange={handleFilterChange}>
-            <option value="">Search Main Categories</option>
-            {mainCategories.map((cat) => (
-              <option key={cat._id} value={cat._id}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
-
-          <select
-            name="subCategoryId"
-            value={filters.subCategoryId}
-            onChange={handleFilterChange}>
-            <option value="">Search Sub Categories</option>
-            {filteredSubCategories.map((sub) => (
-              <option key={sub._id} value={sub._id}>
-                {sub.name}
-              </option>
-            ))}
-          </select>
-
-          <select
-            name="childCategoryId"
-            value={filters.childCategoryId}
-            onChange={handleFilterChange}>
-            <option value="">Search Child Categories</option>
-            {filteredChildCategories.map((child) => (
-              <option key={child._id} value={child._id}>
-                {child.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="vendor-product-table-horizontal-line">
+        <div className="vpt-table-horizontal-line">
           <span>OR Reference No.</span>
         </div>
 
-        <div className="reference-no">
+        <div className="vpt-reference-no">
           <input
             type="text"
             name="referenceNumber"
             placeholder="Search by reference no."
             value={filters.referenceNumber}
             onChange={handleFilterChange}
+            className="vpt-reference-no-input"
           />
         </div>
       </div>
 
-      <div className="table-responsive">
-        <div className="vendor-table-header">
-          <h3 className="vendor-table-h3">
+      <div className="vpt-table-responsive">
+        <div className="vpt-table-header">
+          <h3 className="vpt-table-h3">
             Edit Products:
             <button
-              className={`refresh-button ${isSpinning ? "spin-once" : ""}`}
+              className={`vpt-refresh-button ${
+                isSpinning ? "vpt-spin-once" : ""
+              }`}
               onClick={handleRefreshClick}
               title="Reset sorting">
-              {/* <FaSyncAlt /> */}
               <FiRefreshCw />
             </button>
           </h3>
         </div>
-        <table className="vendor-table">
+        <table className="vpt-table-table">
           <thead>
             <tr>
               <th>Image</th>
@@ -450,7 +502,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
           <tbody>
             {currentItems.length === 0 ? (
               <tr>
-                <td colSpan="9" className="no-products-message">
+                <td colSpan="9" className="vpt-no-products-message">
                   No products available.
                 </td>
               </tr>
@@ -461,10 +513,12 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="vendor-product-image"
+                      className="vpt-product-image"
                     />
                   </td>
-                  <td data-label="Name" title={product.referenceNumber}>
+                  <td
+                    data-label="Reference No."
+                    title={product.referenceNumber}>
                     {product.referenceNumber}
                   </td>
                   <td data-label="Name" title={product.name}>
@@ -481,20 +535,20 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
                     data-label="Status"
                     className={
                       product.reflectStatus
-                        ? "status-active"
-                        : "status-inactive"
+                        ? "vpt-status-active"
+                        : "vpt-status-inactive"
                     }>
                     {product.reflectStatus ? "Active" : "Inactive"}
                   </td>
                   <td data-label="Actions">
-                    <div className="action-buttons">
+                    <div className="vpt-action-buttons">
                       <button
-                        className="edit-btn"
+                        className="vpt-edit-btn"
                         onClick={() => handleEdit(product)}>
                         Edit
                       </button>
                       <button
-                        className="delete-btn"
+                        className="vpt-delete-btn"
                         onClick={() => handleDelete(product._id)}>
                         Delete
                       </button>
@@ -502,7 +556,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
                   </td>
                   <td data-label="View">
                     <button
-                      className="view-btn"
+                      className="vpt-view-btn"
                       onClick={() => handleView(product)}>
                       View
                     </button>
@@ -516,7 +570,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="pagination">
+        <div className="vpt-pagination">
           <button
             onClick={() => handlePageChange(1)}
             disabled={currentPage === 1}>
@@ -538,7 +592,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 onKeyDown={handleInputKeyDown}
-                className="pagination-input"
+                className="vpt-pagination-input"
                 autoFocus
                 style={{ width: "40px" }}
               />
