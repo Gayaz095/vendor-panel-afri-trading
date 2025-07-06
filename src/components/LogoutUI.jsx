@@ -1,14 +1,11 @@
 import { useRef, useEffect } from "react";
 import { useVendor } from "./VendorContext";
-import { useNavigate } from "react-router-dom";
 import "./componentsStyles/LogoutUI.css";
 
 function LogoutUI({ onCancel }) {
   const modalRef = useRef();
   const { logoutVendor } = useVendor();
-  const navigate = useNavigate();
 
-  // Close modal on outside click
   useEffect(() => {
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -32,9 +29,9 @@ function LogoutUI({ onCancel }) {
   }, [onCancel]);
 
   const handleLogout = () => {
-    logoutVendor(); // Clear context + sessionStorage
+    logoutVendor(); // Clear session/context
     onCancel(); // Close modal
-    navigate("/login", { replace: true }); // Go to login cleanly
+    window.location.replace("/login");
   };
 
   return (

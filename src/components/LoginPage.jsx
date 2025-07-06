@@ -27,13 +27,14 @@ const LoginPage = () => {
   const location = useLocation();
   const hasRedirected = useRef(false);
 
-  // Original page user tried to visit before login
+  // Get original page user tried to visit before login
   const from = location.state?.from?.pathname || "/dashboard";
 
+  // Redirect to dashboard if already logged in
   useEffect(() => {
     if (!isCheckingSession && vendorDetails && !hasRedirected.current) {
       hasRedirected.current = true;
-      navigate(from, { replace: true });
+      navigate(from, { replace: true }); // Replace to prevent stacking
     }
   }, [vendorDetails, isCheckingSession, navigate, from]);
 
@@ -88,7 +89,7 @@ const LoginPage = () => {
         });
 
         setTimeout(() => {
-          navigate(from, { replace: true });
+          navigate(from, { replace: true }); // Prevent stacking login page
         }, 1500);
       } else {
         throw new Error("Invalid login response");
