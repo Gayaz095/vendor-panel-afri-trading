@@ -36,6 +36,11 @@ const LoginPage = () => {
     }
   }, [vendorDetails, isCheckingSession, navigate]);
 
+  useEffect(() => {
+    // On LoginPage, replace the history stack
+    window.history.replaceState(null, "", window.location.href);
+  }, []);
+
   const validateInputs = () => {
     let isValid = true;
     const newErrors = { username: "", password: "" };
