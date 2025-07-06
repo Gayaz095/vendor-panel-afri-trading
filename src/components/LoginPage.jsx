@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useVendor } from "./VendorContext";
 import "./componentsStyles/LoginPage.css";
 import loginImage from "../assets/logo.png";
 import {
+  FaCarAlt,
   FaUserShield,
   FaLock,
   FaWhatsapp,
   FaPhone,
   FaEnvelope,
+  FaHeadset,
   FaEye,
   FaEyeSlash,
 } from "react-icons/fa";
@@ -20,23 +22,19 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
   const [errors, setErrors] = useState({ username: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
-
   const navigate = useNavigate();
-  const location = useLocation();
+
   const hasRedirected = useRef(false);
 
-  // Get original page user tried to visit before login
-  const from = location.state?.from?.pathname || "/dashboard";
-
-  // Redirect to dashboard if already logged in
   useEffect(() => {
     if (!isCheckingSession && vendorDetails && !hasRedirected.current) {
       hasRedirected.current = true;
-      navigate(from, { replace: true }); // Replace to prevent stacking
+      navigate("/dashboard");
     }
-  }, [vendorDetails, isCheckingSession, navigate, from]);
+  }, [vendorDetails, isCheckingSession, navigate]);
 
   const validateInputs = () => {
     let isValid = true;
@@ -89,7 +87,7 @@ const LoginPage = () => {
         });
 
         setTimeout(() => {
-          navigate(from, { replace: true }); // Prevent stacking login page
+          navigate("/dashboard");
         }, 1500);
       } else {
         throw new Error("Invalid login response");
@@ -126,7 +124,10 @@ const LoginPage = () => {
                 />
               </div>
               <h1 className="loginpage-brand-title">
+                {/* <FaCarAlt className="loginpage-brand-icon loginpage-front-car" /> */}
                 <span className="loginpage-typewriter">Afri-Trading.com</span>
+                <span className="loginpage-brand-highlight"></span>
+                {/* <FaCarAlt className="loginpage-brand-icon loginpage-back-car" /> */}
               </h1>
             </div>
 
@@ -141,9 +142,7 @@ const LoginPage = () => {
                     <span className="loginpage-connect-label">WhatsApp:</span>
                     <a
                       className="loginpage-connect-link"
-                      href="https://wa.me/8121927536"
-                      target="_blank"
-                      rel="noopener noreferrer">
+                      href="https://wa.me/8121927536">
                       +91-8121927536
                     </a>
                   </div>
@@ -174,6 +173,15 @@ const LoginPage = () => {
                     </a>
                   </div>
                 </div>
+                <div className="loginpage-connect-item">
+                  {/* <div className="loginpage-connect-icon loginpage-support">
+                    <FaHeadset />
+                  </div>
+                  <div className="loginpage-connect-details">
+                    <span className="loginpage-connect-label">Support Hours:</span>
+                    <span className="loginpage-connect-info">Mon-Sun: 24/7</span>
+                  </div> */}
+                </div>
               </div>
             </div>
           </div>
@@ -187,7 +195,7 @@ const LoginPage = () => {
                 Vendor Sign In
               </h2>
               <form onSubmit={handleLogin} className="loginpage-form">
-                <div className="loginpage-input-group">
+                <div className="loginpage-input-group ">
                   <label htmlFor="username">
                     <FaUserShield /> Username (Email or Phone)
                   </label>
