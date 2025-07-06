@@ -37,13 +37,6 @@ const LoginPage = () => {
     }
   }, [vendorDetails, isCheckingSession, navigate, from]);
 
-  useEffect(() => {
-    // HARD RESET history stack when landing on LoginPage
-    if (window.history.length > 2) {
-      window.location.replace(window.location.origin + "/login");
-    }
-  }, []);
-
   const validateInputs = () => {
     let isValid = true;
     const newErrors = { username: "", password: "" };
