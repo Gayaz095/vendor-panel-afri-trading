@@ -37,21 +37,15 @@ const LoginPage = () => {
   }, [vendorDetails, isCheckingSession, navigate]);
 
   useEffect(() => {
+    // Replace history so LoginPage is the only page in history
     window.history.replaceState(null, "", window.location.href);
 
     const handlePopState = () => {
-      if (
-        !document.referrer ||
-        document.referrer.includes(window.location.host)
-      ) {
-        // No external referrer → go to Google
-        window.location.href = "https://www.google.com";
-      } else {
-        // External referrer exists → go back to that page
-        window.location.href = document.referrer;
-      }
+      // User pressed back on LoginPage → send them to Google
+      window.location.href = "https://www.google.com";
     };
 
+    // Trap the back button
     window.addEventListener("popstate", handlePopState);
 
     return () => {
@@ -59,7 +53,7 @@ const LoginPage = () => {
     };
   }, []);
   
-
+  
   const validateInputs = () => {
     let isValid = true;
     const newErrors = { username: "", password: "" };
