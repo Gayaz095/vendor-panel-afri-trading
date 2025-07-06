@@ -38,8 +38,10 @@ const LoginPage = () => {
   }, [vendorDetails, isCheckingSession, navigate, from]);
 
   useEffect(() => {
-    // Prevent multiple login entries in history
-    window.history.replaceState(null, "", window.location.href);
+    // HARD RESET history stack when landing on LoginPage
+    if (window.history.length > 2) {
+      window.location.replace(window.location.origin + "/login");
+    }
   }, []);
 
   const validateInputs = () => {
