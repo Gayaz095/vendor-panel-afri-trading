@@ -98,7 +98,7 @@
   color: #2b6cb0;
 }
 
-.loginpage-typewriter {
+/* .loginpage-typewriter {
   overflow: hidden;
   white-space: nowrap;
   display: inline-block;
@@ -116,7 +116,7 @@
   to {
     width: 18ch;
   }
-}
+} 
 
 @keyframes blink-caret {
   from,
@@ -134,6 +134,7 @@
     border: none;
   }
 }
+*/
 
 /* Connect With Us Section */
 .loginpage-connect-with-us {

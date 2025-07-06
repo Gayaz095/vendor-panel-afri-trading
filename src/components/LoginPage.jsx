@@ -191,7 +191,7 @@ const LoginPage = () => {
         <div className="loginpage-right">
           <div className="loginpage-right-content">
             <div className="loginpage-card">
-              <h2 className="loginpage-title animated-fadein">
+              <h2 className="loginpage-title">
                 Vendor Sign In
               </h2>
               <form onSubmit={handleLogin} className="loginpage-form">

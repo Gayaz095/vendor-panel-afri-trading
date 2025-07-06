@@ -1,3 +1,4 @@
+// AddProductModal.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { createProduct, updateProduct } from "../utils/productsApi";
 import { imageUpload } from "../utils/imageUpload";
