@@ -1,11 +1,9 @@
 import { useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useVendor } from "./VendorContext";
 import "./componentsStyles/LogoutUI.css";
 
 function LogoutUI({ onCancel }) {
   const modalRef = useRef();
-  const navigate = useNavigate();
   const { logoutVendor } = useVendor();
 
   // Close modal on outside click
@@ -23,8 +21,8 @@ function LogoutUI({ onCancel }) {
     logoutVendor(); // Clear context + sessionStorage
     onCancel(); // Close modal
 
-    // Force a full page navigation to /login (clears history)
-    window.location.href = "/login";
+    // ✅ Full reset: clear all React Router history and browser history
+    window.location.replace("/login");
   };
 
   return (
