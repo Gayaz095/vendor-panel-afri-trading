@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useVendor } from "./VendorContext";
 import "./componentsStyles/LogoutUI.css";
 
-function LogoutUI({ onCancel, currentPath }) {
+function LogoutUI({ onCancel }) {
   const modalRef = useRef();
   const navigate = useNavigate();
   const { logoutVendor } = useVendor();
@@ -20,9 +20,11 @@ function LogoutUI({ onCancel, currentPath }) {
   }, [onCancel]);
 
   const handleLogout = () => {
-    logoutVendor(); //Clear context + sessionStorage
+    logoutVendor(); // Clear context + sessionStorage
     onCancel(); // Close modal
-    navigate("/login", { replace: true, state: { from: currentPath } });
+
+    // Force a full page navigation to /login (clears history)
+    window.location.href = "/login";
   };
 
   return (
