@@ -21,8 +21,11 @@ function LogoutUI({ onCancel }) {
     logoutVendor(); // Clear context + sessionStorage
     onCancel(); // Close modal
 
-    // ✅ Full reset: clear all React Router history and browser history
-    window.location.replace("/login");
+    // Full reset: clear all React Router history and browser history
+    // window.location.replace("/login");
+
+    // Hard reload to /login (no history entry)
+    window.location.replace(window.location.origin + "/login");
   };
 
   return (

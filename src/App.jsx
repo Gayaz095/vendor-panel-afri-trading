@@ -8,7 +8,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard";
 import LoginPage from "./components/LoginPage";
-// import LogoutPage from "./components/LogoutPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import NotFound from "./components/NotFound";
@@ -48,9 +47,6 @@ export default function App() {
                 <Route path="/path-not-found" element={<NotFound />} />
               </Route>
             </Route>
-
-            {/* Logout route */}
-            {/* <Route path="/logout" element={<LogoutPage />} /> */}
 
             {/* Fallback route */}
             {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
