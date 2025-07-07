@@ -302,10 +302,6 @@
 /* Responsive Styles */
 @media (max-width: 900px) {
   .topbar {
-    /* flex-direction: row; */
-    /* align-items: center; */
-    /* justify-content: space-between; */
-    /* padding: 0.5rem 0.5rem; */
     position: relative;
     padding-bottom: 3.2rem !important;
     min-height: 120px;
@@ -472,6 +468,6 @@
   }
 
   .topbar-searchbar {
-    margin-right: 2rem;
+    margin-left: 1.3rem;
   }
 }

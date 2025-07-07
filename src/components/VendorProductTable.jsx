@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getVendorProducts, deleteProduct } from "../utils/productsApi";
-// import { FiRefreshCw } from "react-icons/fi";
 import { getAllCars } from "../utils/getAllCars";
 import { getAllCarModels } from "../utils/getAllCarModels";
 import { mainGetCategories } from "../utils/mainGetCategories";
@@ -68,14 +67,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
   }, [products, filters]);
 
   const [isSpinning, setIsSpinning] = useState(false);
-
-  const handleRefreshClick = () => {
-    setIsSpinning(true);
-    setSortConfig({ key: null, direction: "asc" });
-    setTimeout(() => {
-      setIsSpinning(false);
-    }, 600);
-  };
 
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
@@ -200,14 +191,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     setCurrentPage(1);
   };
 
-  // const handleSort = (key) => {
-  //   let direction = "asc";
-  //   if (sortConfig.key === key && sortConfig.direction === "asc") {
-  //     direction = "desc";
-  //   }
-  //   setSortConfig({ key, direction });
-  // };
-
   const sortData = (data) => {
     const { key, direction } = sortConfig;
     if (!key) return data;
@@ -286,22 +269,16 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     });
   };
 
-  // const formatPrice = (price) =>
-  //   `₹${Number(price).toLocaleString("en-IN", {
-  //     minimumFractionDigits: 2,
-  //     maximumFractionDigits: 2,
-  //   })}`;
-  
   // formatPrice uses user locale and dynamic currency and default is INR
-    const formatPrice = (price, currency = "INR") => {
-      const userLocale = navigator.language || "en-IN";
-      return new Intl.NumberFormat(userLocale, {
-        style: "currency",
-        currency,
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(price);
-    };
+  const formatPrice = (price, currency = "INR") => {
+    const userLocale = navigator.language || "en-IN";
+    return new Intl.NumberFormat(userLocale, {
+      style: "currency",
+      currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(price);
+  };
 
   if (loading)
     return (
@@ -455,17 +432,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
 
       <div className="vpt-table-responsive">
         <div className="vpt-table-header">
-          <h3 className="vpt-table-h3">
-            Edit Products:
-            {/* <button
-              className={`vpt-refresh-button ${
-                isSpinning ? "vpt-spin-once" : ""
-              }`}
-              onClick={handleRefreshClick}
-              title="Reset sorting">
-              <FiRefreshCw />
-            </button> */}
-          </h3>
+          <h3 className="vpt-table-h3">Edit Products:</h3>
         </div>
         <table className="vpt-table-table">
           <thead>
@@ -474,36 +441,9 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
               <th>Reference No.</th>
               <th>Name</th>
               <th>Description</th>
-              <th>
-                Price
-                {/* <button onClick={() => handleSort("price")}>
-                  {sortConfig.key === "price"
-                    ? sortConfig.direction === "asc"
-                      ? "↓"
-                      : "↑"
-                    : "↓"}
-                </button> */}
-              </th>
-              <th>
-                Stock
-                {/* <button onClick={() => handleSort("stock")}>
-                  {sortConfig.key === "stock"
-                    ? sortConfig.direction === "asc"
-                      ? "↓"
-                      : "↑"
-                    : "↓"}
-                </button> */}
-              </th>
-              <th>
-                Status
-                {/* <button onClick={() => handleSort("status")}>
-                  {sortConfig.key === "status"
-                    ? sortConfig.direction === "asc"
-                      ? "↓"
-                      : "↑"
-                    : "↓"}
-                </button> */}
-              </th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Status</th>
               <th>Actions</th>
               <th>View</th>
             </tr>
