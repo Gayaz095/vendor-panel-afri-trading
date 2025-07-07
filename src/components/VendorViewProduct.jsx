@@ -17,6 +17,17 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString("en-US", options);
 };
 
+// formatPrice uses user locale and dynamic currency and default is INR
+const formatPrice = (price, currency = "INR") => {
+  const userLocale = navigator.language || "en-IN";
+  return new Intl.NumberFormat(userLocale, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(price);
+};
+
 const VendorViewProduct = ({
   product,
   onClose,
@@ -100,7 +111,10 @@ const VendorViewProduct = ({
         <div className="view-product-footer">
           <div className="view-price-info">
             <span className="view-label">Price:</span>
-            <span className="view-value"> ₹ {product.price.toFixed(2)}</span>
+            <span className="view-value">
+              {/* ₹ {product.price.toFixed(2)} */}
+              {formatPrice(product.price, product.currency || "INR")}
+            </span>
           </div>
           <div className="view-stock-info">
             <span className="view-label">Stock: </span>
