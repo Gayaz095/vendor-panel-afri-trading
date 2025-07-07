@@ -81,7 +81,16 @@ const RecentProducts = () => {
     else if (e.key === "Escape") setEditPage(null);
   };
 
-  const formatPrice = (price) => `₹${parseFloat(price).toFixed(2)}`;
+  // formatPrice uses user locale and dynamic currency and default is INR
+  const formatPrice = (price, currency = "INR") => {
+    const userLocale = navigator.language || "en-IN";
+    return new Intl.NumberFormat(userLocale, {
+      style: "currency",
+      currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(price);
+  };
 
   if (loading)
     return (
@@ -95,6 +104,10 @@ const RecentProducts = () => {
   return (
     <div className="recent-products-table">
       <h3 className="recent-table-h3">Recent Products:</h3>
+      {/* Show detected locale for debugging */}
+      {/* <div style={{fontSize: "0.8em", color: "#888"}}>
+        Detected locale: {navigator.language}
+      </div> */}
       <div className="recent-table-responsive">
         <table className="recent-table">
           <thead>
@@ -111,7 +124,7 @@ const RecentProducts = () => {
           <tbody>
             {currentItems.length === 0 ? (
               <tr>
-                <td className="recent-no-products-message">
+                <td className="recent-no-products-message" colSpan={7}>
                   No recent products available.
                 </td>
               </tr>
@@ -134,7 +147,9 @@ const RecentProducts = () => {
                     title={product.description || product.discription}>
                     {product.description || product.discription}
                   </td>
-                  <td data-label="Price">{formatPrice(product.price)}</td>
+                  <td data-label="Price">
+                    {formatPrice(product.price, product.currency || "INR")}
+                  </td>
                   <td data-label="Stock">{product.stock}</td>
                   <td
                     data-label="Status"

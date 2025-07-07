@@ -49,11 +49,15 @@ const VendorProductsCards = ({ products }) => {
     else if (e.key === "Escape") setEditPage(null);
   };
 
-  const formatPrice = (price) =>
-    `₹${Number(price).toLocaleString("en-IN", {
+  const formatPrice = (price, currency = "INR") => {
+    const userLocale = navigator.language || "en-IN";
+    return new Intl.NumberFormat(userLocale, {
+      style: "currency",
+      currency,
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    })}`;
+    }).format(price);
+  };
 
   return (
     <div>
@@ -63,7 +67,8 @@ const VendorProductsCards = ({ products }) => {
             <div className="product-image">
               <img src={item.image} alt={item.name} />
               <a
-                href={item.onlineLink || "#"}
+                // href={item.onlineLink || "#"}
+                href="https://auto-spare-parts-users.vercel.app/"
                 className="go-online-btn"
                 target="_blank"
                 rel="noopener noreferrer">
@@ -71,23 +76,19 @@ const VendorProductsCards = ({ products }) => {
               </a>
             </div>
             <div className="product-details">
-              <h3
-                className="product-name"
-                title={item.name}
-              >
+              <h3 className="product-name" title={item.name}>
                 Name: {item.name}
               </h3>
-              <p
-                className="product-description"
-                title={item.discription}
-              >
+              <p className="product-description" title={item.discription}>
                 <span>Description:</span> {item.discription}
               </p>
               <p className="product-reference">
                 Reference Number: {item.referenceNumber}
               </p>
               <div className="price-section">
-                <p className="price">Price: {formatPrice(item.price)}</p>
+                <p className="price">
+                  Price: {formatPrice(item.price, item.currency || "INR")}
+                </p>
                 <p className="stock">Stock: {item.stock}</p>
               </div>
             </div>

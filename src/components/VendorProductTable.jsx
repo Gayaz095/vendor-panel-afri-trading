@@ -290,9 +290,22 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     });
   };
 
-  const formatPrice = (price) => {
-    return `₹${parseFloat(price).toFixed(2)}`;
-  };
+  // const formatPrice = (price) =>
+  //   `₹${Number(price).toLocaleString("en-IN", {
+  //     minimumFractionDigits: 2,
+  //     maximumFractionDigits: 2,
+  //   })}`;
+  
+  // formatPrice uses user locale and dynamic currency and default is INR
+    const formatPrice = (price, currency = "INR") => {
+      const userLocale = navigator.language || "en-IN";
+      return new Intl.NumberFormat(userLocale, {
+        style: "currency",
+        currency,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(price);
+    };
 
   if (loading)
     return (
@@ -529,7 +542,10 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
                     title={product.description || product.discription}>
                     {product.description || product.discription}
                   </td>
-                  <td data-label="Price">{formatPrice(product.price)}</td>
+                  {/* <td data-label="Price">{formatPrice(product.price)}</td> */}
+                  <td data-label="Price">
+                    {formatPrice(product.price, product.currency || "INR")}
+                  </td>
                   <td data-label="Stock">{product.stock}</td>
                   <td
                     data-label="Status"
