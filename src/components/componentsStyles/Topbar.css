@@ -97,59 +97,6 @@
   font-style: italic;
   text-shadow: 0 1px 2px rgba(44, 62, 80, 0.07);
 }
-.topbar-search {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 1rem;
-}
-
-.topbar-search-form {
-  display: flex;
-  align-items: center;
-  background: #ffffff;
-  border-radius: 15px;
-  /* padding: 0.4rem 1rem; */
-  border: 1px solid #cbd5e1;
-  box-shadow: 0 2px 5px rgba(44, 62, 80, 0.08);
-  max-width: 400px;
-  width: 100%;
-}
-
-.topbar-search-input {
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 1rem;
-  color: #2a4365;
-  width: 100%;
-  padding: 0.4rem;
-}
-
-.topbar-search input[type="Text"] {
-  border-radius: 15px 15px 15px 15px;
-}
-
-.topbar-search-input::placeholder {
-  color: #a0aec0;
-}
-
-.topbar-search-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: #2a4365;
-  cursor: pointer;
-  transition: color 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.topbar-search-btn:hover {
-  color: #e79061;
-}
 
 .topbar-right {
   display: flex;
@@ -343,21 +290,23 @@
     display: none; 
   } */
   .topbar-vendor-btn {
-    width: 51px;
-    height: 51px;
-    min-width: 51px;
-    min-height: 51px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     border-radius: 50%;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 15px;
   }
   .topbar-vendor-in-topbar {
     display: none; /* Hide name/email */
   }
   .avatar {
-    font-size: 3.4rem;
+    font-size: 2.8rem;
+    /* margin-right: 15px; */
     margin: 0;
     color: #2a4365;
   }
