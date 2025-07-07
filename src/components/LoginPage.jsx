@@ -124,10 +124,8 @@ const LoginPage = () => {
                 />
               </div>
               <h1 className="loginpage-brand-title">
-                {/* <FaCarAlt className="loginpage-brand-icon loginpage-front-car" /> */}
                 <span className="loginpage-typewriter">Afri-Trading.com</span>
                 <span className="loginpage-brand-highlight"></span>
-                {/* <FaCarAlt className="loginpage-brand-icon loginpage-back-car" /> */}
               </h1>
             </div>
 
@@ -173,15 +171,6 @@ const LoginPage = () => {
                     </a>
                   </div>
                 </div>
-                <div className="loginpage-connect-item">
-                  {/* <div className="loginpage-connect-icon loginpage-support">
-                    <FaHeadset />
-                  </div>
-                  <div className="loginpage-connect-details">
-                    <span className="loginpage-connect-label">Support Hours:</span>
-                    <span className="loginpage-connect-info">Mon-Sun: 24/7</span>
-                  </div> */}
-                </div>
               </div>
             </div>
           </div>
@@ -191,9 +180,7 @@ const LoginPage = () => {
         <div className="loginpage-right">
           <div className="loginpage-right-content">
             <div className="loginpage-card">
-              <h2 className="loginpage-title">
-                Vendor Sign In
-              </h2>
+              <h2 className="loginpage-title">Vendor Sign In</h2>
               <form onSubmit={handleLogin} className="loginpage-form">
                 <div className="loginpage-input-group ">
                   <label htmlFor="username">

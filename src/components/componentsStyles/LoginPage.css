@@ -98,44 +98,6 @@
   color: #2b6cb0;
 }
 
-/* .loginpage-typewriter {
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  border-right: 2px solid #2b6cb0;
-  font-size: 2.4rem;
-  animation: typing 3s steps(20, end), blink-caret 0.75s step-end infinite;
-  color: #2b6cb0;
-  max-width: 100%;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 18ch;
-  }
-} 
-
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #2b6cb0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .loginpage-typewriter {
-    animation: none;
-    border: none;
-  }
-}
-*/
-
 /* Connect With Us Section */
 .loginpage-connect-with-us {
   margin-top: auto;

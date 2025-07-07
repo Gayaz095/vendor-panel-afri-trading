@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getVendorProducts } from "../utils/productsApi";
-import "./componentsStyles/RecentProducts.css";
 import { useVendor } from "./VendorContext";
+import "./componentsStyles/RecentProducts.css";
 
 const PRODUCTS_PER_PAGE = 5;
 const PAGE_WINDOW = 3;

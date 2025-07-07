@@ -7,8 +7,8 @@ import { mainGetCategories } from "../utils/mainGetCategories";
 import { getSubCategories } from "../utils/getSubCategories";
 import { getAllChildCategories } from "../utils/getAllChildCategories";
 import { useVendor } from "./VendorContext";
-import "./componentsStyles/VendorEditProduct.css";
 import { toast } from "react-toastify";
+import "./componentsStyles/VendorEditProduct.css";
 
 const VendorEditProduct = ({ product, onClose, onSave }) => {
   const { vendorDetails } = useVendor();
@@ -28,17 +28,17 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
     heroProduct: "",
   });
 
-  const [mainImageFile, setMainImageFile] = useState(null);
-  const [thumbnailImageFile, setThumbnailImageFile] = useState(null);
-  const [mainImagePreview, setMainImagePreview] = useState(null);
-  const [thumbnailImagePreview, setThumbnailImagePreview] = useState(null);
-  const [loading, setLoading] = useState(false);
-
   const [carBrands, setCarBrands] = useState([]);
   const [carModels, setCarModels] = useState([]);
   const [mainCategories, setMainCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [childCategories, setChildCategories] = useState([]);
+
+  const [mainImageFile, setMainImageFile] = useState(null);
+  const [thumbnailImageFile, setThumbnailImageFile] = useState(null);
+  const [mainImagePreview, setMainImagePreview] = useState(null);
+  const [thumbnailImagePreview, setThumbnailImagePreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const heroOptions = ["NEW ARRIVAL", "TRENDING", "BEST SELLING", "POPULAR"];
 
@@ -84,6 +84,16 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
       Array.isArray(childCats) ? childCats : childCats?.childCategories || []
     );
   };
+
+  const filteredModels = carModels.filter(
+    (m) => m.carId === formData.carBrandId
+  );
+  const filteredSubCats = subCategories.filter(
+    (s) => s.categoryId === formData.categoryId
+  );
+  const filteredChildCats = childCategories.filter(
+    (c) => c.subCategoryId === formData.subCategoryId
+  );
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -174,16 +184,6 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
       setLoading(false);
     }
   };
-
-  const filteredModels = carModels.filter(
-    (m) => m.carId === formData.carBrandId
-  );
-  const filteredSubCats = subCategories.filter(
-    (s) => s.categoryId === formData.categoryId
-  );
-  const filteredChildCats = childCategories.filter(
-    (c) => c.subCategoryId === formData.subCategoryId
-  );
 
   return (
     <div className="vendor-edit-product__modal-overlay">
@@ -396,7 +396,10 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
           </div>
 
           <div className="vendor-edit-product__actions">
-            <button type="submit" disabled={loading} className="vendor-edit-product__cancel-button">
+            <button
+              type="submit"
+              disabled={loading}
+              className="vendor-edit-product__cancel-button">
               {loading ? "Updating..." : "Update"}
             </button>
             <button
