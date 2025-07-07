@@ -94,7 +94,6 @@ const Topbar = ({ toggleSidebar }) => {
         </p>
       </div>
 
-      {/* --- SEARCH BAR --- */}
       <form className="topbar-searchbar" onSubmit={handleSearchSubmit}>
         <input
           type="text"
@@ -107,7 +106,6 @@ const Topbar = ({ toggleSidebar }) => {
           Search
         </button>
       </form>
-      {/* ------------------ */}
 
       <div className="topbar-right">
         <div className="topbar-vendor-dropdown" ref={dropdownRef}>
