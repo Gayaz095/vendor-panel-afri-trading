@@ -1,19 +1,17 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoutUI from "./LogoutUI";
 import "./componentsStyles/Topbar.css";
 import { useVendor } from "./VendorContext";
 import { FaUserCircle } from "react-icons/fa";
-// import { FiPhone } from "react-icons/fi";
-// import { FiSearch } from "react-icons/fi";
 import logoImage from "../assets/logo.png";
 
 const Topbar = ({ toggleSidebar }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const dropdownRef = useRef();
   const navigate = useNavigate();
-  const location = useLocation();
   const { vendorDetails, logoutVendor } = useVendor();
 
   useEffect(() => {
@@ -30,6 +28,11 @@ const Topbar = ({ toggleSidebar }) => {
     e.preventDefault();
     setDropdownOpen(false);
     setShowLogoutModal(true);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log(`Searching for: ${searchValue}`);
   };
 
   const renderDropdown = () => (
@@ -66,7 +69,8 @@ const Topbar = ({ toggleSidebar }) => {
             e.stopPropagation();
             toggleSidebar();
           }}
-          aria-label="Open sidebar">
+          aria-label="Open sidebar"
+        >
           <span className="hamburger-icon">☰</span>
         </button>
         <div className="logo-and-phone">
@@ -74,7 +78,8 @@ const Topbar = ({ toggleSidebar }) => {
             <Link
               to="/dashboard"
               className="logo-image-wrapper"
-              onClick={() => setDropdownOpen(false)}>
+              onClick={() => setDropdownOpen(false)}
+            >
               <img
                 src={logoImage}
                 alt="logo"
@@ -89,6 +94,21 @@ const Topbar = ({ toggleSidebar }) => {
         </p>
       </div>
 
+      {/* --- SEARCH BAR --- */}
+      <form className="topbar-searchbar" onSubmit={handleSearchSubmit}>
+        <input
+          type="text"
+          className="topbar-searchbar-input"
+          placeholder="Search..."
+          value={searchValue}
+          onChange={e => setSearchValue(e.target.value)}
+        />
+        <button className="topbar-searchbar-btn" type="submit">
+          Search
+        </button>
+      </form>
+      {/* ------------------ */}
+
       <div className="topbar-right">
         <div className="topbar-vendor-dropdown" ref={dropdownRef}>
           <button
@@ -96,7 +116,8 @@ const Topbar = ({ toggleSidebar }) => {
             onClick={() => setDropdownOpen(!dropdownOpen)}
             aria-expanded={dropdownOpen ? "true" : "false"}
             aria-controls="topbar-vendor-dropdown-menu"
-            aria-label="Vendor menu">
+            aria-label="Vendor menu"
+          >
             <div>
               <FaUserCircle className="avatar" />
             </div>
@@ -112,7 +133,8 @@ const Topbar = ({ toggleSidebar }) => {
           {dropdownOpen && (
             <div
               id="vendor-dropdown-menu"
-              className="topbar-dropdown-menu-wrapper">
+              className="topbar-dropdown-menu-wrapper"
+            >
               {renderDropdown()}
             </div>
           )}

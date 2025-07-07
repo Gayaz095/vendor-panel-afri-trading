@@ -98,6 +98,52 @@
   text-shadow: 0 1px 2px rgba(44, 62, 80, 0.07);
 }
 
+.topbar-searchbar {
+  display: flex;
+  align-items: center;
+  flex: 1 1 100%;
+  max-width: 500px;
+  background: #f8fafc;
+  border-radius: 24px;
+  padding: 0.2rem 0.5rem;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+  border: 1px solid #cbd5e1;
+  margin: 0 2rem;
+  height: 48px;
+  position: relative;
+  z-index: 10;
+}
+
+.topbar-searchbar-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 24px;
+  color: #2a4365;
+}
+
+.topbar-searchbar-btn {
+  background: #2b6cb0;
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 0.6rem 1.1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  margin-left: 0.5rem;
+  transition: background 0.2s;
+}
+
+.topbar-searchbar-btn:hover,
+.topbar-searchbar-btn:focus {
+  background: #e79061;
+  color: #fff;
+}
+
 .topbar-right {
   display: flex;
   align-items: center;
@@ -250,24 +296,72 @@
 /* Responsive Styles */
 @media (max-width: 900px) {
   .topbar {
-    padding: 0.5rem 1rem;
+    /* flex-direction: row; */
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    /* padding: 0.5rem 0.5rem; */
+    position: relative;
+    padding-bottom: 3.2rem !important; 
+    min-height: 120px;
   }
+
   .logo-image-wrapper {
     width: 72px;
     height: 72px;
   }
+
   .topbar-message {
     font-size: 0.95rem;
   }
+
   .hamburger-btn {
     display: block;
   }
+
   .topbar-vendor-dropdown {
     margin-right: 10%;
   }
+
   .topbar-vendor-btn:hover,
   .topbar-vendor-btn:focus {
     background: #f6ab83;
+  }
+
+  .topbar-dropdown-menu-wrapper {
+    z-index: 30 !important;
+  }
+
+  .topbar-searchbar {
+    position: absolute;
+    left: 5.8rem;
+    bottom: 0.8rem;
+    max-width: 100%;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+    padding: 0.3rem 0.7rem;
+    height: 48px;
+    background: #f8fafc;
+    z-index: 20;
+    border-top: 1px solid #cbd5e1;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .topbar-searchbar-input {
+    font-size: 0.98rem;
+    padding: 0.6rem 0.7rem;
+    border-radius: 12px;
+    margin-bottom: 0;
+  }
+
+  .topbar-searchbar-btn {
+    width: auto;
+    border-radius: 12px;
+    padding: 0.6rem 0.9rem;
+    margin-left: 0.5rem;
   }
 }
 
@@ -276,19 +370,22 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 0.5rem;
+    /* padding: 0.5rem 0.5rem; */
+    position: relative;
+    padding-bottom: 3.2rem !important; 
+    min-height: 120px;
   }
+
   .topbar-left {
     margin-left: 0;
     gap: 0;
   }
+
   .logo-image-wrapper {
     width: 44px;
     height: 44px;
   }
-  /* .topbar-message {
-    display: none; 
-  } */
+
   .topbar-vendor-btn {
     width: 40px;
     height: 40px;
@@ -301,17 +398,74 @@
     justify-content: center;
     margin-right: 15px;
   }
+
   .topbar-vendor-in-topbar {
-    display: none; /* Hide name/email */
+    display: none;
   }
+
   .avatar {
     font-size: 2.8rem;
-    /* margin-right: 15px; */
     margin: 0;
     color: #2a4365;
   }
+
   .topbar-right {
     margin-right: 0;
     gap: 0;
+  }
+
+  .topbar-dropdown-menu-wrapper {
+    z-index: 30 !important;
+  }
+
+  .topbar-searchbar {
+    position: absolute;
+    left: 1.6rem;
+    bottom: 0.8rem;
+    max-width: 100%;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+    padding: 0.3rem 0.7rem;
+    height: 48px;
+    background: #f8fafc;
+    z-index: 20;
+    border-top: 1px solid #cbd5e1;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .topbar-searchbar-input {
+    font-size: 0.98rem;
+    padding: 0.6rem 0.7rem;
+    border-radius: 12px;
+    margin-bottom: 0;
+  }
+
+  .topbar-searchbar-btn {
+    width: auto;
+    border-radius: 12px;
+    padding: 0.6rem 0.9rem;
+    margin-left: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    width: 85%;
+  }
+
+  .topbar-message {
+    font-size: 0.7rem
+  }
+
+  .topbar-vendor-btn {
+    margin-left: 0.9rem
+  }
+
+  .topbar-searchbar {
+    margin-right: 2rem;
   }
 }
