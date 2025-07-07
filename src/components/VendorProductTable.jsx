@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getVendorProducts, deleteProduct } from "../utils/productsApi";
-import { FiRefreshCw } from "react-icons/fi";
+// import { FiRefreshCw } from "react-icons/fi";
 import { getAllCars } from "../utils/getAllCars";
 import { getAllCarModels } from "../utils/getAllCarModels";
 import { mainGetCategories } from "../utils/mainGetCategories";
@@ -57,17 +57,14 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
 
   useEffect(() => {
     fetchProducts();
-    // eslint-disable-next-line
   }, [vendorId, refreshTrigger]);
 
   useEffect(() => {
     loadDropdowns();
-    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     applyFilters();
-    // eslint-disable-next-line
   }, [products, filters]);
 
   const [isSpinning, setIsSpinning] = useState(false);
@@ -82,7 +79,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
 
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
-    // eslint-disable-next-line
   }, [filteredProducts, currentPage, totalPages]);
 
   const fetchProducts = async () => {
@@ -204,13 +200,13 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     setCurrentPage(1);
   };
 
-  const handleSort = (key) => {
-    let direction = "asc";
-    if (sortConfig.key === key && sortConfig.direction === "asc") {
-      direction = "desc";
-    }
-    setSortConfig({ key, direction });
-  };
+  // const handleSort = (key) => {
+  //   let direction = "asc";
+  //   if (sortConfig.key === key && sortConfig.direction === "asc") {
+  //     direction = "desc";
+  //   }
+  //   setSortConfig({ key, direction });
+  // };
 
   const sortData = (data) => {
     const { key, direction } = sortConfig;
@@ -461,14 +457,14 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
         <div className="vpt-table-header">
           <h3 className="vpt-table-h3">
             Edit Products:
-            <button
+            {/* <button
               className={`vpt-refresh-button ${
                 isSpinning ? "vpt-spin-once" : ""
               }`}
               onClick={handleRefreshClick}
               title="Reset sorting">
               <FiRefreshCw />
-            </button>
+            </button> */}
           </h3>
         </div>
         <table className="vpt-table-table">
@@ -480,33 +476,33 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
               <th>Description</th>
               <th>
                 Price
-                <button onClick={() => handleSort("price")}>
+                {/* <button onClick={() => handleSort("price")}>
                   {sortConfig.key === "price"
                     ? sortConfig.direction === "asc"
                       ? "↓"
                       : "↑"
                     : "↓"}
-                </button>
+                </button> */}
               </th>
               <th>
                 Stock
-                <button onClick={() => handleSort("stock")}>
+                {/* <button onClick={() => handleSort("stock")}>
                   {sortConfig.key === "stock"
                     ? sortConfig.direction === "asc"
                       ? "↓"
                       : "↑"
                     : "↓"}
-                </button>
+                </button> */}
               </th>
               <th>
                 Status
-                <button onClick={() => handleSort("status")}>
+                {/* <button onClick={() => handleSort("status")}>
                   {sortConfig.key === "status"
                     ? sortConfig.direction === "asc"
                       ? "↓"
                       : "↑"
                     : "↓"}
-                </button>
+                </button> */}
               </th>
               <th>Actions</th>
               <th>View</th>
