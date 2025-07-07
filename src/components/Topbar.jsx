@@ -95,7 +95,8 @@ const Topbar = ({ toggleSidebar }) => {
             className="topbar-vendor-btn"
             onClick={() => setDropdownOpen(!dropdownOpen)}
             aria-expanded={dropdownOpen ? "true" : "false"}
-            aria-controls="topbar-vendor-dropdown-menu">
+            aria-controls="topbar-vendor-dropdown-menu"
+            aria-label="Vendor menu">
             <div>
               <FaUserCircle className="avatar" />
             </div>

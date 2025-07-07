@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
 
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #2B6CB0;
+  background: #2b6cb0;
   padding-top: 0 20px;
   color: #2d3748;
   box-shadow: 0 12px 10px rgba(44, 62, 80, 0.07);
@@ -12,7 +12,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  font-family: "Roboto", sans-serif;  
+  font-family: "Roboto", sans-serif;
 }
 
 .topbar-left {
@@ -35,7 +35,7 @@
 .logo-image-wrapper {
   width: 90px;
   height: 85px;
-  background: #F8FAFC;
+  background: #f8fafc;
   border-radius: 50%;
   border: 2px solid #cbd5e1;
   overflow: hidden;
@@ -190,7 +190,7 @@
 }
 
 .topbar-vendor-btn:hover .avatar,
-.topbar-vendor-btn:focus .avatar{
+.topbar-vendor-btn:focus .avatar {
   color: #ffffff;
 }
 
@@ -217,7 +217,6 @@
   color: #ffffff;
 }
 
-/* Dropdown Menu */
 .topbar-dropdown-menu-wrapper {
   position: absolute;
   right: 0;
@@ -321,41 +320,49 @@
   }
   .topbar-vendor-btn:hover,
   .topbar-vendor-btn:focus {
-  background: #f6ab83;
-}
+    background: #f6ab83;
+  }
 }
 
 @media (max-width: 600px) {
   .topbar {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     padding: 0.5rem 0.5rem;
   }
   .topbar-left {
-    width: 100%;
-    gap: 0.5rem;
     margin-left: 0;
+    gap: 0;
   }
   .logo-image-wrapper {
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
   }
-  .topbar-message {
-    font-size: 0.9rem;
-    margin-left: 0.5rem;
+  /* .topbar-message {
+    display: none; 
+  } */
+  .topbar-vendor-btn {
+    width: 51px;
+    height: 51px;
+    min-width: 51px;
+    min-height: 51px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .topbar-vendor-in-topbar {
+    display: none; /* Hide name/email */
+  }
+  .avatar {
+    font-size: 3.4rem;
+    margin: 0;
+    color: #2a4365;
   }
   .topbar-right {
-    width: 100%;
-    /* justify-content: flex-end; */
-    justify-content: flex-start;
-    margin-top: 0.5rem;
-  }
-  .topbar-dropdown-menu-wrapper {
-    right: 0;
-    left: auto;
-    min-width: 140px;
-  }
-  .topbar-vendor-btn {
-    padding: 0.4rem 0.7rem;
+    margin-right: 0;
+    gap: 0;
   }
 }
