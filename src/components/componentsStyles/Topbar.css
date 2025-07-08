@@ -9,10 +9,12 @@
   color: #2d3748;
   box-shadow: 0 12px 10px rgba(44, 62, 80, 0.07);
   padding: 0.1rem 2rem 0.9rem 2rem;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
   z-index: 100;
   font-family: "Roboto", sans-serif;
+  height: 80px;
 }
 
 .topbar-left {
@@ -99,21 +101,22 @@
 }
 
 .topbar-searchbar {
-  display: flex;
-  align-items: center;
-  flex: 1 1 100%;
-  max-width: 500px;
-  background: #f8fafc;
-  border-radius: 24px;
-  padding: 0.2rem 0.5rem;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
-  border: 1px solid #cbd5e1;
-  margin: 0 2rem;
-  height: 48px;
-  position: relative;
-  z-index: 10;
-}
-
+    display: flex;
+    align-items: center;
+    flex: 1 1 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255); 
+    border-radius: 24px;
+    /* padding: 0.2rem 0.5rem; */
+    box-shadow: 0 2px 6px rgba(44, 62, 80, 0.08);
+    border: none;
+    margin: 0 2rem;
+    /* height: 48px; */
+    position: relative;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+  }
+  
 .topbar-searchbar-input {
   flex: 1;
   border: none;
@@ -121,8 +124,9 @@
   background: transparent;
   font-size: 1rem;
   padding: 0.7rem 1rem;
-  border-radius: 24px;
+  border-radius: 50px 0 0 50px !important;
   color: #2a4365;
+  font-weight: 500;
 }
 
 .topbar-searchbar-input:focus {
@@ -132,23 +136,25 @@
 }
 
 .topbar-searchbar-btn {
-  background: #2b6cb0;
-  color: #fff;
-  border: none;
-  border-radius: 18px;
-  padding: 0.6rem 1.1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: 500;
-  margin-left: 0.5rem;
-  transition: background 0.2s;
-}
+    background: #2b6cb0;
+    color: #fff;
+    border: 1px solid wheat;
+    border-radius: 0 24px 24px 0;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    /* margin-left: 0.5rem; */
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .topbar-searchbar-btn:hover,
+  .topbar-searchbar-btn:focus {
+    background: #e79061;
+    transform: translateY(-1px); /* slight lift on hover */
+  }
+  
 
-.topbar-searchbar-btn:hover,
-.topbar-searchbar-btn:focus {
-  background: #e79061;
-  color: #fff;
-}
 
 .topbar-right {
   display: flex;
@@ -168,6 +174,7 @@
   border: 1px solid #cbd5e1;
   color: #2a4365;
   padding: 0.5rem 1rem;
+  margin-right: 50px;
   border-radius: 24px;
   cursor: pointer;
   gap: 0.5rem;

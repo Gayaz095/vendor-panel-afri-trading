@@ -9,6 +9,41 @@
   font-weight: 500;
 }
 
+/* Controls */
+.orders-status-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* .orders-status-search {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.orders-status-search-icon {
+  position: absolute;
+  left: 10px;
+  color: #777;
+}
+
+.orders-status-search-input {
+  padding: 8px 8px 8px 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 250px;
+} */
+
+.orders-status-filter {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 50%;
+}
+
+/* Table */
 .orders-status-table {
   width: 100%;
   border-collapse: collapse;
@@ -35,6 +70,13 @@
   background-color: #f1f1f1;
 }
 
+.orders-status-no-results {
+  text-align: center;
+  color: #999;
+  padding: 15px;
+}
+
+/* Badges */
 .orders-status-badge {
   display: inline-block;
   padding: 4px 8px;
@@ -60,6 +102,7 @@
   background-color: red;
 }
 
+/* Buttons */
 .orders-status-btn {
   display: inline-flex;
   align-items: center;
@@ -114,6 +157,7 @@
   background-color: #333;
 }
 
+/* Modal */
 .orders-status-modal-overlay {
   position: fixed;
   top: 0;
@@ -140,8 +184,7 @@
   margin-bottom: 10px;
 }
 
-.orders-status-modal-content ul {
-  list-style: disc;
+.orders-status-modal-content ol {
   margin-left: 20px;
 }
 

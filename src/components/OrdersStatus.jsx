@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./componentsStyles/OrdersStatus.css";
-import { FiCheck, FiX, FiEye } from "react-icons/fi";
+import { FiCheck, FiX, FiEye, FiSearch } from "react-icons/fi";
 
 const mockOrders = [
   {
     id: "ORD001",
     name: "Customer01",
-    email: "customer01@example.com",
+    email: "customer01.doe@example.com",
     phone: "1234567890",
     address: "123 Main St, Africa",
     status: "Pending",
@@ -32,6 +32,8 @@ const mockOrders = [
 export default function OrdersStatus() {
   const [orders, setOrders] = useState(mockOrders);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
 
   const handleAccept = (orderId) => {
     setOrders((prev) =>
@@ -57,9 +59,45 @@ export default function OrdersStatus() {
     setSelectedOrder(null);
   };
 
+  const filteredOrders = orders.filter((order) => {
+    const matchesSearch =
+      order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      order.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      order.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus =
+      statusFilter === "All" || order.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
   return (
     <div className="orders-status-container">
-      <h2 className="orders-status-title">Customer Orders</h2>
+      <h1 className="orders-status-title">Customer Orders</h1>
+
+      {/* Search & Filter */}
+      <div className="orders-status-controls">
+        {/* <div className="orders-status-search">
+          <FiSearch className="orders-status-search-icon" />
+          <input
+            type="text"
+            placeholder="Search by Order ID, Name, Email"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="orders-status-search-input"
+          />
+        </div> */}
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="orders-status-filter">
+          <option value="All">All Statuses</option>
+          <option value="Pending">Pending</option>
+          <option value="Processing">Processing</option>
+          <option value="Completed">Completed</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+
+      {/* Table */}
       <table className="orders-status-table">
         <thead>
           <tr>
@@ -73,7 +111,7 @@ export default function OrdersStatus() {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
+          {filteredOrders.map((order) => (
             <tr key={order.id}>
               <td>{order.id}</td>
               <td>{order.name}</td>
@@ -109,9 +147,17 @@ export default function OrdersStatus() {
               </td>
             </tr>
           ))}
+          {filteredOrders.length === 0 && (
+            <tr>
+              <td colSpan="7" className="orders-status-no-results">
+                No orders found.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
 
+      {/* Modal */}
       {selectedOrder && (
         <div className="orders-status-modal-overlay" onClick={closeModal}>
           <div
@@ -131,14 +177,14 @@ export default function OrdersStatus() {
               <strong>Address:</strong> {selectedOrder.address}
             </p>
             <h3>Products:</h3>
-            <ul>
+            <ol>
               {selectedOrder.products.map((product, idx) => (
                 <li key={idx}>
                   {product.name} - Qty: {product.quantity}, Price: ₹
                   {product.price}
                 </li>
               ))}
-            </ul>
+            </ol>
             <button
               className="orders-status-btn orders-status-btn-close"
               onClick={closeModal}>

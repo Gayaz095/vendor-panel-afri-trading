@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LogoutUI from "./LogoutUI";
 import { useVendor } from "./VendorContext";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaSearch } from "react-icons/fa";
 import logoImage from "../assets/logo.png";
 import "./componentsStyles/Topbar.css";
 
@@ -69,8 +69,7 @@ const Topbar = ({ toggleSidebar }) => {
             e.stopPropagation();
             toggleSidebar();
           }}
-          aria-label="Open sidebar"
-        >
+          aria-label="Open sidebar">
           <span className="hamburger-icon">☰</span>
         </button>
         <div className="logo-and-phone">
@@ -78,8 +77,7 @@ const Topbar = ({ toggleSidebar }) => {
             <Link
               to="/dashboard"
               className="logo-image-wrapper"
-              onClick={() => setDropdownOpen(false)}
-            >
+              onClick={() => setDropdownOpen(false)}>
               <img
                 src={logoImage}
                 alt="logo"
@@ -100,7 +98,7 @@ const Topbar = ({ toggleSidebar }) => {
           className="topbar-searchbar-input"
           placeholder="Search..."
           value={searchValue}
-          onChange={e => setSearchValue(e.target.value)}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
         <button className="topbar-searchbar-btn" type="submit">
           Search
@@ -114,8 +112,7 @@ const Topbar = ({ toggleSidebar }) => {
             onClick={() => setDropdownOpen(!dropdownOpen)}
             aria-expanded={dropdownOpen ? "true" : "false"}
             aria-controls="topbar-vendor-dropdown-menu"
-            aria-label="Vendor menu"
-          >
+            aria-label="Vendor menu">
             <div>
               <FaUserCircle className="avatar" />
             </div>
@@ -131,8 +128,7 @@ const Topbar = ({ toggleSidebar }) => {
           {dropdownOpen && (
             <div
               id="vendor-dropdown-menu"
-              className="topbar-dropdown-menu-wrapper"
-            >
+              className="topbar-dropdown-menu-wrapper">
               {renderDropdown()}
             </div>
           )}
