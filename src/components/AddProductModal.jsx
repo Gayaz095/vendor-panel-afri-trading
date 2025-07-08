@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./componentsStyles/AddProductModal.css";
 
+const Spinner = () => <span className="spinner" aria-label="Loading"></span>;
+
 const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
   const {
     vendorDetails,
@@ -35,6 +37,16 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
     stock: "",
     feautureProduct: false,
   });
+
+  const heroProductOptions = [
+    "NONE",
+    "NEW ARRIVAL",
+    "TRENDING",
+    "BEST SELLING",
+    "POPULAR",
+  ];
+
+  const [loading, setLoading] = useState(false);
 
   const formRef = useRef(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -119,7 +131,7 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
       scrollToInvalid();
       return;
     }
-
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("vendorId", vendorDetails.vendorId);
@@ -160,16 +172,10 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
     } catch (err) {
       console.error("Submission error:", err);
       toast.error("Failed to submit product.");
+    } finally {
+      setLoading(false);
     }
   };
-
-  const heroProductOptions = [
-    "NONE",
-    "NEW ARRIVAL",
-    "TRENDING",
-    "BEST SELLING",
-    "POPULAR",
-  ];
 
   const filteredModels = allCarModels.filter(
     (m) => m.carId === productData.carBrandId
@@ -367,8 +373,19 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
             />
           </label>
 
-          <button type="submit" className="add-product-modal-button">
-            {productToEdit ? "Update Product" : "Add Product"}
+          <button
+            type="submit"
+            className="add-product-modal-button"
+            disabled={loading}>
+            {loading ? (
+              <>
+                <Spinner /> &nbsp; {productToEdit ? "Updating..." : "Adding..."}
+              </>
+            ) : productToEdit ? (
+              "Update Product"
+            ) : (
+              "Add Product"
+            )}
           </button>
         </form>
       </div>

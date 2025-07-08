@@ -1,9 +1,9 @@
-/* VendorVisitStore.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 .vendor-store-container {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   max-width: 1200px;
   margin: 0 auto;
-  /* padding: 20px; */
   background-color: #fdfdfd;
   color: #1f2937;
 }
