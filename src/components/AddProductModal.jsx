@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./componentsStyles/AddProductModal.css";
 
-const Spinner = () => <span className="spinner" aria-label="Loading"></span>;
+const Spinner = () => <span className="add-product-spinner" aria-label="Loading"></span>;
 
 const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
   const {

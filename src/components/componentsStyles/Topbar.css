@@ -307,6 +307,12 @@
 }
 
 /* Responsive Styles */
+@media (max-width: 1024px) {
+  .topbar-message {
+    font-size: 0.6rem;
+  }
+}
+
 @media (max-width: 900px) {
   .topbar {
     position: relative;

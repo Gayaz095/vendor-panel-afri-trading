@@ -140,7 +140,7 @@ textarea {
   100% { transform: translateX(0); }
 }
 
-.spinner {
+.add-product-spinner {
   display: inline-block;
   width: 22px;
   height: 22px;
