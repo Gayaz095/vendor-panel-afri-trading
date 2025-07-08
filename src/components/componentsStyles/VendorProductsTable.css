@@ -431,7 +431,6 @@
 }
 
 /* Pagination */
-
 .vpt-pagination {
   display: flex;
   justify-content: center;
@@ -469,6 +468,12 @@
   background-color: #007bff;
   color: white;
   font-weight: 600;
+}
+
+.vpt-pagination button:disabled {
+  background: #eee;
+  color: #aaa;
+  cursor: not-allowed;
 }
 
 /* Responsive */
