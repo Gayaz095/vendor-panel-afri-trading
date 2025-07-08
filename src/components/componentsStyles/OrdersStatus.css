@@ -1,45 +1,41 @@
-/* Container */
-.order-status-container {
+.orders-status-container {
   padding: 20px;
   font-family: "Segoe UI", sans-serif;
 }
 
-.order-status-container h1 {
+.orders-status-title {
   margin-bottom: 20px;
-  font-family: "Segoe UI", Roboto, sans-serif;
   color: #333;
   font-weight: 500;
 }
 
-/* Table */
-.order-table {
+.orders-status-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.order-table th,
-.order-table td {
+.orders-status-table th,
+.orders-status-table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
 }
 
-.order-table th {
+.orders-status-table th {
   background-color: #f5f5f5;
   color: #333;
 }
 
-.order-table tr:nth-child(even) {
+.orders-status-table tr:nth-child(even) {
   background-color: #fafafa;
 }
 
-.order-table tr:hover {
+.orders-status-table tr:hover {
   background-color: #f1f1f1;
 }
 
-/* Status badges */
-.status-badge {
+.orders-status-badge {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 12px;
@@ -48,24 +44,23 @@
   text-transform: capitalize;
 }
 
-.status-badge.pending {
+.orders-status-badge.pending {
   background-color: orange;
 }
 
-.status-badge.processing {
+.orders-status-badge.processing {
   background-color: blue;
 }
 
-.status-badge.completed {
+.orders-status-badge.completed {
   background-color: green;
 }
 
-.status-badge.rejected {
+.orders-status-badge.rejected {
   background-color: red;
 }
 
-/* Buttons */
-.btn {
+.orders-status-btn {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -78,49 +73,48 @@
   transition: background 0.3s ease;
 }
 
-.btn svg {
+.orders-status-btn svg {
   font-size: 16px;
 }
 
-.btn.accept {
+.orders-status-btn-accept {
   background-color: #4caf50;
   color: white;
 }
 
-.btn.accept:hover {
+.orders-status-btn-accept:hover {
   background-color: #43a047;
 }
 
-.btn.reject {
+.orders-status-btn-reject {
   background-color: #f44336;
   color: white;
 }
 
-.btn.reject:hover {
+.orders-status-btn-reject:hover {
   background-color: #e53935;
 }
 
-.btn.view {
+.orders-status-btn-view {
   background-color: #2196f3;
   color: white;
 }
 
-.btn.view:hover {
+.orders-status-btn-view:hover {
   background-color: #1976d2;
 }
 
-.btn.close {
+.orders-status-btn-close {
   background-color: #555;
   color: white;
   margin-top: 10px;
 }
 
-.btn.close:hover {
+.orders-status-btn-close:hover {
   background-color: #333;
 }
 
-/* Modal */
-.modal-overlay {
+.orders-status-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -133,7 +127,7 @@
   z-index: 1000;
 }
 
-.modal-content {
+.orders-status-modal-content {
   background-color: #fff;
   padding: 20px;
   border-radius: 6px;
@@ -141,16 +135,16 @@
   max-width: 90%;
 }
 
-.modal-content h2 {
+.orders-status-modal-content h2 {
   margin-top: 0;
   margin-bottom: 10px;
 }
 
-.modal-content ul {
+.orders-status-modal-content ul {
   list-style: disc;
   margin-left: 20px;
 }
 
-.modal-content p {
+.orders-status-modal-content p {
   margin: 5px 0;
 }

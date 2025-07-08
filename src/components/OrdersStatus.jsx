@@ -6,7 +6,7 @@ const mockOrders = [
   {
     id: "ORD001",
     name: "Customer01",
-    email: "customer01.doe@example.com",
+    email: "customer01@example.com",
     phone: "1234567890",
     address: "123 Main St, Africa",
     status: "Pending",
@@ -58,9 +58,9 @@ export default function OrdersStatus() {
   };
 
   return (
-    <div className="order-status-container">
-      <h1>Customer Orders</h1>
-      <table className="order-table">
+    <div className="orders-status-container">
+      <h2 className="orders-status-title">Customer Orders</h2>
+      <table className="orders-status-table">
         <thead>
           <tr>
             <th>Order ID</th>
@@ -80,19 +80,20 @@ export default function OrdersStatus() {
               <td>{order.email}</td>
               <td>{order.phone}</td>
               <td>
-                <span className={`status-badge ${order.status.toLowerCase()}`}>
+                <span
+                  className={`orders-status-badge ${order.status.toLowerCase()}`}>
                   {order.status}
                 </span>
               </td>
               <td>
                 <button
-                  className="btn accept"
+                  className="orders-status-btn orders-status-btn-accept"
                   onClick={() => handleAccept(order.id)}
                   title="Accept Order">
                   <FiCheck /> Accept
                 </button>
                 <button
-                  className="btn reject"
+                  className="orders-status-btn orders-status-btn-reject"
                   onClick={() => handleReject(order.id)}
                   title="Reject Order">
                   <FiX /> Reject
@@ -100,7 +101,7 @@ export default function OrdersStatus() {
               </td>
               <td>
                 <button
-                  className="btn view"
+                  className="orders-status-btn orders-status-btn-view"
                   onClick={() => handleView(order)}
                   title="View Order Details">
                   <FiEye /> View
@@ -112,8 +113,10 @@ export default function OrdersStatus() {
       </table>
 
       {selectedOrder && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="orders-status-modal-overlay" onClick={closeModal}>
+          <div
+            className="orders-status-modal-content"
+            onClick={(e) => e.stopPropagation()}>
             <h2>Order Details - {selectedOrder.id}</h2>
             <p>
               <strong>Name:</strong> {selectedOrder.name}
@@ -136,7 +139,9 @@ export default function OrdersStatus() {
                 </li>
               ))}
             </ul>
-            <button className="btn close" onClick={closeModal}>
+            <button
+              className="orders-status-btn orders-status-btn-close"
+              onClick={closeModal}>
               Close
             </button>
           </div>
