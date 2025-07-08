@@ -9,7 +9,6 @@ const VendorContext = createContext();
 
 export const VendorProvider = ({ children }) => {
   const [vendorDetails, setVendorDetails] = useState(null);
-  const [loginTime, setLoginTime] = useState(null);
   const [allCars, setAllCars] = useState([]);
   const [allCarModels, setAllCarModels] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
@@ -20,16 +19,12 @@ export const VendorProvider = ({ children }) => {
   // Restore vendor session on app load
   useEffect(() => {
     const storedVendor = localStorage.getItem("vendorDetails");
-    const storedTime = localStorage.getItem("vendorLoginTime");
-
-    if (storedVendor && storedTime) {
+    if (storedVendor) {
       try {
         setVendorDetails(JSON.parse(storedVendor));
-        setLoginTime(parseInt(storedTime, 10));
       } catch (err) {
         console.error("Failed to parse stored vendor details:", err);
         localStorage.removeItem("vendorDetails");
-        localStorage.removeItem("vendorLoginTime");
       }
     }
     setLoading(false);
@@ -38,23 +33,17 @@ export const VendorProvider = ({ children }) => {
   // Sync vendor details to storage when updated
   useEffect(() => {
     if (vendorDetails) {
-      const now = Date.now();
-      setLoginTime(now);
-
       const vendorString = JSON.stringify(vendorDetails);
       sessionStorage.setItem("vendorDetails", vendorString);
       localStorage.setItem("vendorDetails", vendorString);
-      localStorage.setItem("vendorLoginTime", now.toString());
     }
   }, [vendorDetails]);
 
   // Logout function
   const logoutVendor = () => {
     setVendorDetails(null);
-    setLoginTime(null);
     sessionStorage.removeItem("vendorDetails");
     localStorage.removeItem("vendorDetails");
-    localStorage.removeItem("vendorLoginTime");
   };
 
   useEffect(() => {
@@ -92,7 +81,6 @@ export const VendorProvider = ({ children }) => {
       value={{
         vendorDetails,
         setVendorDetails,
-        loginTime,
         logoutVendor,
         allCars,
         allCarModels,
