@@ -145,7 +145,7 @@ const VendorVisitStore = () => {
             </div>
           ) : (
             <div className="vendor-empty-state">
-              No products added. Try adding new products!.
+              No products added. Start adding new products!.
             </div>
           )}
         </div>
