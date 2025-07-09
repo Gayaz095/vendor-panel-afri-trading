@@ -87,14 +87,6 @@ const VendorVisitStore = () => {
     );
   }
 
-  if (!vendorDetails && products.length === 0) {
-    return (
-      <div className="empty-state">
-        No vendor details and products are available.
-      </div>
-    );
-  }
-
   return (
     <div className="vendor-store-container">
       <div className="vendor-header">{/* Optional header UI */}</div>
@@ -104,8 +96,9 @@ const VendorVisitStore = () => {
             <VendorDetails vendorDetails={vendorDetails} />
           ) : (
             <div className="vendor-empty-state">
+              Vendor details are not available.
               <strong>
-                {vendorDetails?.name || "Vendor details are not found"}
+                Please ensure your documents are submitted for verification.
               </strong>
             </div>
           )}
