@@ -81,7 +81,7 @@ const RecentProducts = () => {
     else if (e.key === "Escape") setEditPage(null);
   };
 
-  // formatPrice uses user locale and dynamic currency and default is INR
+  // formatPrice uses user locale and dynamic currency (default INR)
   const formatPrice = (price, currency = "INR") => {
     const userLocale = navigator.language || "en-IN";
     return new Intl.NumberFormat(userLocale, {
@@ -104,10 +104,6 @@ const RecentProducts = () => {
   return (
     <div className="recent-products-table">
       <h3 className="recent-table-h3">Recent Products:</h3>
-      {/* Show detected locale for debugging */}
-      {/* <div style={{fontSize: "0.8em", color: "#888"}}>
-        Detected locale: {navigator.language}
-      </div> */}
       <div className="recent-table-responsive">
         <table className="recent-table">
           <thead>
@@ -124,8 +120,9 @@ const RecentProducts = () => {
           <tbody>
             {currentItems.length === 0 ? (
               <tr>
-                <td className="recent-no-products-message" colSpan={7}>
-                  No recent products available.
+                <td className="recent-no-products-message">
+                  To view recent products,
+                  <strong>start adding products!</strong>
                 </td>
               </tr>
             ) : (
