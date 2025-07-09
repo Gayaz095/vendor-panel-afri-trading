@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 .vendor-store-container {
-  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
   max-width: 1200px;
   margin: 0 auto;
   background-color: #fdfdfd;
@@ -169,10 +169,10 @@
   padding: 40px 20px;
   margin: 20px auto;
   max-width: 500px;
-  border: 2px dashed #d1d5db; /* subtle dashed border */
+  border: 2px dashed #d1d5db;
   border-radius: 12px;
-  background-color: #f9fafb; /* light background */
-  color: #6b7280; /* gray text */
+  background-color: #f9fafb;
+  color: #6b7280;
   text-align: center;
   font-family: "Urbanist", sans-serif;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -180,22 +180,21 @@
 }
 
 .vendor-empty-state strong {
-  color: #111827; /* dark text for emphasis */
+  color: #111827;
   font-size: 1.2rem;
   margin-bottom: 8px;
 }
 
 .vendor-empty-state:hover {
-  border-color: #9ca3af; /* slight border color change on hover */
+  border-color: #9ca3af;
   background-color: #f3f4f6;
 }
-
+/* 
 .vendor-empty-state::before {
-  /* content: "📦"; */
+  content: "📦";
   font-size: 2.5rem;
   margin-bottom: 12px;
-}
-
+} */
 
 @media (min-width: 768px) {
   .vendor-profile-section {

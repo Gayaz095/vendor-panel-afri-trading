@@ -16,6 +16,28 @@ const getLatestDate = (product) => {
   return updated || created || new Date(0);
 };
 
+// Strict validation for vendorDetails
+const isVendorDetailsValid = (details) => {
+  return (
+    details &&
+    typeof details === "object" &&
+    details.vendorId &&
+    details.name &&
+    details.email &&
+    details.phone &&
+    details.bussinessName &&
+    details.bussinessAddress &&
+    details.adharCard &&
+    details.adharCardImage &&
+    details.panCard &&
+    details.panCardImage &&
+    details.gstNumber &&
+    details.gstImage &&
+    details.status &&
+    typeof details.isVerified === "boolean"
+  );
+};
+
 const VendorVisitStore = () => {
   const { vendorDetails } = useVendor();
   const [products, setProducts] = useState([]);
@@ -24,7 +46,7 @@ const VendorVisitStore = () => {
   const [sortOption, setSortOption] = useState("newest");
 
   useEffect(() => {
-    if (vendorDetails?.vendorId) {
+    if (isVendorDetailsValid(vendorDetails)) {
       fetchProducts(vendorDetails.vendorId);
     } else {
       setLoadingProducts(false);
@@ -87,10 +109,11 @@ const VendorVisitStore = () => {
     );
   }
 
-  if (!vendorDetails && products.length === 0) {
+  if (!isVendorDetailsValid(vendorDetails)) {
     return (
       <div className="empty-state">
-        No vendor details and products are available.
+        Vendor details are incomplete or missing. Please complete profile to
+        view store.
       </div>
     );
   }
@@ -100,15 +123,7 @@ const VendorVisitStore = () => {
       <div className="vendor-header">{/* Optional header UI */}</div>
       <div className="vendor-content">
         <div className="vendor-profile-section">
-          {vendorDetails ? (
-            <VendorDetails vendorDetails={vendorDetails} />
-          ) : (
-            <div className="vendor-empty-state">
-              <strong>
-                {vendorDetails?.name || "Vendor details are not found"}
-              </strong>
-            </div>
-          )}
+          <VendorDetails vendorDetails={vendorDetails} />
         </div>
         <hr className="light-line" />
 
@@ -145,7 +160,7 @@ const VendorVisitStore = () => {
             </div>
           ) : (
             <div className="vendor-empty-state">
-              No products added. Start adding new products!.
+              No products added. <strong>Start adding new products!</strong>
             </div>
           )}
         </div>
