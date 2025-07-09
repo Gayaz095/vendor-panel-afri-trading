@@ -34,6 +34,10 @@
   display: none;
 }
 
+.logo-and-phone {
+  margin-top: 0.8rem;
+}
+
 .logo-image-wrapper {
   width: 90px;
   height: 85px;
@@ -101,22 +105,22 @@
 }
 
 .topbar-searchbar {
-    display: flex;
-    align-items: center;
-    flex: 1 1 100%;
-    max-width: 500px;
-    background: rgba(255, 255, 255); 
-    border-radius: 24px;
-    /* padding: 0.2rem 0.5rem; */
-    box-shadow: 0 2px 6px rgba(44, 62, 80, 0.08);
-    border: none;
-    margin: 0 2rem;
-    /* height: 48px; */
-    position: relative;
-    z-index: 10;
-    backdrop-filter: blur(4px);
-  }
-  
+  display: flex;
+  align-items: center;
+  flex: 1 1 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255);
+  border-radius: 24px;
+  /* padding: 0.2rem 0.5rem; */
+  box-shadow: 0 2px 6px rgba(44, 62, 80, 0.08);
+  border: none;
+  margin: 0 2rem;
+  /* height: 48px; */
+  position: relative;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
 .topbar-searchbar-input {
   flex: 1;
   border: none;
@@ -136,25 +140,23 @@
 }
 
 .topbar-searchbar-btn {
-    background: #2b6cb0;
-    color: #fff;
-    border: 1px solid wheat;
-    border-radius: 0 24px 24px 0;
-    padding: 0.8rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    font-weight: 600;
-    /* margin-left: 0.5rem; */
-    transition: background 0.3s, transform 0.2s;
-  }
-  
-  .topbar-searchbar-btn:hover,
-  .topbar-searchbar-btn:focus {
-    background: #e79061;
-    transform: translateY(-1px); /* slight lift on hover */
-  }
-  
+  background: #2b6cb0;
+  color: #fff;
+  border: 1px solid wheat;
+  border-radius: 0 24px 24px 0;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  /* margin-left: 0.5rem; */
+  transition: background 0.3s, transform 0.2s;
+}
 
+.topbar-searchbar-btn:hover,
+.topbar-searchbar-btn:focus {
+  background: #e79061;
+  transform: translateY(-1px); /* slight lift on hover */
+}
 
 .topbar-right {
   display: flex;
