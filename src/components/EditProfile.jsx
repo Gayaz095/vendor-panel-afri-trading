@@ -118,8 +118,7 @@ const EditProfile = () => {
     return (
       <div className="edit-profile__empty">
         Edit profile for this vendor:
-        <strong>{vendorDetails?.name || "Vendor"}</strong> details are not
-        found.
+        <strong>No vendor profile found</strong> and details are not available
       </div>
     );
   }
