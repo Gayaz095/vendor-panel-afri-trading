@@ -94,7 +94,7 @@ const VendorVisitStore = () => {
       </div>
     );
   }
-  console.log("Vendor Details name:", vendorDetails.name);
+
   return (
     <div className="vendor-store-container">
       <div className="vendor-header">{/* Optional header UI */}</div>
