@@ -61,7 +61,6 @@ const EditProfile = () => {
       [name]: value,
     }));
 
-    // Validate field on change
     validateField(name, value);
   };
 
@@ -92,9 +91,8 @@ const EditProfile = () => {
         ...formData,
       };
 
-      const response = await updateVendorProfile(payload);
+      await updateVendorProfile(payload);
 
-      //Update root-level and vendorDetails fields
       setVendorDetails((prev) => ({
         ...prev,
         name: formData.name,
@@ -114,6 +112,16 @@ const EditProfile = () => {
       setLoading(false);
     }
   };
+
+  //Check if vendorDetails is missing
+  if (!vendorDetails?.vendorDetails) {
+    return (
+      <div className="edit-profile__empty">
+        Edit profile for this vendor:{" "}
+        <strong>{vendorDetails?.name || "Vendor"}</strong> not found.
+      </div>
+    );
+  }
 
   return (
     <div className="edit-profile">

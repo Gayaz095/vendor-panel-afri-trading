@@ -23,17 +23,14 @@ const VendorVisitStore = () => {
   const [productsError, setProductsError] = useState(null);
   const [sortOption, setSortOption] = useState("newest");
 
-  // Fetch products when vendorDetails are available
   useEffect(() => {
     if (vendorDetails?.vendorId) {
       fetchProducts(vendorDetails.vendorId);
     } else {
-      setProductsError("Vendor information is missing.");
       setLoadingProducts(false);
     }
   }, [vendorDetails]);
 
-  // Sort products whenever sortOption changes
   useEffect(() => {
     if (products.length > 0) {
       sortProducts(sortOption);
@@ -45,7 +42,6 @@ const VendorVisitStore = () => {
     setProductsError(null);
     try {
       const data = await getVendorProducts(vendorId);
-      // Sort by most recent updatedAt or createdAt
       const sortedData = [...data].sort(
         (a, b) => getLatestDate(b) - getLatestDate(a)
       );
@@ -67,7 +63,6 @@ const VendorVisitStore = () => {
         sorted.sort((a, b) => b.price - a.price);
         break;
       case "newest":
-        // Use latest of updatedAt or createdAt
         sorted.sort((a, b) => getLatestDate(b) - getLatestDate(a));
         break;
       case "oldest":
@@ -82,7 +77,6 @@ const VendorVisitStore = () => {
     setProducts(sorted);
   };
 
-  // UI for loading and error states
   if (loadingProducts) return <LoadingSpinner />;
 
   if (productsError) {
@@ -93,15 +87,27 @@ const VendorVisitStore = () => {
     );
   }
 
+  if (!vendorDetails && products.length === 0) {
+    return (
+      <div className="empty-state">
+        No vendor details and products are available.
+      </div>
+    );
+  }
+  console.log("Vendor Details name:", vendorDetails.name);
   return (
     <div className="vendor-store-container">
-      <div className="vendor-header">{/* Optional: Add header UI */}</div>
+      <div className="vendor-header">{/* Optional header UI */}</div>
       <div className="vendor-content">
         <div className="vendor-profile-section">
           {vendorDetails ? (
             <VendorDetails vendorDetails={vendorDetails} />
           ) : (
-            <div className="error-message">Vendor details not found.</div>
+            <div className="vendor-empty-state">
+              <strong>
+                {vendorDetails?.name || "Vendor details are not found"}
+              </strong>
+            </div>
           )}
         </div>
         <hr className="light-line" />
@@ -130,12 +136,18 @@ const VendorVisitStore = () => {
             </div>
           </div>
 
-          <div className="vendor-products-card-container">
-            <VendorProductsCards
-              vendorId={vendorDetails.vendorId}
-              products={products}
-            />
-          </div>
+          {products.length > 0 ? (
+            <div className="vendor-products-card-container">
+              <VendorProductsCards
+                vendorId={vendorDetails?.vendorId}
+                products={products}
+              />
+            </div>
+          ) : (
+            <div className="vendor-empty-state">
+              No products added. Try adding new products!.
+            </div>
+          )}
         </div>
       </div>
     </div>

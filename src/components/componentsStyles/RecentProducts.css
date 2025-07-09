@@ -43,7 +43,7 @@
 
 .recent-table-responsive {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  /* -webkit-overflow-scrolling: touch; */
 }
 
 .recent-table {

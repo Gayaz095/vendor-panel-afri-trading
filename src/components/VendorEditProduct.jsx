@@ -188,7 +188,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
   return (
     <div className="vendor-edit-product__modal-overlay">
       <div className="vendor-edit-product__modal">
-        <h2>Edit Product</h2>
+        <h2 className="vendor-edit-product__modal_h2">Edit Product</h2>
         <form onSubmit={handleSubmit}>
           <div className="vendor-edit-product__form-row">
             <div className="vendor-edit-product__form-group">
