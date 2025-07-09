@@ -26,7 +26,7 @@ export default function App() {
       <VendorProvider>
         <Router>
           <ScrollToTop />
-          <ToastContainer style={{ zIndex: 11000 }} />
+          <ToastContainer/>
           <Routes>
             {/* Public routes */}
             <Route element={<PublicRoute />}>
