@@ -1,6 +1,17 @@
 /* EditProfile.css */
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap");
 
+.edit-profile__empty {
+  text-align: center;
+  padding: 30px 20px;
+  margin: 20px auto;
+  color: #6b7280;
+  font-size: 1rem;
+  background-color: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+}
+
 .edit-profile__input:focus,
 .edit-profile__textarea:focus {
   border-color: #2563eb !important;
