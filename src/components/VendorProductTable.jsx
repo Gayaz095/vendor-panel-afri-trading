@@ -451,7 +451,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
           <tbody>
             {currentItems.length === 0 ? (
               <tr>
-                <td colSpan="9" className="vpt-no-products-message">
+                <td className="vpt-no-products-message">
                   No products available. Start adding new products!
                 </td>
               </tr>
