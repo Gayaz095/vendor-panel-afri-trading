@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AddProductModal from "./AddProductModal";
-import "./componentsStyles/Products.css";
+import "./componentsStyles/AddProduct.css";
 import VendorProductsTable from "./VendorProductTable";
 import { useVendor } from "./VendorContext";
 import { FaPlus } from "react-icons/fa";

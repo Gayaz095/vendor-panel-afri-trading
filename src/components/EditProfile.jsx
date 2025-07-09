@@ -113,12 +113,13 @@ const EditProfile = () => {
     }
   };
 
-  //Check if vendorDetails is missing
+  // Check if vendorDetails is missing
   if (!vendorDetails?.vendorDetails) {
     return (
       <div className="edit-profile__empty">
         Edit profile for this vendor:
-        <strong>{vendorDetails?.name || "Vendor"}</strong> details are not found.
+        <strong>{vendorDetails?.name || "Vendor"}</strong> details are not
+        found.
       </div>
     );
   }
