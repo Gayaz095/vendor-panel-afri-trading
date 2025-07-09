@@ -217,6 +217,7 @@ const LoginPage = () => {
                     <span
                       className="loginpage-toggle-password-icon"
                       onClick={() => setShowPassword((prev) => !prev)}
+                      autoComplete="current-password"
                       aria-label="Toggle password visibility">
                       {showPassword ? <FaEye /> : <FaEyeSlash />}
                     </span>

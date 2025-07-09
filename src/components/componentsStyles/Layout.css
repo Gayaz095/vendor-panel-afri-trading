@@ -16,10 +16,10 @@
   background: #fff;
   min-height: calc(100vh - 56px);
   overflow-y: auto;
-  padding-top: 120px;
+  /* padding-top: 120px; */
 }
 
-.sidebar {
+/* .sidebar {
   padding-top: 120px;
 }
 
@@ -39,4 +39,4 @@
   .main-content {
     padding-top: 20px;
   }
-}
+} */

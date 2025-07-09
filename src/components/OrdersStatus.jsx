@@ -68,7 +68,7 @@ export default function OrdersStatus() {
   const handleAccept = (orderId) => {
     setOrders((prev) =>
       prev.map((order) =>
-        order.id === orderId ? { ...order, status: "Processing" } : order
+        order.id === orderId ? { ...order, status: "Pending" } : order
       )
     );
   };
