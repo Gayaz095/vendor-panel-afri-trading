@@ -31,7 +31,7 @@ export default function OrdersStatus() {
           setLoadingOrders(true);
           const response = await getVendorProductsOrders(vendorId);
           // raw API response data
-          console.log("API response data in OrdersStatus:", response);
+          // console.log("API response data in OrdersStatus:", response);
           const ordersData = response.data.map((order) => ({
             id: order._id,
             name: order.email?.split("@")[0] || "Unknown",
@@ -59,6 +59,11 @@ export default function OrdersStatus() {
       fetchOrders();
     }
   }, [vendorId]);
+
+  function shortOrderId(id) {
+    if (!id) return "";
+    return "..." + id.slice(-10);
+  }
 
   const handleShipped = (orderId) => {
     setOrders((prev) =>
@@ -202,7 +207,7 @@ export default function OrdersStatus() {
             <tbody>
               {currentItems.map((order) => (
                 <tr key={order.id}>
-                  <td>{order.id}</td>
+                  <td>{shortOrderId(order.id)}</td>
                   <td>{order.name}</td>
                   <td>{order.email}</td>
                   <td>{order.phone}</td>
