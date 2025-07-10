@@ -42,7 +42,8 @@ export default function OrdersStatus() {
             email: order.email,
             phone: order.phone,
             address: order.addressId || "N/A",
-            status: order.productsList[0].vendorStatus,
+            status: order.productsList?.[0]?.vendorStatus || "Pending",
+            // status: order.vendorStatus || order.orderStatus,
             createdAt: order.createdAt,
             updatedAt: order.updatedAt,
             products: order.productsList.map((product) => ({
