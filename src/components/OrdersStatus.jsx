@@ -6,6 +6,7 @@ import {
   updateVendorProductsOrdersStatus,
 } from "../utils/getVendorProductsOrders";
 import { useVendor } from "./VendorContext";
+import OrdersStatusModal from "./OrdersStatusModal";
 
 const PRODUCTS_PER_PAGE = 5;
 const PAGE_WINDOW = 3;
@@ -209,7 +210,12 @@ export default function OrdersStatus() {
         </>
       )}
 
-      {selectedOrder && (
+      <OrdersStatusModal
+        order={selectedOrder}
+        onClose={() => setSelectedOrder(null)}
+      />
+
+      {/* {selectedOrder && (
         <div
           className="orders-status-modal-overlay"
           onClick={() => setSelectedOrder(null)}>
@@ -264,7 +270,7 @@ export default function OrdersStatus() {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

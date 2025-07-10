@@ -1,0 +1,185 @@
+/* OrdersStatusModal.css */
+.OrdersStatusModal__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: OrdersStatusModal__fadeIn 0.3s ease-in-out;
+}
+
+.OrdersStatusModal__content {
+  background: #ffffff;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90%;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  padding: 24px;
+  animation: OrdersStatusModal__slideUp 0.3s ease-in-out;
+}
+
+.OrdersStatusModal__header {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 0;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.OrdersStatusModal__section {
+  margin: 16px 0;
+}
+
+.OrdersStatusModal__section p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.OrdersStatusModal__section strong {
+  color: #222;
+}
+
+.OrdersStatusModal__productsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.OrdersStatusModal__productsTable th,
+.OrdersStatusModal__productsTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.OrdersStatusModal__productsTable th {
+  background-color: #f1f5f9;
+  color: #333;
+  font-weight: 600;
+}
+
+.OrdersStatusModal__productsTable td {
+  color: #555;
+}
+
+.OrdersStatusModal__productImage {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* Footer*/
+.OrdersStatusModal__footer {
+  display: flex;
+  /* justify-content: flex-end; */
+  justify-content: space-between;
+  /* gap: 12px; */
+  margin-top: 16px;
+}
+
+.OrdersStatusModal__btnClose,
+.OrdersStatusModal__btnPrint {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.OrdersStatusModal__btnClose {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.OrdersStatusModal__btnClose:hover {
+  background-color: #d32f2f;
+}
+
+.OrdersStatusModal__btnPrint {
+  background-color: #0d6efd;
+  color: #ffffff;
+}
+
+.OrdersStatusModal__btnPrint:hover {
+  background-color: #0b5ed7;
+}
+
+/* Animations */
+@keyframes OrdersStatusModal__fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes OrdersStatusModal__slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .OrdersStatusModal__content {
+    padding: 16px;
+  }
+
+  .OrdersStatusModal__header {
+    font-size: 1.4rem;
+  }
+
+  .OrdersStatusModal__productsTable th,
+  .OrdersStatusModal__productsTable td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .OrdersStatusModal__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .OrdersStatusModal__btnClose,
+  .OrdersStatusModal__btnPrint {
+    width: 100%;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .OrdersStatusModal__content,
+  .OrdersStatusModal__content * {
+    visibility: visible;
+  }
+  .OrdersStatusModal__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+  }
+  .OrdersStatusModal__footer {
+    display: none; /* Hide Close/Print buttons in print */
+  }
+}
+
