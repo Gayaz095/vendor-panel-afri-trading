@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./componentsStyles/OrdersStatus.css";
 import { FiCheck, FiX, FiEye, FiSearch } from "react-icons/fi";
-import { getVendorProductsOrders } from "../utils/getVendorProductsOrders";
+import {
+  getVendorProductsOrders,
+  updateVendorProductsOrdersStatus
+} from "../utils/getVendorProductsOrders";
 import { useVendor } from "./VendorContext";
+import { toast } from "react-toastify";
 
 const PRODUCTS_PER_PAGE = 5;
 const PAGE_WINDOW = 3;
@@ -38,7 +42,7 @@ export default function OrdersStatus() {
             email: order.email,
             phone: order.phone,
             address: order.addressId || "N/A",
-            status: order.orderStatus,
+            status: order.productsList[0].vendorStatus,
             createdAt: order.createdAt,
             updatedAt: order.updatedAt,
             products: order.productsList.map((product) => ({
@@ -48,7 +52,7 @@ export default function OrdersStatus() {
               image: product.image,
             })),
           }));
-
+          
           setOrders(ordersData);
         } catch (error) {
           console.error("Error fetching vendor orders:", error.message);
@@ -85,23 +89,25 @@ export default function OrdersStatus() {
 
     return date.toLocaleString(userLocale, options);
   }
-  
 
-  const handleShipped = (orderId) => {
-    setOrders((prev) =>
-      prev.map((order) =>
-        order.id === orderId ? { ...order, status: "Shipped" } : order
-      )
-    );
+  const handleUpdateStatus = async (orderId, newStatus) => {
+    try {
+      toast.info(`Updating order ${newStatus}...`);
+      await updateVendorProductsOrdersStatus(orderId, vendorId, newStatus);
+      toast.success(`Order marked as ${newStatus}`);
+      setOrders((prev) =>
+        prev.map((order) =>
+          order.id === orderId ? { ...order, status: newStatus } : order
+        )
+      );
+    } catch (error) {
+      console.error("Error updating order status:", error.message);
+      toast.error(`Failed to update order: ${error.message}`);
+    }
   };
 
-  const handleCancelled = (orderId) => {
-    setOrders((prev) =>
-      prev.map((order) =>
-        order.id === orderId ? { ...order, status: "Cancelled" } : order
-      )
-    );
-  };
+  const handleShipped = (orderId) => handleUpdateStatus(orderId, "Shipped");
+  const handleCancelled = (orderId) => handleUpdateStatus(orderId, "Cancelled");
 
   const handleView = (order) => {
     setSelectedOrder(order);
@@ -240,13 +246,13 @@ export default function OrdersStatus() {
                     <button
                       className="orders-status-btn orders-status-btn-accept"
                       onClick={() => handleShipped(order.id)}
-                      title="Mark as Shipped">
+                      disabled={order.status === "Shipped"}>
                       <FiCheck /> Shipped
                     </button>
                     <button
                       className="orders-status-btn orders-status-btn-reject"
                       onClick={() => handleCancelled(order.id)}
-                      title="Cancel Order">
+                      disabled={order.status === "Cancelled"}>
                       <FiX /> Cancel
                     </button>
                   </td>
@@ -344,27 +350,43 @@ export default function OrdersStatus() {
               <strong>Address:</strong> {selectedOrder.address}
             </p>
             <p>
-              <strong>Created At:</strong>{" "}
+              <strong>Created At:</strong>
               {formatDateTime(selectedOrder.createdAt)}
             </p>
             <p>
-              <strong>Updated At:</strong>{" "}
+              <strong>Updated At:</strong>
               {formatDateTime(selectedOrder.updatedAt)}
             </p>
             <h3>Products:</h3>
-            <ol>
-              {selectedOrder.products.map((product, idx) => (
-                <li key={idx}>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="orders-status-product-image"
-                  />
-                  {product.name} - Qty: {product.quantity}, Price: ₹
-                  {product.price}
-                </li>
-              ))}
-            </ol>
+            <table className="orders-status-modal-products-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price (₹)</th>
+                  <th>Total (₹)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedOrder.products.map((product, idx) => (
+                  <tr key={idx}>
+                    <td>
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="orders-status-product-image"
+                      />
+                    </td>
+                    <td>{product.name}</td>
+                    <td>{product.quantity}</td>
+                    <td>₹{product.price}</td>
+                    <td>₹{product.price * product.quantity}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
             <button
               className="orders-status-btn orders-status-btn-close"
               onClick={closeModal}>

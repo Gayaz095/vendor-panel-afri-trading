@@ -18,3 +18,24 @@ export const getVendorProductsOrders = async (vendorId) => {
     throw new Error(error.message);
   }
 };
+
+export const updateVendorProductsOrdersStatus = async (
+  orderId,
+  vendorId,
+  vendorStatus
+) => {
+  try {
+    const response = await api.post(
+      "/order/update-vendor-products-order-status",
+      {
+        orderId,
+        vendorId,
+        vendorStatus,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || error.message);
+  }
+};
