@@ -20,9 +20,6 @@ export default function OrdersStatus() {
   const [inputValue, setInputValue] = useState("");
   const [loadingOrders, setLoadingOrders] = useState(true);
 
-  // console.log("vendorDetails at render:", vendorDetails);
-  // console.log("vendorId at render:", vendorId);
-
   useEffect(() => {
     if (vendorId) {
       const fetchOrders = async () => {
@@ -32,23 +29,50 @@ export default function OrdersStatus() {
           const response = await getVendorProductsOrders(vendorId);
           // raw API response data
           console.log("API response data in OrdersStatus:", response);
-          const ordersData = response.data.map((order) => ({
-            id: order._id,
-            name: order.email?.split("@")[0] || "Unknown",
-            email: order.email,
-            phone: order.phone,
-            address: order.addressId || "N/A",
-            status: order.orderStatus,
-            products: order.productsList.map((product) => ({
-              name: product.productName,
-              quantity: product.quantity,
-              price: product.productPrice,
-              image: product.image,
-            })),
-          }));
+          const rawOrders = response.data;
 
-          // console.log("Mapped Orders Data:", ordersData);
-          setOrders(ordersData);
+          //Group orders by _id to avoid duplicates
+          const groupedOrdersMap = new Map();
+
+          rawOrders.forEach((order) => {
+            if (!groupedOrdersMap.has(order._id)) {
+              groupedOrdersMap.set(order._id, {
+                id: order._id,
+                name: order.email?.split("@")[0] || "Unknown",
+                email: order.email,
+                phone: order.phone,
+                address: order.addressId || "N/A",
+                status: order.orderStatus,
+                products: [], // start with empty array
+              });
+            }
+
+            // Add products to the existing grouped order
+            const existingOrder = groupedOrdersMap.get(order._id);
+            const productList = Array.isArray(order.productsList)
+              ? order.productsList
+              : [order.productsList];
+
+            productList.forEach((product) => {
+              if (
+                !existingOrder.products.some(
+                  (p) => p.name === product.productName
+                )
+              ) {
+                existingOrder.products.push({
+                  name: product.productName,
+                  quantity: product.quantity,
+                  price: product.productPrice,
+                  image: product.image,
+                });
+              }
+            });
+          });
+
+          const groupedOrders = Array.from(groupedOrdersMap.values());
+
+          // console.log("Grouped Orders:", groupedOrders);
+          setOrders(groupedOrders);
         } catch (error) {
           console.error("Error fetching vendor orders:", error.message);
         } finally {
@@ -161,7 +185,6 @@ export default function OrdersStatus() {
       {/* Search & Filter */}
       <div className="orders-status-controls">
         <div className="orders-status-search">
-          {/* <FiSearch /> */}
           <input
             type="text"
             placeholder="Search by ID, name, or email..."
