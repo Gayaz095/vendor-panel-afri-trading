@@ -13,7 +13,6 @@ export const getVendorProductsOrders = async (vendorId) => {
     const response = await api.post("/order/get-vendor-products-orders", {
       vendorId,
     });
-    console.log("API response in getVendorProductsOrders:", response.data);
     return response.data;
   } catch (error) {
     throw new Error(error.message);

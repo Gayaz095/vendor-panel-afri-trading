@@ -262,6 +262,7 @@
 
   .view-product-main {
     flex-direction: column;
+    align-items: center;
   }
 
   .view-product-image-container {
