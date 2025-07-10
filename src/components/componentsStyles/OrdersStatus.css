@@ -187,6 +187,22 @@
   background-color: #4b5563;
 }
 
+.orders-status-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.orders-status-btn:disabled:hover {
+  /* background-color: inherit; */
+  cursor: not-allowed;
+}
+
+.orders-status-final {
+  display: inline-block;
+  font-weight: 600;
+  color: #e63946;
+}
+
 .orders-status-modal-overlay {
   position: fixed;
   inset: 0;
@@ -265,8 +281,6 @@
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
-
-
 
 .orders-status-pagination {
   display: flex;
