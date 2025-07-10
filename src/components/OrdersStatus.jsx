@@ -20,25 +20,27 @@ export default function OrdersStatus() {
   const [inputValue, setInputValue] = useState("");
   const [loadingOrders, setLoadingOrders] = useState(true);
 
-  // console.log("vendorDetails at render:", vendorDetails);
-  // console.log("vendorId at render:", vendorId);
-
   useEffect(() => {
     if (vendorId) {
       const fetchOrders = async () => {
-        // console.log("Fetching orders for Vendor ID:", vendorId);
         try {
           setLoadingOrders(true);
           const response = await getVendorProductsOrders(vendorId);
-          // raw API response data
-          // console.log("API response data in OrdersStatus:", response);
-          const ordersData = response.data.map((order) => ({
+
+          // Sort orders by createdAt (newest first)
+          const sortedData = response.data.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+
+          const ordersData = sortedData.map((order) => ({
             id: order._id,
             name: order.email?.split("@")[0] || "Unknown",
             email: order.email,
             phone: order.phone,
             address: order.addressId || "N/A",
             status: order.orderStatus,
+            createdAt: order.createdAt,
+            updatedAt: order.updatedAt,
             products: order.productsList.map((product) => ({
               name: product.productName,
               quantity: product.quantity,
@@ -47,7 +49,6 @@ export default function OrdersStatus() {
             })),
           }));
 
-          // console.log("Mapped Orders Data:", ordersData);
           setOrders(ordersData);
         } catch (error) {
           console.error("Error fetching vendor orders:", error.message);
@@ -64,6 +65,27 @@ export default function OrdersStatus() {
     if (!id) return "";
     return "..." + id.slice(-10);
   }
+
+  function formatDateTime(isoString) {
+    const date = new Date(isoString);
+    if (isNaN(date)) return "Invalid Date";
+
+    const userLocale = navigator.language || "en-US";
+
+    const options = {
+      year: "numeric",
+      month: "short", // e.g., Jul
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true, // 12-hour format
+      timeZoneName: "short", // Shows timezone like IST
+    };
+
+    return date.toLocaleString(userLocale, options);
+  }
+  
 
   const handleShipped = (orderId) => {
     setOrders((prev) =>
@@ -141,7 +163,6 @@ export default function OrdersStatus() {
     else if (e.key === "Escape") setEditPage(null);
   };
 
-  // Loading vendor details
   if (vendorLoading) {
     return (
       <div className="orders-status-container">
@@ -150,7 +171,6 @@ export default function OrdersStatus() {
     );
   }
 
-  // Vendor not logged in
   if (!vendorDetails || !vendorId) {
     return (
       <div className="orders-status-container">
@@ -161,12 +181,11 @@ export default function OrdersStatus() {
 
   return (
     <div className="orders-status-container">
-      <h1 className="orders-status-title">Customer Orders</h1>
+      <h1 className="orders-status-title">Customers Orders</h1>
 
       {/* Search & Filter */}
       <div className="orders-status-controls">
         <div className="orders-status-search">
-          {/* <FiSearch /> */}
           <input
             type="text"
             placeholder="Search by ID, name, or email..."
@@ -323,6 +342,14 @@ export default function OrdersStatus() {
             </p>
             <p>
               <strong>Address:</strong> {selectedOrder.address}
+            </p>
+            <p>
+              <strong>Created At:</strong>{" "}
+              {formatDateTime(selectedOrder.createdAt)}
+            </p>
+            <p>
+              <strong>Updated At:</strong>{" "}
+              {formatDateTime(selectedOrder.updatedAt)}
             </p>
             <h3>Products:</h3>
             <ol>
