@@ -8,7 +8,7 @@ import {
 import { useVendor } from "./VendorContext";
 import { toast } from "react-toastify";
 
-const PRODUCTS_PER_PAGE = 6;
+const PRODUCTS_PER_PAGE = 1;
 const PAGE_WINDOW = 3;
 
 export default function OrdersStatus() {
