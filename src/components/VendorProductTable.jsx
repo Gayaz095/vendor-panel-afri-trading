@@ -14,6 +14,14 @@ import { toast } from "react-toastify";
 const PRODUCTS_PER_PAGE = 5;
 const PAGE_WINDOW = 3;
 
+// Helper to get the latest date (updatedAt or createdAt)
+const getLatestDate = (product) => {
+  const updated = product.updatedAt ? new Date(product.updatedAt) : null;
+  const created = product.createdAt ? new Date(product.createdAt) : null;
+  if (updated && created) return updated > created ? updated : created;
+  return updated || created || new Date(0);
+};
+
 const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -54,6 +62,8 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE)
   );
 
+  const [sortOption, setSortOption] = useState("newest"); // added sortOption state
+
   useEffect(() => {
     fetchProducts();
   }, [vendorId, refreshTrigger]);
@@ -66,21 +76,25 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     applyFilters();
   }, [products, filters]);
 
-  const [isSpinning, setIsSpinning] = useState(false);
+  // const [isSpinning, setIsSpinning] = useState(false);
 
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
   }, [filteredProducts, currentPage, totalPages]);
+
+  useEffect(() => {
+    if (products.length > 0) {
+      sortProducts(sortOption);
+    }
+  }, [sortOption]);
 
   const fetchProducts = async () => {
     setLoading(true);
     try {
       const data = await getVendorProducts(vendorId);
       if (Array.isArray(data)) {
-        const sorted = data.sort(
-          (a, b) =>
-            new Date(b.updatedAt || b.createdAt) -
-            new Date(a.updatedAt || a.createdAt)
+        const sorted = [...data].sort(
+          (a, b) => getLatestDate(b) - getLatestDate(a)
         );
         setProducts(sorted);
       } else {
@@ -90,6 +104,31 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const sortProducts = (option) => {
+    let sorted = [...products];
+    switch (option) {
+      case "price-low":
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+      case "price-high":
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+      case "newest":
+        sorted.sort((a, b) => getLatestDate(b) - getLatestDate(a));
+        break;
+      case "oldest":
+        sorted.sort((a, b) => getLatestDate(a) - getLatestDate(b));
+        break;
+      default:
+        break;
+    }
+    // Only update state if it’s actually different
+    const isSame = JSON.stringify(sorted) === JSON.stringify(products);
+    if (!isSame) {
+      setProducts(sorted);
     }
   };
 
@@ -267,6 +306,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       subCategoryId: "",
       childCategoryId: "",
     });
+    setSortOption("newest"); // reset sort dropdown
   };
 
   // formatPrice uses user locale and dynamic currency and default is INR
@@ -294,6 +334,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       <div className="vpt-filters-actions">
         <div className="vpt-filter-header">
           <div className="vpt-left-input">
+            <p>Search By Name:</p>
             <input
               type="text"
               name="name"
@@ -433,6 +474,18 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       <div className="vpt-table-responsive">
         <div className="vpt-table-header">
           <h3 className="vpt-table-h3">Edit Products:</h3>
+          <div className="vpt-sort-dropdown">
+            <select
+              className="vpt-sort-select"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              aria-label="Sort products">
+              <option value="newest">Sort by: Recently Added/Updated</option>
+              <option value="oldest">Sort by: Oldest First</option>
+              <option value="price-low">Sort by: Price Low to High</option>
+              <option value="price-high">Sort by: Price High to Low</option>
+            </select>
+          </div>
         </div>
         <table className="vpt-table-table">
           <thead>

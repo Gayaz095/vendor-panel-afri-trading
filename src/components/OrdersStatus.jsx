@@ -238,7 +238,7 @@ export default function OrdersStatus() {
         <p className="orders-status-loading">Loading orders...</p>
       ) : (
         <>
-          <div class="orders-status-table-responsive" tabindex="0">
+          <div className="orders-status-table-responsive" tabIndex="0">
             <table className="orders-status-table">
               <thead>
                 <tr>

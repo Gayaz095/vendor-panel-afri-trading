@@ -20,6 +20,7 @@ import productsData from "./static-data/products.json";
 import Charts from "./Charts";
 import VendorProductsTable from "./VendorProductTable";
 import RecentProducts from "./RecentProducts";
+import RecentOrdersStatus from "./RecentOrdersStatus";
 
 
 const iconComponents = {
@@ -121,6 +122,7 @@ const Dashboard = () => {
 
       <Charts stats={stats} />
       <RecentProducts />
+      <RecentOrdersStatus />
     </div>
   );
   };

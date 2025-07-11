@@ -1,0 +1,151 @@
+/* Container & Title */
+.recent-orders-table {
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 1200px;
+    font-family: "Segoe UI", sans-serif;
+    background: #eaeaea;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+  }
+  
+  .recent-orders-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    text-align: start;
+  }
+  
+  .recent-orders-no-message {
+    text-align: center;
+    padding: 30px 20px;
+    margin: 20px auto;
+    color: #6b7280;
+    font-size: 1rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .recent-orders-no-message strong {
+    color: #111827;
+    font-weight: 600;
+  }
+  
+  .recent-orders-no-message:hover {
+    background-color: #f3f4f6;
+  }
+  
+  /* Table */
+  .recent-orders-table-responsive {
+    overflow-x: auto;
+  }
+  
+  .recent-orders-table-content {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 600px;
+  }
+  
+  .recent-orders-table-content th,
+  .recent-orders-table-content td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  
+  .recent-orders-table-content th {
+    background-color: #f7f9fc;
+    color: #555;
+    font-weight: 600;
+  }
+  
+  .recent-orders-table-content td {
+    background-color: #ffffff;
+  }
+  
+  /* Status Badges */
+  .recent-orders-status-pending {
+    color: #f59e0b;
+    font-weight: bold;
+  }
+  
+  .recent-orders-status-shipped {
+    color: #3b82f6;
+    font-weight: bold;
+  }
+  
+  .recent-orders-status-cancelled {
+    color: #ef4444;
+    font-weight: bold;
+  }
+  
+  .recent-orders-status-delivered {
+    color: #10b981;
+    font-weight: bold;
+  }
+  
+  /* Pagination */
+  .recent-orders-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .recent-orders-pagination button,
+  .recent-orders-pagination .recent-orders-pagination-input {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .recent-orders-pagination button:hover:not(:disabled) {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .recent-orders-pagination button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+  
+  .recent-orders-pagination button.active {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .recent-orders-pagination .recent-orders-pagination-input {
+    width: 40px !important;
+    height: 30px;
+    padding: 0 5px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 600px) {
+    .recent-orders-pagination button {
+      font-size: 14px;
+    }
+  
+    .recent-orders-pagination .recent-orders-pagination-input {
+      width: 30px !important;
+    }
+  
+    .recent-orders-table-content {
+      font-size: 12px;
+    }
+  }
+  
