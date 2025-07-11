@@ -74,37 +74,37 @@ export default function OrdersStatus() {
     }
   }, [vendorId]);
 
-  // const handleUpdateStatus = async (orderId, newStatus) => {
-  //   try {
-  //     setUpdatingOrderId(orderId);
-  //     await updateVendorProductsOrdersStatus(orderId, vendorId, newStatus);
-  //     setOrders((prevOrders) =>
-  //       prevOrders.map((order) =>
-  //         order.id === orderId ? { ...order, status: newStatus } : order
-  //       )
-  //     );
-  //   } catch (error) {
-  //     console.error("Failed to update order:", error.message);
-  //   } finally {
-  //     setUpdatingOrderId(null);
-  //   }
+  const handleUpdateStatus = async (orderId, newStatus) => {
+    try {
+      setUpdatingOrderId(orderId);
+      await updateVendorProductsOrdersStatus(orderId, vendorId, newStatus);
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.id === orderId ? { ...order, status: newStatus } : order
+        )
+      );
+    } catch (error) {
+      console.error("Failed to update order:", error.message);
+    } finally {
+      setUpdatingOrderId(null);
+    }
+  };
+
+  // const handleShipped = (orderId) => {
+  //   setOrders((prev) =>
+  //     prev.map((order) =>
+  //       order.id === orderId ? { ...order, status: "Shipped" } : order
+  //     )
+  //   );
   // };
 
-  const handleShipped = (orderId) => {
-    setOrders((prev) =>
-      prev.map((order) =>
-        order.id === orderId ? { ...order, status: "Shipped" } : order
-      )
-    );
-  };
-
-  const handleCancelled = (orderId) => {
-    setOrders((prev) =>
-      prev.map((order) =>
-        order.id === orderId ? { ...order, status: "Cancelled" } : order
-      )
-    );
-  };
+  // const handleCancelled = (orderId) => {
+  //   setOrders((prev) =>
+  //     prev.map((order) =>
+  //       order.id === orderId ? { ...order, status: "Cancelled" } : order
+  //     )
+  //   );
+  // };
 
   const handleView = (order) => setSelectedOrder(order);
   const closeModal = () => setSelectedOrder(null);
@@ -221,6 +221,8 @@ export default function OrdersStatus() {
           <table className="orders-status-table">
             <thead>
               <tr>
+                <th>S.No.</th>
+
                 <th>Order ID</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -231,8 +233,9 @@ export default function OrdersStatus() {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map((order) => (
+              {currentItems.map((order, idx) => (
                 <tr key={order.id}>
+                  <td>{startIndex + idx + 1}</td>
                   <td>{shortOrderId(order.id)}</td>
                   <td>{order.name}</td>
                   <td>{order.email}</td>
@@ -247,20 +250,22 @@ export default function OrdersStatus() {
                     {/* {order.status === "Cancelled" ? (
                       <span className="orders-status-final">Cancelled</span>
                     ) : ( */}
-                      <>
-                        <button
-                          className="orders-status-btn orders-status-btn-accept"
-                          onClick={() => handleShipped(order.id)}
-                          title="Mark as Shipped">
-                          <FiCheck /> Shipped
-                        </button>
-                        <button
-                          className="orders-status-btn orders-status-btn-reject"
-                          onClick={() => handleCancelled(order.id)}
-                          title="Cancel Order">
-                          <FiX /> Cancel
-                        </button>
-                        {/* <button
+                    <>
+                      <button
+                        className="orders-status-btn orders-status-btn-accept"
+                        onClick={() => handleUpdateStatus(order.id, "Shipped")}
+                        disabled={updatingOrderId === order.id}>
+                        <FiCheck /> Shipped
+                      </button>
+                      <button
+                        className="orders-status-btn orders-status-btn-reject"
+                        onClick={() =>
+                          handleUpdateStatus(order.id, "Cancelled")
+                        }
+                        disabled={updatingOrderId === order.id}>
+                        <FiX /> Cancel
+                      </button>
+                      {/* <button
                           className="orders-status-btn orders-status-btn-accept"
                           onClick={() => handleShipped(order.id)}
                           title="Mark as Shipped">
@@ -272,7 +277,7 @@ export default function OrdersStatus() {
                           title="Cancel Order">
                           <FiX /> Cancel
                         </button> */}
-                      </>
+                    </>
                     {/* )} */}
                   </td>
                   <td className="print-hide">
@@ -286,7 +291,7 @@ export default function OrdersStatus() {
               ))}
               {currentItems.length === 0 && (
                 <tr>
-                  <td colSpan="7" className="orders-status-no-results">
+                  <td className="orders-status-no-results">
                     No orders found.
                   </td>
                 </tr>
