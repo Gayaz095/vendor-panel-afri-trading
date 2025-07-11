@@ -57,7 +57,7 @@
 
 .orders-status-search:focus,
 .orders-status-filter:focus {
-  border-color: var(--primary);
+  border-color: var(--primary) !important;
   outline: none;
 }
 
