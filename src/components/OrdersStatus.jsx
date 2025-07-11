@@ -244,9 +244,9 @@ export default function OrdersStatus() {
                     </span>
                   </td>
                   <td className="print-hide">
-                    {order.status === "Cancelled" ? (
+                    {/* {order.status === "Cancelled" ? (
                       <span className="orders-status-final">Cancelled</span>
-                    ) : (
+                    ) : ( */}
                       <>
                         <button
                           className="orders-status-btn orders-status-btn-accept"
@@ -273,7 +273,7 @@ export default function OrdersStatus() {
                           <FiX /> Cancel
                         </button> */}
                       </>
-                    )}
+                    {/* )} */}
                   </td>
                   <td className="print-hide">
                     <button
