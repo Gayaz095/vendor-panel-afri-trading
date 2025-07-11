@@ -68,7 +68,7 @@ const VendorProductsCards = ({ products }) => {
               <img src={item.image} alt={item.name} />
               <a
                 // href={item.onlineLink || "#"}
-                href="https://auto-spare-parts-users.vercel.app/"
+                href="https://auto-spare-parts-user-panel.vercel.app/"
                 className="go-online-btn"
                 target="_blank"
                 rel="noopener noreferrer">
@@ -83,7 +83,7 @@ const VendorProductsCards = ({ products }) => {
                 <span>Description:</span> {item.discription}
               </p>
               <p className="product-reference">
-              <span> Reference Number:</span> {item.referenceNumber}
+                <span> Reference Number:</span> {item.referenceNumber}
               </p>
               <div className="price-section">
                 <p className="price">
