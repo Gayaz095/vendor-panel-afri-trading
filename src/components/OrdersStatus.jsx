@@ -218,6 +218,7 @@ export default function OrdersStatus() {
         <input
           type="text"
           placeholder="Search by ID, name, or email..."
+          title="Search Id, name, email ..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="orders-status-search"
