@@ -8,7 +8,7 @@ import {
 import { useVendor } from "./VendorContext";
 import { toast } from "react-toastify";
 
-const PRODUCTS_PER_PAGE = 1;
+const PRODUCTS_PER_PAGE = 3;
 const PAGE_WINDOW = 3;
 
 export default function OrdersStatus() {
@@ -272,7 +272,7 @@ export default function OrdersStatus() {
                       {/* {order.status === "Cancelled" ? (
                       <span className="orders-status-final">Cancelled</span>
                     ) : ( */}
-                      <>
+                      <div className="orders-status-btn-actions">
                         <button
                           className="orders-status-btn orders-status-btn-accept"
                           onClick={() =>
@@ -301,7 +301,7 @@ export default function OrdersStatus() {
                           title="Cancel Order">
                           <FiX /> Cancel
                         </button> */}
-                      </>
+                      </div>
                       {/* )} */}
                     </td>
                     <td className="print-hide">
