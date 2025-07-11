@@ -10,7 +10,7 @@
   --gray-text: #555;
   --modal-bg: #fff;
   --modal-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-  --radius: 10px;
+  --radius: 6px;
   --font-main: "Inter", "Segoe UI", Arial, sans-serif;
 }
 
@@ -217,7 +217,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5em;
+  gap: 6px;
   margin-top: 2rem;
   flex-wrap: wrap;
 }
@@ -231,7 +231,7 @@
   cursor: pointer;
   font-weight: 500;
   transition: background 0.2s, color 0.2s;
-  font-size: 1em;
+  /* font-size: 1em; */
 }
 
 .orders-status-pagination button.active {
