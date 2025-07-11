@@ -6,6 +6,7 @@ import {
   updateVendorProductsOrdersStatus,
 } from "../utils/getVendorProductsOrders";
 import { useVendor } from "./VendorContext";
+import { toast } from "react-toastify";
 
 const PRODUCTS_PER_PAGE = 6;
 const PAGE_WINDOW = 3;
@@ -83,8 +84,26 @@ export default function OrdersStatus() {
           order.id === orderId ? { ...order, status: newStatus } : order
         )
       );
+      if (newStatus === "Cancelled") {
+        toast.error("Order has been Cancelled!", {
+          style: {
+            background: "#AA4A44 ",
+            color: "#fff",
+            fontWeight: "bold",
+          },
+        });
+      } else {
+        toast.success(`Order marked as ${newStatus}!`, {
+          style: {
+            // background: "#388e3c",
+            // color: "#fff",
+            fontWeight: "bold",
+          },
+        });
+      }
     } catch (error) {
       console.error("Failed to update order:", error.message);
+      toast.error("Failed to update order status.");
     } finally {
       setUpdatingOrderId(null);
     }
@@ -211,6 +230,7 @@ export default function OrdersStatus() {
           <option value="Pending">Pending</option>
           <option value="Shipped">Shipped</option>
           <option value="Cancelled">Cancelled</option>
+          <option value="Delivered">Delivered</option>
         </select>
       </div>
 
@@ -218,54 +238,58 @@ export default function OrdersStatus() {
         <p className="orders-status-loading">Loading orders...</p>
       ) : (
         <>
-          <table className="orders-status-table">
-            <thead>
-              <tr>
-                <th>S.No.</th>
-
-                <th>Order ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Status</th>
-                <th className="print-hide">Actions</th>
-                <th className="print-hide">View</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentItems.map((order, idx) => (
-                <tr key={order.id}>
-                  <td>{startIndex + idx + 1}</td>
-                  <td>{shortOrderId(order.id)}</td>
-                  <td>{order.name}</td>
-                  <td>{order.email}</td>
-                  <td>{order.phone}</td>
-                  <td>
-                    <span
-                      className={`orders-status-badge ${order.status.toLowerCase()}`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="print-hide">
-                    {/* {order.status === "Cancelled" ? (
+          <div class="orders-status-table-responsive" tabindex="0">
+            <table className="orders-status-table">
+              <thead>
+                <tr>
+                  <th>S.No.</th>
+                  <th>Order ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Status</th>
+                  <th className="print-hide">Actions</th>
+                  <th className="print-hide">View</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentItems.map((order, idx) => (
+                  <tr key={order.id}>
+                    <td>{startIndex + idx + 1}</td>
+                    <td className="orders-status-orderId">
+                      {shortOrderId(order.id)}
+                    </td>
+                    <td className="orders-status-name">{order.name}</td>
+                    <td className="orders-status-email">{order.email}</td>
+                    <td className="orders-status-phone">{order.phone}</td>
+                    <td>
+                      <span
+                        className={`orders-status-badge ${order.status.toLowerCase()}`}>
+                        {order.status}
+                      </span>
+                    </td>
+                    <td className="print-hide">
+                      {/* {order.status === "Cancelled" ? (
                       <span className="orders-status-final">Cancelled</span>
                     ) : ( */}
-                    <>
-                      <button
-                        className="orders-status-btn orders-status-btn-accept"
-                        onClick={() => handleUpdateStatus(order.id, "Shipped")}
-                        disabled={updatingOrderId === order.id}>
-                        <FiCheck /> Shipped
-                      </button>
-                      <button
-                        className="orders-status-btn orders-status-btn-reject"
-                        onClick={() =>
-                          handleUpdateStatus(order.id, "Cancelled")
-                        }
-                        disabled={updatingOrderId === order.id}>
-                        <FiX /> Cancel
-                      </button>
-                      {/* <button
+                      <>
+                        <button
+                          className="orders-status-btn orders-status-btn-accept"
+                          onClick={() =>
+                            handleUpdateStatus(order.id, "Shipped")
+                          }
+                          disabled={updatingOrderId === order.id}>
+                          <FiCheck /> Shipped
+                        </button>
+                        <button
+                          className="orders-status-btn orders-status-btn-reject"
+                          onClick={() =>
+                            handleUpdateStatus(order.id, "Cancelled")
+                          }
+                          disabled={updatingOrderId === order.id}>
+                          <FiX /> Cancel
+                        </button>
+                        {/* <button
                           className="orders-status-btn orders-status-btn-accept"
                           onClick={() => handleShipped(order.id)}
                           title="Mark as Shipped">
@@ -277,26 +301,28 @@ export default function OrdersStatus() {
                           title="Cancel Order">
                           <FiX /> Cancel
                         </button> */}
-                    </>
-                    {/* )} */}
-                  </td>
-                  <td className="print-hide">
-                    <button
-                      className="orders-status-btn orders-status-btn-view"
-                      onClick={() => handleView(order)}>
-                      <FiEye /> View
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {currentItems.length === 0 && (
-                <tr>
-                  <td className="orders-status-no-results">No orders found.</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-
+                      </>
+                      {/* )} */}
+                    </td>
+                    <td className="print-hide">
+                      <button
+                        className="orders-status-btn orders-status-btn-view"
+                        onClick={() => handleView(order)}>
+                        <FiEye /> View
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {currentItems.length === 0 && (
+                  <tr>
+                    <td className="orders-status-no-results">
+                      No orders found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="orders-status-pagination print-hide">
@@ -463,6 +489,7 @@ export default function OrdersStatus() {
                     })}
                   </tbody>
                 </table>
+                <br />
               </>
             )}
           </div>

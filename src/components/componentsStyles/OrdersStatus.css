@@ -46,6 +46,10 @@
   align-items: center;
 }
 
+.orders-status-controls .orders-status-search{
+  width: 25%;
+}
+
 .orders-status-search,
 .orders-status-filter {
   padding: 0.7em 1em;
@@ -64,7 +68,14 @@
 }
 
 /* Table */
+.orders-status-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
 .orders-status-table {
+  min-width: 700px;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -87,6 +98,15 @@
   /* word-break: break-word; */
 }
 
+.orders-status-table td.orders-status-email,
+.orders-status-table th.orders-status-email,
+.orders-status-table td.orders-status-name,
+.orders-status-table th.orders-status-name {
+  white-space: normal;
+  word-break: break-word;
+  max-width: 220px; 
+}
+
 .orders-status-table th {
   background-color: #f3f6fa;
   color: var(--primary-dark);
@@ -103,7 +123,6 @@
   transition: background 0.2s;
 }
 
-/* Badges */
 .orders-status-badge {
   display: inline-block;
   padding: 0.3em 0.9em;
@@ -128,7 +147,6 @@
   color: #fff;
 }
 
-/* Buttons */
 .orders-status-btn {
   display: inline-flex;
   align-items: center;
@@ -233,7 +251,6 @@
   border: 1px solid var(--gray-border);
 }
 
-/* Modal Overlay */
 .orders-status-modal-overlay {
   position: fixed;
   top: 0;
@@ -249,7 +266,6 @@
   overflow-y: auto;
 }
 
-/* Modal Content */
 .orders-status-modal-content {
   background: var(--modal-bg);
   border-radius: var(--radius);
@@ -318,7 +334,6 @@
   display: block;
 }
 
-/* Loading & No Results */
 .orders-status-loading {
   text-align: center;
   padding: 2em;
@@ -353,5 +368,33 @@
     max-height: 100vh;
     overflow: visible;
     padding: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .orders-status-controls .orders-status-search{
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .orders-status-controls .orders-status-search{
+    width: 100%;
+  }
+  
+  .orders-status-table th,
+  .orders-status-table td {
+    max-width: 100%;
+    font-size: 0.95em;
+    padding: 0.5rem 0.4rem;
+  }
+  .orders-status-table td.orders-status-email,
+  .orders-status-table th.orders-status-email,
+  .orders-status-table td.orders-status-name,
+  .orders-status-table th.orders-status-name {
+    white-space: nowrap;
+    word-break: normal;
+    max-width: none; 
   }
 }
