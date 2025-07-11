@@ -6,13 +6,20 @@ import {
   updateVendorProductsOrdersStatus,
 } from "../utils/getVendorProductsOrders";
 import { useVendor } from "./VendorContext";
-import OrdersStatusModal from "./OrdersStatusModal";
 
-const PRODUCTS_PER_PAGE = 5;
+const PRODUCTS_PER_PAGE = 6;
 const PAGE_WINDOW = 3;
 
 export default function OrdersStatus() {
-  const { vendorDetails, loading: vendorLoading } = useVendor();
+  const {
+    vendorDetails,
+    loading: vendorLoading,
+    allCars,
+    allCarModels,
+    allCategories,
+    allSubCategories,
+    allChildCategories,
+  } = useVendor();
   const vendorId = vendorDetails?.vendorId || vendorDetails?._id;
 
   const [orders, setOrders] = useState([]);
@@ -20,9 +27,10 @@ export default function OrdersStatus() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
+  const [loadingOrders, setLoadingOrders] = useState(true);
+  const [updatingOrderId, setUpdatingOrderId] = useState(null);
   const [editPage, setEditPage] = useState(null);
   const [inputValue, setInputValue] = useState("");
-  const [loadingOrders, setLoadingOrders] = useState(true);
 
   useEffect(() => {
     if (vendorId) {
@@ -38,17 +46,23 @@ export default function OrdersStatus() {
               email: order.email,
               phone: order.phone,
               address: order.addressId || "N/A",
-              status: order.productsList[0]?.vendorStatus || "Pending",
+              status: order.productsList?.[0]?.vendorStatus || "Pending",
               createdAt: order.createdAt,
               updatedAt: order.updatedAt,
+              totalAmount: order.totalAmount || 0,
               products: order.productsList.map((product) => ({
                 name: product.productName,
                 quantity: product.quantity,
                 price: product.productPrice,
                 image: product.image,
+                status: product.vendorStatus,
+                carBrandId: product.carBrandId,
+                carModelId: product.carModelId,
+                categoryId: product.categoryId,
+                subCategoryId: product.subCategoryId,
+                childCategoryId: product.childCategoryId,
               })),
             }));
-
           setOrders(ordersData);
         } catch (error) {
           console.error("Error fetching vendor orders:", error.message);
@@ -56,26 +70,55 @@ export default function OrdersStatus() {
           setLoadingOrders(false);
         }
       };
-
       fetchOrders();
     }
   }, [vendorId]);
 
-  function shortOrderId(id) {
-    return id ? "..." + id.slice(-10) : "";
-  }
+  // const handleUpdateStatus = async (orderId, newStatus) => {
+  //   try {
+  //     setUpdatingOrderId(orderId);
+  //     await updateVendorProductsOrdersStatus(orderId, vendorId, newStatus);
+  //     setOrders((prevOrders) =>
+  //       prevOrders.map((order) =>
+  //         order.id === orderId ? { ...order, status: newStatus } : order
+  //       )
+  //     );
+  //   } catch (error) {
+  //     console.error("Failed to update order:", error.message);
+  //   } finally {
+  //     setUpdatingOrderId(null);
+  //   }
+  // };
 
-  const handleStatusUpdate = async (orderId, newStatus) => {
-    try {
-      await updateVendorProductsOrdersStatus(orderId, vendorId, newStatus);
-      setOrders((prev) =>
-        prev.map((order) =>
-          order.id === orderId ? { ...order, status: newStatus } : order
-        )
-      );
-    } catch (err) {
-      console.error("Failed to update order:", err.message);
-    }
+  const handleShipped = (orderId) => {
+    setOrders((prev) =>
+      prev.map((order) =>
+        order.id === orderId ? { ...order, status: "Shipped" } : order
+      )
+    );
+  };
+
+  const handleCancelled = (orderId) => {
+    setOrders((prev) =>
+      prev.map((order) =>
+        order.id === orderId ? { ...order, status: "Cancelled" } : order
+      )
+    );
+  };
+
+  const handleView = (order) => setSelectedOrder(order);
+  const closeModal = () => setSelectedOrder(null);
+
+  const handlePrint = (orderId) => {
+    const printContents = document.querySelector(
+      `.orders-status-modal-content`
+    ).innerHTML;
+
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+    window.location.reload();
   };
 
   const filteredOrders = orders.filter((order) => {
@@ -97,33 +140,62 @@ export default function OrdersStatus() {
   const currentItems = filteredOrders.slice(startIndex, endIndex);
 
   const handlePageChange = (page) => {
-    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+    const clampedPage = Math.max(1, Math.min(page, totalPages));
+    setCurrentPage(clampedPage);
     setEditPage(null);
   };
 
-  const locale = navigator.language || "en-US";
-
-  if (vendorLoading) {
-    return (
-      <div className="orders-status-container">
-        <p className="orders-status-loading">Loading vendor details...</p>
-      </div>
-    );
+  let startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
+  let endPage = startPage + PAGE_WINDOW - 1;
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(1, endPage - PAGE_WINDOW + 1);
   }
+  const pageNumbers = [];
+  for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
 
-  if (!vendorDetails || !vendorId) {
-    return (
-      <div className="orders-status-container">
-        <h2>Please login as a vendor to view orders.</h2>
-      </div>
-    );
+  const handleDoubleClick = (page) => {
+    setEditPage(page);
+    setInputValue(page);
+  };
+
+  const handleInputChange = (e) =>
+    setInputValue(e.target.value.replace(/[^0-9]/g, ""));
+
+  const handleInputBlur = () => {
+    const page = Number(inputValue);
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
+    setEditPage(null);
+  };
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === "Enter") handleInputBlur();
+    else if (e.key === "Escape") setEditPage(null);
+  };
+
+  const shortOrderId = (id) => (id ? "..." + id.slice(-10) : "");
+
+  const formatDate = (dateStr) => {
+    const locale = navigator.language || "en-US";
+    return new Date(dateStr).toLocaleString(locale, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  if (vendorLoading || !vendorDetails || !vendorId) {
+    return <p className="orders-status-loading">Loading order's data...</p>;
   }
 
   return (
     <div className="orders-status-container">
       <h1 className="orders-status-title">Customer Orders</h1>
 
-      <div className="orders-status-controls">
+      {/* Controls */}
+      <div className="orders-status-controls print-hide">
         <input
           type="text"
           placeholder="Search by ID, name, or email..."
@@ -137,7 +209,6 @@ export default function OrdersStatus() {
           className="orders-status-filter">
           <option value="All">All Status</option>
           <option value="Pending">Pending</option>
-          <option value="Processing">Processing</option>
           <option value="Shipped">Shipped</option>
           <option value="Cancelled">Cancelled</option>
         </select>
@@ -155,8 +226,8 @@ export default function OrdersStatus() {
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Status</th>
-                <th>Actions</th>
-                <th>View</th>
+                <th className="print-hide">Actions</th>
+                <th className="print-hide">View</th>
               </tr>
             </thead>
             <tbody>
@@ -172,27 +243,42 @@ export default function OrdersStatus() {
                       {order.status}
                     </span>
                   </td>
-                  <td>
-                    <button
-                      className="orders-status-btn orders-status-btn-accept"
-                      onClick={() => handleStatusUpdate(order.id, "Shipped")}
-                      title="Mark as Shipped"
-                      disabled={order.status === "Cancelled"}>
-                      <FiCheck /> Shipped
-                    </button>
-                    <button
-                      className="orders-status-btn orders-status-btn-reject"
-                      onClick={() => handleStatusUpdate(order.id, "Cancelled")}
-                      title="Cancel Order"
-                      disabled={order.status === "Cancelled"}>
-                      <FiX /> Cancel
-                    </button>
+                  <td className="print-hide">
+                    {order.status === "Cancelled" ? (
+                      <span className="orders-status-final">Cancelled</span>
+                    ) : (
+                      <>
+                        <button
+                          className="orders-status-btn orders-status-btn-accept"
+                          onClick={() => handleShipped(order.id)}
+                          title="Mark as Shipped">
+                          <FiCheck /> Shipped
+                        </button>
+                        <button
+                          className="orders-status-btn orders-status-btn-reject"
+                          onClick={() => handleCancelled(order.id)}
+                          title="Cancel Order">
+                          <FiX /> Cancel
+                        </button>
+                        {/* <button
+                          className="orders-status-btn orders-status-btn-accept"
+                          onClick={() => handleShipped(order.id)}
+                          title="Mark as Shipped">
+                          <FiCheck /> Shipped
+                        </button>
+                        <button
+                          className="orders-status-btn orders-status-btn-reject"
+                          onClick={() => handleCancelled(order.id)}
+                          title="Cancel Order">
+                          <FiX /> Cancel
+                        </button> */}
+                      </>
+                    )}
                   </td>
-                  <td>
+                  <td className="print-hide">
                     <button
                       className="orders-status-btn orders-status-btn-view"
-                      onClick={() => setSelectedOrder(order)}
-                      title="View Order Details">
+                      onClick={() => handleView(order)}>
                       <FiEye /> View
                     </button>
                   </td>
@@ -207,70 +293,178 @@ export default function OrdersStatus() {
               )}
             </tbody>
           </table>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="orders-status-pagination print-hide">
+              <button
+                onClick={() => handlePageChange(1)}
+                disabled={currentPage === 1}>
+                &laquo;
+              </button>
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}>
+                &lsaquo;
+              </button>
+              {startPage > 1 && <span>...</span>}
+              {pageNumbers.map((num) =>
+                editPage === num ? (
+                  <input
+                    key={num}
+                    type="text"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
+                    onKeyDown={handleInputKeyDown}
+                    className="orders-status-pagination-input"
+                    autoFocus
+                  />
+                ) : (
+                  <button
+                    key={num}
+                    className={currentPage === num ? "active" : ""}
+                    onClick={() => handlePageChange(num)}
+                    onDoubleClick={() => handleDoubleClick(num)}>
+                    {num}
+                  </button>
+                )
+              )}
+              {endPage < totalPages && <span>...</span>}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}>
+                &rsaquo;
+              </button>
+              <button
+                onClick={() => handlePageChange(totalPages)}
+                disabled={currentPage === totalPages}>
+                &raquo;
+              </button>
+            </div>
+          )}
         </>
       )}
 
-      <OrdersStatusModal
-        order={selectedOrder}
-        onClose={() => setSelectedOrder(null)}
-      />
-
-      {/* {selectedOrder && (
-        <div
-          className="orders-status-modal-overlay"
-          onClick={() => setSelectedOrder(null)}>
+      {/* Modal */}
+      {selectedOrder && (
+        <div className="orders-status-modal-overlay" onClick={closeModal}>
           <div
             className="orders-status-modal-content"
             onClick={(e) => e.stopPropagation()}>
-            <h2>Order Details - {shortOrderId(selectedOrder.id)}</h2>
-            <p>
-              <strong>Name:</strong> {selectedOrder.name}
-            </p>
-            <p>
-              <strong>Email:</strong> {selectedOrder.email}
-            </p>
-            <p>
-              <strong>Phone:</strong> {selectedOrder.phone}
-            </p>
-            <p>
-              <strong>Address:</strong> {selectedOrder.address}
-            </p>
-            <p>
-              <strong>Created At:</strong>{" "}
-              {new Date(selectedOrder.createdAt).toLocaleString(locale, {
-                dateStyle: "medium",
-                timeStyle: "short",
-              })}
-            </p>
-            <p>
-              <strong>Updated At:</strong>{" "}
-              {new Date(selectedOrder.updatedAt).toLocaleString(locale, {
-                dateStyle: "medium",
-                timeStyle: "short",
-              })}
-            </p>
-            <h3>Products:</h3>
-            <ol>
-              {selectedOrder.products.map((product, idx) => (
-                <li key={idx}>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="orders-status-product-image"
-                  />
-                  {product.name} - Qty: {product.quantity}, Price: ₹
-                  {product.price}
-                </li>
-              ))}
-            </ol>
-            <button
-              className="orders-status-btn orders-status-btn-close"
-              onClick={() => setSelectedOrder(null)}>
-              Close
-            </button>
+            <div className="orders-status-modal-header">
+              <h2>Order Details - {selectedOrder.id}</h2>
+              <div className="orders-status-modal-actions print-hide">
+                <button
+                  className="orders-status-btn orders-status-btn-print"
+                  onClick={() => handlePrint(selectedOrder.id)}>
+                  Print
+                </button>
+                <button
+                  className="orders-status-btn orders-status-btn-close"
+                  onClick={closeModal}>
+                  Close
+                </button>
+              </div>
+            </div>
+
+            {vendorLoading || !allCars.length ? (
+              <p className="orders-status-loading">
+                Loading product details...
+              </p>
+            ) : (
+              <>
+                <div className="orders-status-modal-summary">
+                  <p>
+                    <strong>Name:</strong> {selectedOrder.name}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {selectedOrder.email}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {selectedOrder.phone}
+                  </p>
+                  <p>
+                    <strong>Address:</strong> {selectedOrder.address}
+                  </p>
+                  <p>
+                    <strong>Total Quantity:</strong>{" "}
+                    {selectedOrder.products.reduce(
+                      (total, product) => total + (product.quantity || 0),
+                      0
+                    )}
+                  </p>
+                  <p>
+                    <strong>Total Amount:</strong> ₹
+                    {selectedOrder.totalAmount || 0}
+                  </p>
+                  <p>
+                    <strong>Created:</strong>{" "}
+                    {formatDate(selectedOrder.createdAt)}
+                  </p>
+                  <p>
+                    <strong>Updated:</strong>{" "}
+                    {formatDate(selectedOrder.updatedAt)}
+                  </p>
+                </div>
+
+                <table className="orders-status-modal-products-table">
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Name</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>Car Brand</th>
+                      <th>Car Model</th>
+                      <th>Main Category</th>
+                      <th>Subcategory</th>
+                      <th>Child Category</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedOrder.products.map((product, idx) => {
+                      const carBrand =
+                        allCars.find((b) => b._id === product.carBrandId)
+                          ?.name || "N/A";
+                      const carModel =
+                        allCarModels.find((m) => m._id === product.carModelId)
+                          ?.name || "N/A";
+                      const mainCategory =
+                        allCategories.find((c) => c._id === product.categoryId)
+                          ?.name || "N/A";
+                      const subCategory =
+                        allSubCategories.find(
+                          (s) => s._id === product.subCategoryId
+                        )?.name || "N/A";
+                      const childCategory =
+                        allChildCategories.find(
+                          (ch) => ch._id === product.childCategoryId
+                        )?.name || "N/A";
+
+                      return (
+                        <tr key={idx}>
+                          <td>
+                            <img src={product.image} alt={product.name} />
+                          </td>
+                          <td>{product.name}</td>
+                          <td>{product.quantity}</td>
+                          <td>₹{product.price}</td>
+                          <td>{carBrand}</td>
+                          <td>{carModel}</td>
+                          <td>{mainCategory}</td>
+                          <td>{subCategory}</td>
+                          <td>{childCategory}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </>
+            )}
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 }

@@ -94,7 +94,8 @@
   text-overflow: ellipsis;
 }
 
-.product-description {
+.product-description,
+.product-reference {
   font-size: 0.95rem;
   color: #666;
   margin: 0 0 15px 0;
@@ -106,6 +107,11 @@
 }
 
 .product-description span {
+  color:#333;
+  font-weight: 700;
+}
+
+.product-reference span {
   color:#333;
   font-weight: 700;
 }

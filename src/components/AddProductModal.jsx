@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { createProduct, updateProduct } from "../utils/productsApi";
+import {
+  createProduct,
+  updateProduct,
+  getVendorProducts,
+} from "../utils/productsApi";
 import { imageUpload } from "../utils/imageUpload";
 import { useVendor } from "./VendorContext";
 import { AiOutlineClose } from "react-icons/ai";
@@ -9,7 +13,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./componentsStyles/AddProductModal.css";
 
-const Spinner = () => <span className="add-product-spinner" aria-label="Loading"></span>;
+const Spinner = () => (
+  <span className="add-product-spinner" aria-label="Loading"></span>
+);
 
 const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
   const {
@@ -47,10 +53,28 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
   ];
 
   const [loading, setLoading] = useState(false);
-
+  const [allReferenceNumbers, setAllReferenceNumbers] = useState([]);
+  const [referenceError, setReferenceError] = useState("");
   const formRef = useRef(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
+
+  // Fetch all reference numbers for this vendor (excluding the current product if editing)
+  useEffect(() => {
+    const fetchReferenceNumbers = async () => {
+      if (!vendorDetails?.vendorId) return;
+      try {
+        const products = await getVendorProducts(vendorDetails.vendorId);
+        const numbers = (products || [])
+          .filter((p) => p._id !== productToEdit?._id)
+          .map((p) => (p.referenceNumber || "").trim());
+        setAllReferenceNumbers(numbers);
+      } catch (err) {
+        setAllReferenceNumbers([]);
+      }
+    };
+    fetchReferenceNumbers();
+  }, [vendorDetails, productToEdit]);
 
   useEffect(() => {
     if (productToEdit) {
@@ -67,6 +91,17 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+
+    // Prevent duplicate reference number
+    if (name === "referenceNumber") {
+      if (allReferenceNumbers.includes(value.trim())) {
+        setReferenceError("Reference number already exists!");
+        return; // Block updating the state
+      } else {
+        setReferenceError("");
+      }
+    }
+
     setProductData((prev) => {
       const updated = {
         ...prev,
@@ -109,6 +144,13 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
     e.preventDefault();
     if (!vendorDetails?.vendorId) {
       toast.error("Vendor not authenticated.");
+      return;
+    }
+
+    // Double-check for duplicate before submitting
+    if (allReferenceNumbers.includes(productData.referenceNumber.trim())) {
+      setReferenceError("Reference number already exists!");
+      scrollToInvalid();
       return;
     }
 
@@ -270,14 +312,24 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
             )}
           </select>
 
-          <input
-            type="text"
-            name="referenceNumber"
-            placeholder="Reference Number *"
-            value={productData.referenceNumber}
-            onChange={handleInputChange}
-            required
-          />
+          <div className="add-product-input-tooltip-container">
+            <input
+              type="text"
+              name="referenceNumber"
+              placeholder="Reference Number *"
+              value={productData.referenceNumber}
+              onChange={handleInputChange}
+              required
+              className={referenceError ? "input-error" : ""}
+              autoComplete="off"
+            />
+            {referenceError && (
+              <div className="add-product-tooltip">
+                {referenceError}
+                <span className="add-product-tooltip-arrow" />
+              </div>
+            )}
+          </div>
 
           <textarea
             name="name"
@@ -376,7 +428,7 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
           <button
             type="submit"
             className="add-product-modal-button"
-            disabled={loading}>
+            disabled={loading || !!referenceError}>
             {loading ? (
               <>
                 <Spinner /> &nbsp; {productToEdit ? "Updating..." : "Adding..."}

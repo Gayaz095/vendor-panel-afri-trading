@@ -99,6 +99,49 @@
   box-shadow: 0 0 6px rgba(37, 99, 235, 0.4);
 }
 
+.vendor-edit-product__input-tooltip-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.vendor-edit-product__tooltip {
+  position: absolute;
+  top: -38px;
+  left: 0;
+  background: #e74c3c;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.17);
+  animation: vendor-edit-tooltip-pop 0.2s;
+}
+
+@keyframes vendor-edit-tooltip-pop {
+  0% { opacity: 0; transform: translateY(8px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+.vendor-edit-product__tooltip-arrow {
+  position: absolute;
+  left: 18px; 
+  bottom: -7px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #e74c3c;
+  content: "";
+}
+
+.vendor-edit-product__input-error {
+  border: 1.5px solid #e74c3c !important;
+}
+
 .vendor-edit-product__form-group__checkbox-container {
   margin-bottom: 20px;
   display: flex;

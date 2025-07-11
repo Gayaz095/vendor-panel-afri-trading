@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { imageUpload } from "../utils/imageUpload";
-import { updateProduct } from "../utils/productsApi";
+import { updateProduct, getVendorProducts } from "../utils/productsApi";
 import { getAllCars } from "../utils/getAllCars";
 import { getAllCarModels } from "../utils/getAllCarModels";
 import { mainGetCategories } from "../utils/mainGetCategories";
@@ -33,15 +33,19 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
   const [mainCategories, setMainCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [childCategories, setChildCategories] = useState([]);
-
   const [mainImageFile, setMainImageFile] = useState(null);
   const [thumbnailImageFile, setThumbnailImageFile] = useState(null);
   const [mainImagePreview, setMainImagePreview] = useState(null);
   const [thumbnailImagePreview, setThumbnailImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // For reference number duplicate check
+  const [allReferenceNumbers, setAllReferenceNumbers] = useState([]);
+  const [referenceError, setReferenceError] = useState("");
+
   const heroOptions = ["NEW ARRIVAL", "TRENDING", "BEST SELLING", "POPULAR"];
 
+  // Fetch dropdowns and reference numbers
   useEffect(() => {
     loadDropdowns();
     if (product) {
@@ -63,6 +67,19 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
       setThumbnailImagePreview(product.thumbnailImage || null);
     }
   }, [product]);
+
+  useEffect(() => {
+    // Fetch all reference numbers for this vendor (excluding this product)
+    const fetchReferenceNumbers = async () => {
+      if (!vendorDetails?.vendorId) return;
+      const products = await getVendorProducts(vendorDetails.vendorId);
+      const numbers = (products || [])
+        .filter((p) => p._id !== product?._id)
+        .map((p) => (p.referenceNumber || "").trim());
+      setAllReferenceNumbers(numbers);
+    };
+    fetchReferenceNumbers();
+  }, [vendorDetails, product]);
 
   const loadDropdowns = async () => {
     const carRes = await getAllCars();
@@ -95,9 +112,20 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
     (c) => c.subCategoryId === formData.subCategoryId
   );
 
+  // Block typing duplicate reference number
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
+
+    if (name === "referenceNumber") {
+      if (allReferenceNumbers.includes(value.trim())) {
+        setReferenceError("Reference number already exists!");
+        return; // Block updating the formData
+      } else {
+        setReferenceError("");
+      }
+    }
+
     setFormData((prev) => ({ ...prev, [name]: val }));
 
     if (name === "carBrandId")
@@ -130,6 +158,13 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
     setLoading(true);
     try {
       if (!vendorDetails?.vendorId) throw new Error("Vendor ID not found");
+
+      // Double-check for duplicate reference number before submitting
+      if (allReferenceNumbers.includes(formData.referenceNumber.trim())) {
+        setReferenceError("Reference number already exists!");
+        setLoading(false);
+        return;
+      }
 
       const updatedProduct = {
         id: product._id,
@@ -178,7 +213,6 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
         toast.error(response?.message || "Product update failed");
       }
     } catch (err) {
-      //console.error("Update failed:", err);
       toast.error(err.message || "Error updating product.");
     } finally {
       setLoading(false);
@@ -202,12 +236,24 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
             </div>
             <div className="vendor-edit-product__form-group">
               <label>Reference Number:</label>
-              <input
-                name="referenceNumber"
-                value={formData.referenceNumber}
-                onChange={handleInputChange}
-                required
-              />
+              <div className="vendor-edit-product__input-tooltip-container">
+                <input
+                  name="referenceNumber"
+                  value={formData.referenceNumber}
+                  onChange={handleInputChange}
+                  required
+                  className={
+                    referenceError ? "vendor-edit-product__input-error" : ""
+                  }
+                  autoComplete="off"
+                />
+                {referenceError && (
+                  <div className="vendor-edit-product__tooltip">
+                    {referenceError}
+                    <span className="vendor-edit-product__tooltip-arrow" />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -398,7 +444,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
           <div className="vendor-edit-product__actions">
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || !!referenceError}
               className="vendor-edit-product__cancel-button">
               {loading ? "Updating..." : "Update"}
             </button>

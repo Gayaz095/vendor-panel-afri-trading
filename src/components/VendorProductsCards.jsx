@@ -83,7 +83,7 @@ const VendorProductsCards = ({ products }) => {
                 <span>Description:</span> {item.discription}
               </p>
               <p className="product-reference">
-                Reference Number: {item.referenceNumber}
+              <span> Reference Number:</span> {item.referenceNumber}
               </p>
               <div className="price-section">
                 <p className="price">
