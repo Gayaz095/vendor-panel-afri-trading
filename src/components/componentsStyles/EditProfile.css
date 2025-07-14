@@ -86,6 +86,10 @@
   outline: none;
 }
 
+.edit-profile__input[name="bussinessAddress"] {
+  font-family: unset;
+}
+
 .edit-profile__input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
