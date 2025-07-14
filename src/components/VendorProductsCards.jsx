@@ -75,7 +75,7 @@ const VendorProductsCards = ({ products }) => {
                 Go Online
               </a>
             </div>
-            <div className="product-details">
+            <div className="vendor-product-details">
               <h3 className="product-name" title={item.name}>
                 Name: {item.name}
               </h3>

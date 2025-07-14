@@ -414,9 +414,9 @@ export default function OrdersStatus() {
                   <p>
                     <strong>Phone:</strong> {selectedOrder.phone}
                   </p>
-                  <p>
+                  {/* <p>
                     <strong>Address:</strong> {selectedOrder.address}
-                  </p>
+                  </p> */}
                   <p>
                     <strong>Total Quantity:</strong>{" "}
                     {selectedOrder.products.reduce(
@@ -429,13 +429,13 @@ export default function OrdersStatus() {
                     {selectedOrder.totalAmount || 0}
                   </p>
                   <p>
-                    <strong>Created:</strong>{" "}
+                    <strong>Created:</strong>
                     {formatDate(selectedOrder.createdAt)}
                   </p>
-                  <p>
-                    <strong>Updated:</strong>{" "}
+                  {/* <p>
+                    <strong>Updated:</strong>
                     {formatDate(selectedOrder.updatedAt)}
-                  </p>
+                  </p> */}
                 </div>
 
                 <table className="orders-status-modal-products-table">
