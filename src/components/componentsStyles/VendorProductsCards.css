@@ -13,6 +13,7 @@
 
 .product-card {
   flex: 0 0 calc(33.333% - 20px);
+  /* height: 450px; */
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
@@ -34,6 +35,7 @@
   overflow: hidden;
   border-bottom: 2px solid #e0e0e0;
 }
+
 .go-online-btn {
   position: absolute;
   left: 50%;
@@ -67,6 +69,7 @@
   color: #fffbe8;
   text-decoration: underline;
 }
+
 .product-image img {
   width: 100%;
   height: 100%;
@@ -134,11 +137,15 @@
 }
 
 .price {
+  margin: 0;
+  padding: 0;
   color: #2a52be;
   font-weight: 600;
 }
 
 .stock {
+  margin: 0;
+  padding: 0;
   color: #228b22;
   font-weight: 600;
 }

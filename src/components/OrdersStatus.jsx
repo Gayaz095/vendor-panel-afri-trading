@@ -211,7 +211,7 @@ export default function OrdersStatus() {
 
   return (
     <div className="orders-status-container">
-      <h1 className="orders-status-title">Customer Orders</h1>
+      <h1 className="orders-status-title">Customers Orders</h1>
 
       {/* Controls */}
       <div className="orders-status-controls print-hide">
