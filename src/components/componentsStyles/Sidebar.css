@@ -21,6 +21,7 @@
 }
 
 .sidebar {
+  position: sticky;
   width: 260px;
   background: #f8fafc;
   padding: 24px 0;
@@ -226,4 +227,18 @@
 .sidebar-overlay.open {
   opacity: 1;
   pointer-events: auto;
+}
+
+
+/* Hide scrollbar for */
+.sidebar::-webkit-scrollbar {
+  display: none; /*Chrome, Safari, and Opera */
+}
+
+.sidebar {
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.sidebar {
+  scrollbar-width: none; /* Firefox */
 }

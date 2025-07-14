@@ -1,7 +1,19 @@
 /* Layout.css */
-.login-page-wrapper {
+.layout-root {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.login-page-wrapper {
+  /* height: 100vh;
+  flex-direction: column;
+  overflow: hidden; */
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0; /* important for flex children scrolling */
+  height: 100%;
 }
 
 .layout-content {
@@ -14,6 +26,6 @@
   flex: 1;
   padding: 32px;
   background: #fff;
-  min-height: calc(100vh - 56px);
+  min-height: 0;
   overflow-y: auto;
 }

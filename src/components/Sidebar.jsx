@@ -121,7 +121,7 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
                   to="/orders-status"
                   className={({ isActive }) => (isActive ? "active" : "")}>
                   <FaClipboardList className="icon" />
-                  Orders Status
+                  Orders
                 </NavLink>
               </li>
               <li key="/delivery-status" style={{ "--i": 4 }}>
@@ -136,7 +136,7 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
                 <NavLink
                   to="/edit-profile"
                   className={({ isActive }) => (isActive ? "active" : "")}>
-                  <FaUserEdit  className="icon" />
+                  <FaUserEdit className="icon" />
                   Edit Profile
                 </NavLink>
               </li>
