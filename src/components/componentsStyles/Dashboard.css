@@ -289,7 +289,7 @@
   }
 }
 
-/* Responsive adjustments */
+/* Responsive Design*/
 @media (max-width: 1024px) {
   .dashboard-cards > * {
     flex: 0 0 calc(33.33% - 1.5rem);

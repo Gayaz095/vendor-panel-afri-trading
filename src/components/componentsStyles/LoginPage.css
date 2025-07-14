@@ -355,7 +355,7 @@
   content: "";
 }
 
-/* Hide regular text when loading */
+/* Hiding regular text when loading */
 .loginpage-button.loginpage-loading
   > :not(.loginpage-loading-spinner):not(.loginpage-loading-text) {
   display: none !important;
@@ -460,7 +460,7 @@
   }
 }
 
-/* Animations */
+/* All Animations */
 @keyframes slideInLeftContent {
   from {
     opacity: 0;

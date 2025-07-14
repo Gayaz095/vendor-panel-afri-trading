@@ -64,7 +64,7 @@
 
 .add-product-tooltip {
   position: absolute;
-  top: -38px; /* Adjust as needed */
+  top: -38px;
   left: 0;
   background: #e74c3c;
   color: #fff;
@@ -84,7 +84,7 @@
 
 .add-product-tooltip-arrow {
   position: absolute;
-  left: 18px; /* Align with input, adjust as needed */
+  left: 18px;
   bottom: -7px;
   width: 0;
   height: 0;
