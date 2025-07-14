@@ -209,6 +209,7 @@ const LoginPage = () => {
                     <input
                       type={showPassword ? "text" : "password"}
                       id="password"
+                      autocomplete="current-password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter password"
