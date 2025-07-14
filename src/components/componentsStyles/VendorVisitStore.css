@@ -3,7 +3,8 @@
 .vendor-store-container {
   font-family: "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
   max-width: 1200px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin-bottom: 50px;
   background-color: #fdfdfd;
   color: #1f2937;
 }

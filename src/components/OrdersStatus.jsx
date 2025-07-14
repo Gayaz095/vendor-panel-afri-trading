@@ -27,9 +27,9 @@ export default function OrdersStatus() {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
+  const [updatingOrderId, setUpdatingOrderId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingOrders, setLoadingOrders] = useState(true);
-  const [updatingOrderId, setUpdatingOrderId] = useState(null);
   const [editPage, setEditPage] = useState(null);
   const [inputValue, setInputValue] = useState("");
 
@@ -43,7 +43,7 @@ export default function OrdersStatus() {
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             .map((order) => ({
               id: order._id,
-              name: order.email?.split("@")[0] || "Unknown",
+              // name: order.email?.split("@")[0] || "Unknown",
               email: order.email,
               phone: order.phone,
               address: order.addressId || "N/A",
@@ -143,7 +143,7 @@ export default function OrdersStatus() {
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
       order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      order.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      // order.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       order.email.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus =
       statusFilter === "All" || order.status === statusFilter;
@@ -217,7 +217,7 @@ export default function OrdersStatus() {
       <div className="orders-status-controls print-hide">
         <input
           type="text"
-          placeholder="Search by ID, name, or email..."
+          placeholder="Search by ID, email..."
           title="Search Id, name, email ..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -245,7 +245,7 @@ export default function OrdersStatus() {
                 <tr>
                   <th>S.No.</th>
                   <th>Order ID</th>
-                  <th>Name</th>
+                  {/* <th>Name</th> */}
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Status</th>
@@ -260,7 +260,7 @@ export default function OrdersStatus() {
                     <td className="orders-status-orderId">
                       {shortOrderId(order.id)}
                     </td>
-                    <td className="orders-status-name">{order.name}</td>
+                    {/* <td className="orders-status-name">{order.name}</td> */}
                     <td className="orders-status-email">{order.email}</td>
                     <td className="orders-status-phone">{order.phone}</td>
                     <td>
@@ -405,9 +405,9 @@ export default function OrdersStatus() {
             ) : (
               <>
                 <div className="orders-status-modal-summary">
-                  <p>
+                  {/* <p>
                     <strong>Name:</strong> {selectedOrder.name}
-                  </p>
+                  </p> */}
                   <p>
                     <strong>Email:</strong> {selectedOrder.email}
                   </p>

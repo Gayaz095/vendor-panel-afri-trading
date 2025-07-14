@@ -33,7 +33,7 @@ export default function Layout() {
         />
 
         <main className="main-content">
-          <Outlet context={{ setVendorDetails }} />{" "}
+          <Outlet context={{ setVendorDetails }} />
         </main>
       </div>
     </div>
