@@ -189,6 +189,7 @@ const LoginPage = () => {
                   <input
                     type="text"
                     id="username"
+                    autocomplete="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Enter email or phone"
