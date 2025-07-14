@@ -7,9 +7,6 @@
 }
 
 .login-page-wrapper {
-  /* height: 100vh;
-  flex-direction: column;
-  overflow: hidden; */
   display: flex;
   flex: 1 1 auto;
   min-height: 0; /* important for flex children scrolling */
