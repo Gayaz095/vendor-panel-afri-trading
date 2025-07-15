@@ -3,7 +3,7 @@ import { getVendorProductsOrders } from "../utils/getVendorProductsOrders";
 import { useVendor } from "./VendorContext";
 import "./componentsStyles/RecentOrdersStatus.css";
 
-const ORDERS_PER_PAGE = 4;
+const ORDERS_PER_PAGE = 7;
 const PAGE_WINDOW = 3;
 
 const RecentOrdersStatus = () => {

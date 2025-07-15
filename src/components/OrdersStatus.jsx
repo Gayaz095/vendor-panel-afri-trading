@@ -8,7 +8,7 @@ import {
 import { useVendor } from "./VendorContext";
 import { toast } from "react-toastify";
 
-const PRODUCTS_PER_PAGE = 3;
+const PRODUCTS_PER_PAGE = 6;
 const PAGE_WINDOW = 3;
 
 export default function OrdersStatus() {
@@ -149,19 +149,19 @@ export default function OrdersStatus() {
         </body>
       </html>
     `;
-  
+
     const printWindow = window.open("", "", "width=600,height=400");
     printWindow.document.open();
     printWindow.document.write(content);
     printWindow.document.close();
-  
+
     // Wait for resources to finish loading before printing
     printWindow.onload = function () {
       printWindow.focus();
       printWindow.print();
       printWindow.close();
     };
-  };  
+  };
 
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
