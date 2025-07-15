@@ -303,10 +303,15 @@
 }
 
 @media (max-width: 768px) {
+
+  .dashboard {
+    padding: 0;
+  }
+  
   .dashboard-cards {
     gap: 1.5rem;
   }
-  
+
   .dashboard-cards > * {
     flex: 0 0 calc(50% - 1.5rem);
     min-width: 155px;

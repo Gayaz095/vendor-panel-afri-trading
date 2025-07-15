@@ -161,6 +161,10 @@
 }
 
 @media (max-width: 600px) {
+  .recent-products-table {
+    padding: 0px;
+  }
+  
   .recent-pagination button {
     font-size: 14px;
   }

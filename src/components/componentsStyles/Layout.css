@@ -27,9 +27,3 @@
   /* min-height: calc(100vh - 56px); */
   overflow-y: auto;
 }
-
-@media (max-width: 480px) {
-  .main-content {
-    padding: 0px;
-  }
-}
