@@ -43,7 +43,6 @@ export default function OrdersStatus() {
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             .map((order) => ({
               id: order._id,
-              // name: order.email?.split("@")[0] || "Unknown",
               email: order.email,
               phone: order.phone,
               address: order.addressId || "N/A",
@@ -95,8 +94,6 @@ export default function OrdersStatus() {
       } else {
         toast.success(`Order marked as ${newStatus}!`, {
           style: {
-            // background: "#388e3c",
-            // color: "#fff",
             fontWeight: "bold",
           },
         });
@@ -108,26 +105,10 @@ export default function OrdersStatus() {
       setUpdatingOrderId(null);
     }
   };
-
-  // const handleShipped = (orderId) => {
-  //   setOrders((prev) =>
-  //     prev.map((order) =>
-  //       order.id === orderId ? { ...order, status: "Shipped" } : order
-  //     )
-  //   );
-  // };
-
-  // const handleCancelled = (orderId) => {
-  //   setOrders((prev) =>
-  //     prev.map((order) =>
-  //       order.id === orderId ? { ...order, status: "Cancelled" } : order
-  //     )
-  //   );
-  // };
-
   const handleView = (order) => setSelectedOrder(order);
   const closeModal = () => setSelectedOrder(null);
 
+  // Handler Function for Modal Print
   const handlePrint = (orderId) => {
     const printContents = document.querySelector(
       `.orders-status-modal-content`
@@ -139,6 +120,48 @@ export default function OrdersStatus() {
     document.body.innerHTML = originalContents;
     window.location.reload();
   };
+
+  // Handler Function for Individual Barcode
+  const handlePrintBarcode = (product) => {
+    const content = `
+      <html>
+        <head>
+          <title>Print Barcode</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              padding: 2rem;
+              text-align: center;
+            }
+            .barcode-image {
+              max-width: 100%;
+              height: auto;
+            }
+            h2 {
+              margin-bottom: 1rem;
+            }
+          </style>
+        </head>
+        <body>
+          <h2>${product.name}</h2><h2>Price:${product.price}</h2>
+          <p>Product ID: ${product.referenceNumber}</p>
+          <img src="${product.barcodeImage}" alt="Barcode" class="barcode-image" />
+        </body>
+      </html>
+    `;
+  
+    const printWindow = window.open("", "", "width=600,height=400");
+    printWindow.document.open();
+    printWindow.document.write(content);
+    printWindow.document.close();
+  
+    // Wait for resources to finish loading before printing
+    printWindow.onload = function () {
+      printWindow.focus();
+      printWindow.print();
+      printWindow.close();
+    };
+  };  
 
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
@@ -206,7 +229,7 @@ export default function OrdersStatus() {
   };
 
   if (vendorLoading || !vendorDetails || !vendorId) {
-    return <p className="orders-status-loading">Loading order's data...</p>;
+    return <p className="orders-status-loading">Loading orders data...</p>;
   }
 
   return (
@@ -260,7 +283,6 @@ export default function OrdersStatus() {
                     <td className="orders-status-orderId">
                       {shortOrderId(order.id)}
                     </td>
-                    {/* <td className="orders-status-name">{order.name}</td> */}
                     <td className="orders-status-email">{order.email}</td>
                     <td className="orders-status-phone">{order.phone}</td>
                     <td>
@@ -328,11 +350,13 @@ export default function OrdersStatus() {
           {totalPages > 1 && (
             <div className="orders-status-pagination print-hide">
               <button
+                aria-label="First Page"
                 onClick={() => handlePageChange(1)}
                 disabled={currentPage === 1}>
                 &laquo;
               </button>
               <button
+                aria-label="Previous Page"
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}>
                 &lsaquo;
@@ -362,11 +386,13 @@ export default function OrdersStatus() {
               )}
               {endPage < totalPages && <span>...</span>}
               <button
+                aria-label="Next Page"
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}>
                 &rsaquo;
               </button>
               <button
+                aria-label="Last Page"
                 onClick={() => handlePageChange(totalPages)}
                 disabled={currentPage === totalPages}>
                 &raquo;
@@ -386,6 +412,7 @@ export default function OrdersStatus() {
               <h2>Order Details - {selectedOrder.id}</h2>
               <div className="orders-status-modal-actions print-hide">
                 <button
+                  data-testid="modal-print-btn"
                   className="orders-status-btn orders-status-btn-print"
                   onClick={() => handlePrint(selectedOrder.id)}>
                   Print
@@ -405,18 +432,12 @@ export default function OrdersStatus() {
             ) : (
               <>
                 <div className="orders-status-modal-summary">
-                  {/* <p>
-                    <strong>Name:</strong> {selectedOrder.name}
-                  </p> */}
                   <p>
                     <strong>Email:</strong> {selectedOrder.email}
                   </p>
                   <p>
                     <strong>Phone:</strong> {selectedOrder.phone}
                   </p>
-                  {/* <p>
-                    <strong>Address:</strong> {selectedOrder.address}
-                  </p> */}
                   <p>
                     <strong>Total Quantity:</strong>
                     {selectedOrder.products.reduce(
@@ -435,10 +456,6 @@ export default function OrdersStatus() {
                     <strong>Created:</strong>
                     {formatDate(selectedOrder.createdAt)}
                   </p>
-                  {/* <p>
-                    <strong>Updated:</strong>
-                    {formatDate(selectedOrder.updatedAt)}
-                  </p> */}
                 </div>
 
                 <table className="orders-status-modal-products-table">
@@ -491,12 +508,20 @@ export default function OrdersStatus() {
                           <td>{childCategory}</td>
                           <td className="barcode-column">
                             {product.barcodeImage ? (
-                              <img
-                                src={product.barcodeImage}
-                                alt="Barcode"
-                                className="barcode-image"
-                                style={{ width: "550px" } }
-                              />
+                              <div>
+                                <img
+                                  src={product.barcodeImage}
+                                  alt="Barcode"
+                                  className="barcode-image"
+                                  style={{ width: "550px" }}
+                                />
+                                <button
+                                  onClick={() => handlePrintBarcode(product)}
+                                  className="orders-status-btn orders-status-btn-print modal-print-hide"
+                                  style={{ marginTop: "0.5rem" }}>
+                                  Print Barcode
+                                </button>
+                              </div>
                             ) : (
                               "N/A"
                             )}
