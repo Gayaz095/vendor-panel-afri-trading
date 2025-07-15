@@ -50,7 +50,6 @@ export default function OrdersStatus() {
               status: order.productsList?.[0]?.vendorStatus || "Pending",
               createdAt: order.createdAt,
               updatedAt: order.updatedAt,
-              totalAmount: order.totalAmount || 0,
               products: order.productsList.map((product) => ({
                 name: product.productName,
                 quantity: product.quantity,
@@ -427,7 +426,10 @@ export default function OrdersStatus() {
                   </p>
                   <p>
                     <strong>Total Amount:</strong> ₹
-                    {selectedOrder.totalAmount || 0}
+                    {selectedOrder.products.reduce(
+                      (total, product) => total + (product.price || 0),
+                      0
+                    )}
                   </p>
                   <p>
                     <strong>Created:</strong>
