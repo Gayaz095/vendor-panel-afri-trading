@@ -62,6 +62,7 @@ export default function OrdersStatus() {
                 categoryId: product.categoryId,
                 subCategoryId: product.subCategoryId,
                 childCategoryId: product.childCategoryId,
+                barcodeImage: product.barcodeImage,
               })),
             }));
           setOrders(ordersData);
@@ -418,7 +419,7 @@ export default function OrdersStatus() {
                     <strong>Address:</strong> {selectedOrder.address}
                   </p> */}
                   <p>
-                    <strong>Total Quantity:</strong>{" "}
+                    <strong>Total Quantity:</strong>
                     {selectedOrder.products.reduce(
                       (total, product) => total + (product.quantity || 0),
                       0
@@ -450,6 +451,7 @@ export default function OrdersStatus() {
                       <th>Main Category</th>
                       <th>Subcategory</th>
                       <th>Child Category</th>
+                      <th className="barcode-column">Product Bar Code</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -485,6 +487,18 @@ export default function OrdersStatus() {
                           <td>{mainCategory}</td>
                           <td>{subCategory}</td>
                           <td>{childCategory}</td>
+                          <td className="barcode-column">
+                            {product.barcodeImage ? (
+                              <img
+                                src={product.barcodeImage}
+                                alt="Barcode"
+                                className="barcode-image"
+                                style={{ width: "550px" } }
+                              />
+                            ) : (
+                              "N/A"
+                            )}
+                          </td>
                         </tr>
                       );
                     })}
