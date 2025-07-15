@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  createProduct,
-  updateProduct,
-  getVendorProducts,
-} from "../utils/productsApi";
+import { createProduct, getVendorProducts } from "../utils/productsApi";
 import { imageUpload } from "../utils/imageUpload";
 import { useVendor } from "./VendorContext";
 import { AiOutlineClose } from "react-icons/ai";
@@ -17,7 +13,7 @@ const Spinner = () => (
   <span className="add-product-spinner" aria-label="Loading"></span>
 );
 
-const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
+const AddProductModal = ({ onClose, onProductAdded }) => {
   const {
     vendorDetails,
     allCars,
@@ -59,44 +55,29 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
   const [imagePreview, setImagePreview] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
 
-  // Fetch all reference numbers for this vendor (excluding the current product if editing)
   useEffect(() => {
     const fetchReferenceNumbers = async () => {
       if (!vendorDetails?.vendorId) return;
       try {
         const products = await getVendorProducts(vendorDetails.vendorId);
-        const numbers = (products || [])
-          .filter((p) => p._id !== productToEdit?._id)
-          .map((p) => (p.referenceNumber || "").trim());
+        const numbers = (products || []).map((p) =>
+          (p.referenceNumber || "").trim()
+        );
         setAllReferenceNumbers(numbers);
       } catch (err) {
         setAllReferenceNumbers([]);
       }
     };
     fetchReferenceNumbers();
-  }, [vendorDetails, productToEdit]);
-
-  useEffect(() => {
-    if (productToEdit) {
-      setProductData({
-        ...productToEdit,
-        image: null,
-        thumbnailImage: null,
-        feautureProduct: !!productToEdit.feautureProduct,
-      });
-      setImagePreview(productToEdit.image);
-      setThumbnailPreview(productToEdit.thumbnailImage);
-    }
-  }, [productToEdit]);
+  }, [vendorDetails]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    // Prevent duplicate reference number
     if (name === "referenceNumber") {
       if (allReferenceNumbers.includes(value.trim())) {
         setReferenceError("Reference number already exists!");
-        return; // Block updating the state
+        return;
       } else {
         setReferenceError("");
       }
@@ -147,7 +128,6 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
       return;
     }
 
-    // Double-check for duplicate before submitting
     if (allReferenceNumbers.includes(productData.referenceNumber.trim())) {
       setReferenceError("Reference number already exists!");
       scrollToInvalid();
@@ -173,23 +153,23 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
       scrollToInvalid();
       return;
     }
+
     setLoading(true);
     try {
       const formData = new FormData();
       formData.append("vendorId", vendorDetails.vendorId);
-      Object.entries(productData).forEach(([key, val]) => {
+
+      for (const [key, val] of Object.entries(productData)) {
         if (key !== "image" && key !== "thumbnailImage") {
           formData.append(key, val);
         }
-      });
+      }
 
       if (productData.image) {
         const imageForm = new FormData();
         imageForm.append("image", productData.image);
         const res = await imageUpload(imageForm);
         formData.append("image", res.imageUrl);
-      } else if (productToEdit?.image) {
-        formData.append("image", productToEdit.image);
       }
 
       if (productData.thumbnailImage) {
@@ -197,23 +177,15 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
         thumbForm.append("image", productData.thumbnailImage);
         const res = await imageUpload(thumbForm);
         formData.append("thumbnailImage", res.imageUrl);
-      } else if (productToEdit?.thumbnailImage) {
-        formData.append("thumbnailImage", productToEdit.thumbnailImage);
       }
 
-      if (productToEdit) {
-        await updateProduct(productToEdit.id, formData);
-        toast.success("Product updated!");
-      } else {
-        await createProduct(formData);
-        toast.success("Product added!");
-        onProductAdded();
-      }
-
+      await createProduct(formData);
+      toast.success("Product added!");
+      onProductAdded();
       onClose();
     } catch (err) {
-      console.error("Submission error:", err);
-      toast.error("Failed to submit product.");
+      console.error("Submit error:", err);
+      toast.error("Failed to add product.");
     } finally {
       setLoading(false);
     }
@@ -226,7 +198,7 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
     (s) => s.categoryId === productData.categoryId
   );
   const filteredChildCategories = allChildCategories.filter(
-    (ch) => ch.subCategoryId === productData.subCategoryId
+    (c) => c.subCategoryId === productData.subCategoryId
   );
 
   return (
@@ -235,13 +207,11 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
         <span className="add-product-modal-close" onClick={onClose}>
           <AiOutlineClose />
         </span>
-        <h2 className="add-product-modal-h2">
-          {productToEdit ? "Update Product" : "Add New Product"}
-        </h2>
+        <h2 className="add-product-modal-h2">Add New Product</h2>
 
         <form
-          onSubmit={handleSubmit}
           className="add-product-form"
+          onSubmit={handleSubmit}
           ref={formRef}>
           <select
             name="carBrandId"
@@ -431,10 +401,8 @@ const AddProductModal = ({ onClose, productToEdit = null, onProductAdded }) => {
             disabled={loading || !!referenceError}>
             {loading ? (
               <>
-                <Spinner /> &nbsp; {productToEdit ? "Updating..." : "Adding..."}
+                <Spinner /> &nbsp; Adding...
               </>
-            ) : productToEdit ? (
-              "Update Product"
             ) : (
               "Add Product"
             )}

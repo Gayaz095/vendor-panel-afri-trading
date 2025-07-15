@@ -17,8 +17,9 @@
 .vendor-edit-product__modal {
   background: #d1d9e0;
   border-radius: 12px;
-  width: 720px;
-  max-width: 100vw;
+  /* width: 720px; */
+  /* max-width: 100vw; */
+  max-width: 800px;
   max-height: 90vh;
   padding: 32px 40px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -76,7 +77,8 @@
 .vendor-edit-product__form-group input,
 .vendor-edit-product__form-group select,
 .vendor-edit-product__form-group textarea {
-  padding: 10px 14px;
+  /* padding: 10px 14px; */
+  padding: 12px;
   font-size: 1rem;
   border: 1.8px solid #d1d5db;
   border-radius: 8px;
