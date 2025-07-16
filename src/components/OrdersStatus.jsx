@@ -144,7 +144,7 @@ export default function OrdersStatus() {
         </head>
         <body>
           <h2>${product.name}</h2><h2>Price:${product.price}</h2>
-          <p>Product ID: ${product.referenceNumber}</p>
+         
           <img src="${product.barcodeImage}" alt="Barcode" class="barcode-image" />
         </body>
       </html>
