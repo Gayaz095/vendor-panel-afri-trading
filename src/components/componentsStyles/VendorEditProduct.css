@@ -75,7 +75,6 @@
 .vendor-edit-product__form-group input,
 .vendor-edit-product__form-group select,
 .vendor-edit-product__form-group textarea {
-  /* padding: 10px 14px; */
   padding: 12px;
   font-size: 1rem;
   border: 1.8px solid #d1d5db;
@@ -188,7 +187,6 @@
 
 .vendor-edit-product__image-upload > label {
   font-weight: 600;
-  /* margin-bottom: 8px; */
   color: #374151;
 }
 

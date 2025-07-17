@@ -24,6 +24,5 @@
   padding: 32px;
   background: #fff;
   min-height: 0;
-  /* min-height: calc(100vh - 56px); */
   overflow-y: auto;
 }

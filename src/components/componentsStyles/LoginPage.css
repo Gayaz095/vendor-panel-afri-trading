@@ -21,7 +21,6 @@
   letter-spacing: 0.05em;
 }
 
-
 .animated-fadein {
   opacity: 0;
   transform: translateY(30px);

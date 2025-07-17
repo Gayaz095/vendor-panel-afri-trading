@@ -137,9 +137,6 @@
   
   /* Responsive Adjustments */
   @media (max-width: 600px) {
-    /* .recent-orders-table {
-      padding: 0px;
-    } */
 
     .recent-orders-pagination button {
       font-size: 14px;

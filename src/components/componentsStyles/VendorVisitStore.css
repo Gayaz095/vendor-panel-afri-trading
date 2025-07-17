@@ -3,7 +3,6 @@
 .vendor-store-container {
   font-family: "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
   max-width: 1200px;
-  /* margin: 0 auto; */
   margin-bottom: 50px;
   background-color: #fdfdfd;
   color: #1f2937;
@@ -190,6 +189,7 @@
   border-color: #9ca3af;
   background-color: #f3f4f6;
 }
+
 /* 
 .vendor-empty-state::before {
   content: "📦";
