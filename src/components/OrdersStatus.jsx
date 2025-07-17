@@ -30,8 +30,6 @@ export default function OrdersStatus() {
   const [updatingOrderId, setUpdatingOrderId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingOrders, setLoadingOrders] = useState(true);
-  const [editPage, setEditPage] = useState(null);
-  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     if (vendorId) {
@@ -86,7 +84,7 @@ export default function OrdersStatus() {
       if (newStatus === "Cancelled") {
         toast.error("Order has been Cancelled!", {
           style: {
-            background: "#AA4A44 ",
+            background: "#AA4A44",
             color: "#fff",
             fontWeight: "bold",
           },
@@ -105,10 +103,10 @@ export default function OrdersStatus() {
       setUpdatingOrderId(null);
     }
   };
+
   const handleView = (order) => setSelectedOrder(order);
   const closeModal = () => setSelectedOrder(null);
 
-  // Handler Function for Modal Print
   const handlePrint = (orderId) => {
     const printContents = document.querySelector(
       `.orders-status-modal-content`
@@ -121,7 +119,6 @@ export default function OrdersStatus() {
     window.location.reload();
   };
 
-  // Handler Function for Individual Barcode
   const handlePrintBarcode = (product) => {
     const content = `
       <html>
@@ -144,7 +141,6 @@ export default function OrdersStatus() {
         </head>
         <body>
           <h2>${product.name}</h2><h2>Price:${product.price}</h2>
-         
           <img src="${product.barcodeImage}" alt="Barcode" class="barcode-image" />
         </body>
       </html>
@@ -155,7 +151,6 @@ export default function OrdersStatus() {
     printWindow.document.write(content);
     printWindow.document.close();
 
-    // Wait for resources to finish loading before printing
     printWindow.onload = function () {
       printWindow.focus();
       printWindow.print();
@@ -166,7 +161,6 @@ export default function OrdersStatus() {
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
       order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      // order.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       order.email.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus =
       statusFilter === "All" || order.status === statusFilter;
@@ -184,7 +178,6 @@ export default function OrdersStatus() {
   const handlePageChange = (page) => {
     const clampedPage = Math.max(1, Math.min(page, totalPages));
     setCurrentPage(clampedPage);
-    setEditPage(null);
   };
 
   let startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
@@ -195,25 +188,6 @@ export default function OrdersStatus() {
   }
   const pageNumbers = [];
   for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
-
-  const handleDoubleClick = (page) => {
-    setEditPage(page);
-    setInputValue(page);
-  };
-
-  const handleInputChange = (e) =>
-    setInputValue(e.target.value.replace(/[^0-9]/g, ""));
-
-  const handleInputBlur = () => {
-    const page = Number(inputValue);
-    if (page >= 1 && page <= totalPages) setCurrentPage(page);
-    setEditPage(null);
-  };
-
-  const handleInputKeyDown = (e) => {
-    if (e.key === "Enter") handleInputBlur();
-    else if (e.key === "Escape") setEditPage(null);
-  };
 
   const shortOrderId = (id) => (id ? "..." + id.slice(-10) : "");
 
@@ -268,7 +242,6 @@ export default function OrdersStatus() {
                 <tr>
                   <th>S.No.</th>
                   <th>Order ID</th>
-                  {/* <th>Name</th> */}
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Status</th>
@@ -292,9 +265,6 @@ export default function OrdersStatus() {
                       </span>
                     </td>
                     <td className="print-hide">
-                      {/* {order.status === "Cancelled" ? (
-                      <span className="orders-status-final">Cancelled</span>
-                    ) : ( */}
                       <div className="orders-status-btn-actions">
                         <button
                           className="orders-status-btn orders-status-btn-accept"
@@ -312,20 +282,7 @@ export default function OrdersStatus() {
                           disabled={updatingOrderId === order.id}>
                           <FiX /> Cancel
                         </button>
-                        {/* <button
-                          className="orders-status-btn orders-status-btn-accept"
-                          onClick={() => handleShipped(order.id)}
-                          title="Mark as Shipped">
-                          <FiCheck /> Shipped
-                        </button>
-                        <button
-                          className="orders-status-btn orders-status-btn-reject"
-                          onClick={() => handleCancelled(order.id)}
-                          title="Cancel Order">
-                          <FiX /> Cancel
-                        </button> */}
                       </div>
-                      {/* )} */}
                     </td>
                     <td className="print-hide">
                       <button
@@ -338,7 +295,7 @@ export default function OrdersStatus() {
                 ))}
                 {currentItems.length === 0 && (
                   <tr>
-                    <td className="orders-status-no-results">
+                    <td className="orders-status-no-results" colSpan="7">
                       No orders found.
                     </td>
                   </tr>
@@ -362,28 +319,14 @@ export default function OrdersStatus() {
                 &lsaquo;
               </button>
               {startPage > 1 && <span>...</span>}
-              {pageNumbers.map((num) =>
-                editPage === num ? (
-                  <input
-                    key={num}
-                    type="text"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    onBlur={handleInputBlur}
-                    onKeyDown={handleInputKeyDown}
-                    className="orders-status-pagination-input"
-                    autoFocus
-                  />
-                ) : (
-                  <button
-                    key={num}
-                    className={currentPage === num ? "active" : ""}
-                    onClick={() => handlePageChange(num)}
-                    onDoubleClick={() => handleDoubleClick(num)}>
-                    {num}
-                  </button>
-                )
-              )}
+              {pageNumbers.map((num) => (
+                <button
+                  key={num}
+                  className={currentPage === num ? "active" : ""}
+                  onClick={() => handlePageChange(num)}>
+                  {num}
+                </button>
+              ))}
               {endPage < totalPages && <span>...</span>}
               <button
                 aria-label="Next Page"
@@ -408,11 +351,11 @@ export default function OrdersStatus() {
           <div
             className="orders-status-modal-content"
             onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
             <div className="orders-status-modal-header">
               <h2>Order Details - {selectedOrder.id}</h2>
               <div className="orders-status-modal-actions print-hide">
                 <button
-                  data-testid="modal-print-btn"
                   className="orders-status-btn orders-status-btn-print"
                   onClick={() => handlePrint(selectedOrder.id)}>
                   Print

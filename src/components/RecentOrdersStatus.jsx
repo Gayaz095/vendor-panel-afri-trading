@@ -14,8 +14,6 @@ const RecentOrdersStatus = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [editPage, setEditPage] = useState(null);
-  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const fetchRecentOrders = async () => {
@@ -57,7 +55,6 @@ const RecentOrdersStatus = () => {
   const handlePageChange = (page) => {
     const clampedPage = Math.max(1, Math.min(page, totalPages));
     setCurrentPage(clampedPage);
-    setEditPage(null);
   };
 
   let startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
@@ -68,25 +65,6 @@ const RecentOrdersStatus = () => {
   }
   const pageNumbers = [];
   for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
-
-  const handleDoubleClick = (page) => {
-    setEditPage(page);
-    setInputValue(page);
-  };
-
-  const handleInputChange = (e) =>
-    setInputValue(e.target.value.replace(/[^0-9]/g, ""));
-
-  const handleInputBlur = () => {
-    const page = Number(inputValue);
-    if (page >= 1 && page <= totalPages) setCurrentPage(page);
-    setEditPage(null);
-  };
-
-  const handleInputKeyDown = (e) => {
-    if (e.key === "Enter") handleInputBlur();
-    else if (e.key === "Escape") setEditPage(null);
-  };
 
   const shortOrderId = (id) => (id ? "..." + id.slice(-10) : "");
 
@@ -167,28 +145,14 @@ const RecentOrdersStatus = () => {
           </button>
 
           {startPage > 1 && <span>...</span>}
-          {pageNumbers.map((num) =>
-            editPage === num ? (
-              <input
-                key={num}
-                type="text"
-                value={inputValue}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                onKeyDown={handleInputKeyDown}
-                className="recent-orders-pagination-input"
-                autoFocus
-              />
-            ) : (
-              <button
-                key={num}
-                className={currentPage === num ? "active" : ""}
-                onClick={() => handlePageChange(num)}
-                onDoubleClick={() => handleDoubleClick(num)}>
-                {num}
-              </button>
-            )
-          )}
+          {pageNumbers.map((num) => (
+            <button
+              key={num}
+              className={currentPage === num ? "active" : ""}
+              onClick={() => handlePageChange(num)}>
+              {num}
+            </button>
+          ))}
           {endPage < totalPages && <span>...</span>}
 
           <button

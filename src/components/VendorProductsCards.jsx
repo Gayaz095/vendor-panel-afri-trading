@@ -26,10 +26,10 @@ const VendorProductsCards = ({ products }) => {
   const startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
   const endPage = Math.min(totalPages, startPage + PAGE_WINDOW - 1);
 
-  const handleDoubleClick = (page) => {
-    setEditPage(page);
-    setInputValue(page);
-  };
+  // const handleDoubleClick = (page) => {
+  //   setEditPage(page);
+  //   setInputValue(page);
+  // };
 
   const handleInputChange = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -129,7 +129,8 @@ const VendorProductsCards = ({ products }) => {
               key={num}
               className={currentPage === num ? "active" : ""}
               onClick={() => handlePageChange(num)}
-              onDoubleClick={() => handleDoubleClick(num)}>
+                // onDoubleClick={() => handleDoubleClick(num)}
+              >
               {num}
             </button>
           )

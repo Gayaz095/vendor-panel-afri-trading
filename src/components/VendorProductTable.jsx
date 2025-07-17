@@ -28,8 +28,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [editPage, setEditPage] = useState(null);
-  const [inputValue, setInputValue] = useState("");
   const [editingProduct, setEditingProduct] = useState(null);
   const [viewingProduct, setViewingProduct] = useState(null);
   const [carBrands, setCarBrands] = useState([]);
@@ -62,7 +60,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE)
   );
 
-  const [sortOption, setSortOption] = useState("newest"); // added sortOption state
+  const [sortOption, setSortOption] = useState("newest");
 
   useEffect(() => {
     fetchProducts();
@@ -75,8 +73,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
   useEffect(() => {
     applyFilters();
   }, [products, filters]);
-
-  // const [isSpinning, setIsSpinning] = useState(false);
 
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
@@ -125,7 +121,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       default:
         break;
     }
-    // Only update state if it’s actually different
     const isSame = JSON.stringify(sorted) === JSON.stringify(products);
     if (!isSame) {
       setProducts(sorted);
@@ -255,7 +250,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
   const handlePageChange = (page) => {
     const clampedPage = Math.max(1, Math.min(page, totalPages));
     setCurrentPage(clampedPage);
-    setEditPage(null);
   };
 
   let startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
@@ -267,35 +261,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
   const pageNumbers = [];
   for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
 
-  const handleDoubleClick = (page) => {
-    setEditPage(page);
-    setInputValue(page);
-  };
-
-  const handleInputChange = (e) =>
-    setInputValue(e.target.value.replace(/[^0-9]/g, ""));
-
-  const handleInputBlur = () => {
-    const page = Number(inputValue);
-    if (page >= 1 && page <= totalPages) setCurrentPage(page);
-    setEditPage(null);
-  };
-
-  const handleInputKeyDown = (e) => {
-    if (e.key === "Enter") handleInputBlur();
-    else if (e.key === "Escape") setEditPage(null);
-  };
-
-  const filteredModels = carModels.filter(
-    (m) => m.carId === filters.carBrandId
-  );
-  const filteredSubCategories = subCategories.filter(
-    (s) => s.categoryId === filters.categoryId
-  );
-  const filteredChildCategories = childCategories.filter(
-    (ch) => ch.subCategoryId === filters.subCategoryId
-  );
-
   const resetFilters = () => {
     setFilters({
       name: "",
@@ -306,10 +271,9 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       subCategoryId: "",
       childCategoryId: "",
     });
-    setSortOption("newest"); // reset sort dropdown
+    setSortOption("newest");
   };
 
-  // formatPrice uses user locale and dynamic currency and default is INR
   const formatPrice = (price, currency = "INR") => {
     const userLocale = navigator.language || "en-IN";
     return new Intl.NumberFormat(userLocale, {
@@ -588,29 +552,14 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
           </button>
 
           {startPage > 1 && <span>...</span>}
-          {pageNumbers.map((num) =>
-            editPage === num ? (
-              <input
-                key={num}
-                type="text"
-                value={inputValue}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                onKeyDown={handleInputKeyDown}
-                className="vpt-pagination-input"
-                autoFocus
-                style={{ width: "40px" }}
-              />
-            ) : (
-              <button
-                key={num}
-                className={currentPage === num ? "active" : ""}
-                onClick={() => handlePageChange(num)}
-                onDoubleClick={() => handleDoubleClick(num)}>
-                {num}
-              </button>
-            )
-          )}
+          {pageNumbers.map((num) => (
+            <button
+              key={num}
+              className={currentPage === num ? "active" : ""}
+              onClick={() => handlePageChange(num)}>
+              {num}
+            </button>
+          ))}
           {endPage < totalPages && <span>...</span>}
 
           <button
@@ -625,7 +574,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
           </button>
         </div>
       )}
-
+      {/* Edit/View Modals */}
       {editingProduct && (
         <VendorEditProduct
           product={editingProduct}
