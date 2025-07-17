@@ -18,10 +18,9 @@ import ordersData from "./static-data/orders.json";
 import productsData from "./static-data/products.json";
 
 import Charts from "./Charts";
-import VendorProductsTable from "./VendorProductTable";
+// import VendorProductsTable from "./VendorProductTable";
 import RecentProducts from "./RecentProducts";
 import RecentOrdersStatus from "./RecentOrdersStatus";
-
 
 const iconComponents = {
   FiShoppingCart,
@@ -38,6 +37,9 @@ const Dashboard = () => {
   const { vendorDetails } = useVendor();
   const navigate = useNavigate();
   const [animateValues, setAnimateValues] = useState(false);
+  const [loading, setLoading] = useState(false);// change to true 
+                                                // if simulating in real time
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!vendorDetails) {
@@ -47,13 +49,13 @@ const Dashboard = () => {
     setTimeout(() => setAnimateValues(true), 100);
   }, [vendorDetails, navigate]);
 
-  const handleViewProduct = () => {
-    navigate("/products/all");
-  };
+  // const handleViewProduct = () => {
+  //   navigate("/products/all");
+  // };
 
-  const handleViewOrder = () => {
-    navigate("/orders");
-  };
+  // const handleViewOrder = () => {
+  //   navigate("/orders");
+  // };
 
   const stats = [
     {
@@ -74,12 +76,6 @@ const Dashboard = () => {
       icon: "FiDollarSign",
       color: "#FF9800",
     },
-    // {
-    //   title: "Total Items Sold",
-    //   value: 520,
-    //   icon: "FiPieChart",
-    //   color: "#0ea5e9",
-    // },
     { title: "Pending Orders", value: "2", icon: "FiClock", color: "#F44336" },
     { title: "Order Processing", value: 8, icon: "FiRepeat", color: "#6366f1" },
     {
@@ -89,6 +85,12 @@ const Dashboard = () => {
       color: "#22c55e",
     },
   ];
+
+  if (!vendorDetails) return null; // or a loading state until redirect
+
+  if (loading) return <div className="loading">Loading dashboard data...</div>;
+
+  if (error) return <div className="error-message">Error: {error}</div>;
 
   return (
     <div className="dashboard">
@@ -125,6 +127,6 @@ const Dashboard = () => {
       <RecentOrdersStatus />
     </div>
   );
-  };
+};
 
-  export default Dashboard;
+export default Dashboard;

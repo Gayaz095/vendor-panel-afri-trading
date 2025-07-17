@@ -423,9 +423,9 @@
     font-size: 1.3em;
   }
 
-  .modal-print-hide {
+  /* .modal-print-hide {
     display: none !important;
-  }
+  } */
 
   body {
     margin: 0;
@@ -435,8 +435,9 @@
 }
 
 @media print {
-  .modal-print-hide {
+  .modal-print-hide, .print-hide, .orders-status-btn-close, .orders-status-btn-print {
     display: none !important;
+    visibility: hidden !important;
   }
 }
 
