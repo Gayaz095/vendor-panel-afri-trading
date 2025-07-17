@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { getVendorProducts, deleteProduct } from "../utils/productsApi";
 import { getAllCars } from "../utils/getAllCars";
 import { getAllCarModels } from "../utils/getAllCarModels";
@@ -283,6 +283,17 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
       maximumFractionDigits: 2,
     }).format(price);
   };
+
+  // 🆕 Filtered dropdown data
+  const filteredModels = carModels.filter(
+    (model) => model.carId === filters.carBrandId
+  );
+  const filteredSubCategories = subCategories.filter(
+    (sub) => sub.categoryId === filters.categoryId
+  );
+  const filteredChildCategories = childCategories.filter(
+    (child) => child.subCategoryId === filters.subCategoryId
+  );
 
   if (loading)
     return (

@@ -60,6 +60,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
       if (!vendorDetails?.vendorId) return;
       try {
         const products = await getVendorProducts(vendorDetails.vendorId);
+        // console.log(products)
         const numbers = (products || []).map((p) =>
           (p.referenceNumber || "").trim()
         );
