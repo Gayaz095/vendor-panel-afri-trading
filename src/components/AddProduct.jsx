@@ -26,10 +26,11 @@ const AddProduct = () => {
 
   return (
     <div className="products-container">
-      <div className="vendor-header">
+      <div className="add-product-header">
         <h2 className="your-products">Manage Your Inventory</h2>
       </div>
       <div className="button-wrapper">
+        <span className="button-wrapper-text">Add your products: </span>
         <button
           className="add-product-button"
           onClick={() => setModalOpen(true)}>

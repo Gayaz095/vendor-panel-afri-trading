@@ -7,6 +7,19 @@ import { mainGetCategories } from "../utils/mainGetCategories";
 import { getSubCategories } from "../utils/getSubCategories";
 import { getAllChildCategories } from "../utils/getAllChildCategories";
 import { useVendor } from "./VendorContext";
+import {
+  FaTag,
+  FaHashtag,
+  FaCar,
+  FaThList,
+  FaBoxes,
+  FaDollarSign,
+  FaWarehouse,
+  FaStar,
+  FaImage,
+  FaAlignLeft,
+  FaEdit,
+} from "react-icons/fa";
 import { toast } from "react-toastify";
 import "./componentsStyles/VendorEditProduct.css";
 
@@ -222,44 +235,57 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
   return (
     <div className="vendor-edit-product__modal-overlay">
       <div className="vendor-edit-product__modal">
-        <h2 className="vendor-edit-product__modal_h2">Edit Product</h2>
+        <h2 className="vendor-edit-product__modal_h2">
+          <FaEdit />
+          Edit Product Details
+        </h2>
         <form onSubmit={handleSubmit}>
-          <div className="vendor-edit-product__form-row">
-            <div className="vendor-edit-product__form-group">
-              <label>Name:</label>
-              <textarea
-                name="name"
-                value={formData.name}
+          {/* SECTION: Reference Number */}
+          <div className="vendor-edit-product__form-group">
+            <label>
+              <FaHashtag style={{ marginRight: "6px" }} />
+              Reference Number:
+            </label>
+            <div className="vendor-edit-product__input-tooltip-container">
+              <input
+                name="referenceNumber"
+                value={formData.referenceNumber}
                 onChange={handleInputChange}
                 required
+                className={
+                  referenceError ? "vendor-edit-product__input-error" : ""
+                }
               />
-            </div>
-            <div className="vendor-edit-product__form-group">
-              <label>Reference Number:</label>
-              <div className="vendor-edit-product__input-tooltip-container">
-                <input
-                  name="referenceNumber"
-                  value={formData.referenceNumber}
-                  onChange={handleInputChange}
-                  required
-                  className={
-                    referenceError ? "vendor-edit-product__input-error" : ""
-                  }
-                  autoComplete="off"
-                />
-                {referenceError && (
-                  <div className="vendor-edit-product__tooltip">
-                    {referenceError}
-                    <span className="vendor-edit-product__tooltip-arrow" />
-                  </div>
-                )}
-              </div>
+              {referenceError && (
+                <div className="vendor-edit-product__tooltip">
+                  {referenceError}
+                  <span className="vendor-edit-product__tooltip-arrow" />
+                </div>
+              )}
             </div>
           </div>
 
+          {/* SECTION: Name */}
+          <div className="vendor-edit-product__form-group">
+            <label>
+              <FaTag style={{ marginRight: "6px" }} />
+              Name:
+            </label>
+            <textarea
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          {/* SECTION: Car Brand / Model */}
           <div className="vendor-edit-product__form-row">
             <div className="vendor-edit-product__form-group">
-              <label>Car Brand:</label>
+              <label>
+                <FaCar style={{ marginRight: "6px" }} />
+                Car Brand:
+              </label>
               <select
                 name="carBrandId"
                 value={formData.carBrandId}
@@ -274,7 +300,10 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
               </select>
             </div>
             <div className="vendor-edit-product__form-group">
-              <label>Car Model:</label>
+              <label>
+                <FaCar style={{ marginRight: "6px" }} />
+                Car Model:
+              </label>
               <select
                 name="carBrandModelId"
                 value={formData.carBrandModelId}
@@ -290,9 +319,13 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
             </div>
           </div>
 
+          {/* SECTION: Categories */}
           <div className="vendor-edit-product__form-row">
             <div className="vendor-edit-product__form-group">
-              <label>Main Category:</label>
+              <label>
+                <FaThList style={{ marginRight: "6px" }} />
+                Main Category:
+              </label>
               <select
                 name="categoryId"
                 value={formData.categoryId}
@@ -307,7 +340,10 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
               </select>
             </div>
             <div className="vendor-edit-product__form-group">
-              <label>Sub Category:</label>
+              <label>
+                <FaBoxes style={{ marginRight: "6px" }} />
+                Sub Category:
+              </label>
               <select
                 name="subCategoryId"
                 value={formData.subCategoryId}
@@ -323,27 +359,36 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
             </div>
           </div>
 
-          <div className="vendor-edit-product__form-row">
-            <div className="vendor-edit-product__form-group">
-              <label>Child Category:</label>
-              <select
-                name="childCategoryId"
-                value={formData.childCategoryId}
-                onChange={handleInputChange}
-                required>
-                <option value="">Select Child Category</option>
-                {filteredChildCats.map((child) => (
-                  <option key={child._id} value={child._id}>
-                    {child.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+          {/* SECTION: Child Category */}
+          <div className="vendor-edit-product__form-group">
+            <label>
+              <FaBoxes style={{ marginRight: "6px" }} />
+              Child Category:
+            </label>
+            <select
+              name="childCategoryId"
+              value={formData.childCategoryId}
+              onChange={handleInputChange}
+              required>
+              <option value="">Select Child Category</option>
+              {filteredChildCats.map((child) => (
+                <option key={child._id} value={child._id}>
+                  {child.name}
+                </option>
+              ))}
+            </select>
           </div>
 
+          {/* SECTION: Price + Stock */}
           <div className="vendor-edit-product__form-row">
             <div className="vendor-edit-product__form-group">
-              <label>Price:</label>
+              <label>
+                {/* <FaDollarSign style={{ marginRight: "6px" }} /> */}
+                <span style={{ fontSize: "22px"}}>
+                  &#8377;
+                </span>
+                Price:
+              </label>
               <input
                 type="number"
                 name="price"
@@ -353,7 +398,10 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
               />
             </div>
             <div className="vendor-edit-product__form-group">
-              <label>Stock:</label>
+              <label>
+                <FaWarehouse style={{ marginRight: "6px" }} />
+                Stock:
+              </label>
               <input
                 type="number"
                 name="stock"
@@ -363,8 +411,13 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
               />
             </div>
           </div>
+
+          {/* Checkbox */}
           <div className="vendor-edit-product__form-group__checkbox-container">
-            <label>Featured Product:</label>
+            <label>
+              <FaStar style={{ marginRight: "6px" }} />
+              Featured Product:
+            </label>
             <div className="vendor-edit-product__checkbox-container">
               <input
                 type="checkbox"
@@ -374,73 +427,80 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
               />
             </div>
           </div>
-          <div className="vendor-edit-product__form-row">
-            <div className="vendor-edit-product__form-group">
-              <label>Hero Product:</label>
-              <select
-                name="heroProduct"
-                value={formData.heroProduct}
-                onChange={handleInputChange}>
-                <option value="">None</option>
-                {heroOptions.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="vendor-edit-product__form-group"></div>
+
+          {/* Hero Product */}
+          <div className="vendor-edit-product__form-group">
+            <label>Hero Product:</label>
+            <select
+              name="heroProduct"
+              value={formData.heroProduct}
+              onChange={handleInputChange}>
+              <option value="">None</option>
+              {heroOptions.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
           </div>
 
-          <div className="vendor-edit-product__form-row">
-            <div className="vendor-edit-product__image-container">
-              <div className="vendor-edit-product__image-upload">
-                <label>Main Image:</label>
-                <input
-                  type="file"
-                  name="image"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                />
-                {mainImagePreview && (
-                  <img
-                    src={mainImagePreview}
-                    alt="Main Preview"
-                    className="vendor-edit-product__preview-image"
-                  />
-                )}
-              </div>
-              <div className="vendor-edit-product__image-upload">
-                <label>Thumbnail Image:</label>
-                <input
-                  type="file"
-                  name="thumbnailImage"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                />
-                {thumbnailImagePreview && (
-                  <img
-                    src={thumbnailImagePreview}
-                    alt="Thumb Preview"
-                    className="vendor-edit-product__preview-image"
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="vendor-edit-product__form-row">
-            <div className="vendor-edit-product__form-group">
-              <label>Description:</label>
-              <textarea
-                name="discription"
-                value={formData.discription}
-                onChange={handleInputChange}
-                required
+          {/* Images */}
+          <div className="vendor-edit-product__image-container">
+            <div className="vendor-edit-product__image-upload">
+              <label>
+                <FaImage style={{ marginRight: "6px" }} />
+                Main Image:
+              </label>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleFileChange}
               />
+              {mainImagePreview && (
+                <img
+                  src={mainImagePreview}
+                  alt="Main Preview"
+                  className="vendor-edit-product__preview-image"
+                />
+              )}
+            </div>
+            <div className="vendor-edit-product__image-upload">
+              <label>
+                <FaImage style={{ marginRight: "6px" }} />
+                Thumbnail Image:
+              </label>
+              <input
+                type="file"
+                name="thumbnailImage"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              {thumbnailImagePreview && (
+                <img
+                  src={thumbnailImagePreview}
+                  alt="Thumb Preview"
+                  className="vendor-edit-product__preview-image"
+                />
+              )}
             </div>
           </div>
 
+          {/* Description */}
+          <div className="vendor-edit-product__form-group">
+            <label>
+              <FaAlignLeft style={{ marginRight: "6px" }} />
+              Description:
+            </label>
+            <textarea
+              name="discription"
+              value={formData.discription}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          {/* Actions */}
           <div className="vendor-edit-product__actions">
             <button
               type="submit"

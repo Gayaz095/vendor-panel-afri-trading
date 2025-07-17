@@ -17,8 +17,6 @@
 .vendor-edit-product__modal {
   background: #d1d9e0;
   border-radius: 12px;
-  /* width: 720px; */
-  /* max-width: 100vw; */
   max-width: 800px;
   max-height: 90vh;
   padding: 32px 40px;
@@ -46,7 +44,7 @@
 }
 
 .vendor-edit-product__modal .vendor-edit-product__modal_h2 {
-  margin-bottom: 28px;
+  margin-bottom: 8px;
   color: #111827;
   text-align: start;
   color: #2c3e50;
@@ -70,7 +68,7 @@
 .vendor-edit-product__form-group > label {
   font-weight: 600;
   font-size: 0.95rem;
-  margin-bottom: 8px;
+  margin-top: 18px;
   color: #374151;
 }
 
@@ -162,7 +160,7 @@
 .vendor-edit-product__image-container {
   display: flex;
   gap: 32px;
-  margin-bottom: 24px;
+  margin: 24px 0;
   justify-content: space-between;
 }
 
@@ -184,12 +182,13 @@
   border-radius: 8px;
   object-fit: contain;
   border: 1px solid #e5e7eb;
+  background: #f4f4f4;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .vendor-edit-product__image-upload > label {
   font-weight: 600;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
   color: #374151;
 }
 
