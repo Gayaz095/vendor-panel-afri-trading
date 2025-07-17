@@ -6,8 +6,6 @@ const PAGE_WINDOW = 5;
 
 const VendorProductsCards = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [editPage, setEditPage] = useState(null);
-  const [inputValue, setInputValue] = useState("");
 
   const totalPages = Math.ceil(products.length / CARDS_PER_PAGE);
   const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
@@ -19,35 +17,11 @@ const VendorProductsCards = ({ products }) => {
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
-      setEditPage(null);
     }
   };
 
   const startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
   const endPage = Math.min(totalPages, startPage + PAGE_WINDOW - 1);
-
-  // const handleDoubleClick = (page) => {
-  //   setEditPage(page);
-  //   setInputValue(page);
-  // };
-
-  const handleInputChange = (e) => {
-    const value = e.target.value.replace(/[^0-9]/g, "");
-    setInputValue(value);
-  };
-
-  const handleInputBlur = () => {
-    const page = Number(inputValue);
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-    setEditPage(null);
-  };
-
-  const handleInputKeyDown = (e) => {
-    if (e.key === "Enter") handleInputBlur();
-    else if (e.key === "Escape") setEditPage(null);
-  };
 
   const formatPrice = (price, currency = "INR") => {
     const userLocale = navigator.language || "en-IN";
@@ -67,7 +41,6 @@ const VendorProductsCards = ({ products }) => {
             <div className="product-image">
               <img src={item.image} alt={item.name} />
               <a
-                // href={item.onlineLink || "#"}
                 href="https://auto-spare-parts-user-panel.vercel.app/"
                 className="go-online-btn"
                 target="_blank"
@@ -112,29 +85,14 @@ const VendorProductsCards = ({ products }) => {
         {Array.from(
           { length: endPage - startPage + 1 },
           (_, i) => startPage + i
-        ).map((num) =>
-          editPage === num ? (
-            <input
-              key={num}
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-              onBlur={handleInputBlur}
-              onKeyDown={handleInputKeyDown}
-              className="pagination-input"
-              autoFocus
-            />
-          ) : (
-            <button
-              key={num}
-              className={currentPage === num ? "active" : ""}
-              onClick={() => handlePageChange(num)}
-                // onDoubleClick={() => handleDoubleClick(num)}
-              >
-              {num}
-            </button>
-          )
-        )}
+        ).map((num) => (
+          <button
+            key={num}
+            className={currentPage === num ? "active" : ""}
+            onClick={() => handlePageChange(num)}>
+            {num}
+          </button>
+        ))}
         {endPage < totalPages && <span>...</span>}
         <button
           onClick={() => handlePageChange(currentPage + 1)}

@@ -85,10 +85,11 @@ const LoginPage = () => {
           autoClose: 1500,
           hideProgressBar: true,
         });
-
+        // const delay = process.env.NODE_ENV === "test" ? 0 : 1500;// for testing purposes
         setTimeout(() => {
           navigate("/dashboard");
         }, 1500);
+        // }, delay);// Redirect after a short delay for testing purpose
       } else {
         throw new Error("Invalid login response");
       }

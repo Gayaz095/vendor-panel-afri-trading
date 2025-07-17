@@ -253,7 +253,9 @@ export default function OrdersStatus() {
                 {currentItems.map((order, idx) => (
                   <tr key={order.id}>
                     <td>{startIndex + idx + 1}</td>
-                    <td className="orders-status-orderId">
+                    <td
+                      className="orders-status-orderId"
+                    >
                       {shortOrderId(order.id)}
                     </td>
                     <td className="orders-status-email">{order.email}</td>
