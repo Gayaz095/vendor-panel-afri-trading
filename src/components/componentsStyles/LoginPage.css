@@ -194,10 +194,16 @@
   background: #edf2f7;
   border-radius: 12px;
   padding: 3.5rem;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   width: 100%;
   max-width: 450px;
   transition: all 0.3s ease;
+
+  /* Centering content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .loginpage-title {
@@ -297,7 +303,9 @@
   box-shadow: none;         /* No shadow */
   outline: none;            /* No outline by default */
   cursor: pointer;
-  font-size: 1.2rem;
+  width: 24px;        /* Fixed width */
+  height: 24px;       /* Fixed height */
+  /* font-size: 1.2rem; */
   color: #718096;
   transition: color 0.2s ease;
 
@@ -312,9 +320,8 @@
 }
 
 .loginpage-toggle-password-icon svg {
-  width: 1.2em;
+  width: 1.2em;      /* Ensure consistent sizing */
   height: 1.2em;
-  display: block;
 }
 
 .loginpage-toggle-password-icon:hover {

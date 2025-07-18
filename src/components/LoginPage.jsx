@@ -347,92 +347,95 @@ const LoginPage = () => {
 
         {/* Right Side: Login Form */}
         <section className="loginpage-right" aria-label="Vendor Sign In">
-          <article className="loginpage-right-content">
-            <header>
-              <h2 className="loginpage-title">Vendor Sign In</h2>
-            </header>
-            <form
-              onSubmit={handleLogin}
-              className="loginpage-form"
-              autoComplete="on"
-              aria-label="Sign in form">
-              <div className="loginpage-input-group">
-                <label htmlFor="username">
-                  <FaUserShield aria-hidden="true" /> Username (Email or Phone)
-                </label>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  autoComplete="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Enter email or phone"
-                  className="loginpage-username"
-                  aria-required="true"
-                  aria-invalid={!!errors.username}
-                />
-                {errors.username && (
-                  <p className="loginpage-error-message" role="alert">
-                    {errors.username}
-                  </p>
-                )}
-              </div>
-              <div className="loginpage-input-group loginpage-password-group">
-                <label htmlFor="password">
-                  <FaLock aria-hidden="true" /> Password
-                </label>
-                <div className="loginpage-password-input-wrapper">
+          <article className="loginpage-card">  {/*Using car wrapper*/}
+            <div className="loginpage-right-content">
+              <header>
+                <h2 className="loginpage-title">Vendor Sign In</h2>
+              </header>
+              <form
+                onSubmit={handleLogin}
+                className="loginpage-form"
+                autoComplete="on"
+                aria-label="Sign in form">
+                <div className="loginpage-input-group">
+                  <label htmlFor="username">
+                    <FaUserShield aria-hidden="true" /> Username (Email or
+                    Phone)
+                  </label>
                   <input
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    name="password"
-                    autoComplete="current-password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter password"
-                    className="loginpage-password"
+                    type="text"
+                    id="username"
+                    name="username"
+                    autoComplete="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Enter email or phone"
+                    className="loginpage-username"
                     aria-required="true"
-                    aria-invalid={!!errors.password}
+                    aria-invalid={!!errors.username}
                   />
-                  <button
-                    type="button"
-                    className="loginpage-toggle-password-icon"
-                    onClick={() => setShowPassword((prev) => !prev)}
-                    aria-label={
-                      showPassword ? "Hide password" : "Show password"
-                    }
-                    tabIndex={0}>
-                    {showPassword ? <FaEye /> : <FaEyeSlash />}
-                  </button>
+                  {errors.username && (
+                    <p className="loginpage-error-message" role="alert">
+                      {errors.username}
+                    </p>
+                  )}
                 </div>
-                {errors.password && (
-                  <p className="loginpage-error-message" role="alert">
-                    {errors.password}
-                  </p>
-                )}
-              </div>
-              <button
-                type="submit"
-                className={`loginpage-button${
-                  isLoading ? " loginpage-loading" : ""
-                }`}
-                disabled={isLoading}
-                aria-busy={isLoading}>
-                {isLoading ? (
-                  <>
-                    <span
-                      className="loginpage-loading-spinner"
-                      aria-hidden="true"></span>
-                    <span className="loginpage-loading-text">
-                      Signing In...
-                    </span>
-                  </>
-                ) : (
-                  "Sign In to Dashboard"
-                )}
-              </button>
-            </form>
+                <div className="loginpage-input-group loginpage-password-group">
+                  <label htmlFor="password">
+                    <FaLock aria-hidden="true" /> Password
+                  </label>
+                  <div className="loginpage-password-input-wrapper">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      autoComplete="current-password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter password"
+                      className="loginpage-password"
+                      aria-required="true"
+                      aria-invalid={!!errors.password}
+                    />
+                    <button
+                      type="button"
+                      className="loginpage-toggle-password-icon"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
+                      tabIndex={0}>
+                      {showPassword ? <FaEye /> : <FaEyeSlash />}
+                    </button>
+                  </div>
+                  {errors.password && (
+                    <p className="loginpage-error-message" role="alert">
+                      {errors.password}
+                    </p>
+                  )}
+                </div>
+                <button
+                  type="submit"
+                  className={`loginpage-button${
+                    isLoading ? " loginpage-loading" : ""
+                  }`}
+                  disabled={isLoading}
+                  aria-busy={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <span
+                        className="loginpage-loading-spinner"
+                        aria-hidden="true"></span>
+                      <span className="loginpage-loading-text">
+                        Signing In...
+                      </span>
+                    </>
+                  ) : (
+                    "Sign In to Dashboard"
+                  )}
+                </button>
+              </form>
+            </div>
           </article>
         </section>
       </div>

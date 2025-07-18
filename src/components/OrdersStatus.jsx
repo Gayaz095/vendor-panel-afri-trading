@@ -253,9 +253,7 @@ export default function OrdersStatus() {
                 {currentItems.map((order, idx) => (
                   <tr key={order.id}>
                     <td>{startIndex + idx + 1}</td>
-                    <td
-                      className="orders-status-orderId"
-                    >
+                    <td className="orders-status-orderId">
                       {shortOrderId(order.id)}
                     </td>
                     <td className="orders-status-email">{order.email}</td>
@@ -442,6 +440,7 @@ export default function OrdersStatus() {
                         <tr key={idx}>
                           <td>
                             <img src={product.image} alt={product.name} />
+                            <h5> {product.status} </h5>
                           </td>
                           <td>{product.name}</td>
                           <td>{product.quantity}</td>
