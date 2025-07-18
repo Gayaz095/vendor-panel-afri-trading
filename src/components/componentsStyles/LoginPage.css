@@ -178,6 +178,10 @@
 }
 
 /* Right Section */
+.loginpage-right-content {
+  width: 350px
+}
+
 .loginpage-right {
   flex: 1;
   display: flex;
@@ -286,10 +290,31 @@
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
+  background: none;         /* No background */
+  border: none;             /* No border */
+  padding: 0;               /* No padding */
+  margin: 0;                /* No margin */
+  box-shadow: none;         /* No shadow */
+  outline: none;            /* No outline by default */
   cursor: pointer;
   font-size: 1.2rem;
   color: #718096;
   transition: color 0.2s ease;
+
+  /* Fix width & height: */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+   /* Prevent flex children from changing size */
+   flex-shrink: 0;
+}
+
+.loginpage-toggle-password-icon svg {
+  width: 1.2em;
+  height: 1.2em;
+  display: block;
 }
 
 .loginpage-toggle-password-icon:hover {
@@ -377,9 +402,9 @@
   .loginpage-wrapper {
     overflow: auto;
   }
-  .loginpage-right-content {
+  /* .loginpage-right-content {
     padding-right: 5rem;
-  }
+  } */
   .loginpage-left,
   .loginpage-right {
     padding: 2.5rem;

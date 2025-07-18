@@ -108,153 +108,335 @@ const LoginPage = () => {
   if (isCheckingSession) return null;
 
   return (
-    <div className="loginpage-wrapper">
+    // <div className="loginpage-wrapper">
+    //   <div className="loginpage-container">
+    //     {/* Left Side */}
+    //     <div className="loginpage-left">
+    //       <div className="loginpage-left-content">
+    //         <div className="loginpage-brand-section">
+    //           <h2 className="loginpage-welcome-header animated-fadein">
+    //             Welcome to Afri-Trading.com Vendor Portal
+    //           </h2>
+    //           <div className="loginpage-logo-container">
+    //             <img
+    //               src={loginImage}
+    //               alt="Afri-Trading.com"
+    //               className="loginpage-brand-logo"
+    //             />
+    //           </div>
+    //           <h1 className="loginpage-brand-title">
+    //             <span className="loginpage-typewriter">Afri-Trading.com</span>
+    //             <span className="loginpage-brand-highlight"></span>
+    //           </h1>
+    //         </div>
+
+    //         <div className="loginpage-connect-with-us">
+    //           <h3 className="loginpage-connect-title">Connect With Us</h3>
+    //           <div className="loginpage-connect-items">
+    //             <div className="loginpage-connect-item">
+    //               <div className="loginpage-connect-icon loginpage-whatsapp">
+    //                 <FaWhatsapp />
+    //               </div>
+    //               <div className="loginpage-connect-details">
+    //                 <span className="loginpage-connect-label">WhatsApp:</span>
+    //                 <a
+    //                   className="loginpage-connect-link"
+    //                   href="https://wa.me/8121927536">
+    //                   +91-8121927536
+    //                 </a>
+    //               </div>
+    //             </div>
+    //             <div className="loginpage-connect-item">
+    //               <div className="loginpage-connect-icon loginpage-phone">
+    //                 <FaPhone />
+    //               </div>
+    //               <div className="loginpage-connect-details">
+    //                 <span className="loginpage-connect-label">Phone:</span>
+    //                 <a
+    //                   className="loginpage-connect-link"
+    //                   href="tel:+91-8121927536">
+    //                   +91-8121927536
+    //                 </a>
+    //               </div>
+    //             </div>
+    //             <div className="loginpage-connect-item">
+    //               <div className="loginpage-connect-icon loginpage-email">
+    //                 <FaEnvelope />
+    //               </div>
+    //               <div className="loginpage-connect-details">
+    //                 <span className="loginpage-connect-label">Email Us:</span>
+    //                 <a
+    //                   className="loginpage-connect-link"
+    //                   href="mailto:contact@afri-trading.com">
+    //                   contact@afri-trading.com
+    //                 </a>
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+
+    //     {/* Right Side */}
+    //     <div className="loginpage-right">
+    //       <div className="loginpage-right-content">
+    //         <div className="loginpage-card">
+    //           <h2 className="loginpage-title">Vendor Sign In</h2>
+    //           <form onSubmit={handleLogin} className="loginpage-form">
+    //             <div className="loginpage-input-group ">
+    //               <label htmlFor="username">
+    //                 <FaUserShield /> Username (Email or Phone)
+    //               </label>
+    //               <input
+    //                 type="text"
+    //                 id="username"
+    //                 autocomplete="username"
+    //                 value={username}
+    //                 onChange={(e) => setUsername(e.target.value)}
+    //                 placeholder="Enter email or phone"
+    //                 className="loginpage-username"
+    //               />
+    //               {errors.username && (
+    //                 <div className="loginpage-error-message">
+    //                   {errors.username}
+    //                 </div>
+    //               )}
+    //             </div>
+
+    //             <div className="loginpage-input-group loginpage-password-group">
+    //               <label htmlFor="password">
+    //                 <FaLock /> Password
+    //               </label>
+    //               <div className="loginpage-password-input-wrapper">
+    //                 <input
+    //                   type={showPassword ? "text" : "password"}
+    //                   id="password"
+    //                   autocomplete="current-password"
+    //                   value={password}
+    //                   onChange={(e) => setPassword(e.target.value)}
+    //                   placeholder="Enter password"
+    //                   className="loginpage-password"
+    //                 />
+    //                 <span
+    //                   className="loginpage-toggle-password-icon"
+    //                   onClick={() => setShowPassword((prev) => !prev)}
+    //                   autoComplete="current-password"
+    //                   aria-label="Toggle password visibility">
+    //                   {showPassword ? <FaEye /> : <FaEyeSlash />}
+    //                 </span>
+    //               </div>
+    //               {errors.password && (
+    //                 <div className="loginpage-error-message">
+    //                   {errors.password}
+    //                 </div>
+    //               )}
+    //             </div>
+
+    //             <button
+    //               type="submit"
+    //               className={`loginpage-button${
+    //                 isLoading ? " loginpage-loading" : ""
+    //               }`}
+    //               disabled={isLoading}>
+    //               {isLoading ? (
+    //                 <>
+    //                   <span className="loginpage-loading-spinner"></span>
+    //                   <span className="loginpage-loading-text">
+    //                     Signing In...
+    //                   </span>
+    //                 </>
+    //               ) : (
+    //                 "Sign In to Dashboard"
+    //               )}
+    //             </button>
+    //           </form>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+    <main className="loginpage-wrapper" role="main">
       <div className="loginpage-container">
-        {/* Left Side */}
-        <div className="loginpage-left">
-          <div className="loginpage-left-content">
-            <div className="loginpage-brand-section">
-              <h2 className="loginpage-welcome-header animated-fadein">
+        {/* Left Side: Brand & Contact */}
+        <aside className="loginpage-left" aria-label="About Afri-Trading.com">
+          <section className="loginpage-left-content">
+            <header className="loginpage-brand-section">
+              <h1 className="loginpage-welcome-header animated-fadein">
                 Welcome to Afri-Trading.com Vendor Portal
-              </h2>
-              <div className="loginpage-logo-container">
+              </h1>
+              <figure className="loginpage-logo-container">
                 <img
                   src={loginImage}
-                  alt="Afri-Trading.com"
+                  alt="Afri-Trading.com Logo"
                   className="loginpage-brand-logo"
+                  width="120"
+                  height="120"
                 />
-              </div>
-              <h1 className="loginpage-brand-title">
+                <figcaption className="visually-hidden">
+                  Afri-Trading.com logo
+                </figcaption>
+              </figure>
+              <h2 className="loginpage-brand-title">
                 <span className="loginpage-typewriter">Afri-Trading.com</span>
-                <span className="loginpage-brand-highlight"></span>
-              </h1>
-            </div>
+                <span
+                  className="loginpage-brand-highlight"
+                  aria-hidden="true"
+                />
+              </h2>
+            </header>
 
-            <div className="loginpage-connect-with-us">
-              <h3 className="loginpage-connect-title">Connect With Us</h3>
-              <div className="loginpage-connect-items">
-                <div className="loginpage-connect-item">
-                  <div className="loginpage-connect-icon loginpage-whatsapp">
+            <nav
+              className="loginpage-connect-with-us"
+              aria-label="Contact options">
+              <h2 className="loginpage-connect-title">Connect With Us</h2>
+              <ul className="loginpage-connect-items">
+                <li className="loginpage-connect-item">
+                  <span
+                    className="loginpage-connect-icon loginpage-whatsapp"
+                    aria-hidden="true">
                     <FaWhatsapp />
-                  </div>
-                  <div className="loginpage-connect-details">
+                  </span>
+                  <span className="loginpage-connect-details">
                     <span className="loginpage-connect-label">WhatsApp:</span>
                     <a
                       className="loginpage-connect-link"
-                      href="https://wa.me/8121927536">
+                      href="https://wa.me/8121927536"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Chat with us on WhatsApp">
                       +91-8121927536
                     </a>
-                  </div>
-                </div>
-                <div className="loginpage-connect-item">
-                  <div className="loginpage-connect-icon loginpage-phone">
+                  </span>
+                </li>
+                <li className="loginpage-connect-item">
+                  <span
+                    className="loginpage-connect-icon loginpage-phone"
+                    aria-hidden="true">
                     <FaPhone />
-                  </div>
-                  <div className="loginpage-connect-details">
+                  </span>
+                  <span className="loginpage-connect-details">
                     <span className="loginpage-connect-label">Phone:</span>
                     <a
                       className="loginpage-connect-link"
-                      href="tel:+91-8121927536">
+                      href="tel:+91-8121927536"
+                      aria-label="Call us">
                       +91-8121927536
                     </a>
-                  </div>
-                </div>
-                <div className="loginpage-connect-item">
-                  <div className="loginpage-connect-icon loginpage-email">
+                  </span>
+                </li>
+                <li className="loginpage-connect-item">
+                  <span
+                    className="loginpage-connect-icon loginpage-email"
+                    aria-hidden="true">
                     <FaEnvelope />
-                  </div>
-                  <div className="loginpage-connect-details">
+                  </span>
+                  <span className="loginpage-connect-details">
                     <span className="loginpage-connect-label">Email Us:</span>
                     <a
                       className="loginpage-connect-link"
-                      href="mailto:contact@afri-trading.com">
+                      href="mailto:contact@afri-trading.com"
+                      aria-label="Email us">
                       contact@afri-trading.com
                     </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  </span>
+                </li>
+              </ul>
+            </nav>
+          </section>
+        </aside>
 
-        {/* Right Side */}
-        <div className="loginpage-right">
-          <div className="loginpage-right-content">
-            <div className="loginpage-card">
+        {/* Right Side: Login Form */}
+        <section className="loginpage-right" aria-label="Vendor Sign In">
+          <article className="loginpage-right-content">
+            <header>
               <h2 className="loginpage-title">Vendor Sign In</h2>
-              <form onSubmit={handleLogin} className="loginpage-form">
-                <div className="loginpage-input-group ">
-                  <label htmlFor="username">
-                    <FaUserShield /> Username (Email or Phone)
-                  </label>
+            </header>
+            <form
+              onSubmit={handleLogin}
+              className="loginpage-form"
+              autoComplete="on"
+              aria-label="Sign in form">
+              <div className="loginpage-input-group">
+                <label htmlFor="username">
+                  <FaUserShield aria-hidden="true" /> Username (Email or Phone)
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  autoComplete="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter email or phone"
+                  className="loginpage-username"
+                  aria-required="true"
+                  aria-invalid={!!errors.username}
+                />
+                {errors.username && (
+                  <p className="loginpage-error-message" role="alert">
+                    {errors.username}
+                  </p>
+                )}
+              </div>
+              <div className="loginpage-input-group loginpage-password-group">
+                <label htmlFor="password">
+                  <FaLock aria-hidden="true" /> Password
+                </label>
+                <div className="loginpage-password-input-wrapper">
                   <input
-                    type="text"
-                    id="username"
-                    autocomplete="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Enter email or phone"
-                    className="loginpage-username"
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter password"
+                    className="loginpage-password"
+                    aria-required="true"
+                    aria-invalid={!!errors.password}
                   />
-                  {errors.username && (
-                    <div className="loginpage-error-message">
-                      {errors.username}
-                    </div>
-                  )}
+                  <button
+                    type="button"
+                    className="loginpage-toggle-password-icon"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                    tabIndex={0}>
+                    {showPassword ? <FaEye /> : <FaEyeSlash />}
+                  </button>
                 </div>
-
-                <div className="loginpage-input-group loginpage-password-group">
-                  <label htmlFor="password">
-                    <FaLock /> Password
-                  </label>
-                  <div className="loginpage-password-input-wrapper">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      id="password"
-                      autocomplete="current-password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Enter password"
-                      className="loginpage-password"
-                    />
+                {errors.password && (
+                  <p className="loginpage-error-message" role="alert">
+                    {errors.password}
+                  </p>
+                )}
+              </div>
+              <button
+                type="submit"
+                className={`loginpage-button${
+                  isLoading ? " loginpage-loading" : ""
+                }`}
+                disabled={isLoading}
+                aria-busy={isLoading}>
+                {isLoading ? (
+                  <>
                     <span
-                      className="loginpage-toggle-password-icon"
-                      onClick={() => setShowPassword((prev) => !prev)}
-                      autoComplete="current-password"
-                      aria-label="Toggle password visibility">
-                      {showPassword ? <FaEye /> : <FaEyeSlash />}
+                      className="loginpage-loading-spinner"
+                      aria-hidden="true"></span>
+                    <span className="loginpage-loading-text">
+                      Signing In...
                     </span>
-                  </div>
-                  {errors.password && (
-                    <div className="loginpage-error-message">
-                      {errors.password}
-                    </div>
-                  )}
-                </div>
-
-                <button
-                  type="submit"
-                  className={`loginpage-button${
-                    isLoading ? " loginpage-loading" : ""
-                  }`}
-                  disabled={isLoading}>
-                  {isLoading ? (
-                    <>
-                      <span className="loginpage-loading-spinner"></span>
-                      <span className="loginpage-loading-text">
-                        Signing In...
-                      </span>
-                    </>
-                  ) : (
-                    "Sign In to Dashboard"
-                  )}
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
+                  </>
+                ) : (
+                  "Sign In to Dashboard"
+                )}
+              </button>
+            </form>
+          </article>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 
