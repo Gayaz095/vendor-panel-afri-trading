@@ -221,11 +221,23 @@ export default function OrdersStatus() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="orders-status-search"
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              setSearchTerm("");
+              // optionally, e.target.blur(); // to remove focus
+            }
+          }}
         />
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="orders-status-filter">
+          className="orders-status-filter"
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              setStatusFilter("All"); // Reset filter to 'All'
+              e.target.blur(); // Optional: remove focus
+            }
+          }}>
           <option value="All">All Status</option>
           <option value="Pending">Pending</option>
           <option value="Shipped">Shipped</option>

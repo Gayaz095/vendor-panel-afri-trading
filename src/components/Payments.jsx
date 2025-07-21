@@ -1,4 +1,7 @@
 import React, { useState, useRef } from "react";
+
+import { FiEye } from "react-icons/fi";
+
 import "./componentsStyles/Payments.css";
 
 // Mock data for demonstration
@@ -8,22 +11,44 @@ const mockPayments = [
     totalAmount: "₹2000",
     paymentId: "PAY123456",
     transactionId: "TXN456789",
-    orderId: "ORD987654",
-    date: "2024-06-21",
+    orderId: "687e1590e2140f4efaaeab1e",
+    date: "21 Jul 2025, 03:55 pm",
     paymentStatus: "Success",
     received: true,
-    actionMarked: null, // NEW
+    actionMarked: null,
   },
   {
     id: 2,
     totalAmount: "₹1500",
     paymentId: "PAY789012",
     transactionId: "TXN123456",
-    orderId: "ORD123456",
-    date: "2024-06-20",
+    orderId: "687e14eae2140f4efaaea8a1",
+    date: "21 June 2025, 02:00 pm",
     paymentStatus: "Failed",
     received: false,
-    actionMarked: null, // NEW
+    actionMarked: null,
+  },
+  {
+    id: 3,
+    totalAmount: "₹1800",
+    paymentId: "PAY789012897504758EAik898745789012897504758EAik898745",
+    transactionId: "TXN123456687e12f8e2140f4efaaea3df",
+    orderId: "687e12f8e2140f4efaaea3df",
+    date: "08 Jul 2025, 05:18 pm",
+    paymentStatus: "Failed",
+    received: false,
+    actionMarked: null,
+  },
+  {
+    id: 4,
+    totalAmount: "₹2000",
+    paymentId: "PAY789012",
+    transactionId: "TXN123456",
+    orderId: "687e123ce2140f4efaaea2f8",
+    date: "08 Jul 2025, 11: 46 am",
+    paymentStatus: "Success",
+    received: false,
+    actionMarked: null,
   },
   // Add more mock data as needed, each with `actionMarked: null`
 ];
@@ -54,7 +79,13 @@ export default function Payments() {
       p.paymentId.toLowerCase().includes(s) ||
       p.transactionId.toLowerCase().includes(s) ||
       p.orderId.toLowerCase().includes(s);
-    const filterMatch = filter === "All" ? true : p.paymentStatus === filter;
+    let filterMatch;
+    if (filter === "All") {
+      filterMatch = true; // Don't filter by status and include everything
+    } else {
+      filterMatch = p.paymentStatus === filter; // Only include if status matches filter value
+    }
+
     return searchMatch && filterMatch;
   });
 
@@ -92,9 +123,9 @@ export default function Payments() {
 
   return (
     <div className="payments-container">
-      <h2 className="payments-title">Payments</h2>
+      <h2 className="payments-title">Payments Management</h2>
 
-      {/* Top Controls */}
+      {/* Payments search and filters */}
       <div className="payments-controls">
         <input
           className="payments-search"
@@ -102,29 +133,41 @@ export default function Payments() {
           placeholder="Search by Payment ID, Transaction ID, or Order ID"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              setSearch("");
+              // optionally, e.target.blur(); // to remove focus
+            }
+          }}
         />
 
         <select
           className="payments-filter"
           value={filter}
-          onChange={(e) => setFilter(e.target.value)}>
+          onChange={(e) => setFilter(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              setFilter("All"); // Reset filter to 'All'
+              e.target.blur(); // Optional: remove focus
+            }
+          }}>
           <option value="All">All</option>
           <option value="Success">Success</option>
           <option value="Failed">Failed</option>
         </select>
       </div>
 
-      {/* Table */}
+      {/* Payments Table */}
       <div className="payments-table-responsive">
         <table className="payments-table">
           <thead>
             <tr>
-              <th>TotalAmount</th>
+              <th>Total Amount</th>
               <th>PaymentId</th>
               <th>TranscationId</th>
               <th>OrderId</th>
               <th>Date</th>
-              <th>PaymentStatus</th>
+              <th>Payment Status</th>
               <th>Action</th>
               <th>View</th>
             </tr>
@@ -187,7 +230,7 @@ export default function Payments() {
                     <button
                       className="payments-view-btn"
                       onClick={() => handleView(p)}>
-                      View
+                      <FiEye />
                     </button>
                   </td>
                 </tr>
@@ -196,7 +239,66 @@ export default function Payments() {
           </tbody>
         </table>
       </div>
-
+      {modalOpen && modalPayment && (
+        <div className="payments-modal-overlay" onClick={closeModal}>
+          <div
+            className="payments-modal-content"
+            ref={modalContentRef}
+            onClick={(e) => e.stopPropagation()}>
+            <div className="payments-modal-header">
+              <h3>Payment Details</h3>
+              <div>
+                <button
+                  className="payments-modal-print"
+                  onClick={handlePrint}
+                  title="Print">
+                  Print
+                </button>
+                <button
+                  className="payments-modal-close"
+                  onClick={closeModal}
+                  title="Close">
+                  &times;
+                </button>
+              </div>
+            </div>
+            <div className="payments-modal-body">
+              <table className="payments-modal-table">
+                <tbody>
+                  {Object.entries(paymentFieldLabels).map(([key, label]) => (
+                    <tr key={key}>
+                      <td className="payments-modal-label">{label}</td>
+                      <td className="payments-modal-value">
+                        {key === "paymentStatus" ? (
+                          <span
+                            className={
+                              "payments-badge " +
+                              (modalPayment.paymentStatus === "Success"
+                                ? "success"
+                                : modalPayment.paymentStatus === "Failed"
+                                ? "failed"
+                                : "")
+                            }>
+                            {modalPayment.paymentStatus}
+                          </span>
+                        ) : key === "received" ? (
+                          modalPayment.received ? (
+                            "Yes"
+                          ) : (
+                            "No"
+                          )
+                        ) : (
+                          modalPayment[key]
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

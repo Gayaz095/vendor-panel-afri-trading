@@ -61,7 +61,7 @@
 .payments-search:focus,
 .payments-filter:focus {
   border-color: var(--primary) !important;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.16) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16) !important;
   outline: none !important;
 }
 
@@ -71,7 +71,7 @@
   overflow-x: auto;
   background: #fff;
   border-radius: var(--radius);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   padding: 0;
   margin-bottom: 2rem;
 }
@@ -99,11 +99,19 @@
   word-break: break-word;
 }
 
+/* .payments-table td,
+.payments-modal-value {
+  word-break: break-all;
+  overflow-wrap: anywhere;
+} */
+
 .payments-table th {
   background-color: #f3f6fa;
   color: var(--primary-dark);
   font-weight: 600;
   letter-spacing: 0.01em;
+  white-space: normal;        /* allow breaking! */
+  word-break: break-word;    /* break long words to fit */
   border-bottom: 2px solid var(--gray-border);
 }
 
@@ -203,8 +211,11 @@
 /* Modal styles */
 .payments-modal-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(44,62,80,0.19);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(44, 62, 80, 0.19);
   z-index: 9000;
   display: flex;
   align-items: center;
@@ -216,7 +227,8 @@
   background: var(--modal-bg);
   border-radius: var(--radius);
   box-shadow: var(--modal-shadow);
-  max-width: 420px;
+  /* max-width: 420px; */
+  max-width: 700px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -226,8 +238,14 @@
 }
 
 @keyframes fadeInScale {
-  0% { opacity: 0; transform: scale(0.94);}
-  100%{ opacity: 1; transform: scale(1);}
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .payments-modal-header {
@@ -253,10 +271,10 @@
   transition: color 0.17s;
 }
 .payments-modal-close:hover {
-  color: var(--primary);
+  color: #334155;
 }
 .payments-modal-print {
-  background: var(--primary);
+  background: #0ea5e9;
   border: none;
   color: #fff;
   font-size: 1.02em;
@@ -270,7 +288,7 @@
   align-items: center;
 }
 .payments-modal-print:hover {
-  background: var(--primary-dark);
+  background: #0369a1;
 }
 
 .payments-modal-body {
@@ -356,7 +374,7 @@
     margin-bottom: 1.15em;
     background: #fff;
     border-radius: var(--radius);
-    box-shadow: 0 1px 6px rgba(37,99,235,0.05);
+    box-shadow: 0 1px 6px rgba(37, 99, 235, 0.05);
     padding: 0.6em 0.25em;
   }
 

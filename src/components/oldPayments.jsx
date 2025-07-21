@@ -55,6 +55,13 @@ export default function Payments() {
       p.transactionId.toLowerCase().includes(s) ||
       p.orderId.toLowerCase().includes(s);
     const filterMatch = filter === "All" ? true : p.paymentStatus === filter;
+    //Equivalent plain JS logic
+    // let filterMatch;
+    // if (filter === "All") {
+    //   filterMatch = true; // Don't filter by status and include everything
+    // } else {
+    //   filterMatch = p.paymentStatus === filter; // Only include if status matches filter value
+    // }
     return searchMatch && filterMatch;
   });
 
