@@ -18,7 +18,6 @@ import { vendorLogin } from "../utils/vendorLoginApi";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
-  
   // useVendor() a custom hook to manage vendor authentication and session state from context
   const { vendorDetails, setVendorDetails, isCheckingSession } = useVendor();
 
@@ -119,7 +118,7 @@ const LoginPage = () => {
   };
 
   // Optionally render nothing while checking session status
-  // this prevents flicker/false render
+  // this prevents flickering or false render
   if (isCheckingSession) return null;
 
   return (
@@ -140,9 +139,6 @@ const LoginPage = () => {
                   width="120"
                   height="120"
                 />
-                <figcaption className="visually-hidden">
-                  Afri-Trading.com logo
-                </figcaption>
               </figure>
               <h2 className="loginpage-brand-title">
                 <span className="loginpage-typewriter">Afri-Trading.com</span>
