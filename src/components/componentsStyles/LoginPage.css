@@ -404,7 +404,7 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .loginpage-container {
-    flex-direction: row;
+    flex-direction: column;
   }
   .loginpage-wrapper {
     overflow: auto;
