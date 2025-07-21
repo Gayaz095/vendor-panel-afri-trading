@@ -37,6 +37,7 @@ export default function OrdersStatus() {
         try {
           setLoadingOrders(true);
           const response = await getVendorProductsOrders(vendorId);
+
           const ordersData = response.data
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             .map((order) => ({
@@ -62,6 +63,7 @@ export default function OrdersStatus() {
               })),
             }));
           setOrders(ordersData);
+          // console.log("Response: ", ordersData);
         } catch (error) {
           console.error("Error fetching vendor orders:", error.message);
         } finally {
