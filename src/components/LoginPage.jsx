@@ -142,10 +142,6 @@ const LoginPage = () => {
               </figure>
               <h2 className="loginpage-brand-title">
                 <span className="loginpage-typewriter">Afri-Trading.com</span>
-                <span
-                  className="loginpage-brand-highlight"
-                  aria-hidden="true"
-                />
               </h2>
             </header>
 
@@ -212,7 +208,6 @@ const LoginPage = () => {
         {/* Right Side: Login Form */}
         <section className="loginpage-right" aria-label="Vendor Sign In">
           <article className="loginpage-card">
-            {" "}
             {/*Using car wrapper*/}
             <div className="loginpage-right-content">
               <header>
