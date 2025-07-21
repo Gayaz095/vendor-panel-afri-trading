@@ -317,6 +317,14 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
               value={filters.name}
               onChange={handleFilterChange}
               className="vpt-left-input-input"
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  setFilters((prev) => ({
+                    ...prev,
+                    name: "",
+                  }));
+                }
+              }}
             />
           </div>
           <div className="vpt-right-button">
@@ -442,6 +450,13 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
             value={filters.referenceNumber}
             onChange={handleFilterChange}
             className="vpt-reference-no-input"
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                setFilters((prev) => {
+                  return { ...prev, referenceNumber: "" };
+                });
+              }
+            }}
           />
         </div>
       </div>

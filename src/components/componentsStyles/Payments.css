@@ -342,7 +342,7 @@
 /* Responsive */
 @media (max-width: 900px) {
   .payments-table-responsive {
-    padding: 0.2em 0.2em;
+    /* padding: 0.2em 0.2em; */
     background: #fff;
     border-radius: var(--radius);
     box-shadow: none;
@@ -363,7 +363,7 @@
   .payments-table td,
   .payments-table tr {
     display: block;
-    width: 100%;
+    /* width: 100%; */
   }
 
   .payments-table thead {
@@ -376,6 +376,7 @@
     border-radius: var(--radius);
     box-shadow: 0 1px 6px rgba(37, 99, 235, 0.05);
     padding: 0.6em 0.25em;
+    border: 0.2rem solid rgba(37, 99, 235, 0.05);
   }
 
   .payments-table td {

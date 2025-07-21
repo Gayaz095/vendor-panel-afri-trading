@@ -136,7 +136,6 @@ export default function Payments() {
           onKeyDown={(e) => {
             if (e.key === "Escape") {
               setSearch("");
-              // optionally, e.target.blur(); // to remove focus
             }
           }}
         />
