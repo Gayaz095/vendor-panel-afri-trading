@@ -18,17 +18,24 @@ import { vendorLogin } from "../utils/vendorLoginApi";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
+  
+  // useVendor() a custom hook to manage vendor authentication and session state from context
   const { vendorDetails, setVendorDetails, isCheckingSession } = useVendor();
+
+  // State to store input values and UI states
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
 
+  // State to manage input validation errors and loading status
   const [errors, setErrors] = useState({ username: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // React Router hook for navigation
 
-  const hasRedirected = useRef(false);
+  const hasRedirected = useRef(false); // Prevents multiple redirects
 
+  // Redirect to dashboard if session has been checked
+  // and vendor is already logged in
   useEffect(() => {
     if (!isCheckingSession && vendorDetails && !hasRedirected.current) {
       hasRedirected.current = true;
@@ -36,21 +43,22 @@ const LoginPage = () => {
     }
   }, [vendorDetails, isCheckingSession, navigate]);
 
+  // Validate login form inputs and set errors if any
   const validateInputs = () => {
     let isValid = true;
     const newErrors = { username: "", password: "" };
-
+    // Validate username (should be non-empty and match email/phone regex)
     if (!username.trim()) {
       newErrors.username = "Username is required";
       isValid = false;
     } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(username) &&
-      !/^[\d+]{10,15}$/.test(username)
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(username) && // Not a valid email
+      !/^[\d+]{10,15}$/.test(username) // Not a valid phone number
     ) {
       newErrors.username = "Please enter a valid email or phone number";
       isValid = false;
     }
-
+    // Validate password (should be non-empty and minimum 5 characters)
     if (!password) {
       newErrors.password = "Password is required";
       isValid = false;
@@ -63,11 +71,12 @@ const LoginPage = () => {
     return isValid;
   };
 
+  // Handles login form submission
   const handleLogin = async (e) => {
-    e.preventDefault();
-    if (!validateInputs()) return;
+    e.preventDefault(); // Prevent default form behavior
+    if (!validateInputs()) return; // Don't proceed if validation fails
 
-    setIsLoading(true);
+    setIsLoading(true); // Show loading spinner/button
 
     const payLoad = {
       emailOrPhone: username,
@@ -75,11 +84,12 @@ const LoginPage = () => {
     };
 
     try {
+      // Attempt vendor login via API
       const response = await vendorLogin(payLoad);
 
       if (response?.token) {
-        setVendorDetails(response);
-
+        setVendorDetails(response); // Update global vendor state
+        // Notify user of success
         toast.success("Login successful!", {
           position: "top-right",
           autoClose: 1500,
@@ -87,13 +97,16 @@ const LoginPage = () => {
         });
         // const delay = process.env.NODE_ENV === "test" ? 0 : 1500;// for testing purposes
         setTimeout(() => {
+          // Redirect to dashboard after short delay
           navigate("/dashboard");
         }, 1500);
         // }, delay);// Redirect after a short delay for testing purpose
       } else {
+        // In case the response does not have expected data
         throw new Error("Invalid login response");
       }
     } catch (error) {
+      // Show error toast notification and log error
       toast.error("Login failed. Please check your credentials", {
         position: "top-right",
         autoClose: 3000,
@@ -101,160 +114,15 @@ const LoginPage = () => {
       });
       console.error("Login error:", error);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Hide loading spinner/button
     }
   };
 
+  // Optionally render nothing while checking session status
+  // this prevents flicker/false render
   if (isCheckingSession) return null;
 
   return (
-    // <div className="loginpage-wrapper">
-    //   <div className="loginpage-container">
-    //     {/* Left Side */}
-    //     <div className="loginpage-left">
-    //       <div className="loginpage-left-content">
-    //         <div className="loginpage-brand-section">
-    //           <h2 className="loginpage-welcome-header animated-fadein">
-    //             Welcome to Afri-Trading.com Vendor Portal
-    //           </h2>
-    //           <div className="loginpage-logo-container">
-    //             <img
-    //               src={loginImage}
-    //               alt="Afri-Trading.com"
-    //               className="loginpage-brand-logo"
-    //             />
-    //           </div>
-    //           <h1 className="loginpage-brand-title">
-    //             <span className="loginpage-typewriter">Afri-Trading.com</span>
-    //             <span className="loginpage-brand-highlight"></span>
-    //           </h1>
-    //         </div>
-
-    //         <div className="loginpage-connect-with-us">
-    //           <h3 className="loginpage-connect-title">Connect With Us</h3>
-    //           <div className="loginpage-connect-items">
-    //             <div className="loginpage-connect-item">
-    //               <div className="loginpage-connect-icon loginpage-whatsapp">
-    //                 <FaWhatsapp />
-    //               </div>
-    //               <div className="loginpage-connect-details">
-    //                 <span className="loginpage-connect-label">WhatsApp:</span>
-    //                 <a
-    //                   className="loginpage-connect-link"
-    //                   href="https://wa.me/8121927536">
-    //                   +91-8121927536
-    //                 </a>
-    //               </div>
-    //             </div>
-    //             <div className="loginpage-connect-item">
-    //               <div className="loginpage-connect-icon loginpage-phone">
-    //                 <FaPhone />
-    //               </div>
-    //               <div className="loginpage-connect-details">
-    //                 <span className="loginpage-connect-label">Phone:</span>
-    //                 <a
-    //                   className="loginpage-connect-link"
-    //                   href="tel:+91-8121927536">
-    //                   +91-8121927536
-    //                 </a>
-    //               </div>
-    //             </div>
-    //             <div className="loginpage-connect-item">
-    //               <div className="loginpage-connect-icon loginpage-email">
-    //                 <FaEnvelope />
-    //               </div>
-    //               <div className="loginpage-connect-details">
-    //                 <span className="loginpage-connect-label">Email Us:</span>
-    //                 <a
-    //                   className="loginpage-connect-link"
-    //                   href="mailto:contact@afri-trading.com">
-    //                   contact@afri-trading.com
-    //                 </a>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-
-    //     {/* Right Side */}
-    //     <div className="loginpage-right">
-    //       <div className="loginpage-right-content">
-    //         <div className="loginpage-card">
-    //           <h2 className="loginpage-title">Vendor Sign In</h2>
-    //           <form onSubmit={handleLogin} className="loginpage-form">
-    //             <div className="loginpage-input-group ">
-    //               <label htmlFor="username">
-    //                 <FaUserShield /> Username (Email or Phone)
-    //               </label>
-    //               <input
-    //                 type="text"
-    //                 id="username"
-    //                 autocomplete="username"
-    //                 value={username}
-    //                 onChange={(e) => setUsername(e.target.value)}
-    //                 placeholder="Enter email or phone"
-    //                 className="loginpage-username"
-    //               />
-    //               {errors.username && (
-    //                 <div className="loginpage-error-message">
-    //                   {errors.username}
-    //                 </div>
-    //               )}
-    //             </div>
-
-    //             <div className="loginpage-input-group loginpage-password-group">
-    //               <label htmlFor="password">
-    //                 <FaLock /> Password
-    //               </label>
-    //               <div className="loginpage-password-input-wrapper">
-    //                 <input
-    //                   type={showPassword ? "text" : "password"}
-    //                   id="password"
-    //                   autocomplete="current-password"
-    //                   value={password}
-    //                   onChange={(e) => setPassword(e.target.value)}
-    //                   placeholder="Enter password"
-    //                   className="loginpage-password"
-    //                 />
-    //                 <span
-    //                   className="loginpage-toggle-password-icon"
-    //                   onClick={() => setShowPassword((prev) => !prev)}
-    //                   autoComplete="current-password"
-    //                   aria-label="Toggle password visibility">
-    //                   {showPassword ? <FaEye /> : <FaEyeSlash />}
-    //                 </span>
-    //               </div>
-    //               {errors.password && (
-    //                 <div className="loginpage-error-message">
-    //                   {errors.password}
-    //                 </div>
-    //               )}
-    //             </div>
-
-    //             <button
-    //               type="submit"
-    //               className={`loginpage-button${
-    //                 isLoading ? " loginpage-loading" : ""
-    //               }`}
-    //               disabled={isLoading}>
-    //               {isLoading ? (
-    //                 <>
-    //                   <span className="loginpage-loading-spinner"></span>
-    //                   <span className="loginpage-loading-text">
-    //                     Signing In...
-    //                   </span>
-    //                 </>
-    //               ) : (
-    //                 "Sign In to Dashboard"
-    //               )}
-    //             </button>
-    //           </form>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
     <main className="loginpage-wrapper" role="main">
       <div className="loginpage-container">
         {/* Left Side: Brand & Contact */}
@@ -347,7 +215,9 @@ const LoginPage = () => {
 
         {/* Right Side: Login Form */}
         <section className="loginpage-right" aria-label="Vendor Sign In">
-          <article className="loginpage-card">  {/*Using car wrapper*/}
+          <article className="loginpage-card">
+            {" "}
+            {/*Using car wrapper*/}
             <div className="loginpage-right-content">
               <header>
                 <h2 className="loginpage-title">Vendor Sign In</h2>

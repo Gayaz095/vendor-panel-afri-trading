@@ -22,6 +22,7 @@ import Charts from "./Charts";
 import RecentProducts from "./RecentProducts";
 import RecentOrdersStatus from "./RecentOrdersStatus";
 
+// Map icon names to icon components for dynamic lookup
 const iconComponents = {
   FiShoppingCart,
   FiPackage,
@@ -33,14 +34,19 @@ const iconComponents = {
   FiPieChart,
 };
 
+/**
+ * Dashboard Component
+ * Displays vendor stats, charts, and recent activity for logged in vendor.
+ **/
 const Dashboard = () => {
-  const { vendorDetails } = useVendor();
-  const navigate = useNavigate();
+  const { vendorDetails } = useVendor(); // Get vendor details from context
+  const navigate = useNavigate(); // React Router hook for navigation
   const [animateValues, setAnimateValues] = useState(false);
-  const [loading, setLoading] = useState(false);// change to true 
-                                                // if simulating in real time
+  const [loading, setLoading] = useState(false); // change to true
+  // if simulating in real time
   const [error, setError] = useState(null);
 
+  //Redirect to login if not authenticated.
   useEffect(() => {
     if (!vendorDetails) {
       navigate("/login");
@@ -86,10 +92,13 @@ const Dashboard = () => {
     },
   ];
 
-  if (!vendorDetails) return null; // or a loading state until redirect
+  // If user is not authenticated, render nothing while effect processes redirect
+  if (!vendorDetails) return null;
 
+  // Show loading message if loading state is set
   if (loading) return <div className="loading">Loading dashboard data...</div>;
 
+  // Show error message if error occurred
   if (error) return <div className="error-message">Error: {error}</div>;
 
   return (
@@ -98,6 +107,7 @@ const Dashboard = () => {
 
       <div className="dashboard-cards">
         {stats.map((stat, index) => {
+          // Look up icon dynamically by string name
           const Icon = iconComponents[stat.icon];
           return (
             <div
@@ -107,7 +117,7 @@ const Dashboard = () => {
               <div
                 className="dashboard-icon"
                 style={{ backgroundColor: stat.color }}>
-                {Icon && <Icon />}
+                {Icon && <Icon />} {/* Render icon if exists */}
               </div>
               <div className="dashboard-info">
                 <h3>{stat.title}</h3>

@@ -6,6 +6,7 @@ import {
   FaBoxOpen,
   FaPlus,
   FaCloudUploadAlt,
+  FaMoneyBill,
   FaStore,
   FaClipboardList,
   FaShippingFast,
@@ -132,7 +133,15 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
                   Delivery Status
                 </NavLink>
               </li>
-              <li key="/edit-profile" style={{ "--i": 5 }}>
+              <li key="/payments" style={{ "--i": 5 }}>
+                <NavLink
+                  to="/payments"
+                  className={({ isActive }) => (isActive ? "active" : "")}>
+                  <FaMoneyBill className="icon" />
+                  Payments
+                </NavLink>
+              </li>
+              <li key="/edit-profile" style={{ "--i": 6 }}>
                 <NavLink
                   to="/edit-profile"
                   className={({ isActive }) => (isActive ? "active" : "")}>

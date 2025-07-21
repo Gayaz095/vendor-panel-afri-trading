@@ -13,12 +13,15 @@ import PublicRoute from "./components/PublicRoute";
 import NotFound from "./components/NotFound";
 import VendorVisitStore from "./components/VendorVisitStore";
 import OrdersStatus from "./components/OrdersStatus";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { VendorProvider } from "./components/VendorContext";
 import DeliveryStatus from "./components/DeliveryStatus";
+import Payments from "./components/Payments";
 import AddProduct from "./components/AddProduct";
 import EditProfile from "./components/EditProfile";
+
+import { VendorProvider } from "./components/VendorContext";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
@@ -42,6 +45,7 @@ export default function App() {
                 <Route path="visit-store" element={<VendorVisitStore />} />
                 <Route path="orders-status" element={<OrdersStatus />} />
                 <Route path="delivery-status" element={<DeliveryStatus />} />
+                <Route path="payments" element={<Payments />} />
                 <Route path="edit-profile" element={<EditProfile />} />
                 {/* NotFound route at /path-not-found */}
                 <Route path="/path-not-found" element={<NotFound />} />

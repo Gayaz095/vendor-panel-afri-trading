@@ -3,11 +3,13 @@ import { getVendorProductsOrders } from "../utils/getVendorProductsOrders";
 import { useVendor } from "./VendorContext";
 import "./componentsStyles/RecentOrdersStatus.css";
 
-const ORDERS_PER_PAGE = 7;
-const PAGE_WINDOW = 3;
+const ORDERS_PER_PAGE = 7; // How many products to show per page
+const PAGE_WINDOW = 3; // How many pagination buttons to show at once
 
 const RecentOrdersStatus = () => {
+  // Get vendor info from context
   const { vendorDetails } = useVendor();
+  // Support for two possible vendor ID field names
   const vendorId = vendorDetails?.vendorId || vendorDetails?._id;
 
   const [orders, setOrders] = useState([]);
@@ -15,10 +17,13 @@ const RecentOrdersStatus = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Fetch recent orders for this vendor when component mounts
   useEffect(() => {
+    // Async function for order fetch and processing
     const fetchRecentOrders = async () => {
       setLoading(true);
       try {
+        // Fetch products list using the vendor ID
         const response = await getVendorProductsOrders(vendorId);
         if (Array.isArray(response.data)) {
           const sorted = response.data.sort(
@@ -44,30 +49,39 @@ const RecentOrdersStatus = () => {
       }
     };
 
+    // Only fetch if vendorId is available and prevents unwanted API calls
     if (vendorId) fetchRecentOrders();
   }, [vendorId]);
 
+  // Pagination calculations
   const totalPages = Math.max(1, Math.ceil(orders.length / ORDERS_PER_PAGE));
+  // Calculating which products to show for this page
   const startIndex = (currentPage - 1) * ORDERS_PER_PAGE;
   const endIndex = startIndex + ORDERS_PER_PAGE;
   const currentItems = orders.slice(startIndex, endIndex);
 
+  // Handler that changes current page and clamps to valid range
   const handlePageChange = (page) => {
     const clampedPage = Math.max(1, Math.min(page, totalPages));
     setCurrentPage(clampedPage);
   };
 
+  // Compute the range of visible page numbers based on current page
+  // and window size
   let startPage = Math.max(1, currentPage - Math.floor(PAGE_WINDOW / 2));
   let endPage = startPage + PAGE_WINDOW - 1;
   if (endPage > totalPages) {
     endPage = totalPages;
     startPage = Math.max(1, endPage - PAGE_WINDOW + 1);
   }
+  // Build an array of page numbers to display
   const pageNumbers = [];
   for (let i = startPage; i <= endPage; i++) pageNumbers.push(i);
 
+  // Helper to display a shortened order ID for compact table display
   const shortOrderId = (id) => (id ? "..." + id.slice(-10) : "");
 
+  // Helper to display a nice formatted local date and time string
   const formatDate = (dateStr) => {
     const locale = navigator.language || "en-US";
     return new Date(dateStr).toLocaleString(locale, {
@@ -79,10 +93,13 @@ const RecentOrdersStatus = () => {
     });
   };
 
+  // Render loading message if fetching is in progress
   if (loading)
     return (
       <div className="recent-orders-no-message">Loading recent orders...</div>
     );
+
+  // Render error if any occurred during fetch
   if (error)
     return <div className="recent-orders-no-message">Error: {error}</div>;
 
