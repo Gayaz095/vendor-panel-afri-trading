@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { getAllCars } from "../utils/getAllCars";
-import { getAllCarModels } from "../utils/getAllCarModels";
-import { mainGetCategories } from "../utils/mainGetCategories";
-import { getSubCategories } from "../utils/getSubCategories";
-import { getAllChildCategories } from "../utils/getAllChildCategories";
+import { getAllCars } from "../../utils/getAllCars";
+import { getAllCarModels } from "../../utils/getAllCarModels";
+import { mainGetCategories } from "../../utils/mainGetCategories";
+import { getSubCategories } from "../../utils/getSubCategories";
+import { getAllChildCategories } from "../../utils/getAllChildCategories";
 
 const VendorContext = createContext();
 

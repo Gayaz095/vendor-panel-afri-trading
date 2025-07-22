@@ -16,10 +16,10 @@ import "./Dashboard.css";
 import ordersData from "./static-data/orders.json";
 import productsData from "./static-data/products.json";
 
-import Charts from "./Charts";
+import Charts from "./Charts/Charts";
 // import VendorProductsTable from "./VendorProductTable";
-import RecentProducts from "./RecentProducts";
-import RecentOrdersStatus from "./RecentOrdersStatus";
+import RecentProducts from "./RecentProducts/RecentProducts";
+import RecentOrdersStatus from "./RecentOrdersStatus/RecentOrdersStatus";
 
 // Map icon names to icon components for dynamic lookup
 const iconComponents = {

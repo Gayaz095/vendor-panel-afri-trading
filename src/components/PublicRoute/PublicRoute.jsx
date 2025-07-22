@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useVendor } from "./VendorContext";
+import { useVendor } from "../VendorContext/VendorContext";
 
 const PublicRoute = () => {
   const { vendorDetails, loading } = useVendor();

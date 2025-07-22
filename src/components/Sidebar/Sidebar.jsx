@@ -1,6 +1,6 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { useVendor } from "./VendorContext";
+import { useVendor } from "../VendorContext/VendorContext";
 import {
   FaTachometerAlt,
   FaBoxOpen,
@@ -13,7 +13,7 @@ import {
   FaChevronDown,
   FaUserEdit,
 } from "react-icons/fa";
-import "./componentsStyles/Sidebar.css";
+import "./Sidebar.css";
 
 export default function Sidebar({ isMobile, isOpen, onClose }) {
   const { vendorDetails } = useVendor();

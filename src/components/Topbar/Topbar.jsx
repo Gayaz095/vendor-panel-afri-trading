@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import LogoutUI from "./LogoutUI";
-import { useVendor } from "./VendorContext";
+import LogoutUI from "../LogoutUI/LogoutUI";
+import { useVendor } from "../VendorContext/VendorContext";
 import { FaUserCircle, FaSearch } from "react-icons/fa";
-import logoImage from "../assets/logo.png";
-import "./componentsStyles/Topbar.css";
+import logoImage from "../../assets/logo.png";
+import "./Topbar.css";
 
 const Topbar = ({ toggleSidebar }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);

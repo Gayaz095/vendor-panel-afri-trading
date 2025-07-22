@@ -14,7 +14,7 @@ import {
   FaEye,
   FaEyeSlash,
 } from "react-icons/fa";
-import { vendorLogin } from "../utils/vendorLoginApi";
+import { vendorLogin } from "../../utils/vendorLoginApi";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {

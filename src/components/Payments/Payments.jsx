@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 
 import { FiEye } from "react-icons/fi";
 
-import "./componentsStyles/Payments.css";
+import "./Payments.css";
 
 // Mock data for demonstration
 const mockPayments = [

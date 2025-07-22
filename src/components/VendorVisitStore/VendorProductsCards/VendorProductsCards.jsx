@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./componentsStyles/VendorProductsCards.css";
+import "./VendorProductsCards.css";
 
 const CARDS_PER_PAGE = 6;
 const PAGE_WINDOW = 5;

@@ -5,9 +5,9 @@ import { getAllCarModels } from "../../../utils/getAllCarModels";
 import { mainGetCategories } from "../../../utils/mainGetCategories";
 import { getSubCategories } from "../../../utils/getSubCategories";
 import { getAllChildCategories } from "../../../utils/getAllChildCategories";
-import VendorEditProduct from "../../VendorEditProduct/VendorEditProduct";
+import VendorEditProduct from "../VendorEditProduct/VendorEditProduct";
 import VendorViewProduct from "../VendorViewProduct/VendorViewProduct";
-import DeleteConfirmationModal from "../../VendorEditProduct/DeleteConfirmationModal/DeleteConfirmationModal";
+import DeleteConfirmationModal from "../VendorEditProduct/DeleteConfirmationModal/DeleteConfirmationModal";
 import "./VendorProductsTable.css";
 import { toast } from "react-toastify";
 

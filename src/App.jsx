@@ -4,21 +4,21 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import ScrollToTop from "./components/ScrollToTop";
-import Layout from "./components/Layout";
-import Dashboard from "./components/Dashboard";
-import LoginPage from "./components/LoginPage";
-import ProtectedRoute from "./components/ProtectedRoute";
-import PublicRoute from "./components/PublicRoute";
-import NotFound from "./components/NotFound";
-import VendorVisitStore from "./components/VendorVisitStore";
-import OrdersStatus from "./components/OrdersStatus";
-import DeliveryStatus from "./components/DeliveryStatus";
-import Payments from "./components/Payments";
-import AddProduct from "./components/AddProduct";
-import EditProfile from "./components/EditProfile";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Layout from "./components/Layout/Layout";
+import Dashboard from "./components/Dashboard/Dashboard";
+import LoginPage from "./components/LoginPage/LoginPage";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute/PublicRoute";
+import NotFound from "./components/NotFound/NotFound";
+import VendorVisitStore from "./components/VendorVisitStore/VendorVisitStore";
+import OrdersStatus from "./components/OrderStatus/OrdersStatus";
+import DeliveryStatus from "./components/DeliveryStatus/DeliveryStatus";
+import Payments from "./components/Payments/Payments";
+import AddProduct from "./components/AddProduct/AddProduct";
+import EditProfile from "./components/EditProfile/EditProfile";
 
-import { VendorProvider } from "./components/VendorContext";
+import { VendorProvider } from "./components/VendorContext/VendorContext";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,7 +29,7 @@ export default function App() {
       <VendorProvider>
         <Router>
           <ScrollToTop />
-          <ToastContainer/>
+          <ToastContainer />
           <Routes>
             {/* Public routes */}
             <Route element={<PublicRoute />}>

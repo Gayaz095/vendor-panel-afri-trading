@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { imageUpload } from "../../utils/imageUpload";
-import { updateProduct, getVendorProducts } from "../../utils/productsApi";
-import { getAllCars } from "../../utils/getAllCars";
-import { getAllCarModels } from "../../utils/getAllCarModels";
-import { mainGetCategories } from "../../utils/mainGetCategories";
-import { getSubCategories } from "../../utils/getSubCategories";
-import { getAllChildCategories } from "../../utils/getAllChildCategories";
-import { useVendor } from "../VendorContext/VendorContext";
+import { imageUpload } from "../../../utils/imageUpload";
+import { updateProduct, getVendorProducts } from "../../../utils/productsApi";
+import { getAllCars } from "../../../utils/getAllCars";
+import { getAllCarModels } from "../../../utils/getAllCarModels";
+import { mainGetCategories } from "../../../utils/mainGetCategories";
+import { getSubCategories } from "../../../utils/getSubCategories";
+import { getAllChildCategories } from "../../../utils/getAllChildCategories";
+import { useVendor } from "../../VendorContext/VendorContext";
 import {
   FaTag,
   FaHashtag,
@@ -21,7 +21,7 @@ import {
   FaEdit,
 } from "react-icons/fa";
 import { toast } from "react-toastify";
-import "./componentsStyles/VendorEditProduct.css";
+import "./VendorEditProduct.css";
 
 const VendorEditProduct = ({ product, onClose, onSave }) => {
   const { vendorDetails } = useVendor();
@@ -384,9 +384,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
             <div className="vendor-edit-product__form-group">
               <label>
                 {/* <FaDollarSign style={{ marginRight: "6px" }} /> */}
-                <span style={{ fontSize: "22px"}}>
-                  &#8377;
-                </span>
+                <span style={{ fontSize: "22px" }}>&#8377;</span>
                 Price:
               </label>
               <input

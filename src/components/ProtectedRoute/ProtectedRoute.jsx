@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useVendor } from "./VendorContext";
+import { useVendor } from "../VendorContext/VendorContext";
 
 const ProtectedRoute = () => {
   const { vendorDetails, loading } = useVendor();
