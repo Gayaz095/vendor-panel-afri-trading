@@ -30,19 +30,6 @@
   scrollbar-color: #23365f #e5e7eb;
 }
 
-/* Custom scrollbar for Webkit browsers */
-.vendor-edit-product__modal::-webkit-scrollbar {
-  width: 8px;
-}
-.vendor-edit-product__modal::-webkit-scrollbar-thumb {
-  background: #253557;
-  border-radius: 4px;
-}
-.vendor-edit-product__modal::-webkit-scrollbar-track {
-  background: #e5e7eb;
-  border-radius: 4px;
-}
-
 .vendor-edit-product__modal .vendor-edit-product__modal_h2 {
   margin-bottom: 8px;
   color: #111827;
@@ -116,18 +103,24 @@
   font-size: 0.95rem;
   white-space: nowrap;
   z-index: 10;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.17);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.17);
   animation: vendor-edit-tooltip-pop 0.2s;
 }
 
 @keyframes vendor-edit-tooltip-pop {
-  0% { opacity: 0; transform: translateY(8px);}
-  100% { opacity: 1; transform: translateY(0);}
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .vendor-edit-product__tooltip-arrow {
   position: absolute;
-  left: 18px; 
+  left: 18px;
   bottom: -7px;
   width: 0;
   height: 0;

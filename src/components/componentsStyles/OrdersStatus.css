@@ -21,7 +21,6 @@
   background: var(--gray-bg);
   border-radius: var(--radius);
   max-width: 1200px;
-  /* margin: 2rem auto; */
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
@@ -431,7 +430,10 @@
 }
 
 @media print {
-  .modal-print-hide, .print-hide, .orders-status-btn-close, .orders-status-btn-print {
+  .modal-print-hide,
+  .print-hide,
+  .orders-status-btn-close,
+  .orders-status-btn-print {
     display: none !important;
     visibility: hidden !important;
   }

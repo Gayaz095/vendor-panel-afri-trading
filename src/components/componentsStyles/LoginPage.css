@@ -305,16 +305,11 @@
   cursor: pointer;
   width: 24px;        /* Fixed width */
   height: 24px;       /* Fixed height */
-  /* font-size: 1.2rem; */
   color: #718096;
   transition: color 0.2s ease;
-
-  /* Fix width & height: */
-
   display: flex;
   align-items: center;
   justify-content: center;
-
    /* Prevent flex children from changing size */
    flex-shrink: 0;
 }
@@ -409,9 +404,6 @@
   .loginpage-wrapper {
     overflow: auto;
   }
-  /* .loginpage-right-content {
-    padding-right: 5rem;
-  } */
   .loginpage-left,
   .loginpage-right {
     padding: 2.5rem;
