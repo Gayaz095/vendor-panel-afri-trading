@@ -11,7 +11,7 @@ import {
   Cell,
   ResponsiveContainer,
 } from "recharts";
-import "./componentsStyles/Charts.css";
+import "./Charts.css";
 
 // Define color scheme for pie chart slices
 const COLORS = ["#F44336", "#6366f1", "#22c55e"];

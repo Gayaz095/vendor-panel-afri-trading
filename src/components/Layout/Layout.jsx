@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Sidebar from "./Sidebar";
-import Topbar from "./Topbar";
+import Sidebar from "../Sidebar/Sidebar";
+import Topbar from "../Topbar/Topbar";
 import { Outlet } from "react-router-dom";
-import "./componentsStyles/Layout.css";
+import "./Layout.css";
 
 export default function Layout() {
   const [isMobile, setIsMobile] = useState(false);

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { createProduct, getVendorProducts } from "../utils/productsApi";
-import { imageUpload } from "../utils/imageUpload";
-import { useVendor } from "./VendorContext";
+import { createProduct, getVendorProducts } from "../../../utils/productsApi";
+import { imageUpload } from "../../../utils/imageUpload";
+import { useVendor } from "../../VendorContext/VendorContext";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdStars } from "react-icons/md";
 import { FiUpload } from "react-icons/fi";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./componentsStyles/AddProductModal.css";
+import "./AddProductModal.css";
 
 const Spinner = () => (
   <span className="add-product-spinner" aria-label="Loading"></span>

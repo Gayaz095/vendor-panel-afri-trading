@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { getVendorProducts, deleteProduct } from "../utils/productsApi";
-import { getAllCars } from "../utils/getAllCars";
-import { getAllCarModels } from "../utils/getAllCarModels";
-import { mainGetCategories } from "../utils/mainGetCategories";
-import { getSubCategories } from "../utils/getSubCategories";
-import { getAllChildCategories } from "../utils/getAllChildCategories";
-import VendorEditProduct from "./VendorEditProduct";
-import VendorViewProduct from "./VendorViewProduct";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
-import "./componentsStyles/VendorProductsTable.css";
+import { getVendorProducts, deleteProduct } from "../../../utils/productsApi";
+import { getAllCars } from "../../../utils/getAllCars";
+import { getAllCarModels } from "../../../utils/getAllCarModels";
+import { mainGetCategories } from "../../../utils/mainGetCategories";
+import { getSubCategories } from "../../../utils/getSubCategories";
+import { getAllChildCategories } from "../../../utils/getAllChildCategories";
+import VendorEditProduct from "../../VendorEditProduct/VendorEditProduct";
+import VendorViewProduct from "../VendorViewProduct/VendorViewProduct";
+import DeleteConfirmationModal from "../../VendorEditProduct/DeleteConfirmationModal/DeleteConfirmationModal";
+import "./VendorProductsTable.css";
 import { toast } from "react-toastify";
 
 const PRODUCTS_PER_PAGE = 5;

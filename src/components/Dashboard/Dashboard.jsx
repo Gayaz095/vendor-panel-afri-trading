@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useVendor } from "./VendorContext";
+import { useVendor } from "../VendorContext/VendorContext";
 import {
   FiPackage,
   FiShoppingCart,
@@ -11,7 +11,7 @@ import {
   FiCreditCard,
 } from "react-icons/fi";
 import { FaRupeeSign } from "react-icons/fa";
-import "./componentsStyles/Dashboard.css";
+import "./Dashboard.css";
 
 import ordersData from "./static-data/orders.json";
 import productsData from "./static-data/products.json";

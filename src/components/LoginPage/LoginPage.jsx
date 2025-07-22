@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useVendor } from "./VendorContext";
-import "./componentsStyles/LoginPage.css";
-import loginImage from "../assets/logo.png";
+import { useVendor } from "../VendorContext/VendorContext";
+import "./LoginPage.css";
+import loginImage from "../../assets/logo.png";
 import {
   FaCarAlt,
   FaUserShield,

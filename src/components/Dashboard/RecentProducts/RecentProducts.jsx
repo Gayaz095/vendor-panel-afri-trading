@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getVendorProducts } from "../utils/productsApi";
-import { useVendor } from "./VendorContext";
-import "./componentsStyles/RecentProducts.css";
+import { getVendorProducts } from "../../../utils/productsApi";
+import { useVendor } from "../../VendorContext/VendorContext";
+import "./RecentProducts.css";
 
-const PRODUCTS_PER_PAGE = 5;// How many products to show per page
+const PRODUCTS_PER_PAGE = 5; // How many products to show per page
 const PAGE_WINDOW = 3; // How many pagination buttons to show at once
 
 const RecentProducts = () => {

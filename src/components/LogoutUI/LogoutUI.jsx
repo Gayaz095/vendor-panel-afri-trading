@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useVendor } from "./VendorContext";
-import "./componentsStyles/LogoutUI.css";
+import { useVendor } from "../VendorContext/VendorContext";
+import "./LogoutUI.css";
 
 function LogoutUI({ onCancel, currentPath }) {
   const modalRef = useRef();

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { imageUpload } from "../utils/imageUpload";
-import { updateProduct, getVendorProducts } from "../utils/productsApi";
-import { getAllCars } from "../utils/getAllCars";
-import { getAllCarModels } from "../utils/getAllCarModels";
-import { mainGetCategories } from "../utils/mainGetCategories";
-import { getSubCategories } from "../utils/getSubCategories";
-import { getAllChildCategories } from "../utils/getAllChildCategories";
-import { useVendor } from "./VendorContext";
+import { imageUpload } from "../../utils/imageUpload";
+import { updateProduct, getVendorProducts } from "../../utils/productsApi";
+import { getAllCars } from "../../utils/getAllCars";
+import { getAllCarModels } from "../../utils/getAllCarModels";
+import { mainGetCategories } from "../../utils/mainGetCategories";
+import { getSubCategories } from "../../utils/getSubCategories";
+import { getAllChildCategories } from "../../utils/getAllChildCategories";
+import { useVendor } from "../VendorContext/VendorContext";
 import {
   FaTag,
   FaHashtag,

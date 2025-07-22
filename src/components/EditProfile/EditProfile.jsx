@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useVendor } from "./VendorContext";
-import { updateVendorProfile } from "../utils/updateVendorProfile";
+import { useVendor } from "../VendorContext/VendorContext";
+import { updateVendorProfile } from "../../utils/updateVendorProfile";
 import { toast } from "react-toastify";
 import { FiUser, FiMail, FiPhone, FiMapPin, FiBriefcase } from "react-icons/fi";
-import "./componentsStyles/EditProfile.css";
+import "./EditProfile.css";
 
 const EditProfile = () => {
   const { vendorDetails, setVendorDetails } = useVendor();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getVendorProductsOrders } from "../utils/getVendorProductsOrders";
-import { useVendor } from "./VendorContext";
-import "./componentsStyles/RecentOrdersStatus.css";
+import { getVendorProductsOrders } from "../../../utils/getVendorProductsOrders";
+import { useVendor } from "../../VendorContext/VendorContext";
+import "./RecentOrdersStatus.css";
 
 const ORDERS_PER_PAGE = 7; // How many products to show per page
 const PAGE_WINDOW = 3; // How many pagination buttons to show at once

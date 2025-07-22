@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./componentsStyles/OrdersStatus.css";
+import "./OrdersStatus.css";
 import { FiCheck, FiX, FiEye } from "react-icons/fi";
 import {
   getVendorProductsOrders,
   updateVendorProductsOrdersStatus,
-} from "../utils/getVendorProductsOrders";
-import { useVendor } from "./VendorContext";
+} from "../../utils/getVendorProductsOrders";
+import { useVendor } from "../VendorContext/VendorContext";
 import { toast } from "react-toastify";
 
 const PRODUCTS_PER_PAGE = 6;
