@@ -130,7 +130,8 @@ export default function Payments() {
         <input
           className="payments-search"
           type="text"
-          placeholder="Search by Payment ID, Transaction ID, or Order ID"
+          placeholder="Search by PaymentId, Transactio...."
+          title="Search by PaymentId, TransactionId, OrderId"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => {

@@ -216,8 +216,8 @@ export default function OrdersStatus() {
       <div className="orders-status-controls print-hide">
         <input
           type="text"
-          placeholder="Search by ID, email..."
-          title="Search Id, name, email ..."
+          placeholder="Search by Order ID, Email"
+          title="Search OrderId, Email"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="orders-status-search"
