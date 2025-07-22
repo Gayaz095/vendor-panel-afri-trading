@@ -1,3 +1,4 @@
+/* Payments.css */
 /* Root Variables for Consistency */
 :root {
   --primary: #2563eb;
@@ -21,7 +22,6 @@
   background: var(--gray-bg);
   border-radius: var(--radius);
   max-width: 1200px;
-  margin: 2rem auto;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
@@ -100,19 +100,13 @@
   word-break: break-word;
 }
 
-/* .payments-table td,
-.payments-modal-value {
-  word-break: break-all;
-  overflow-wrap: anywhere;
-} */
-
 .payments-table th {
   background-color: #f3f6fa;
   color: var(--primary-dark);
   font-weight: 600;
   letter-spacing: 0.01em;
-  white-space: normal;        /* allow breaking! */
-  word-break: break-word;    /* break long words to fit */
+  white-space: normal; /* allow breaking! */
+  word-break: break-word; /* break long words to fit */
   border-bottom: 2px solid var(--gray-border);
 }
 
@@ -151,7 +145,6 @@
   flex-direction: column;
   gap: 0.5em;
   align-items: center;
-  /* gap: 0.42em; */
 }
 
 .payments-action-btn {
@@ -174,7 +167,6 @@
 .payments-action-btn.received {
   background: var(--success);
   color: #fff;
-  /* Optional: border for definition */
   border: 1px solid var(--success);
 }
 
@@ -202,7 +194,6 @@
   font-size: 0.99em;
   padding: 0.5em 1.15em;
   font-weight: 500;
-  /* margin-left: 0.4em; */
   cursor: pointer;
   transition: background 0.18s;
 }
@@ -234,7 +225,6 @@
   background: var(--modal-bg);
   border-radius: var(--radius);
   box-shadow: var(--modal-shadow);
-  /* max-width: 420px; */
   max-width: 700px;
   width: 100%;
   max-height: 90vh;
@@ -354,7 +344,6 @@
 /* Responsive */
 @media (max-width: 900px) {
   .payments-table-responsive {
-    /* padding: 0.2em 0.2em; */
     background: #fff;
     border-radius: var(--radius);
     box-shadow: none;
@@ -375,7 +364,6 @@
   .payments-table td,
   .payments-table tr {
     display: block;
-    /* width: 100%; */
   }
 
   .payments-table thead {
@@ -421,11 +409,10 @@
     min-width: 102px;
     display: block;
     letter-spacing: 0.011em;
-    /* Allow labels to wrap */
     overflow-wrap: anywhere;
   }
 
-  /* Ensure buttons/fields use full width in mobile view */
+  /* Ensure buttons/fields use full width in smaller screen */
   .payments-table td,
   .payments-badge,
   .payments-actions,
