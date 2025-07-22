@@ -334,13 +334,6 @@
   padding: 2.1rem 0;
 }
 
-@media print {
-  .payments-modal-print,
-  .payments-modal-close {
-    display: none !important;
-  }
-}
-
 /* Responsive */
 @media (max-width: 900px) {
   .payments-table-responsive {

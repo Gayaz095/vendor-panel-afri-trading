@@ -105,20 +105,79 @@ export default function Payments() {
     setModalOpen(true);
   };
 
+  const handlePrint = () => {
+    if (modalContentRef.current) {
+      const printWindow = window.open("", "_blank", "width=800,height=600");
+      if (printWindow) {
+        // Clone modal content without the print/close buttons
+        const modalClone = modalContentRef.current.cloneNode(true);
+        // Remove the buttons (Print and Close) from the clone
+        const buttons = modalClone.querySelectorAll(
+          ".payments-modal-print, .payments-modal-close"
+        );
+        buttons.forEach((btn) => btn.remove());
+
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>Payment Details</title>
+              <style>
+                body {
+                  font-family: "Inter", Arial, sans-serif;
+                  margin: 0;
+                  padding: 20px;
+                  color: #333;
+                  background: #fff;
+                }
+                h3 {
+                  text-align: center;
+                  margin: 0 0 20px 0;
+                  font-size: 1.5rem;
+                }
+                table {
+                  width: 100%;
+                  border-collapse: collapse;
+                  margin-top: 10px;
+                }
+                td {
+                  padding: 10px;
+                  border: 1px solid #ddd;
+                  font-size: 1rem;
+                  vertical-align: top;
+                }
+                .payments-badge {
+                  display: inline-block;
+                  padding: 4px 10px;
+                  border-radius: 12px;
+                  font-weight: 600;
+                  color: #fff;
+                }
+                .payments-badge.success {
+                  background-color: #22c55e;
+                }
+                .payments-badge.failed {
+                  background-color: #ef4444;
+                }
+              </style>
+            </head>
+            <body>
+              <h3>Payment Details</h3>
+              ${modalClone.innerHTML}
+            </body>
+          </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+      }
+    }
+  };
+  
+
   const closeModal = () => {
     setModalOpen(false);
     setModalPayment(null);
-  };
-
-  // Print handler: print only modal
-  const handlePrint = () => {
-    if (!modalOpen || !modalContentRef.current) return;
-    // Add a class to body so CSS (@media print) shows only modal
-    document.body.classList.add("printing-modal");
-    window.print();
-    setTimeout(() => {
-      document.body.classList.remove("printing-modal");
-    }, 600);
   };
 
   return (

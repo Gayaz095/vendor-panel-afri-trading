@@ -211,6 +211,23 @@
   cursor: not-allowed;
 }
 
+.orders-status-modal-products-table th.barcode-column,
+.orders-status-modal-products-table td.barcode-column {
+  max-width: 100%;
+  width: auto;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.orders-status-modal-products-table img.barcode-image {
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  page-break-inside: avoid;
+}
+
 /* Pagination */
 .orders-status-pagination {
   display: flex;
@@ -329,24 +346,6 @@
   display: block;
 }
 
-.orders-status-modal-products-table th.barcode-column,
-.orders-status-modal-products-table td.barcode-column {
-  max-width: 300px;
-  width: 300px;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.barcode-image {
-  border: 1px solid #e0e0e0;
-  background: #f9f9f9;
-  padding: 5px;
-  margin-bottom: 0.3rem;
-  max-height: 100px;
-  max-width: 100%;
-  display: block;
-}
-
 .orders-status-loading {
   text-align: center;
   padding: 2em;
@@ -365,77 +364,61 @@
 }
 
 @media print {
-  .orders-status-modal-content {
-    box-shadow: none;
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    padding: 0;
+  body {
     margin: 0;
+    padding: 0;
+  }
+
+  .orders-status-modal-content {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   .orders-status-modal-products-table {
     width: 100% !important;
-    table-layout: fixed !important; /* Prevent overflow on right */
+    table-layout: auto !important;
     border-collapse: collapse !important;
+    page-break-inside: auto !important;
   }
 
   .orders-status-modal-products-table th,
   .orders-status-modal-products-table td {
-    max-width: none;
-    width: auto;
     word-wrap: break-word;
     white-space: normal;
-    padding: 0.5rem;
-    font-size: 0.95em;
-    border: 1px solid #ccc;
-    page-break-inside: avoid;
-    text-align: center;
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+    padding: 0.4rem !important;
+    font-size: 0.95em !important;
   }
 
-  .orders-status-modal-products-table th {
-    text-align: center;
+  .orders-status-modal-products-table tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
   }
 
-  .orders-status-modal-products-table th.barcode-column,
-  .orders-status-modal-products-table td.barcode-column {
-    max-width: none;
-    width: auto;
-    text-align: center;
-  }
-
-  .orders-status-modal-products-table td.barcode-column {
-    padding-left: 0px;
-  }
-
+  .orders-status-modal-products-table img.barcode-image,
   .orders-status-modal-products-table img {
     max-width: 100% !important;
+    width: auto !important;
     height: auto !important;
     display: block;
-    margin: 0 auto;
-    page-break-inside: avoid;
-    border: none;
+    margin: 0 auto !important;
+    page-break-inside: avoid !important;
   }
 
-  .orders-status-modal-header h2 {
-    font-size: 1.3em;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background: #fff;
-  }
-}
-
-@media print {
-  .modal-print-hide,
-  .print-hide,
-  .orders-status-btn-close,
-  .orders-status-btn-print {
+  .orders-status-modal-header,
+  .orders-status-modal-actions,
+  .print-hide {
     display: none !important;
-    visibility: hidden !important;
+  }
+
+  .modal-print-hide {
+    display: none !important;
   }
 }
 

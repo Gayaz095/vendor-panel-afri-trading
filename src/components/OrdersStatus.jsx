@@ -107,19 +107,62 @@ export default function OrdersStatus() {
   };
 
   const handleView = (order) => setSelectedOrder(order);
-  const closeModal = () => setSelectedOrder(null);
 
-  const handlePrint = (orderId) => {
-    const printContents = document.querySelector(
-      `.orders-status-modal-content`
-    ).innerHTML;
+  const handlePrint = () => {
+    const modalContent = document.querySelector(".orders-status-modal-content");
 
-    const originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    window.location.reload();
+    if (!modalContent) {
+      console.error("Modal content not found for printing.");
+      return;
+    }
+
+    // Temporarily disable scroll and height limits for print
+    modalContent.style.maxHeight = "none";
+    modalContent.style.overflow = "visible";
+
+    const printContent = modalContent.outerHTML;
+
+    const printWindow = window.open("", "_blank", "width=1000,height=800");
+    if (printWindow) {
+      printWindow.document.open();
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Print Order Details</title>
+            <style>
+              ${[...document.styleSheets]
+                .map((styleSheet) => {
+                  try {
+                    return [...styleSheet.cssRules]
+                      .map((rule) => rule.cssText)
+                      .join("\n");
+                  } catch {
+                    return "";
+                  }
+                })
+                .join("\n")}
+            </style>
+          </head>
+          <body>
+            ${printContent}
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+
+      printWindow.onload = function () {
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+      };
+    }
+
+    // Restore modal scroll after print
+    modalContent.style.maxHeight = "";
+    modalContent.style.overflow = "";
   };
+  
+  const closeModal = () => setSelectedOrder(null);
 
   const handlePrintBarcode = (product) => {
     const content = `
