@@ -4,14 +4,13 @@ import { useVendor } from "./VendorContext";
 import {
   FiPackage,
   FiShoppingCart,
-  FiDollarSign,
   FiPieChart,
   FiClock,
   FiRepeat,
   FiCheckCircle,
   FiCreditCard,
-  FiEye,
 } from "react-icons/fi";
+import { FaRupeeSign } from "react-icons/fa";
 import "./componentsStyles/Dashboard.css";
 
 import ordersData from "./static-data/orders.json";
@@ -26,7 +25,7 @@ import RecentOrdersStatus from "./RecentOrdersStatus";
 const iconComponents = {
   FiShoppingCart,
   FiPackage,
-  FiDollarSign,
+  FaRupeeSign,
   FiClock,
   FiCheckCircle,
   FiRepeat,
@@ -79,7 +78,7 @@ const Dashboard = () => {
     {
       title: "Total Earnings",
       value: "$5000",
-      icon: "FiDollarSign",
+      icon: "FaRupeeSign",
       color: "#FF9800",
     },
     { title: "Pending Orders", value: "2", icon: "FiClock", color: "#F44336" },
