@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { createProduct, getVendorProducts } from "../../../utils/productsApi";
-import { imageUpload } from "../../../utils/imageUpload";
-import { useVendor } from "../../VendorContext/VendorContext";
+import { createProduct, getVendorProducts } from "../../../../utils/productsApi";
+import { imageUpload } from "../../../../utils/imageUpload";
+import { useVendor } from "../../../VendorContext/VendorContext";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdStars } from "react-icons/md";
 import { FiUpload } from "react-icons/fi";

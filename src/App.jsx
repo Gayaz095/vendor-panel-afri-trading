@@ -15,7 +15,7 @@ import VendorVisitStore from "./components/VendorVisitStore/VendorVisitStore";
 import OrdersStatus from "./components/OrderStatus/OrdersStatus";
 import DeliveryStatus from "./components/DeliveryStatus/DeliveryStatus";
 import Payments from "./components/Payments/Payments";
-import AddProduct from "./components/AddProduct/AddProduct";
+import AddProduct from "./components/ProductManagement/AddProduct/AddProduct";
 import EditProfile from "./components/EditProfile/EditProfile";
 
 import { VendorProvider } from "./components/VendorContext/VendorContext";

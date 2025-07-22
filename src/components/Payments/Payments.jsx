@@ -161,7 +161,6 @@ export default function Payments() {
               </style>
             </head>
             <body>
-              <h3>Payment Details</h3>
               ${modalClone.innerHTML}
             </body>
           </html>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddProductModal from "./AddProductModal/AddProductModal";
 import "./AddProduct.css";
 import VendorProductsTable from "../VendorProductTable/VendorProductTable";
-import { useVendor } from "../VendorContext/VendorContext";
+import { useVendor } from "../../VendorContext/VendorContext";
 import { FaPlus } from "react-icons/fa";
 
 const AddProduct = () => {
