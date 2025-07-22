@@ -67,6 +67,14 @@ const VendorViewProduct = ({
           <p>Created At: {formatDate(product.createdAt)}</p>
           <p>Updated At: {formatDate(product.updatedAt)}</p>
         </div>
+        <div className="view-product-flags">
+          {product.feautureProduct && (
+            <span className="featured-badge">Featured Product</span>
+          )}
+          {product.heroProduct && (
+            <span className="hero-badge">{product.heroProduct}</span>
+          )}
+        </div>
         <div className="view-product-main">
           <div className="view-product-image-container">
             <img

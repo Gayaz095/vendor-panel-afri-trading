@@ -88,6 +88,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     setLoading(true);
     try {
       const data = await getVendorProducts(vendorId);
+      console.log(data)
       if (Array.isArray(data)) {
         const sorted = [...data].sort(
           (a, b) => getLatestDate(b) - getLatestDate(a)
@@ -284,7 +285,7 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     }).format(price);
   };
 
-  // 🆕 Filtered dropdown data
+  // Filtered dropdown data
   const filteredModels = carModels.filter(
     (model) => model.carId === filters.carBrandId
   );
