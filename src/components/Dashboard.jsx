@@ -77,7 +77,7 @@ const Dashboard = () => {
     },
     {
       title: "Total Earnings",
-      value: "$5000",
+      value: "₹5000",
       icon: "FaRupeeSign",
       color: "#FF9800",
     },
