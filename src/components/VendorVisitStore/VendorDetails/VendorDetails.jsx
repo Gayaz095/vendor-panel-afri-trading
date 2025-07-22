@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./componentsStyles/VendorDetails.css";
+import "./VendorDetails.css";
 
 const VendorDetails = ({ vendorDetails }) => {
   const [modalImage, setModalImage] = useState(null);

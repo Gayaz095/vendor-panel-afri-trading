@@ -1,5 +1,5 @@
 import React from "react";
-import "./componentsStyles/VendorViewProduct.css";
+import "./VendorViewProduct.css";
 
 // Helper function to format date
 const formatDate = (dateString) => {

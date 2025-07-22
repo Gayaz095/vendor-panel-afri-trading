@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa";
-import VendorDetails from "./VendorDetails";
-import VendorProductsCards from "./VendorProductsCards";
-import { getVendorProducts } from "../utils/productsApi.js";
-import { useVendor } from "./VendorContext";
-import LoadingSpinner from "./LoadingSpinner.jsx";
-
-import "./componentsStyles/VendorVisitStore.css";
+import VendorDetails from "./VendorDetails/VendorDetails";
+import VendorProductsCards from "./VendorProductsCards/VendorProductsCards.jsx";
+import { getVendorProducts } from "../../utils/productsApi.js";
+import { useVendor } from "../VendorContext/VendorContext";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
+import "./VendorVisitStore.css";
 
 // Helper to get the latest date (updatedAt or createdAt)
 const getLatestDate = (product) => {
