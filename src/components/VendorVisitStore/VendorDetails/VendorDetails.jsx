@@ -10,70 +10,73 @@ const VendorDetails = ({ vendorDetails }) => {
   return (
     <div className="vendor-details-root">
       <div className="vendor-details-profile-card">
-        <div className="vendor-details-documents-section">
-          <h3 className="vendor-details-section-title">Vendor Documents</h3>
-          <div className="vendor-details-documents-grid">
-            <div className="vendor-details-document-item">
-              <h4 className="vendor-details-document-title">Adhar Card</h4>
-              <div className="vendor-details-document-image-container">
-                <img
-                  src={vendorDetails.vendorDetails.adharCardImage}
-                  alt="Vendor Adhar Card Document"
-                  className="vendor-details-document-image"
-                  onClick={() =>
-                    openModal(
-                      vendorDetails.vendorDetails.adharCardImage,
-                      "Vendor Adhar Card Document"
-                    )
-                  }
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
+        {/* Documents and Bond side by side */}
+        <div className="vendor-details-documents-bond-wrapper">
+          {/* Documents */}
+          <div className="vendor-details-documents-section">
+            <h3 className="vendor-details-section-title">Vendor Documents</h3>
+            <div className="vendor-details-documents-grid">
+              {[
+                {
+                  title: "Adhar Card",
+                  image: vendorDetails.vendorDetails.adharCardImage,
+                  alt: "Vendor Adhar Card Document",
+                },
+                {
+                  title: "GST Certificate",
+                  image: vendorDetails.vendorDetails.gstImage,
+                  alt: "Vendor GST Certificate Document",
+                },
+                {
+                  title: "PAN Card",
+                  image: vendorDetails.vendorDetails.panCardImage,
+                  alt: "Vendor PAN Card Document",
+                },
+              ].map((doc, index) => (
+                <div key={index} className="vendor-details-document-item">
+                  <h4 className="vendor-details-document-title">{doc.title}</h4>
+                  <div className="vendor-details-document-image-container">
+                    <img
+                      src={doc.image}
+                      alt={doc.alt}
+                      className="vendor-details-document-image"
+                      onClick={() => openModal(doc.image, doc.alt)}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
 
-            <div className="vendor-details-document-item">
-              <h4 className="vendor-details-document-title">GST Certificate</h4>
-              <div className="vendor-details-document-image-container">
-                <img
-                  src={vendorDetails.vendorDetails.gstImage}
-                  alt="Vendor GST Certificate Document"
-                  className="vendor-details-document-image"
-                  onClick={() =>
-                    openModal(
-                      vendorDetails.vendorDetails.gstImage,
-                      "Vendor GST Certificate Document"
-                    )
-                  }
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
-            </div>
-
-            <div className="vendor-details-document-item">
-              <h4 className="vendor-details-document-title">PAN Card</h4>
-              <div className="vendor-details-document-image-container">
-                <img
-                  src={vendorDetails.vendorDetails.panCardImage}
-                  alt="Vendor PAN Card Document"
-                  className="vendor-details-document-image"
-                  onClick={() =>
-                    openModal(
-                      vendorDetails.vendorDetails.panCardImage,
-                      "Vendor PAN Card Document"
-                    )
-                  }
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
+          {/* Bond */}
+          <div className="vendor-details-bond-section">
+            <h4 className="vendor-details-document-bond-title">Bond Image</h4>
+            <div className="vendor-details-document-bond-image-container">
+              <img
+                src={vendorDetails.vendorDetails.bondImage}
+                alt="Vendor Bond Image Document"
+                className="vendor-details-document-bond-image"
+                onClick={() =>
+                  openModal(
+                    vendorDetails.vendorDetails.bondImage,
+                    "Vendor Bond Image Document"
+                  )
+                }
+                style={{ cursor: "pointer" }}
+              />
             </div>
           </div>
         </div>
 
+        {/* Divider */}
         <div className="vendor-details-info-divider"></div>
 
+        {/* Vendor Info */}
         <div className="vendor-details-info-section">
           <h3 className="vendor-details-section-title">Vendor Information</h3>
           <div className="vendor-details-info-basic-contact">
+            {/* Basic Info */}
             <div className="vendor-details-basic-info">
               <h2 className="vendor-details-name">
                 {vendorDetails.vendorDetails.name}
@@ -98,8 +101,7 @@ const VendorDetails = ({ vendorDetails }) => {
               </div>
             </div>
 
-            <hr className="vendor-details-section-divider" />
-
+            {/* Contact Info */}
             <div className="vendor-details-contact-info">
               <h4 className="vendor-details-info-section-title">
                 Contact Details
