@@ -1,0 +1,148 @@
+/* ConfirmModal.css */
+
+.confirm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.confirm-modal-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 100%;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.confirm-modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1f2937; /* slate-800 */
+}
+
+.confirm-modal-message {
+  font-size: 1rem;
+  color: #374151; /* slate-700 */
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Base button */
+.confirm-modal-btn {
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Cancel button (No) */
+.confirm-modal-btn.cancel {
+  background-color: #e5e7eb; /* gray-200 */
+  color: #374151; /* slate-700 */
+}
+.confirm-modal-btn.cancel:hover {
+  background-color: #d1d5db; /* gray-300 */
+}
+
+/* Confirm button - success */
+.confirm-modal-btn.success {
+  background-color: #16a34a; /* green-600 */
+  color: #ffffff;
+}
+.confirm-modal-btn.success:hover {
+  background-color: #15803d; /* green-700 */
+}
+
+/* Confirm button - danger */
+.confirm-modal-btn.danger {
+  background-color: #dc2626; /* red-600 */
+  color: #ffffff;
+}
+.confirm-modal-btn.danger:hover {
+  background-color: #b91c1c; /* red-700 */
+}
+
+.confirm-modal-btn.disabled-btn {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.confirm-modal-btn.disabled-btn:hover {
+  background-color: #ccc;
+  color: #888;
+}
+
+.disabled-icon {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+
+/* Spinner styles */
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.spinner-with-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Keep this keyframe */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Responsive adjustments */
+@media screen and (max-width: 480px) {
+  .confirm-modal-container {
+    padding: 20px 16px;
+  }
+
+  .confirm-modal-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .confirm-modal-btn {
+    width: 100%;
+  }
+}

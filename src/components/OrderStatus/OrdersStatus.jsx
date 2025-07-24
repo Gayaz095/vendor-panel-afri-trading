@@ -7,6 +7,7 @@ import {
 } from "../../utils/getVendorProductsOrders";
 import { useVendor } from "../VendorContext/VendorContext";
 import { toast } from "react-toastify";
+import ConfirmModal from "./ConfirmModal/ConfirmModal";
 
 const PRODUCTS_PER_PAGE = 6;
 const PAGE_WINDOW = 3;
@@ -30,6 +31,7 @@ export default function OrdersStatus() {
   const [updatingOrderId, setUpdatingOrderId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingOrders, setLoadingOrders] = useState(true);
+  const [confirmModalData, setConfirmModalData] = useState(null); // for modal state
 
   useEffect(() => {
     if (vendorId) {
@@ -63,7 +65,6 @@ export default function OrdersStatus() {
               })),
             }));
           setOrders(ordersData);
-          // console.log("Response: ", ordersData);
         } catch (error) {
           console.error("Error fetching vendor orders:", error.message);
         } finally {
@@ -103,7 +104,12 @@ export default function OrdersStatus() {
       toast.error("Failed to update order status.");
     } finally {
       setUpdatingOrderId(null);
+      setConfirmModalData(null);
     }
+  };
+
+  const confirmStatusChange = (orderId, newStatus) => {
+    setConfirmModalData({ orderId, newStatus });
   };
 
   const handleView = (order) => setSelectedOrder(order);
@@ -161,7 +167,7 @@ export default function OrdersStatus() {
     modalContent.style.maxHeight = "";
     modalContent.style.overflow = "";
   };
-  
+
   const closeModal = () => setSelectedOrder(null);
 
   const handlePrintBarcode = (product) => {
@@ -278,7 +284,7 @@ export default function OrdersStatus() {
           onKeyDown={(e) => {
             if (e.key === "Escape") {
               setStatusFilter("All"); // Reset filter to 'All'
-              e.target.blur(); // Optional: remove focus
+              e.target.blur(); // remove focus
             }
           }}>
           <option value="All">All Status</option>
@@ -293,7 +299,7 @@ export default function OrdersStatus() {
         <p className="orders-status-loading">Loading orders...</p>
       ) : (
         <>
-          <div className="orders-status-table-responsive" tabIndex="0">
+          {/* <div className="orders-status-table-responsive" tabIndex="0">
             <table className="orders-status-table">
               <thead>
                 <tr>
@@ -301,7 +307,6 @@ export default function OrdersStatus() {
                   <th>Order ID</th>
                   <th>Email</th>
                   <th>Phone</th>
-                  <th>Status</th>
                   <th className="print-hide">Actions</th>
                   <th className="print-hide">View</th>
                 </tr>
@@ -315,26 +320,22 @@ export default function OrdersStatus() {
                     </td>
                     <td className="orders-status-email">{order.email}</td>
                     <td className="orders-status-phone">{order.phone}</td>
-                    <td>
-                      <span
-                        className={`orders-status-badge ${order.status.toLowerCase()}`}>
-                        {order.status}
-                      </span>
-                    </td>
+
                     <td className="print-hide">
                       <div className="orders-status-btn-actions">
                         <button
                           className="orders-status-btn orders-status-btn-accept"
                           onClick={() =>
-                            handleUpdateStatus(order.id, "Shipped")
+                            confirmStatusChange(order.id, "Shipped")
                           }
                           disabled={updatingOrderId === order.id}>
                           <FiCheck /> Shipped
                         </button>
+
                         <button
                           className="orders-status-btn orders-status-btn-reject"
                           onClick={() =>
-                            handleUpdateStatus(order.id, "Cancelled")
+                            confirmStatusChange(order.id, "Cancelled")
                           }
                           disabled={updatingOrderId === order.id}>
                           <FiX /> Cancel
@@ -359,7 +360,84 @@ export default function OrdersStatus() {
                 )}
               </tbody>
             </table>
+          </div> */}
+
+          <div className="orders-status-table-responsive" tabIndex="0">
+            <table className="orders-status-table">
+              <thead>
+                <tr>
+                  <th>S.No.</th>
+                  <th>Order ID</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th className="print-hide">Action</th>
+                  <th className="print-hide">View</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentItems.map((order, idx) => (
+                  <tr key={order.id}>
+                    <td>{startIndex + idx + 1}</td>
+                    <td className="orders-status-orderId">
+                      {shortOrderId(order.id)}
+                    </td>
+                    <td className="orders-status-email">{order.email}</td>
+                    <td className="orders-status-phone">{order.phone}</td>
+
+                    <td className="print-hide">
+                      {order.status === "Shipped" ||
+                      order.status === "Cancelled" ? (
+                        <span
+                          className={`orders-status-label ${
+                            order.status === "Shipped"
+                              ? "orders-status-shipped"
+                              : "orders-status-cancelled"
+                          }`}>
+                          {order.status}
+                        </span>
+                      ) : (
+                        <div className="orders-status-btn-actions">
+                          <button
+                            className="orders-status-btn orders-status-btn-accept"
+                            onClick={() =>
+                              confirmStatusChange(order.id, "Shipped")
+                            }
+                            disabled={updatingOrderId === order.id}>
+                            <FiCheck /> Shipped
+                          </button>
+
+                          <button
+                            className="orders-status-btn orders-status-btn-reject"
+                            onClick={() =>
+                              confirmStatusChange(order.id, "Cancelled")
+                            }
+                            disabled={updatingOrderId === order.id}>
+                            <FiX /> Cancel
+                          </button>
+                        </div>
+                      )}
+                    </td>
+
+                    <td className="print-hide">
+                      <button
+                        className="orders-status-btn orders-status-btn-view"
+                        onClick={() => handleView(order)}>
+                        <FiEye /> View
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {currentItems.length === 0 && (
+                  <tr>
+                    <td className="orders-status-no-results" colSpan="6">
+                      No orders found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
+
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="orders-status-pagination print-hide">
@@ -537,6 +615,23 @@ export default function OrdersStatus() {
             )}
           </div>
         </div>
+      )}
+
+      {/* Confirm Modal */}
+      {confirmModalData && (
+        <ConfirmModal
+          title={`Confirm ${confirmModalData.newStatus}`}
+          message={`Are you sure you want to mark this order as ${confirmModalData.newStatus}?`}
+          onConfirm={() =>
+            handleUpdateStatus(
+              confirmModalData.orderId,
+              confirmModalData.newStatus
+            )
+          }
+          onCancel={() => setConfirmModalData(null)}
+          loading={updatingOrderId === confirmModalData.orderId}
+          statusType={confirmModalData.newStatus}
+        />
       )}
     </div>
   );
