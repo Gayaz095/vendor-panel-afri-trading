@@ -1,0 +1,83 @@
+/* EditProfileModal.css*/
+.edit-profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 16px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #23365f #e5e7eb;
+}
+
+/* Modal Container */
+.edit-profile-modal-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 900px;
+  max-height: 95vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 10px 24px 24px 24px;
+  box-sizing: border-box;
+  animation: fadeInUp 0.3s ease-in-out;
+}
+
+/* Close Button */
+.edit-profile-modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  background: #2563eb;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-profile-modal-close-btn:hover {
+  background: #1e40af;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .edit-profile-modal-container {
+    padding: 20px 16px;
+    max-height: 90vh;
+    border-radius: 12px;
+  }
+
+  .edit-profile-modal-close-btn {
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+}

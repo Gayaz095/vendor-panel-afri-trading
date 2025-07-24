@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./VendorDetails.css";
+import EditProfileModal from "./EditProfileModal/EditProfileModal";
 
 const VendorDetails = ({ vendorDetails }) => {
   const [modalImage, setModalImage] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const openModal = (src, alt) => {
     setModalImage({ src, alt });
@@ -11,90 +13,47 @@ const VendorDetails = ({ vendorDetails }) => {
   const closeModal = () => {
     setModalImage(null);
   };
+
+  // List of document fields with labels
+  const documentFields = [
+    { key: "adharCardImage", label: "Adhar Card" },
+    { key: "gstImage", label: "GST Certificate" },
+    { key: "panCardImage", label: "PAN Card" },
+    { key: "bondImage", label: "Bond Image" },
+  ];
+
   return (
     <div className="vendor-details-root">
       <div className="vendor-details-profile-card">
         <div className="vendor-details-documents-section">
-          <h3 className="vendor-details-section-title">Vendor Documents</h3>
+          <h3 className="vendor-details-section-title">Documents</h3>
           <div className="vendor-details-documents-grid">
-            <div className="vendor-details-document-item">
-              <h4 className="vendor-details-document-title">Adhar Card</h4>
-              <div className="vendor-details-document-image-container">
-                <img
-                  src={vendorDetails.vendorDetails.adharCardImage}
-                  alt="Vendor Adhar Card Document"
-                  className="vendor-details-document-image"
-                  onClick={() =>
-                    openModal(
-                      vendorDetails.vendorDetails.adharCardImage,
-                      "Vendor Adhar Card Document"
-                    )
-                  }
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
-            </div>
-
-            <div className="vendor-details-document-item">
-              <h4 className="vendor-details-document-title">GST Certificate</h4>
-              <div className="vendor-details-document-image-container">
-                <img
-                  src={vendorDetails.vendorDetails.gstImage}
-                  alt="Vendor GST Certificate Document"
-                  className="vendor-details-document-image"
-                  onClick={() =>
-                    openModal(
-                      vendorDetails.vendorDetails.gstImage,
-                      "Vendor GST Certificate Document"
-                    )
-                  }
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
-            </div>
-
-            <div className="vendor-details-document-item">
-              <h4 className="vendor-details-document-title">PAN Card</h4>
-              <div className="vendor-details-document-image-container">
-                <img
-                  src={vendorDetails.vendorDetails.panCardImage}
-                  alt="Vendor PAN Card Document"
-                  className="vendor-details-document-image"
-                  onClick={() =>
-                    openModal(
-                      vendorDetails.vendorDetails.panCardImage,
-                      "Vendor PAN Card Document"
-                    )
-                  }
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
-            </div>
-
-            <div className="vendor-details-document-item">
-              <h4 className="vendor-details-document-title">Bond Image</h4>
-              <div className="vendor-details-document-image-container">
-                <img
-                  src={vendorDetails.vendorDetails.bondImage}
-                  alt="Vendor Bond Image Document"
-                  className="vendor-details-document-image"
-                  onClick={() =>
-                    openModal(
-                      vendorDetails.vendorDetails.bondImage,
-                      "Vendor Bond Image Document"
-                    )
-                  }
-                  style={{ cursor: "pointer" }}
-                />
-              </div>
-            </div>
+            {documentFields.map(({ key, label }) => {
+              const imageSrc = vendorDetails.vendorDetails[key];
+              return (
+                <div className="vendor-details-document-item" key={key}>
+                  <h4 className="vendor-details-document-title">{label}</h4>
+                  <div className="vendor-details-document-image-container">
+                    <img
+                      src={imageSrc}
+                      alt={`Vendor ${label} Document`}
+                      className="vendor-details-document-image"
+                      onClick={() =>
+                        openModal(imageSrc, `Vendor ${label} Document`)
+                      }
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         <div className="vendor-details-info-divider"></div>
 
         <div className="vendor-details-info-section">
-          <h3 className="vendor-details-section-title">Vendor Information</h3>
+          <h3 className="vendor-details-section-title">Contact Information</h3>
           <div className="vendor-details-info-basic-contact">
             <div className="vendor-details-basic-info">
               <h2 className="vendor-details-name">
@@ -152,6 +111,13 @@ const VendorDetails = ({ vendorDetails }) => {
                   </span>
                 </div>
               </div>
+              <div className="vendor-details-edit-btn-container">
+                <button
+                  className="vendor-details-edit-btn"
+                  onClick={() => setShowEditModal(true)}>
+                  Edit Profile
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -177,6 +143,11 @@ const VendorDetails = ({ vendorDetails }) => {
             />
           </div>
         </div>
+      )}
+
+      {/* Edit Profile Modal */}
+      {showEditModal && (
+        <EditProfileModal onClose={() => setShowEditModal(false)} />
       )}
     </div>
   );

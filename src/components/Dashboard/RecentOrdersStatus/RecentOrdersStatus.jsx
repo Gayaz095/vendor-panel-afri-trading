@@ -117,7 +117,7 @@ const RecentOrdersStatus = () => {
               <th>Phone</th>
               <th>Status</th>
               <th>Created At</th>
-              <th>Updated At</th>
+              {/* <th>Updated At</th> */}
             </tr>
           </thead>
           <tbody>
@@ -140,7 +140,7 @@ const RecentOrdersStatus = () => {
                     {order.status}
                   </td>
                   <td>{formatDate(order.createdAt)}</td>
-                  <td>{formatDate(order.updatedAt)}</td>
+                  {/* <td>{formatDate(order.updatedAt)}</td> */}
                 </tr>
               ))
             )}
