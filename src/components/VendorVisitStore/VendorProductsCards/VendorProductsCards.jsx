@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./VendorProductsCards.css";
 
-const CARDS_PER_PAGE = 6;
+const CARDS_PER_PAGE = 8;
 const PAGE_WINDOW = 5;
 
 const VendorProductsCards = ({ products }) => {

@@ -11,15 +11,12 @@ const VendorDetails = ({ vendorDetails }) => {
   const closeModal = () => {
     setModalImage(null);
   };
-
   return (
     <div className="vendor-details-root">
       <div className="vendor-details-profile-card">
-        {/* Left side: Documents  Aadhar, GST, PAN images*/}
         <div className="vendor-details-documents-section">
           <h3 className="vendor-details-section-title">Vendor Documents</h3>
           <div className="vendor-details-documents-grid">
-            {/* Aadhar */}
             <div className="vendor-details-document-item">
               <h4 className="vendor-details-document-title">Adhar Card</h4>
               <div className="vendor-details-document-image-container">
@@ -33,11 +30,11 @@ const VendorDetails = ({ vendorDetails }) => {
                       "Vendor Adhar Card Document"
                     )
                   }
+                  style={{ cursor: "pointer" }}
                 />
               </div>
             </div>
 
-            {/* GST */}
             <div className="vendor-details-document-item">
               <h4 className="vendor-details-document-title">GST Certificate</h4>
               <div className="vendor-details-document-image-container">
@@ -51,11 +48,11 @@ const VendorDetails = ({ vendorDetails }) => {
                       "Vendor GST Certificate Document"
                     )
                   }
+                  style={{ cursor: "pointer" }}
                 />
               </div>
             </div>
 
-            {/* PAN */}
             <div className="vendor-details-document-item">
               <h4 className="vendor-details-document-title">PAN Card</h4>
               <div className="vendor-details-document-image-container">
@@ -69,39 +66,36 @@ const VendorDetails = ({ vendorDetails }) => {
                       "Vendor PAN Card Document"
                     )
                   }
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+            </div>
+
+            <div className="vendor-details-document-item">
+              <h4 className="vendor-details-document-title">Bond Image</h4>
+              <div className="vendor-details-document-image-container">
+                <img
+                  src={vendorDetails.vendorDetails.bondImage}
+                  alt="Vendor Bond Image Document"
+                  className="vendor-details-document-image"
+                  onClick={() =>
+                    openModal(
+                      vendorDetails.vendorDetails.bondImage,
+                      "Vendor Bond Image Document"
+                    )
+                  }
+                  style={{ cursor: "pointer" }}
                 />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right side: Bond Image */}
-        <div className="vendor-details-bond-section">
-          <div className="vendor-details-document-bond-image-container">
-            <img
-              src={vendorDetails.vendorDetails.bondImage}
-              alt="Vendor Bond Image Document"
-              className="vendor-details-document-bond-image"
-              onClick={() =>
-                openModal(
-                  vendorDetails.vendorDetails.bondImage,
-                  "Vendor Bond Image Document"
-                )
-              }
-            />
-          </div>
-        </div>
+        <div className="vendor-details-info-divider"></div>
 
-        {/* Horizontal Line */}
-        <div className="vendor-details-info-divider-line"></div>
-
-        {/* Vendor Info */}
         <div className="vendor-details-info-section">
-          <h3 className="vendor-details-section-title-vendor-info">
-            Vendor Information
-          </h3>
+          <h3 className="vendor-details-section-title">Vendor Information</h3>
           <div className="vendor-details-info-basic-contact">
-            {/* Basic Info */}
             <div className="vendor-details-basic-info">
               <h2 className="vendor-details-name">
                 {vendorDetails.vendorDetails.name}
@@ -126,7 +120,8 @@ const VendorDetails = ({ vendorDetails }) => {
               </div>
             </div>
 
-            {/* Contact Info */}
+            <hr className="vendor-details-section-divider" />
+
             <div className="vendor-details-contact-info">
               <h4 className="vendor-details-info-section-title">
                 Contact Details
@@ -162,7 +157,7 @@ const VendorDetails = ({ vendorDetails }) => {
         </div>
       </div>
 
-      {/* Image Modal */}
+      {/* Modal */}
       {modalImage && (
         <div
           className="vendor-details-image-modal-overlay"
@@ -175,14 +170,11 @@ const VendorDetails = ({ vendorDetails }) => {
               onClick={closeModal}>
               &times;
             </button>
-
-            <div className="vendor-details-modal-image-scroll-container">
-              <img
-                src={modalImage.src}
-                alt={modalImage.alt}
-                className="vendor-details-modal-image"
-              />
-            </div>
+            <img
+              src={modalImage.src}
+              alt={modalImage.alt}
+              className="vendor-details-modal-image"
+            />
           </div>
         </div>
       )}
