@@ -20,6 +20,7 @@ import {
   FaAlignLeft,
   FaEdit,
 } from "react-icons/fa";
+import { GiWeight } from "react-icons/gi";
 import { toast } from "react-toastify";
 import "./VendorEditProduct.css";
 
@@ -39,6 +40,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
     childCategoryId: "",
     feautureProduct: false,
     heroProduct: "",
+    productWeight: "",
   });
 
   const [carBrands, setCarBrands] = useState([]);
@@ -56,6 +58,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
   const [allReferenceNumbers, setAllReferenceNumbers] = useState([]);
   const [referenceError, setReferenceError] = useState("");
 
+  const [productWeight, setProductWeight] = useState("");
   const heroOptions = ["NEW ARRIVAL", "TRENDING", "BEST SELLING", "POPULAR"];
 
   // Fetch dropdowns and reference numbers
@@ -75,6 +78,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
         childCategoryId: product.childCategoryId || "",
         feautureProduct: product.feautureProduct || false,
         heroProduct: product.heroProduct || "",
+        productWeight: product.productWeight || "",
       });
       setMainImagePreview(product.image || null);
       setThumbnailImagePreview(product.thumbnailImage || null);
@@ -217,6 +221,7 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
           childCategoryId: "",
           feautureProduct: false,
           heroProduct: "",
+          productWeight: "",
         });
         setMainImageFile(null);
         setThumbnailImageFile(null);
@@ -404,6 +409,20 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
                 type="number"
                 name="stock"
                 value={formData.stock}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div className="vendor-edit-product__form-group">
+              <label>
+                <GiWeight style={{ marginRight: "6px" }} />
+                Weight:
+              </label>
+              <input
+                type="number"
+                name="productWeight"
+                value={formData.productWeight}
                 onChange={handleInputChange}
                 required
               />

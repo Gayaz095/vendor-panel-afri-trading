@@ -38,6 +38,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
     price: "",
     stock: "",
     feautureProduct: false,
+    productWeight: "",
   });
 
   const heroProductOptions = [
@@ -146,6 +147,7 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
       "discription",
       "price",
       "stock",
+      "productWeight",
     ];
 
     const isFormValid = requiredFields.every((field) => productData[field]);
@@ -395,6 +397,15 @@ const AddProductModal = ({ onClose, onProductAdded }) => {
               onChange={handleInputChange}
             />
           </label>
+
+          <input
+            type="number"
+            name="productWeight"
+            placeholder="Weight *"
+            value={productData.productWeight}
+            onChange={handleInputChange}
+            required
+          />
 
           <button
             type="submit"
