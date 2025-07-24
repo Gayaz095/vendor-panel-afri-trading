@@ -12,8 +12,8 @@ const ConfirmModal = ({
 }) => {
   const isCancelling = statusType === "Cancelled";
   const confirmLabel = loading ? (
-    <span className="spinner-with-text">
-      <span className="spinner" />
+    <span className="confirm-modal-spinner-with-text">
+      <span className="confirm-modal-spinner" />
       Processing...
     </span>
   ) : isCancelling ? (
