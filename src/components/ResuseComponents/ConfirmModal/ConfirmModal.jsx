@@ -28,7 +28,7 @@ const ConfirmModal = ({
       <div className="confirm-modal-container">
         <h2 className="confirm-modal-title">{title}</h2>
         <p className="confirm-modal-message">{message}</p>
-        <div className="confirm-modal-actions">
+        {/* <div className="confirm-modal-actions">
           <button
             className={`confirm-modal-btn cancel ${
               loading ? "disabled-btn" : ""
@@ -48,6 +48,60 @@ const ConfirmModal = ({
             title={loading ? "Disabled during processing" : ""}>
             {confirmLabel}
           </button>
+        </div> */}
+
+        <div className="confirm-modal-actions">
+          {isDanger ? (
+            // Confirm button comes first (for Not Received, Cancelled etc.)
+            <>
+              <button
+                className={`confirm-modal-btn ${
+                  isDanger ? "danger" : "success"
+                } ${loading ? "disabled-btn" : ""}`}
+                onClick={onConfirm}
+                disabled={loading}
+                title={loading ? "Disabled during processing" : ""}>
+                {confirmLabel}
+              </button>
+
+              <button
+                className={`confirm-modal-btn cancel ${
+                  loading ? "disabled-btn" : ""
+                }`}
+                onClick={onCancel}
+                disabled={loading}
+                title={
+                  loading ? "Disabled during processing" : "Cancel action"
+                }>
+                No
+              </button>
+            </>
+          ) : (
+            // Cancel button comes first (for Received and others)
+            <>
+              <button
+                className={`confirm-modal-btn cancel ${
+                  loading ? "disabled-btn" : ""
+                }`}
+                onClick={onCancel}
+                disabled={loading}
+                title={
+                  loading ? "Disabled during processing" : "Cancel action"
+                }>
+                No
+              </button>
+
+              <button
+                className={`confirm-modal-btn ${
+                  isDanger ? "danger" : "success"
+                } ${loading ? "disabled-btn" : ""}`}
+                onClick={onConfirm}
+                disabled={loading}
+                title={loading ? "Disabled during processing" : ""}>
+                {confirmLabel}
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

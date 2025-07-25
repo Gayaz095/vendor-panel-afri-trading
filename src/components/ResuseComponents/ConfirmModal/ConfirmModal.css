@@ -1,5 +1,4 @@
 /* ConfirmModal.css */
-
 .confirm-modal-overlay {
   position: fixed;
   top: 0;
@@ -30,12 +29,12 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 12px;
-  color: #1f2937; /* slate-800 */
+  color: #1f2937;
 }
 
 .confirm-modal-message {
   font-size: 1rem;
-  color: #374151; /* slate-700 */
+  color: #374151;
   margin-bottom: 24px;
   line-height: 1.5;
 }
@@ -60,29 +59,29 @@
 
 /* Cancel button (No) */
 .confirm-modal-btn.cancel {
-  background-color: #e5e7eb; /* gray-200 */
-  color: #374151; /* slate-700 */
+  background-color: #e5e7eb;
+  color: #374151;
 }
 .confirm-modal-btn.cancel:hover {
-  background-color: #d1d5db; /* gray-300 */
+  background-color: #d1d5db;
 }
 
 /* Confirm button - success */
 .confirm-modal-btn.success {
-  background-color: #16a34a; /* green-600 */
+  background-color: #16a34a;
   color: #ffffff;
 }
 .confirm-modal-btn.success:hover {
-  background-color: #15803d; /* green-700 */
+  background-color: #15803d;
 }
 
 /* Confirm button - danger */
 .confirm-modal-btn.danger {
-  background-color: #dc2626; /* red-600 */
+  background-color: #dc2626;
   color: #ffffff;
 }
 .confirm-modal-btn.danger:hover {
-  background-color: #b91c1c; /* red-700 */
+  background-color: #b91c1c;
 }
 
 .confirm-modal-btn.disabled-btn {
@@ -120,7 +119,6 @@
   justify-content: center;
 }
 
-/* Keep this keyframe */
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -131,7 +129,7 @@
 }
 
 
-/* Responsive adjustments */
+/* Responsive */
 @media screen and (max-width: 480px) {
   .confirm-modal-container {
     padding: 20px 16px;
