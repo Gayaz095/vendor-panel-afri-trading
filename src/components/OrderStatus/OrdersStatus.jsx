@@ -6,8 +6,8 @@ import {
   updateVendorProductsOrdersStatus,
 } from "../../utils/getVendorProductsOrders";
 import { useVendor } from "../VendorContext/VendorContext";
+import ConfirmModal from "../ResuseComponents/ConfirmModal/ConfirmModal";
 import { toast } from "react-toastify";
-import ConfirmModal from "./ConfirmModal/ConfirmModal";
 
 const PRODUCTS_PER_PAGE = 6;
 const PAGE_WINDOW = 3;
@@ -436,7 +436,7 @@ export default function OrdersStatus() {
                 )}
               </tbody>
             </table>
-          </div>
+          </div> 
 
           {/* Pagination */}
           {totalPages > 1 && (

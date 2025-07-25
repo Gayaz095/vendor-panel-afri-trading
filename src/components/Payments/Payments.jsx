@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { FiEye } from "react-icons/fi";
-import ConfirmModal from "../OrderStatus/ConfirmModal/ConfirmModal";
+import ConfirmModal from "../ResuseComponents/ConfirmModal/ConfirmModal";
 import { toast } from "react-toastify";
 import "./Payments.css";
 
@@ -98,7 +98,7 @@ export default function Payments() {
     );
     setUpdatingPaymentId(null);
     setConfirmModalData(null);
-    
+
     if (received) {
       toast.success('Marked as "Received"', {
         style: {

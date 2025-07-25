@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import ScrollToTop from "./components/ResuseComponents/ScrollToTop/ScrollToTop";
 import Layout from "./components/Layout/Layout";
 import Dashboard from "./components/Dashboard/Dashboard";
 import LoginPage from "./components/LoginPage/LoginPage";

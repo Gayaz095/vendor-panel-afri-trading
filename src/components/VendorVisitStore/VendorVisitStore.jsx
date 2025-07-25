@@ -4,7 +4,7 @@ import VendorDetails from "./VendorDetails/VendorDetails";
 import VendorProductsCards from "./VendorProductsCards/VendorProductsCards.jsx";
 import { getVendorProducts } from "../../utils/productsApi.js";
 import { useVendor } from "../VendorContext/VendorContext";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
+import LoadingSpinner from "../ResuseComponents/LoadingSpinner/LoadingSpinner.jsx";
 import "./VendorVisitStore.css";
 
 // Helper to get the latest date (updatedAt or createdAt)
