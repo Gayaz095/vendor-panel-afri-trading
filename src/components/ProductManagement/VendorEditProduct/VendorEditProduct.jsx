@@ -172,7 +172,6 @@ const VendorEditProduct = ({ product, onClose, onSave }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting:", formData);
     setLoading(true);
     try {
       if (!vendorDetails?.vendorId) throw new Error("Vendor ID not found");
