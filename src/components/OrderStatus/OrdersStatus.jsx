@@ -429,7 +429,7 @@ export default function OrdersStatus() {
                 ))}
                 {currentItems.length === 0 && (
                   <tr>
-                    <td className="orders-status-no-results" colSpan="6">
+                    <td className="orders-status-no-results">
                       No orders found.
                     </td>
                   </tr>

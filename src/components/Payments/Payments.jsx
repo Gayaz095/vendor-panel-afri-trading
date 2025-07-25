@@ -6,50 +6,50 @@ import "./Payments.css";
 
 // Mock data for demonstration
 const mockPayments = [
-  {
-    id: 1,
-    totalAmount: "₹2000",
-    paymentId: "140f4efaaeab1",
-    transactionId: "87e1590e2140f4efa",
-    orderId: "687e1590e2140f4efaaeab1e",
-    date: "21 Jul 2025, 03:55 pm",
-    paymentStatus: "Success",
-    received: true,
-    actionMarked: null,
-  },
-  {
-    id: 2,
-    totalAmount: "₹1500",
-    paymentId: "e14eae2140f4ef",
-    transactionId: "e14eae2140f4ef",
-    orderId: "687e14eae2140f4efaaea8a1",
-    date: "21 June 2025, 02:00 pm",
-    paymentStatus: "Failed",
-    received: false,
-    actionMarked: null,
-  },
-  {
-    id: 3,
-    totalAmount: "₹1800",
-    paymentId: "789012897504758",
-    transactionId: "e2140f4efaaea3df",
-    orderId: "687e12f8e2140f4efaaea3df",
-    date: "08 Jul 2025, 05:18 pm",
-    paymentStatus: "Failed",
-    received: false,
-    actionMarked: null,
-  },
-  {
-    id: 4,
-    totalAmount: "₹2000",
-    paymentId: "3ce2140f4efaaea",
-    transactionId: "ce2140f4efaaea2",
-    orderId: "687e123ce2140f4efaaea2f8",
-    date: "08 Jul 2025, 11: 46 am",
-    paymentStatus: "Success",
-    received: false,
-    actionMarked: null,
-  },
+    {
+      id: 1,
+      totalAmount: "₹2000",
+      paymentId: "140f4efaaeab1",
+      transactionId: "87e1590e2140f4efa",
+      orderId: "687e1590e2140f4efaaeab1e",
+      date: "21 Jul 2025, 03:55 pm",
+      paymentStatus: "Success",
+      received: true,
+      actionMarked: null,
+    },
+    {
+      id: 2,
+      totalAmount: "₹1500",
+      paymentId: "e14eae2140f4ef",
+      transactionId: "e14eae2140f4ef",
+      orderId: "687e14eae2140f4efaaea8a1",
+      date: "21 June 2025, 02:00 pm",
+      paymentStatus: "Failed",
+      received: false,
+      actionMarked: null,
+    },
+    {
+      id: 3,
+      totalAmount: "₹1800",
+      paymentId: "789012897504758",
+      transactionId: "e2140f4efaaea3df",
+      orderId: "687e12f8e2140f4efaaea3df",
+      date: "08 Jul 2025, 05:18 pm",
+      paymentStatus: "Failed",
+      received: false,
+      actionMarked: null,
+    },
+    {
+      id: 4,
+      totalAmount: "₹2000",
+      paymentId: "3ce2140f4efaaea",
+      transactionId: "ce2140f4efaaea2",
+      orderId: "687e123ce2140f4efaaea2f8",
+      date: "08 Jul 2025, 11: 46 am",
+      paymentStatus: "Success",
+      received: false,
+      actionMarked: null,
+    },
   // mock data as needed, each with `actionMarked: null`
 ];
 
@@ -254,7 +254,7 @@ export default function Payments() {
           <tbody>
             {visiblePayments.length === 0 ? (
               <tr>
-                <td colSpan="8" className="payments-empty">
+                <td className="payments-empty">
                   No payments found.
                 </td>
               </tr>
