@@ -88,7 +88,6 @@ const VendorProductsTable = ({ vendorId, refreshTrigger }) => {
     setLoading(true);
     try {
       const data = await getVendorProducts(vendorId);
-      console.log(data)
       if (Array.isArray(data)) {
         const sorted = [...data].sort(
           (a, b) => getLatestDate(b) - getLatestDate(a)
