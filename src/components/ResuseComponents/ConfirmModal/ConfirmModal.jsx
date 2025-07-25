@@ -1,6 +1,6 @@
 import React from "react";
 import "./ConfirmModal.css";
-import { FiSlash } from "react-icons/fi"; // optional
+import { FiSlash } from "react-icons/fi";
 
 const ConfirmModal = ({
   title = "Are you sure?",
