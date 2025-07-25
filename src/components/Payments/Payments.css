@@ -139,6 +139,27 @@
   color: #fff;
 }
 
+.payments-status-label {
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.payments-badge-success {
+  color: #0a8754;
+  background-color: #e0f7ec;
+  border: 1px solid #0a8754;
+}
+
+.payments-badge-failed {
+  color: #b00020;
+  background-color: #fdecea;
+  border: 1px solid #b00020;
+}
+
 /*Actions */
 .payments-actions {
   display: flex;

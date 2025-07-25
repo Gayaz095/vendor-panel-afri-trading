@@ -141,14 +141,14 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
                   Payments
                 </NavLink>
               </li>
-              <li key="/edit-profile" style={{ "--i": 6 }}>
+              {/* <li key="/edit-profile" style={{ "--i": 6 }}>
                 <NavLink
                   to="/edit-profile"
                   className={({ isActive }) => (isActive ? "active" : "")}>
                   <FaUserEdit className="icon" />
                   Edit Profile
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>

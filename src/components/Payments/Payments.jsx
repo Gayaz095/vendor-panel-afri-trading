@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-
 import { FiEye } from "react-icons/fi";
-
+import ConfirmModal from "../OrderStatus/ConfirmModal/ConfirmModal";
+import { toast } from "react-toastify";
 import "./Payments.css";
 
 // Mock data for demonstration
@@ -50,7 +50,7 @@ const mockPayments = [
     received: false,
     actionMarked: null,
   },
-  // Add more mock data as needed, each with `actionMarked: null`
+  // mock data as needed, each with `actionMarked: null`
 ];
 
 // Helper for label format
@@ -71,7 +71,9 @@ export default function Payments() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalPayment, setModalPayment] = useState(null);
   const modalContentRef = useRef(null); // For printing modal only
-
+  const [confirmModalData, setConfirmModalData] = useState(null);
+  const [updatingPaymentId, setUpdatingPaymentId] = useState(null);
+  
   // Apply search/filter to payments state
   const visiblePayments = payments.filter((p) => {
     const s = search.toLowerCase();
@@ -90,15 +92,39 @@ export default function Payments() {
   });
 
   // Handler for "Received" or "Not Received"
-  const handleAction = (id, received) => {
+  const handleActionConfirmed = (id, received) => {
     setPayments((prev) =>
       prev.map((p) => (p.id === id ? { ...p, actionMarked: received } : p))
     );
-    // (Optional) show alert or toast
-    // alert(
-    //   `Payment ID ${id} marked as "${received ? "Received" : "Not Received"}"`
-    // );
+    setUpdatingPaymentId(null);
+    setConfirmModalData(null);
+
+    if (received) {
+      toast.success('Marked as "Received"', {
+        style: {
+          background: "#22c55e",
+          color: "#fff",
+          fontWeight: "bold",
+        },
+      });
+    } else {
+      toast.error('Marked as "Not Received"', {
+        style: {
+          background: "#AA4A44",
+          color: "#fff",
+          fontWeight: "bold",
+        },
+      });
+    }
+    
+    
+    
   };
+
+  const confirmAction = (id, received) => {
+    setConfirmModalData({ id, received });
+  };
+  
 
   const handleView = (payment) => {
     setModalPayment(payment);
@@ -224,7 +250,7 @@ export default function Payments() {
               <th>TranscationId</th>
               <th>OrderId</th>
               <th>Date</th>
-              <th>Payment Status</th>
+              {/* <th>Payment Status</th> */}
               <th>Action</th>
               <th>View</th>
             </tr>
@@ -244,7 +270,7 @@ export default function Payments() {
                   <td data-label="TransactionId">{p.transactionId}</td>
                   <td data-label="OrderId">{p.orderId}</td>
                   <td data-label="Date">{p.date}</td>
-                  <td data-label="PaymentStatus">
+                  {/* <td data-label="PaymentStatus">
                     <span
                       className={
                         `payments-badge ` +
@@ -256,27 +282,27 @@ export default function Payments() {
                       }>
                       {p.paymentStatus}
                     </span>
-                  </td>
+                  </td> */}
                   <td data-label="Action">
                     {p.actionMarked === null ? (
                       <div className="payments-actions">
                         <button
                           className="payments-action-btn received"
-                          onClick={() => handleAction(p.id, true)}>
+                          onClick={() => confirmAction(p.id, true)}>
                           Received
                         </button>
                         <button
                           className="payments-action-btn not-received"
-                          onClick={() => handleAction(p.id, false)}>
+                          onClick={() => confirmAction(p.id, false)}>
                           Not Received
                         </button>
                       </div>
                     ) : (
                       <span
                         className={
-                          p.actionMarked
-                            ? "payments-badge success"
-                            : "payments-badge failed"
+                          `payments-status-label ${p.actionMarked
+                            ? "payments-badge-success"
+                            : "payments-badge-failed"}`
                         }
                         style={{ padding: "0.5em 1em" }}>
                         {p.actionMarked ? "Received" : "Not Received"}
@@ -355,6 +381,26 @@ export default function Payments() {
             </div>
           </div>
         </div>
+      )}
+
+      {confirmModalData && (
+        <ConfirmModal
+          title={`Confirm ${
+            confirmModalData.received ? "Received" : "Not Received"
+          }`}
+          message={`Are you sure you want to mark this payment as "${
+            confirmModalData.received ? "Received" : "Not Received"
+          }"?`}
+          onConfirm={() =>
+            handleActionConfirmed(
+              confirmModalData.id,
+              confirmModalData.received
+            )
+          }
+          onCancel={() => setConfirmModalData(null)}
+          loading={updatingPaymentId === confirmModalData.id}
+          statusType={confirmModalData.received ? "Received" : "Not Received"}
+        />
       )}
     </div>
   );

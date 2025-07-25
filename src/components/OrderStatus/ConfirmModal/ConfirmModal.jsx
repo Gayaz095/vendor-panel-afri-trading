@@ -1,25 +1,26 @@
 import React from "react";
 import "./ConfirmModal.css";
-import { FiSlash } from "react-icons/fi"; // for disabled icon
+import { FiSlash } from "react-icons/fi"; // optional
 
 const ConfirmModal = ({
-  title,
-  message,
+  title = "Are you sure?",
+  message = "Please confirm your action.",
   onConfirm,
   onCancel,
-  loading,
-  statusType,
+  loading = false,
+  statusType = "", // examples: "Cancelled", "Shipped", "Received"
 }) => {
-  const isCancelling = statusType === "Cancelled";
+  const lowerStatus = statusType.toLowerCase();
+  const isDanger =
+    lowerStatus === "cancelled" || lowerStatus === "not received";
+
   const confirmLabel = loading ? (
     <span className="confirm-modal-spinner-with-text">
       <span className="confirm-modal-spinner" />
       Processing...
     </span>
-  ) : isCancelling ? (
-    "Cancel?"
   ) : (
-    "Yes, Shipped"
+    `Yes, ${statusType}`
   );
 
   return (
@@ -35,14 +36,13 @@ const ConfirmModal = ({
             onClick={onCancel}
             disabled={loading}
             title={loading ? "Disabled during processing" : "Cancel action"}>
-            {loading}
             No
           </button>
 
           <button
-            className={`confirm-modal-btn ${
-              isCancelling ? "danger" : "success"
-            } ${loading ? "disabled-btn" : ""}`}
+            className={`confirm-modal-btn ${isDanger ? "danger" : "success"} ${
+              loading ? "disabled-btn" : ""
+            }`}
             onClick={onConfirm}
             disabled={loading}
             title={loading ? "Disabled during processing" : ""}>
