@@ -16,11 +16,7 @@ import "./Charts.css";
 // Define color scheme for pie chart slices
 const COLORS = ["#F44336", "#6366f1", "#22c55e"];
 
-/**
- * Charts Component
- * Renders a bar chart and a pie chart to visualize statistics.
- * Expects 'stats' prop: array of objects with {title, value}
- **/
+//Expects 'stats' prop: array of objects with {title, value}
 const Charts = ({ stats }) => {
   // Convert stats data for use in BarChart.
   // Attempt to parse values as numbers and removing any non-digit characters if value is a string

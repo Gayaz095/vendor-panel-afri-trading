@@ -33,16 +33,11 @@ const iconComponents = {
   FiPieChart,
 };
 
-/**
- * Dashboard Component
- * Displays vendor stats, charts, and recent activity for logged in vendor.
- **/
 const Dashboard = () => {
   const { vendorDetails } = useVendor(); // Get vendor details from context
   const navigate = useNavigate(); // React Router hook for navigation
   const [animateValues, setAnimateValues] = useState(false);
-  const [loading, setLoading] = useState(false); // change to true
-  // if simulating in real time
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   //Redirect to login if not authenticated.
@@ -53,14 +48,6 @@ const Dashboard = () => {
     // Trigger animation after component mounts
     setTimeout(() => setAnimateValues(true), 100);
   }, [vendorDetails, navigate]);
-
-  // const handleViewProduct = () => {
-  //   navigate("/products/all");
-  // };
-
-  // const handleViewOrder = () => {
-  //   navigate("/orders");
-  // };
 
   const stats = [
     {
@@ -91,7 +78,7 @@ const Dashboard = () => {
     },
   ];
 
-  // If user is not authenticated, render nothing while effect processes redirect
+  // If user is not authenticated, render nothing while use effect processes redirect
   if (!vendorDetails) return null;
 
   // Show loading message if loading state is set
