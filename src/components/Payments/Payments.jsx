@@ -73,7 +73,7 @@ export default function Payments() {
   const modalContentRef = useRef(null); // For printing modal only
   const [confirmModalData, setConfirmModalData] = useState(null);
   const [updatingPaymentId, setUpdatingPaymentId] = useState(null);
-  
+
   // Apply search/filter to payments state
   const visiblePayments = payments.filter((p) => {
     const s = search.toLowerCase();
@@ -98,7 +98,7 @@ export default function Payments() {
     );
     setUpdatingPaymentId(null);
     setConfirmModalData(null);
-
+    
     if (received) {
       toast.success('Marked as "Received"', {
         style: {
@@ -116,15 +116,11 @@ export default function Payments() {
         },
       });
     }
-    
-    
-    
   };
 
   const confirmAction = (id, received) => {
     setConfirmModalData({ id, received });
   };
-  
 
   const handleView = (payment) => {
     setModalPayment(payment);
@@ -299,11 +295,11 @@ export default function Payments() {
                       </div>
                     ) : (
                       <span
-                        className={
-                          `payments-status-label ${p.actionMarked
-                            ? "payments-badge-success"
-                            : "payments-badge-failed"}`
-                        }
+                        className={`payments-status-label ${
+                          p.actionMarked
+                            ? "payments-badge success"
+                            : "payments-badge failed"
+                        }`}
                         style={{ padding: "0.5em 1em" }}>
                         {p.actionMarked ? "Received" : "Not Received"}
                       </span>

@@ -1,5 +1,4 @@
 /* Payments.css */
-/* Root Variables for Consistency */
 :root {
   --primary: #2563eb;
   --primary-dark: #1743ae;
@@ -119,17 +118,7 @@
   transition: background 0.2s;
 }
 
-/*Status Badge */
-.payments-badge {
-  display: inline-block;
-  padding: 0.3em 1em;
-  border-radius: 999px;
-  font-size: 0.95em;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.payments-badge.success {
+/* .payments-badge.success {
   background: var(--success);
   color: #fff;
 }
@@ -137,28 +126,7 @@
 .payments-badge.failed {
   background: var(--danger);
   color: #fff;
-}
-
-.payments-status-label {
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 20px;
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-}
-
-.payments-badge-success {
-  color: #0a8754;
-  background-color: #e0f7ec;
-  border: 1px solid #0a8754;
-}
-
-.payments-badge-failed {
-  color: #b00020;
-  background-color: #fdecea;
-  border: 1px solid #b00020;
-}
+} */
 
 /*Actions */
 .payments-actions {
@@ -205,6 +173,37 @@
 .payments-action-btn.not-received:hover {
   background: #b91c1c;
   border-color: #b91c1c;
+}
+
+/*Status Badge */
+.payments-status-label {
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.payments-badge {
+  display: inline-block;
+  padding: 0.3em 1em;
+  border-radius: 999px;
+  font-size: 0.95em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.payments-badge.success {
+  color: #0a8754;
+  background-color: #e0f7ec;
+  border: 1px solid #0a8754;
+}
+
+.payments-badge.failed {
+  color: #b00020;
+  background-color: #fdecea;
+  border: 1px solid #b00020;
 }
 
 .payments-view-btn {
