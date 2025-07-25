@@ -82,6 +82,11 @@ const VendorViewProduct = ({
               alt={product.name}
               className="view-product-image"
             />
+            <div className="view-product-weight">
+              <span className="weight-badge">
+                Weight:{product.productWeight}
+              </span>
+            </div>
           </div>
           <div className="view-product-header">
             <h3 className="view-product-name">{product.name}</h3>
@@ -91,6 +96,7 @@ const VendorViewProduct = ({
               }`}>
               {product.reflectStatus ? "Active" : "Inactive"}
             </div>
+
             <div className="product-brands-models-section">
               <div>
                 <strong>Car Brand:</strong>
@@ -111,6 +117,7 @@ const VendorViewProduct = ({
             </div>
           </div>
         </div>
+
         <div className="view-product-description">
           <p>
             <strong>Description:</strong> {product.discription}
