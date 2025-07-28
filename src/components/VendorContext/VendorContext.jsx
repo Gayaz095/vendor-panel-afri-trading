@@ -39,13 +39,7 @@ export const VendorProvider = ({ children }) => {
     }
   }, [vendorDetails]);
 
-  // Logout function
-  const logoutVendor = () => {
-    setVendorDetails(null);
-    sessionStorage.removeItem("vendorDetails");
-    localStorage.removeItem("vendorDetails");
-  };
-
+  //Fetching data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -75,6 +69,13 @@ export const VendorProvider = ({ children }) => {
 
     fetchData();
   }, []);
+
+  // Logout function
+  const logoutVendor = () => {
+    setVendorDetails(null);
+    sessionStorage.removeItem("vendorDetails");
+    localStorage.removeItem("vendorDetails");
+  };
 
   return (
     <VendorContext.Provider
