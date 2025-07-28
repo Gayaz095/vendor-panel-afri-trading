@@ -125,14 +125,14 @@ export default function Sidebar({ isMobile, isOpen, onClose }) {
                   Orders
                 </NavLink>
               </li>
-              <li key="/delivery-status" style={{ "--i": 4 }}>
+              {/* <li key="/delivery-status" style={{ "--i": 4 }}>
                 <NavLink
                   to="/delivery-status"
                   className={({ isActive }) => (isActive ? "active" : "")}>
                   <FaShippingFast className="icon" />
                   Delivery Status
                 </NavLink>
-              </li>
+              </li> */}
               <li key="/payments" style={{ "--i": 5 }}>
                 <NavLink
                   to="/payments"
