@@ -8,7 +8,7 @@ const ConfirmModal = ({
   onConfirm,
   onCancel,
   loading = false,
-  statusType = "", // examples: "Cancelled", "Shipped", "Received"
+  statusType = "", // "Cancelled", "Shipped", "Received"
 }) => {
   const lowerStatus = statusType.toLowerCase();
   const isDanger =
